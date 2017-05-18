@@ -1,0 +1,17 @@
+// Since we're in the default package,
+// no package declaration is needed
+
+// The following imports the function lib.down
+// which afterwards is available in unqualified form, "down"
+import lib.down;
+
+// Qualified call to the unimported recipe lib.up
+lib.up;
+// Unqualified call to the imported function lib.down
+down;
+// Qualified call to the rule rules.one
+rules.one;
+// Unqualified call to the rule two
+// No qualification or import is needed, since two is
+// in the default package, same ass this control program
+two;

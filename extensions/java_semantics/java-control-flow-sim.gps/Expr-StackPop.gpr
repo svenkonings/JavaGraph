@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="rule" edgeids="false" edgemode="directed" id="Expr-StackPop">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n6">
+            <attr name="layout">
+                <string>90 24 466 31</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>438 73 41 33</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>434 162 47 31</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>267 172 56 46</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>419 327 76 31</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>105 183 82 31</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>114 273 82 31</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>656 166 109 31</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>660 241 109 31</string>
+            </attr>
+        </node>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>These expressions are statements and the top value of the stack can be popped</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n0">
+            <attr name="label">
+                <string>flow</string>
+            </attr>
+            <attr name="layout">
+                <string>475 -5 457 192 457 332 11</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n3">
+            <attr name="label">
+                <string>index</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>type:Frame</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>flag:active</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n5">
+            <attr name="label">
+                <string>new:stack</string>
+            </attr>
+            <attr name="layout">
+                <string>597 8 272 210 170 278 11</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n4">
+            <attr name="label">
+                <string>del:stack</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n0">
+            <attr name="label">
+                <string>pc</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>type:StackElem</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n5">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge from="n5" to="n5">
+            <attr name="label">
+                <string>type:StackElem</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n7">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n7">
+            <attr name="label">
+                <string>type:ArrayInitializer</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n2">
+            <attr name="label">
+                <string>expr</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n8">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n8">
+            <attr name="label">
+                <string>type:ArrayAllocExpr</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n2">
+            <attr name="label">
+                <string>dimension</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

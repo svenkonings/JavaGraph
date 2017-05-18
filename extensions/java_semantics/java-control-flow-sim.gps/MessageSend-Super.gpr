@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="rule" edgeids="false" edgemode="directed" id="MessageSend-Super">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>67 256 77 34</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>68 99 70 34</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>333 271 131 34</string>
+            </attr>
+        </node>
+        <node id="n11">
+            <attr name="layout">
+                <string>222 265 58 52</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>210 106 77 34</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>380 39 206 70</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>347 354 98 34</string>
+            </attr>
+        </node>
+        <edge from="n5" to="n5">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>type:TypeRef</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n5">
+            <attr name="label">
+                <string>refersTo</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>id:message</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>type:Message</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n4">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge from="n11" to="n11">
+            <attr name="label">
+                <string>type:Frame</string>
+            </attr>
+        </edge>
+        <edge from="n11" to="n11">
+            <attr name="label">
+                <string>flag:active</string>
+            </attr>
+        </edge>
+        <edge from="n11" to="n8">
+            <attr name="label">
+                <string>del:pc</string>
+            </attr>
+        </edge>
+        <edge from="n11" to="n3">
+            <attr name="label">
+                <string>stack</string>
+            </attr>
+        </edge>
+        <edge from="n11" to="n5">
+            <attr name="label">
+                <string>new:pc</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n8">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n2">
+            <attr name="label">
+                <string>superClass</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n0">
+            <attr name="label">
+                <string>method</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>type:MethodDecl</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>test:name = string:message.name</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>test:signature = string:message.signature</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>type:StackBottom</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

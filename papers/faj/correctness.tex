@@ -1,0 +1,380 @@
+\section{Correctness}
+\label{sec:correctness}
+
+We now show that our operational semantics is \emph{correct} in the sense that
+it corresponds to the prior semantics defined in SOS (Structural Operational
+Semantics) style in \cite{DDFL-NoE06}. For this purpose, we define a mapping
+from the configurations in the SOS semantics to graphs, such that there is a
+one-to-one correspondence between SOS derivations and (sequences of) graph
+derivations. (It should be noted that our language is a slight adaptation of
+that in \cite{DDFL-NoE06}; the most important difference is that we only allow
+call point-cuts, whereas they can define point-cuts for arbitrary instructions;
+on the other hand, we include parameters into the advice, which they do not. To
+establish correctness, we use an accordingly modified version of the SOS
+semantics.)
+
+The static structure of a given FAJ program is captured by three partial functions:
+\begin{itemize}
+\item $\FDecl: T \func (\Ident\times T)^*$, yielding for each class type the
+  sequence of field declarations (where $\Ident$ is the universe of identifiers);
+\item $\MDecl: (T\times \Ident) \pfunc (\Ident \times T)^* \times T\times
+  \Expr$, yielding for each class type the corresponding method declarations.
+  A method declaration consists of a list of parameters (pairs of identifiers
+  and types), a return type and a method body.
+\item $\ADecl: (T \times \Ident) \func {\cal P}((\Ident \times T)^* \times
+  \Expr)$, yielding for each pair of class and method identifier the set of
+  aspects that statically match calls of that method.
+\end{itemize}
+%
+For every program, this triple of functions together with the initial
+expression plays exactly the same role as the initial graph discussed in
+Sect.~\ref{sec:gr-state}, except that there all expressions (i.e., the initial
+expression and the bodies of all methods and advices) have been sequentialised
+as discussed in Sect.~\ref{sec:rt}. In fact, there is a straightforward
+translation from each valid combination $(\FDecl,\MDecl,\ADecl,\Expr)$ to an
+aspect program graph; an intuition can be gained from the type graph of
+Figure~\ref{fig:staticmeta}. For lack of space we omit the definition here, but
+below we use \InstrL{}, \IdentL{} and \ClassL{} to denote the sets of nodes
+corresponding to \Instr{}, \Ident{} and $T$ in the program.
+
+The \emph{dynamic} structure, i.e., the states of the program, are encoded in
+the SOS semantics as \emph{configurations} $(S,C,\Sigma,P)$ consisting of the
+same stacks and store as in our graph-based semantics:
+%
+\begin{itemize}\itemsep0pt
+\item $C \in (\Instr\times \Bool)^*$ is the continuation stack, containing the
+  instructions to be executed, combined with booleans indicating whether the
+  instruction has already been adviced (corresponding to the \tagL{}-edge used for
+  this purpose in Section~\ref{sec:gr-aspects}).;
+\item $S \in \Object^*$ is the value stack, containing intermediate results;
+\item $\Sigma: \Object \func T\times (\Ident \pfunc \Object)$ is the heap, containing
+  the run-time type and field values of all objects;
+\item $P\subseteq (\Instr\times \Bool)^*$ is the proceed stack, containing the
+  (tagged or untagged) advices scheduled to be executed.
+\end{itemize}
+
+% The specification of the AFJ in the CASB is defined in a representation of
+% state, and a number of inference rules specified as a structural operational
+% semantics (SOS).
+% State is defined as a compilation of four functions, the first two representing
+% the heap, the latter two describing the static structure:
+%
+% \begin{align*}
+% \Sigma & : Object \: \rightarrow \: T \: \times \: Fd\\
+% Fd & : Identifier \: \rightarrow \: Object\\
+% mbody & : Identifier \times \: \overline{T} \: \rightarrow \: e\\
+% FieldName & : T \: \rightarrow \: \overline{T \times Identifier}\\
+% \end{align*}
+%
+% $\Sigma$ represents the store, or heap. It takes a reference and returns an
+% instance $Fd$ and its type $T$. The function $Fd$ takes a field identifier and
+% returns its current value (i.e. a reference). The function $mbody$ takes the
+% signature of a method --- a method identifier and the types of the parameters
+% --- and returns the method body. $FieldName$ returns the list of fields and
+% their types for a given class.
+%
+% These functions are represented in our graph transformation-based semantics in
+% the following manner:
+% \begin{itemize}
+% \item $\Sigma$: In our model, we do not make a difference between a reference
+%   and an instance: the value of a variable always points to an object. Due to
+%   the nature of graphs, it makes no sense to distinguish between the place
+%   where to find the object and the object itself;
+%
+% \item $Fd$: This function represents an instance and is represented by an {\tt
+%   Object} node and the connected variables for the values of fields. Finding
+%   the value for a field identifier in an object comes down to returning the
+%   value of the variable with that identifier;
+%
+% \item $mbody$: This function is represented as the couple of rules that
+%   performs the method lookup together with the representation of the static
+%   structure of the AFJ program in the graph;
+%
+% \item $FieldName$: This function is represented by the graph-structure that
+%   represents a class and its fields. The {\tt next} edges between fields define
+%   the order of the fields.
+% \end{itemize}
+
+On the basis of these configurations, the SOS semantics consists of two types
+of rules: first, rules to sequentialise expressions to their corresponding
+instructions; and second, rules modelling the the execution of the
+instructions. In our semantics we have chosen to do sequentialisation as part
+of the pre-processing in Section~\ref{sec:rt}; for the purpose of showing
+correctness in this section, we assume the same has happened on the SOS
+semantics side; that is, we assume that all expressions are already transformed
+into sequences of instructions.
+
+The execution rule of instruction \textsc{instr} always has the form
+\[ \frac
+       {\mathit{side~conditions}}
+       {(\textsc{instr}:C,S,\Sigma,P) \rightarrow (C',S',\Sigma',P')}
+\]
+meaning that, if the side conditions are fulfilled, a configuration in which
+the first instruction on the continuation stack is \textsc{instr} can perform a
+step, changing into the configuration on the right hand side. For instance, the
+rules for \setI{}, \callI{} and \returnI{} are:
+
+\begin{eqnarray*}
+\setI \!\! & \begin{array}{@{}c@{}}
+\Sigma(v_0) = (T, F) \\
+\hline
+\begin{array}{l}
+(\setI_f:C, v_0:v:S, \Sigma,P)\\
+\quad\rightarrow_b \: (C,v:S, \Sigma[v_0 \mapsto (T, F[f \mapsto v])],P)
+\end{array}
+\end{array}
+\\[\medskipamount]
+\callI \!\! & \begin{array}{@{}c@{}}
+\Sigma(v_0) = (T, F) \quad \MDecl(m,T)=((x_1,\dotsc,x_n),e) \\
+\hline
+\begin{array}{l}
+(\callI_m:C,v_0:v_1:\dotsc:v_n:S, \Sigma,P)\\
+\quad \rightarrow_b \: (e[x_1/v_1,\dotsc,x_n/v_n],this/v_0:C, S, \Sigma,P)
+\end{array}
+\end{array}
+\\[-\medskipamount]
+\returnI \!\!& \begin{array}{@{}c@{}}
+\: \\
+\hline
+(\returnI:C,S,\Sigma,P) \: \rightarrow_b \: (C,S,\Sigma,P)
+\end{array}
+\end{eqnarray*}
+%
+Note that in these rules, the continuation stack elements are given as plain
+instructions rather than pairs of instructions and booleans; this is to
+indicate that we do not care about the instruction tags.
+
+The $P$-stack is only used for advice execution. Two example rules are given
+below: the \textsc{around}-rule to schedule advice execution, and the rule for
+executing \proceedI.
+\begin{eqnarray*}
+\textsc{around} &  \begin{array}{@{}c@{}}
+\Sigma(\This)=(T,\Fd)\quad \Psi(T,m) = \{a_q\dotsc a_n\} \\
+\hline
+\begin{array}{l}
+((\callI_m,\False):C,S, \Sigma,P) \rightarrow \\
+\quad (\doI_{a_1}:\poppI:C, S, \Sigma, \\
+\qquad \doI_{a_2}:\dotsc:\doI_{a_n}: (\callI_m,\True):P)
+\end{array}
+\end{array}
+\\
+\proceedI &  \begin{array}{@{}c@{}}
+\: \\
+\hline
+\begin{array}{l}
+(\proceedI:C, S ,\Sigma, i:P) \\
+\quad \rightarrow \: (i:\pushppI_i:C, S, \Sigma, P)
+\end{array}
+\end{array}
+\end{eqnarray*}
+
+\subsection{From Configurations to Graphs}
+
+The translation of SOS configurations to graphs is defined by
+%
+\[ \Tra: (C,S,\Sigma,P)
+       \mapsto \sem C \cup \sem S\cup \sem\Sigma \cup \sem P
+\]
+%
+where $\sem C$, $\sem P$ etc.\ are the graphs corresponding to the individual
+data structures; the combined graph is the union of these. The individual
+graphs in turn are defined as follows:
+%
+\begin{itemize}
+\item For each of the stacks, we introduce a single special $\StackL$-node that
+  stands for the stack as a whole, and $\CellL$-nodes that stand for the stack
+  positions. As representatives we can use integer numbers:
+%
+\[\begin{array}{l@{{\:}}l@{{\:}}l}
+\StackL & = & \{-1\} \\
+\CellL & = & \{0,\ldots,n\} \quad\mbox{where $n$ is the stack size}
+\end{array}\]
+%
+The nodes are linked with \topL-, \nextL- and \valueL-edges in accordance with
+the type graph of Figure~\ref{fig:runtime_meta}. Using $|C|$ to denote the size
+of $C$ and $C^i$ to denote the value at position $i$ (where the first position
+is numbered 0 and the last $|C|-1$), the formal definition is:
+%
+\[\begin{array}{l}
+\sem C = (\StackL\cup\CellL\cup \InstrL, E_C) \quad\mbox{where}\\[\smallskipamount]
+\quad
+\begin{array}[t]{l@{{\:}}l}
+E_C = & \{(-1,\topL,0)\} \enspace\cup \\
+      & \{(i,\nextL,i+1)\mid 0\leq i<|C|\} \enspace\cup \\
+      & \{(i,\valueL,x)\mid 0\leq i<|C|,C^i=(x,b) \} \enspace\cup \\
+      & \{(i,\tagL,i)\mid 0\leq i<|C|,C^i=(x,\True) \}
+\end{array}
+\end{array}\]
+%
+Note that stacks always contain a spurious \CellL-node for the
+sake of uniformity, so that even the empty stack has a \topL-edge.
+
+The $P$-stack is encoded in the same was; so is the $S$-stack, except that
+the \valueL-edges point to \ObjectL{}s, and no \tagL-edges are required.
+
+\item For the store, we assume a set of nodes \ObjectL~corresponding to the
+  objects in $\dom(\Sigma)$, that is, those objects that are actually allocated
+  on the heap. We also need auxiliary nodes to represent the object fields;
+  these will be encoded as pairs $(o,f)$ where $o\in \ObjectL$ and $f$ is a
+  field declared for $o$'s type:
+  \[ \VarL = \{ (o,id) \mid \Sigma(o) = (t,\Fd), id \in \dom(\Fd) \}
+  \]
+Using this set of nodes, the graph for $\Sigma$ is defined by
+%
+\[\begin{array}{l}
+\sem \Sigma = (\ClassL \cup \ObjectL \cup \IdentL \cup \VarL, E_{\Sigma})
+\quad \mbox{where}
+\\[\smallskipamount]
+\quad \begin{array}[t]{l@{{\:}}l}
+E_{\Sigma}  = &\{ (v, \nameL, \id) \mid v = (o,\id)  \} \enspace \cup\\
+& \{ (o, \varL, v) \mid v = (o,\id) \} \enspace  \cup\\
+& \{ (v, \valueL,o) \mid v=(o',\id), \Fd(o') = o \} \enspace \cup\\
+& \{ (o, \typeL,t) \mid \Sigma(o) = (t,\Fd) \}
+\end{array}
+\end{array}\]
+\end{itemize}
+
+On the basis of these definitions, we claim that the following correspondence holds
+between the graph semantics and the SOS semantics:
+\begin{center}
+\begin{tikzpicture}
+\node (sos0) {$(C,S,\Sigma,P)$};
+\node (sos1) [right=3cm of sos0] {$(C',S',\Sigma',P')$};
+\node (gr0) [below=1.5cm of sos0] {$G$};
+\node (gr1) [below=1.5cm of sos1] {$G'$};
+\path[->,>=stealth'] (sos0) edge node[above] {SOS derivation} (sos1)
+             edge node[left] {\Tra} (gr0) 
+      (gr0)  edge node[above] {graph derivation sequence} (gr1) 
+      (sos1) edge node[right] {\Tra} (gr1);
+\end{tikzpicture}
+\end{center}
+This picture can be read top-down or bottom-up: for all single SOS derivations,
+there is a corresponding sequence of graph derivations, and for all sequences
+of graph derivations \emph{between non-intermediate graphs} there is a
+corresponding SOS derivation --- where a graph is intermediate if it is the
+middle of a control program such as the one shown in Figure~\ref{lst:call}.
+% %
+% The notion of correctness is based on the fact that we can translate every
+% tuple $(\Sigma, C,S)$ to a graph, and that this translation valid before and
+% after the reductions defined in this work and the CASB. The translation
+% operation $T : (\Sigma, C, S) \rightarrow \ltrace \Sigma \rtrace \Join \ltrace
+% C \rtrace \Join \ltrace S \rtrace$ is defined as follows. We assume a universe
+% of nodes $Node$ and a universe of edges $Edge$. Given $T \subseteq Node$,
+% $Object \subseteq Node$, $Identifier \subseteq Node$, and $Var \subseteq Node$,
+% we define:
+% \begin{align*}
+% \ltrace \Sigma \rtrace =& \langle T \cup Object \cup Identifier \cup Var, E_{\Sigma} \rangle\\
+% Var =& \{ (o,id) \mid o \in Object, \Sigma(o) = (t,Fd), id \in dom(Fd) \}\\
+% E_{\Sigma}  = &\{ (v, name, id) \mid v = (o,id)  \} \: \cup\\
+% & \{ (o, var, v) \mid v = (o,id) \} \:  \cup\\
+% & \{ (v, value,o) \mid v=(o',id), Fd(o') = o \} \: \cup\\
+% & \{ (o, type,t) \mid \Sigma(o) = (t,Fd) \}
+% \end{align*}
+%
+% Now, let $C$ and $S$ be functions over $\Nat$:
+% \begin{align*}
+% C :& \Nat \: \rightarrow Instr&\\
+% S :& \Nat \: \rightarrow Object&\\
+% \end{align*} 
+% Given $Stack \in Node$, $Cell \subseteq Node$, $Object \subseteq Node$, $Instr  \subseteq Node$, we define:
+% \begin{align*}
+% \ltrace S \rtrace =& \langle  \{ Stack_S \} \cup Cell_S \cup Object, E_S \rangle \\
+% Cell_S =& \{ (S,k) \mid k \in dom(S)  \} \\
+% E_S =& \{ (Stack_S, top, s) \mid s = (S,0)  \} \: \cup\\
+%      & \{ (s, value, o ) \mid s = (S,k), S(k) = o \} \: \cup\\
+%      & \{ (s', next, s ) \mid s = (S,k), s' = (S, k+1), k \in dom(S) \}
+% \\
+% \ltrace C \rtrace =& \langle  \{ Stack_C \} \cup Cell_C \cup Instr, E_C \rangle \\
+% Cell_C =& \{ (C,k) \mid k \in dom(C)  \} \\
+% E_C =& \{ (Stack_C, top, c) \mid c = (C,0)  \} \: \cup\\
+%      & \{ (c, value, i ) \mid c = (C,k), C(k) = i \} \: \cup\\
+%      & \{ (c', next, c ) \mid c = (C,k), c' = (C, k+1), k \in dom(C) \}
+% \end{align*}
+%
+% We describe the differences in comparing these rules with our graph
+% transformation-based semantics:
+% \begin{itemize}
+% \item SOS rules that use auxiliary functions can complicate the translation to
+%   graph production rules, when the relationship is direct and cannot be
+%   resolved in a single graph production rule. For such SOS rules, multiple
+%   graph production rules are required. Mostly, a function has to be modelled
+%   only once and can be triggered by a rule in which the function is called.
+% \item The \callI- and \newI-rules include substitutions over lists.
+%   Graph transformation are not suitable for doing such at once. Therefore, we
+%   required multiple rules that specify such behaviour, and more then one rule
+%   application to execute the behaviour;
+% \item The reference specification does not include a rule for the {\sc var}
+%   instruction. This might simply be caused by the theoretical nature of the
+%   specification --- a model that does not provide a means for execution ---
+%   causing details easily being forgotten.
+% \item In the SOS rules, the result of the {\sc new} instruction is pushed on
+%   the continuation stack. The \emph{pushobj} rule is used to move it to the
+%   value stack. In our semantics of the {\tt new} instruction, the new object is
+%   directly pushed on the value stack.
+% \end{itemize}
+%
+% The around advice in the CASB that has been specified as an extension to AFJ
+% in this work is defined in the CASB as two more functions and a number of SOS
+% rules. No specific grammar is given for aspect, or even point-cuts and advice.
+% Instead, the semantics assumes the existence of a pool of advice and
+% associated point-cuts on which these functions, $\Psi$ and $\phi$ operate.
+% $\Psi$ returns all $psi$ functions that correspond to the around advices that
+% match a given instruction statically. The $\phi$ can be used as a parameter
+% of the {\sc do} instruction. This instruction will invoke the advice. The
+% definition of the \emph{AROUND} and \emph{PROCEED} rule are as follow:
+%
+% \begin{equation*}
+% AROUND \: \frac {
+% \Psi(i) = ((\psi_q\dotsc\phi_n),around)
+% } {
+% \begin{aligned}
+% &(i:C,S, \Sigma,P) \: \rightarrow&\\
+% &(do \psi_1:pop_p n:C, S, \Sigma, do \phi_2:\dotsc:do \psi_n: \overline{i}:P)&
+% \end{aligned}
+% }
+% \end{equation*}
+
+% \begin{equation*}
+% PROCEED \: \frac {
+% \:
+% } {
+% \begin{aligned}
+% &(proceed:C, S ,\Sigma, i:P)&\\
+% &\rightarrow \: (x:push_p x:C, S, \Sigma, P)&
+% \end{aligned}
+% }
+% \end{equation*}
+
+% For our notion of correctness, we must extend the translation, with tagged instructions on the continuation stack and a proceed stack, where $P : \Nat \rightarrow Instr$:
+
+% \begin{align*}
+% \ltrace C' \rtrace =& \langle  \{ Stack_C \} \cup Cell'_C \cup Instr, E_C \rangle \\
+% Cell'_C =& \{ (C,k) \mid k \in dom(C)  \} \\
+% E_C =& \{ (Stack_C, top, c) \mid c = (C,0)  \} \: \cup\\
+%      & \{ (c, value, i ) \mid c = (C,k), C(k) = i \} \: \cup\\
+%      & \{ (c', next, c ) \mid c = (C,k), c' = (C, k+1), k \in dom(C) \} \: \cup\\
+%      & \{ (c, tag, c ) \mid c = (C,k), C(k) = \overline{i} \}
+% \\
+% \ltrace P \rtrace =& \langle  \{ Stack_P \} \cup Cell'_P \cup Instr, E_P \rangle \\
+% Cell'_P =& \{ (P,k) \mid k \in dom(P)  \} \\
+% E_P =& \{ (Stack_P, top, p) \mid p = (P,0)  \} \: \cup\\
+%      & \{ (p, value, i ) \mid p = (P,k), P(k) = i \} \: \cup\\
+%      & \{ (p', next, p ) \mid p = (P,k), p' = (P, k+1), k \in dom(P) \} \: \cup\\
+%      & \{ (p, tag, p ) \mid p = (P,k), P(k) = \overline{i} \}
+% \end{align*}
+
+% With respect to these rules, the specification given in this work exactly specifies what the SOS rules describe, except for the fact that we used no $pop_p(n)$ instruction for popping $n$ instruction; instead we handle popping from the proceed stack differently for {\sc test} instructions on the one hand and instructions that are part of the base program on the other side. Also, to increase the power of the language, we have modified the {\sc proceed} to have a signature. This allows modifying the objects involved in the matched expression.\\
+% Another fact worth mentioning, is that, in the SOS rules, the body returned by the $mbody$ function contains a copy of the original. Therefore, in the \emph{around} rule, the instruction can tagged, leaving the original instruction. In our implementation, we describe execution of instructions contained by the static structure of the program. Therefore, we cannot tag the instruction itself; it would be tagged once and never trigger an advice again. This is solved by tagging {\tt Cell} nodes used in the stacks instead of the {\tt Instr} nodes, and by using these nodes until the advice execution has ended.\\
+% \\
+% %We have shown that, once a state representation is chosen, SOS rules can be translated to graph production rules in a direct manner. As desired, the rules representing the base-language semantics contain no parts to facilitate aspects. Only priorities are used to intervene the normal execution of the program.\\
+
+Since we have used an existing (SOS) semantics as our notion of correctness,
+one may question the need for a new (graph) semantics for the same language. To
+motivate this once more, let us point out that our semantics is directly
+executable, in contrast to the SOS rules which (among other things) contain
+substitutions over lists, as well as many auxiliary functions. In fact, in
+setting up our rules we have had the opportunity to repair a number of smaller
+and larger oversights in the SOS semantics, precisely because these were shown
+up by the simulation of the rules. In addition, we believe that the visual
+nature of the graph transformation rules will appeal to many readers that are
+not experts in mathematics.

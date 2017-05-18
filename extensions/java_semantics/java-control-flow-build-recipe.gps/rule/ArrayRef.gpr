@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="rule" edgeids="false" edgemode="directed" id="rule.ArrayRef">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>114 26 102 17</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>33 129 79 17</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>218 133 68 17</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>357 26 106 17</string>
+            </attr>
+        </node>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>parin:0</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>id:root</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>type:ArrayRef</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n0">
+            <attr name="label">
+                <string>position</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n3">
+            <attr name="label">
+                <string>receiver</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n1">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>parout:2</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>id:proot</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>parout:3</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>id:rroot</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>type:Ref</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>parin:1</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>id:exit</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,8 @@
+package control;
+
+recipe Initializer(node root, node exit, out node entry) {
+	// Match the block of the initializer.
+	node broot := rule.Initializer(root, exit);
+	// Build the block.
+	entry := Block(broot, exit);
+}

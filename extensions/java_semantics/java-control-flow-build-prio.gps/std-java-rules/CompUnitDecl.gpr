@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.CompUnitDecl">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1">
+            <attr name="layout">
+                <string>26 144 37 16</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>157 144 58 16</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>135 67 91 16</string>
+            </attr>
+        </node>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>del:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>type</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:CompUnitDecl</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n2">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

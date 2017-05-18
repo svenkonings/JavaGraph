@@ -1,0 +1,25 @@
+package control;
+
+recipe MessageSend(node root, node exit, out node entry) {
+	// Match only the reference.
+	node rroot := rule.MessageSend-Init(root, exit);
+	// Build the flow for reference.
+	node rentry := Ref(rroot, root);
+	try {
+		// Method invocation without arguments.
+		entry := rule.MessageSend-NoArgs(root, rentry);
+	} else {
+		// Method invocation with arguments.
+		int argMax := rule.MessageSend-ArgCount(root);
+		int argNr := rule.help.zero();
+		node aroot, aentry;
+		node aexit := rule.help.assign(rentry);
+		do {
+			aroot := rule.MessageSend-WithArgs(root, argNr);
+			aentry := Expr(aroot, aexit);
+			aexit := rule.help.assign(aentry);
+			argNr := rule.help.add(argNr, 1);
+		} while (rule.help.le(argNr, argMax))
+		entry := rule.help.assign(aentry);
+	}
+}

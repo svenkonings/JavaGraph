@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ForStmt-23-WithCondUpdate-Cond">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1">
+            <attr name="layout">
+                <string>16 18 48 30</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>159 122 61 22</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>167 218 41 22</string>
+            </attr>
+        </node>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:ForStmt</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n2">
+            <attr name="label">
+                <string>new:child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 188 133 128 180 186 229 12</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n2">
+            <attr name="label">
+                <string>not:initialization</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>del:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n2">
+            <attr name="label">
+                <string>condition</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 186 229 241 179 188 133 12</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

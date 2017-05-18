@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="Abort">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n6">
+            <attr name="layout">
+                <string>334 233 79 34</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>330 119 88 34</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>181 143 58 52</string>
+            </attr>
+        </node>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Abort</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n2">
+            <attr name="label">
+                <string>flow</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Frame</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>flag:active</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n0">
+            <attr name="label">
+                <string>new:pc</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>del:pc</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

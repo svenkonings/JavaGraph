@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="regular">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n37564">
+            <attr name="layout">
+                <string>225 27 52 36</string>
+            </attr>
+        </node>
+        <node id="n37563">
+            <attr name="layout">
+                <string>226 110 76 21</string>
+            </attr>
+        </node>
+        <node id="n37565">
+            <attr name="layout">
+                <string>225 177 97 36</string>
+            </attr>
+        </node>
+        <edge to="n37564" from="n37564">
+            <attr name="label">
+                <string>type:Person</string>
+            </attr>
+        </edge>
+        <edge to="n37564" from="n37564">
+            <attr name="label">
+                <string>{flag:?name}</string>
+            </attr>
+        </edge>
+        <edge to="n37563" from="n37563">
+            <attr name="label">
+                <string>type:Person</string>
+            </attr>
+        </edge>
+        <edge to="n37565" from="n37563">
+            <attr name="label">
+                <string>son</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 264 120 207 152 273 195 12</string>
+            </attr>
+        </edge>
+        <edge to="n37564" from="n37563">
+            <attr name="label">
+                <string>{father*}</string>
+            </attr>
+        </edge>
+        <edge to="n37565" from="n37565">
+            <attr name="label">
+                <string>new:{flag:?name}</string>
+            </attr>
+        </edge>
+        <edge to="n37565" from="n37565">
+            <attr name="label">
+                <string>type:Person</string>
+            </attr>
+        </edge>
+        <edge to="n37563" from="n37565">
+            <attr name="label">
+                <string>father</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

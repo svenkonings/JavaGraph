@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="parameters">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n38109">
+            <attr name="layout">
+                <string>119 31 9 15</string>
+            </attr>
+        </node>
+        <node id="n38108">
+            <attr name="layout">
+                <string>177 126 24 15</string>
+            </attr>
+        </node>
+        <node id="n38107">
+            <attr name="layout">
+                <string>77 126 19 19</string>
+            </attr>
+        </node>
+        <edge to="n38109" from="n38109">
+            <attr name="label">
+                <string>type:A</string>
+            </attr>
+        </edge>
+        <edge to="n38107" from="n38109">
+            <attr name="label">
+                <string>x</string>
+            </attr>
+        </edge>
+        <edge to="n38108" from="n38109">
+            <attr name="label">
+                <string>y</string>
+            </attr>
+        </edge>
+        <edge to="n38108" from="n38108">
+            <attr name="label">
+                <string>par:1</string>
+            </attr>
+        </edge>
+        <edge to="n38108" from="n38108">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+        <edge to="n38107" from="n38107">
+            <attr name="label">
+                <string>par:0</string>
+            </attr>
+        </edge>
+        <edge to="n38107" from="n38107">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,94 @@
+% Import packages to use
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{nomencl}
+\usepackage{array}
+\usepackage{subfigure}
+\usepackage{alltt}
+\usepackage{verbatim}
+\usepackage{layout}
+\usepackage{hyperref}
+\usepackage{tikz}                     % figures
+\usetikzlibrary{arrows,automata,positioning}
+
+\graphicspath{{./images/}}
+
+\def\newblock{\hskip .11em plus .33em minus .07em} 
+
+%\oddsidemargin 0.0in \textwidth 5.0in
+  
+\setlength{\parindent}{0pt}
+ 
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+%\makeglossary
+
+%\usepackage{setspace}
+%\doublespacing
+
+% Define colors
+\definecolor{green}{rgb}{0,.47,0}
+\definecolor{gray}{rgb}{.5,.5,.5}
+\definecolor{lightgray}{rgb}{.75,.75,.75}
+\definecolor{backgray}{gray}{.95}
+
+% Define compose star shit:
+\lstdefinelanguage{Control}
+{	morekeywords={alap,try,else,do,while,until,if,function},
+	sensitive=true,
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/}
+}
+
+%%
+%% AspectJ definition (c) Robert Wenner
+%%
+\lstdefinelanguage{FAJ}
+{
+morekeywords={around,call,class,extends},	sensitive=true,
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/}
+}
+
+% Setup stuff for ComposeStar src
+\lstset{
+language=FAJ,
+	tabsize=3,
+	basicstyle=\ttfamily\scriptsize,
+	keywordstyle=\bf,
+	commentstyle=\color{gray}\it,
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\color{gray},
+	stepnumber=1,
+	numbersep=7pt,
+	frame=ltrb,
+	breaklines = true,
+	captionpos=b,
+}
+
+\lstset{
+language=Control,
+	tabsize=3,
+	basicstyle=\ttfamily\scriptsize,
+	keywordstyle=\bf,
+	commentstyle=\color{gray}\it,
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\color{gray},
+	stepnumber=1,
+	numbersep=7pt,
+	frame=ltrb,
+	breaklines = true,
+	captionpos=b,
+}
+
+% Use fancy headers and footers
+% \pagestyle{fancy}
+
+\subfigtopskip = 1cm
+\subfigbottomskip = 0.5cm
+

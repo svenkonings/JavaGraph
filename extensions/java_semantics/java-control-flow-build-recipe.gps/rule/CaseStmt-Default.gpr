@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="rule" edgeids="false" edgemode="directed" id="rule.CaseStmt-Default">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>28 146 109 17</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>230 99 51 34</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>75 248 33 17</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>37 26 83 17</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>238 22 33 17</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>202 200 106 17</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>198 273 116 17</string>
+            </attr>
+        </node>
+        <edge from="n5" to="n5">
+            <attr name="label">
+                <string>id:root</string>
+            </attr>
+        </edge>
+        <edge from="n5" to="n5">
+            <attr name="label">
+                <string>parin:0</string>
+            </attr>
+        </edge>
+        <edge from="n5" to="n5">
+            <attr name="label">
+                <string>type:CaseStmt</string>
+            </attr>
+        </edge>
+        <edge from="n5" to="n3">
+            <attr name="label">
+                <string>not:expr</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>type:Branch</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>flag:default</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n4">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n0">
+            <attr name="label">
+                <string>new:condition</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>type:SwitchStmt</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n0">
+            <attr name="label">
+                <string>expr</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n5">
+            <attr name="label">
+                <string>stmt</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n1">
+            <attr name="label">
+                <string>new:branch</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>id:exit</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>parin:1</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>id:entry</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>parout:2</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n4">
+            <attr name="label">
+                <string>=</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

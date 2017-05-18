@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.TryStmt-9-TryCatchFinally-Close">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n3">
+            <attr name="layout">
+                <string>282 13 83 32</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>274 319 83 32</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>166 330 47 37</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>406 221 98 32</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>24 258 55 32</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>21 324 83 32</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>291 84 63 48</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>436 319 83 32</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>157 264 89 32</string>
+            </attr>
+        </node>
+        <node id="n10">
+            <attr name="layout">
+                <string>6 143 83 32</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>159 146 73 32</string>
+            </attr>
+        </node>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n9">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>del:flag:temp</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>type:#FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n8">
+            <attr name="label">
+                <string>new:=</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 456 237 483 292 477 335 12</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n5">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>del:flag:done</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n1">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n7">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n7">
+            <attr name="label">
+                <string>del:flow</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n0">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Argument</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n0">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n10">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:TryStmt</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n6">
+            <attr name="label">
+                <string>del:exit</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n6">
+            <attr name="label">
+                <string>del:finallyExit</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n6">
+            <attr name="label">
+                <string>catchArgument</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n6">
+            <attr name="label">
+                <string>tryBlock</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n6">
+            <attr name="label">
+                <string>finallyBlock</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n6">
+            <attr name="label">
+                <string>new:entry</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

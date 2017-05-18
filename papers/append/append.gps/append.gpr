@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="append">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n164"/>
+        <node id="n162"/>
+        <node id="n160"/>
+        <node id="n159"/>
+        <node id="n163"/>
+        <node id="n161"/>
+        <node id="n158"/>
+        <edge to="n160" from="n160">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge to="n163" from="n163">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n161" from="n161">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n158" from="n158">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n162" from="n160">
+            <attr name="label">
+                <string>caller</string>
+            </attr>
+        </edge>
+        <edge to="n163" from="n162">
+            <attr name="label">
+                <string>return</string>
+            </attr>
+        </edge>
+        <edge to="n161" from="n164">
+            <attr name="label">
+                <string>not:next</string>
+            </attr>
+        </edge>
+        <edge to="n163" from="n163">
+            <attr name="label">
+                <string>void</string>
+            </attr>
+        </edge>
+        <edge to="n158" from="n164">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge to="n160" from="n160">
+            <attr name="label">
+                <string>append</string>
+            </attr>
+        </edge>
+        <edge to="n159" from="n158">
+            <attr name="label">
+                <string>val</string>
+            </attr>
+        </edge>
+        <edge to="n164" from="n160">
+            <attr name="label">
+                <string>this</string>
+            </attr>
+        </edge>
+        <edge to="n159" from="n164">
+            <attr name="label">
+                <string>not:val</string>
+            </attr>
+        </edge>
+        <edge to="n159" from="n160">
+            <attr name="label">
+                <string>x</string>
+            </attr>
+        </edge>
+        <edge to="n160" from="n160">
+            <attr name="label">
+                <string>control</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

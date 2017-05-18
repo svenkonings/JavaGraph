@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="graph" role="graph" edgeids="false" edgemode="directed">
+        <node id="n35"/>
+        <node id="n37"/>
+        <node id="n33"/>
+        <node id="n34"/>
+        <node id="n36"/>
+        <edge from="n34" to="n34">
+            <attr name="label">
+                <string>append</string>
+            </attr>
+        </edge>
+        <edge from="n36" to="n37">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge from="n37" to="n35">
+            <attr name="label">
+                <string>val</string>
+            </attr>
+        </edge>
+        <edge from="n34" to="n35">
+            <attr name="label">
+                <string>x</string>
+            </attr>
+        </edge>
+        <edge from="n36" to="n35">
+            <attr name="label">
+                <string>not:val</string>
+            </attr>
+        </edge>
+        <edge from="n34" to="n36">
+            <attr name="label">
+                <string>this</string>
+            </attr>
+        </edge>
+        <edge from="n36" to="n33">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge from="n34" to="n34">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge from="n37" to="n37">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge from="n33" to="n33">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

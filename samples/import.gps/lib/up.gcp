@@ -1,0 +1,23 @@
+// Because we're in the package lib, we need to declare it
+package lib;
+
+// The following lines import rules
+// so they can be called with unqualified names
+import rules.one;
+import two;
+import three;
+
+// This defines the recipe lib.up
+recipe up() {
+	one;
+	two;
+	three;
+}
+
+// This defines the function lib.down
+function down() {
+	three;
+	two;
+	// A qualified call is allowed even so
+	rules.one;
+}

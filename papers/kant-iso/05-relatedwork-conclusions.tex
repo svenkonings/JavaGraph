@@ -1,0 +1,67 @@
+\section{Related Work}
+\label{section-related-work}
+
+The \NAUTY tool was created by McKay \cite{mckay2008:nauty24} and is based on
+an algorithm for computing canonical form described in
+\cite{mckay1981:practical}. In \cite{kant2010:canonical}, we provide a
+comprehensive description of the original McKay's algorithm.
+
+Ullmann \cite{ullmann1976:algorithm} presented a search tree based algorithm for
+finding graph or subgraph isomorphisms between two graphs. Messner \& Bunke
+\cite{messmer1999:decision,messmer2000:efficient} made an optimised version for
+large graphs. The graph matching algorithms by Cordella et al.
+\cite{cordella1999:performance,cordella2001:improved,cordella2004:subgraph} also
+aim at isomorphism checking for pairs of graphs. They use heuristics and
+efficient data structures that are optimised for matching large graphs.
+Foggia, Sansone, and Vento compare four one-to-one isomorphism checking
+algorithms to \NAUTY \cite{foggia2001:performance}. In many cases \NAUTY
+performs comparable to these algorithms or better but in some cases \NAUTY
+performs worse or is unable to find an answer, whereas some of the algorithms
+are able to find an answer for all test cases.
+
+Darga et al. \cite{darga2008:faster} have optimised the \NAUTY algorithm
+for symmetry detection in large and sparse graphs and implemented this new
+algorithm in the tool \SAUCY \cite{darga2008:saucy}, which does not produce a
+canonical form. Optimisations of McKay's algorithm for large and sparse graphs
+have also been done by Junttila \& Kaski \cite{junttila2007:engineering} in
+\BLISS \cite{junttila2008:bliss}.
+
+\NAUTY has been used in model checking of systems specified in B by the tool
+ProB \cite{turner2007:symmetry,spermann2008:prob}. The states of the B model are
+translated to edge-labelled graphs which are again converted to node-coloured
+graphs and compared using \NAUTY. In \cite{turner2007:symmetry} a version of the
+\NAUTY algorithm is adapted to work for edge-labelled graphs, but the search
+tree pruning optimisations of \NAUTY are left out. On the contrary, in
+\cite{spermann2008:prob} a conversion from edge-labelled graphs to node-coloured
+graphs is used in combination with the original \NAUTY algorithm.
+Experimentation shows that the symmetry reduction results in faster model
+checking.
+
+\section{Conclusions}
+\label{section-conclusions}
+
+The results of our experiments have shown that, contrary to expectations, the
+state-or-the-art isomorphism checking tools \NAUTY and \BLISS do not do better
+than our own ad-hoc implementation in \GROOVE. On the other hand, \BLISS does
+appear to scale better to larger graphs, at least in the edge node conversion.
+More experimentation and profiling has to be carried out to determine if this
+is really the case, and if so, to explain the phenomenon: for graphs with
+little or no actual symmetry, the computational complexity of the \GROOVE
+algorithm should instead be better than that of \BLISS.
+
+As future work we have identified the following actions:
+\begin{itemize}\itemsep0pt
+\item We need more experiments in particular also using larger graphs, in order
+  to improve our understanding of the relation between \GROOVE and \BLISS performance.
+
+\item So far we have only compared graphs pairwise, whereas in the
+  context of model checking we are actually interested in finding an isomorphic
+  representative in a set of previously generated graphs. Experiments should be
+  set up to compare the performance of \GROOVE and \BLISS also in that context.
+
+\item We believe that the performance loss in \BLISS is mainly due to the need
+  for converting the graphs. The canonical form algorithm beneath \NAUTY and
+  \BLISS, however, can in principle easily be adapted to cope with
+  edge-labelled graphs directly. We intend to carry out this re-implementation
+  to get the best of both worlds.
+\end{itemize}

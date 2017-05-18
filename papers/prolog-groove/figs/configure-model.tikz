@@ -1,0 +1,13 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+% Special colors
+\begin{tikzpicture}[
+% Special color styles
+scale=\tikzscale]
+\node[nacnode] (n1)  at (2.550, -0.340) {\ml{\textbf{Constraint}\\\textit{violated}}};
+\node[node] (n0)  at (0.610, -0.340) {\ml{\textbf{Model}\\{\color{\green}\textit{$+$ configured}}}};
+\path[nacedge](n0.east |- 2.550, -0.340) -- node[naclab]{constraint} (n1) ;
+\userdefinedmacro
+\end{tikzpicture}
+\renewcommand{\userdefinedmacro}{\relax}

@@ -1,0 +1,16 @@
+# Layout information for H:\groove\usermanual\fig\algebra-buffer-transformation-input.gxl
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n230 666 122 18 18 
+n n228 524 266 18 18 
+n n233 531 129 18 18 
+n n229 530 189 18 18 
+n n235 416 265 18 18 
+e n228 n233 "entry" 800 919 545 275 477 143 545 138 13
+n n234 413 189 18 18 
+n n227 763 189 18 18 
+n n231 286 190 18 18 
+n n232 665 188 18 18 
+e n234 n235 "arg:1" 483 517 431 198 431 274 11
+n n236 668 266 18 18 

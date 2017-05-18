@@ -1,0 +1,17 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[type_node] (n1) at (0.700, -1.315) {\ml{\textbf{B}}};
+\node[type_node] (n3) at (2.065, -1.855) {\ml{\textbf{D}}};
+\node[type_node] (n2) at (2.060, -1.315) {\ml{\textbf{C}}};
+\node[abstract_node] (n0) at (1.335, -0.725) {\ml{\textit{\textbf{A}}}};
+
+\path[subtype_edge](n3.north -| 2.060, -1.315) --  (n2) ;
+\path[basic_edge](n0.north -| 1.350, -0.360) -- (1.350, -0.360) -- (0.580, -0.380) -- (0.580, -0.730) -- (n0.west |- 0.580, -0.730)
+node[lab] at (0.849, -0.353) {\ml{\textit{next}}};
+\path[basic_edge, composite](n0.east |- 2.050, -0.750) -- (2.050, -0.750) -- (n2.north -| 2.050, -0.750)
+node[lab] at (2.201, -0.830) {\ml{\textit{has}}};
+\path[subtype_edge] (n1)  --  (n0) ;
+\path[subtype_edge] (n2)  --  (n0) ;
+\end{tikzpicture}

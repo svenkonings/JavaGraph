@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="SelectionChild_OrFeature">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>163 544 71 32</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>92 147 112 48</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>217 282 88 48</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>171 397 86 64</string>
+            </attr>
+        </node>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:FeatureModel</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>new:flag:selected</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n1">
+            <attr name="label">
+                <string>?</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>or</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Feature</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Feature</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:OrFeature</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>flag:selected</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>del:flag:configured</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

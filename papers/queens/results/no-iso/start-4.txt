@@ -1,0 +1,93 @@
+
+Method call reporting: Sat Jan 25 14:13:43 BRST 2014
+====================================================
+
+Reporting class groove.explore.Exploration
+               playScenario() #top=  3 #nest=   0 tot(m)=1503 avg(mu)=501000
+
+Reporting class groove.graph.iso.IsoChecker
+                Equality test #top=  0 #nest=   0 tot(m)=   0 avg(mu)=     0
+  Isomorphism by certificates #top=  0 #nest=   0 tot(m)=   0 avg(mu)=     0
+    Isomorphism by simulation #top=  0 #nest=   0 tot(m)=   0 avg(mu)=     0
+   areIsomorphic(Graph,Graph) #top=  0 #nest=   0 tot(m)=   0 avg(mu)=     0
+        computeCertificates() #top=  2 #nest=   0 tot(m)=  14 avg(mu)=  7000
+            getPartitionMap() #top=  0 #nest=   0 tot(m)=   0 avg(mu)=     0
+
+Reporting class groove.lts.MatchApplier
+                     addState #top=244 #nest=   0 tot(m)= 200 avg(mu)=   819
+                addTransition #top=275 #nest=   0 tot(m)= 336 avg(mu)=  1221
+
+Reporting class groove.match.plan.PlanSearchStrategy
+                Search.find() #top=673 #nest=7298 tot(m)= 512 avg(mu)=    64
+
+Total measured time spent in
+            class groove.explore.Exploration: 1503 ms
+           class groove.graph.iso.IsoChecker: 14 ms
+               class groove.lts.MatchApplier: 536 ms
+  class groove.match.plan.PlanSearchStrategy: 512 ms
+
+Time spent collection information: 5 ms
+===============================================================================
+
+Graph count
+    Modifiable:         853
+    Frozen:             5
+    Bytes/state:        1277.0
+
+Graph element count
+    Factory nodes:      16
+    Factory edges:      184
+    Nodes/state (avg):   18.4
+    Edges/state (avg):   46.2
+
+Transition count
+    Reused:             0
+    Confluent:          0
+    Events:             229
+    Coanchor reuse:     0/0
+
+Isomorphism statistics
+    Predicted:          0     (-0)
+       False pos 1:        0     ( NaN%)
+       False pos 2:        0     ( NaN%)
+    Equal graphs:       0
+    Equal certificates: 0
+    Equal simulation:   0
+    Iterations:         [0, 0, 0, 2, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1]
+    Symmetry breaking:  0
+
+Cache statistics
+    Created:            669
+    Cleared:            103
+    Collected:          0
+    Reconstructed:      101
+    Distribution:       [568,101]
+
+Time (ms):          651
+    Matching:          512    (78.6%)
+    Transforming:      650    (99.8%)
+    Iso checking:       14    ( 2.2%)
+        Certifying:         14    (100.0%)
+        Equals check:        0    ( 0.0%)
+        Cert check:          0    ( 0.0%)
+        Sim check:           0    ( 0.0%)
+    Building GTS:      322    (49.5%)
+    Measuring:           5    ( 0.8%)
+    Initialization:   -852    (-130.9%)
+
+Space (kB):         1625
+
+States:       105
+Transitions:  220
+
+-------------------------------------------------------------------------------
+
+?- report(4)
+Results for 4 queens:
+  queen-4: 2 states.
+  queen-3: 16 states.
+  queen-2: 0 states.
+  queen-1: 0 states.
+No
+
+

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="type" id="FeatureType">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n6">
+            <attr name="layout">
+                <string>410 110 141 51</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>320 10 112 48</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>170 100 72 48</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>400 210 80 32</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>100 110 60 32</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>180 10 102 48</string>
+            </attr>
+        </node>
+        <node id="n11">
+            <attr name="layout">
+                <string>230 210 146 32</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>480 210 80 32</string>
+            </attr>
+        </node>
+        <node id="n12">
+            <attr name="layout">
+                <string>140 210 88 32</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>10 210 134 32</string>
+            </attr>
+        </node>
+        <edge to="n1" from="n4">
+            <attr name="label">
+                <string>root</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n11">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n7">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FeatureConstraint</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n5">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>string:</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>flag:violated</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:FeatureModel</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n12">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n5">
+            <attr name="label">
+                <string>mandatory</string>
+            </attr>
+            <attr name="layout">
+                <string>626 -2 46 215 46 114 175 114 14</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Feature</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n6">
+            <attr name="label">
+                <string>feature2</string>
+            </attr>
+            <attr name="layout">
+                <string>264 2 415 120 340 120 264 120 14</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:MandOptFeature</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n12">
+            <attr name="label">
+                <string>or</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 185 225 213 183 220 140 14</string>
+            </attr>
+        </edge>
+        <edge to="n11" from="n11">
+            <attr name="label">
+                <string>type:AlternativeFeature</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>flag:violated</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n0">
+            <attr name="label">
+                <string>constraint</string>
+            </attr>
+            <attr name="layout">
+                <string>636 -27 427 38 484 101 484 115 14</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:Excludes</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n6">
+            <attr name="label">
+                <string>feature1</string>
+            </attr>
+            <attr name="layout">
+                <string>662 -3 415 132 264 132 11</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n1">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 185 123 168 123 155 123 14</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>type:Requires</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:FeatureTree</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>flag:selected</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n8">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n5">
+            <attr name="label">
+                <string>optional</string>
+            </attr>
+            <attr name="layout">
+                <string>652 -1 76 215 76 144 175 144 14</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n0">
+            <attr name="label">
+                <string>tree</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>flag:configured</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n11">
+            <attr name="label">
+                <string>alternative</string>
+            </attr>
+            <attr name="layout">
+                <string>246 3 303 226 348 153 219 132 14</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n12">
+            <attr name="label">
+                <string>type:OrFeature</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

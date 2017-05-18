@@ -1,0 +1,19 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n1063) at (0.700, -1.505) {\ml{\textbf{Bride}}};
+\node[basic_node] (n1065) at (2.240, -0.345) {\ml{\textbf{Person}}};
+\node[basic_node] (n1068) at (0.710, -0.365) {\ml{\textbf{Person}}};
+\node[basic_node] (n1064) at (2.770, -0.685) {\ml{\textbf{Person}}};
+\node[basic_node] (n1067) at (1.270, -0.735) {\ml{\textbf{Person}}};
+\node[basic_node] (n1066) at (2.265, -1.505) {\ml{\textbf{Groom}}};
+
+\path[creator_edge](n1066.west |- 0.700, -1.505) -- node[lab] {\ml{{\color{creator_c}married}}} (n1063) ;
+\path[basic_edge] (n1063)  -- node[lab] {\ml{mother}} (n1067) ;
+\path[basic_edge, no_arrow](n1068.east |- 2.240, -0.345) -- node[lab] {\ml{!=}} (n1065) ;
+\path[basic_edge] (n1066)  -- node[lab] {\ml{mother}} (n1064) ;
+\path[embargo_edge, no_arrow](n1067.east |- 2.770, -0.685) -- node[lab] {\ml{{\color{embargo_c}=}}} (n1064) ;
+\path[basic_edge](n1063.north -| 0.710, -0.365) -- node[lab] {\ml{father}} (n1068) ;
+\path[basic_edge](n1066.north -| 2.240, -0.345) -- node[lab] {\ml{father}} (n1065) ;
+\end{tikzpicture}

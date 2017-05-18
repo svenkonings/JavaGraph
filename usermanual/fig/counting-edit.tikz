@@ -1,0 +1,18 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n823) at (2.975, -0.715) {\ml{type:Roll}};
+\node[basic_node] (n822) at (1.500, -2.055) {\ml{type:Oven}};
+\node[embargo_node] (n824) at (2.525, -1.340) {\ml{not:\\type:Roll}};
+\node[basic_node] (n821) at (1.470, -1.305) {\ml{type:Plate}};
+\node[basic_node] (n820) at (2.965, -2.155) {\ml{type:Roll}};
+
+\path[embargo_edge](n824.west |- 1.470, -1.305) -- node[lab] {\ml{on}} (n821) ;
+\path[basic_edge, no_arrow](n823.south -| 2.965, -2.155) -- node[lab] {\ml{!=}} (n820) ;
+\path[basic_edge] (n823)  -- node[lab] {\ml{on}} (n821) ;
+\path[basic_edge] (n820)  -- node[lab] {\ml{on}} (n821) ;
+\path[embargo_edge, no_arrow] (n824)  -- node[lab] {\ml{!=}} (n820) ;
+\path[creator_edge](n821.south -| 1.500, -2.055) -- node[lab] {\ml{new:in}} (n822) ;
+\path[embargo_edge, no_arrow] (n824)  -- node[lab] {\ml{!=}} (n823) ;
+\end{tikzpicture}

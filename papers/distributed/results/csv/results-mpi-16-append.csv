@@ -1,0 +1,5 @@
+#startstate	index	states	transitions	leafdb	workers	time_elapsed	time_groove	mem_ltsmin	mem_groove	time_can	time_strategy	time_encode	time_decode	time_revc_state	time_recv_values	generator_ref_time	aborted	comment
+append-3-list-7	0	4046	11210	6405	16	13220	10382	52420	2006	1785	488	273	61	7239	7210	4978	?	?
+append-4-list-8	1	261460	969977	69137	16	195580	192523	52420	23814	105854	9625	9929	2441	53389	52344	201680	?	?
+append-5-list-8	2	?	?	?	16	?	?	?	?	?	?	?	?	?	?	?	?	?
+append-6-list-8	3	?	?	?	16	?	?	?	?	?	?	?	?	?	?	?	?	?

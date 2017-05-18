@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="type" id="type-ast-71-QualAllocExpr">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>630 20 91 51</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>20 20 81 51</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>320 30 121 31</string>
+            </attr>
+        </node>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Ref</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>import:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:QualAllocExpr</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n1">
+            <attr name="label">
+                <string>part:out=0..1:enclosingInstance</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n1">
+            <attr name="label">
+                <string>part:out=0..1:anonymousType</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>import:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

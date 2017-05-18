@@ -1,0 +1,38 @@
+# Layout information for C:\grammars\casb.gps\start2.gst
+# Each line contains layout information about a node or edge
+# Version info: v <version number>; 1 = pre-jgraph 5.9, 2 = jgraph 5.9
+#     v 1: label position = (x-permillage, y-permillage)
+#     v 2: label position = (vector permillage, perpendicular distance)
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+v 2
+n n85914 844 313 19 15 
+n n85929 505 122 27 15 
+n n85916 763 267 22 15 
+n n85923 843 374 32 15 
+n n85925 647 127 47 15 
+n n85928 493 234 30 15 
+n n85915 440 172 22 15 
+n n85924 844 404 17 15 
+n n85930 844 462 45 15 
+n n85920 843 434 16 15 
+n n85927 623 338 69 15 
+n n85917 726 379 23 15 
+n n85926 622 380 22 15 
+n n85918 651 243 42 15 
+n n85921 794 126 58 15 
+n n85922 842 344 23 15 
+n n85919 844 283 16 15 
+e n85918 n85921 "parameter" 344 0 703 252 807 252 807 147 11
+e n85917 n85926 "next" 500 0 726 386 685 386 654 386 14
+e n85927 n85926 "last" 450 0 623 349 586 391 622 391 14
+e n85921 n85921 "next" 262 0 862 137 887 172 851 170 851 147 14
+e n85928 n85915 "next" 809 0 493 242 479 242 455 230 455 193 14
+e n85918 n85916 "next" 642 0 693 264 693 279 763 279 14
+e n85927 n85917 "next" 500 0 702 350 739 350 739 379 11
+e n85921 n85916 "next" 500 0 824 147 824 277 795 277 14
+e n85928 n85928 "extends" 604 0 493 245 459 286 512 273 512 255 14
+e n85929 n85929 "next" 780 0 532 122 532 83 512 81 512 122 14
+e n85929 n85915 "next" 377 0 523 132 455 133 456 182 14
+e n85918 n85921 "next" 344 0 703 252 807 252 807 147 11
+e n85917 n85917 "next" 500 0 726 390 698 430 738 430 738 400 14

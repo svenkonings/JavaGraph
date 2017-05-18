@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="type" edgeids="false" edgemode="directed" id="type-flow-graph">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n98">
+            <attr name="layout">
+                <string>335 354 56 31</string>
+            </attr>
+        </node>
+        <node id="n94">
+            <attr name="layout">
+                <string>80 269 62 61</string>
+            </attr>
+        </node>
+        <node id="n95">
+            <attr name="layout">
+                <string>545 310 43 31</string>
+            </attr>
+        </node>
+        <node id="n96">
+            <attr name="layout">
+                <string>307 90 76 91</string>
+            </attr>
+        </node>
+        <node id="n93">
+            <attr name="layout">
+                <string>27 210 60 31</string>
+            </attr>
+        </node>
+        <edge from="n98" to="n98">
+            <attr name="label">
+                <string>type:Abort</string>
+            </attr>
+        </edge>
+        <edge from="n98" to="n96">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge from="n98" to="n96">
+            <attr name="label">
+                <string>resolving</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 363 370 463 296 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n98" to="n96">
+            <attr name="label">
+                <string>reason</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 363 370 400 276 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n94" to="n94">
+            <attr name="label">
+                <string>type:Branch</string>
+            </attr>
+        </edge>
+        <edge from="n94" to="n94">
+            <attr name="label">
+                <string>flag:default</string>
+            </attr>
+        </edge>
+        <edge from="n94" to="n94">
+            <attr name="label">
+                <string>bool:match</string>
+            </attr>
+        </edge>
+        <edge from="n94" to="n94">
+            <attr name="label">
+                <string>int:on</string>
+            </attr>
+        </edge>
+        <edge from="n94" to="n96">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge from="n94" to="n96">
+            <attr name="label">
+                <string>condition</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 111 300 197 202 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n95" to="n95">
+            <attr name="label">
+                <string>type:Exit</string>
+            </attr>
+        </edge>
+        <edge from="n95" to="n96">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>flag:build</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>flag:done</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>flag:start</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>flag:temp</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 249 61 226 110 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>argExit</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 435 172 446 154 394 152 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n94">
+            <attr name="label">
+                <string>branch</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 266 220 111 300 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>exit</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 402 46 347 29 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n98">
+            <attr name="label">
+                <string>abort</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 315 262 363 370 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n98">
+            <attr name="label">
+                <string>resumeAbort</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 255 308 363 370 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>entry</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 324 25 275 46 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>finallyExit</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 469 133 458 119 397 132 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n96" to="n96">
+            <attr name="label">
+                <string>flow</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 346 136 461 98 440 39 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n93" to="n93">
+            <attr name="label">
+                <string>type:Unlock</string>
+            </attr>
+        </edge>
+        <edge from="n93" to="n96">
+            <attr name="label">
+                <string>receiver</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 57 226 149 141 346 136 12</string>
+            </attr>
+        </edge>
+        <edge from="n93" to="n96">
+            <attr name="label">
+                <string>sub:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

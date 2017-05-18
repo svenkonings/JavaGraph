@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="graph" role="graph" edgeids="false" edgemode="directed">
+        <node id="n230"/>
+        <node id="n228"/>
+        <node id="n229"/>
+        <node id="n233"/>
+        <node id="n235"/>
+        <node id="n234"/>
+        <node id="n227"/>
+        <node id="n231"/>
+        <node id="n232"/>
+        <node id="n236"/>
+        <edge from="n234" to="n234">
+            <attr name="label">
+                <string>prod:</string>
+            </attr>
+        </edge>
+        <edge from="n227" to="n227">
+            <attr name="label">
+                <string>int:1</string>
+            </attr>
+        </edge>
+        <edge from="n230" to="n230">
+            <attr name="label">
+                <string>Object</string>
+            </attr>
+        </edge>
+        <edge from="n235" to="n235">
+            <attr name="label">
+                <string>attr:</string>
+            </attr>
+        </edge>
+        <edge from="n234" to="n229">
+            <attr name="label">
+                <string>arg:0</string>
+            </attr>
+        </edge>
+        <edge from="n228" to="n235">
+            <attr name="label">
+                <string>capacity</string>
+            </attr>
+        </edge>
+        <edge from="n228" to="n228">
+            <attr name="label">
+                <string>Buffer</string>
+            </attr>
+        </edge>
+        <edge from="n228" to="n233">
+            <attr name="label">
+                <string>entry</string>
+            </attr>
+        </edge>
+        <edge from="n228" to="n236">
+            <attr name="label">
+                <string>new:current</string>
+            </attr>
+        </edge>
+        <edge from="n229" to="n229">
+            <attr name="label">
+                <string>attr:</string>
+            </attr>
+        </edge>
+        <edge from="n232" to="n236">
+            <attr name="label">
+                <string>int:add</string>
+            </attr>
+        </edge>
+        <edge from="n233" to="n229">
+            <attr name="label">
+                <string>index</string>
+            </attr>
+        </edge>
+        <edge from="n228" to="n229">
+            <attr name="label">
+                <string>del:current</string>
+            </attr>
+        </edge>
+        <edge from="n236" to="n236">
+            <attr name="label">
+                <string>attr:</string>
+            </attr>
+        </edge>
+        <edge from="n234" to="n231">
+            <attr name="label">
+                <string>int:lt</string>
+            </attr>
+        </edge>
+        <edge from="n232" to="n227">
+            <attr name="label">
+                <string>arg:1</string>
+            </attr>
+        </edge>
+        <edge from="n231" to="n231">
+            <attr name="label">
+                <string>bool:TRUE</string>
+            </attr>
+        </edge>
+        <edge from="n232" to="n229">
+            <attr name="label">
+                <string>arg:0</string>
+            </attr>
+        </edge>
+        <edge from="n230" to="n230">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge from="n233" to="n233">
+            <attr name="label">
+                <string>Cell</string>
+            </attr>
+        </edge>
+        <edge from="n234" to="n235">
+            <attr name="label">
+                <string>arg:1</string>
+            </attr>
+        </edge>
+        <edge from="n232" to="n232">
+            <attr name="label">
+                <string>prod:</string>
+            </attr>
+        </edge>
+        <edge from="n233" to="n230">
+            <attr name="label">
+                <string>val</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

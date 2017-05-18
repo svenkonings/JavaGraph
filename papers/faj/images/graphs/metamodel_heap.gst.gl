@@ -1,0 +1,25 @@
+# Layout information for C:\grammars\casb.gps\metamodel_heap.gst
+# Each line contains layout information about a node or edge
+# Version info: v <version number>; 1 = pre-jgraph 5.9, 2 = jgraph 5.9
+#     v 1: label position = (x-permillage, y-permillage)
+#     v 2: label position = (vector permillage, perpendicular distance)
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+v 2
+n n87248 261 526 23 15 
+n n87244 506 493 18 15 
+n n87237 498 327 35 15 
+n n87240 352 415 30 15 
+n n87243 349 329 42 15 
+n n87239 347 492 35 15 
+n n87245 119 557 30 15 
+n n87238 606 495 47 15 
+n n87246 751 411 37 15 
+n n87241 143 489 21 15 
+n n87247 418 604 50 15 
+n n87242 728 349 54 15 
+e n87241 n87248 "value" 500 0 165 510 165 538 261 538 14
+e n87241 n87241 "next" 340 0 158 499 114 468 149 473 158 499 14
+e n87244 n87239 "value" 500 0 520 503 521 547 375 538 369 502 14
+e n87245 n87241 "top" 500 0 151 571 148 540 148 510 14
+e n87241 n87241 "tag" 710 0 158 499 188 456 163 449 158 499 14

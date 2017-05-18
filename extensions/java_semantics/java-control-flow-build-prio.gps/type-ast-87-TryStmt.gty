@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="type" id="type-ast-87-TryStmt">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>670 50 81 51</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>30 50 91 51</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>300 50 171 61</string>
+            </attr>
+        </node>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>import:</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>import:</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Argument</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>int:catchBlockLastIndex</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n1">
+            <attr name="label">
+                <string>part:out=*:catchArgument</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n1">
+            <attr name="label">
+                <string>part:out=1:tryBlock</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>int:catchArgumentLastIndex</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:TryStmt</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n1">
+            <attr name="label">
+                <string>part:out=*:catchBlock</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 466 100 580 130 675 90 11</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n1">
+            <attr name="label">
+                <string>part:out=0..1:finallyBlock</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 455 55 580 10 675 57 11</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

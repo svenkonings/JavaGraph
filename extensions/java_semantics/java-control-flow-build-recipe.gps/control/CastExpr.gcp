@@ -1,0 +1,8 @@
+package control;
+
+recipe CastExpr(node root, node exit, out node entry) {
+	// Match the sub-component of the expression.
+	node eroot := rule.CastExpr(root, exit);
+	// Build the sub-expression.
+	entry := Expr(eroot, exit);
+}

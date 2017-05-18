@@ -1,0 +1,8 @@
+package control;
+
+recipe LabeledStmt(node root, node exit, out node entry) {
+	// Match the statement.
+	node sroot := rule.LabeledStmt(root);
+	// Build the flow for the statement.
+	entry := Stmt(sroot, exit);
+}

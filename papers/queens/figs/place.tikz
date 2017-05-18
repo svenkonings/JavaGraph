@@ -1,0 +1,9 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n0) at (1.255, 0) {\ml{{\color{creator_c}+ Q}\\{\color{embargo_c}! Q}}};
+\node[embargo_node] (n1) at (1.255, -1) {\ml{{\color{embargo_c}Q}}};
+
+\path[embargo_edge](n1) -- node[lab] {\ml{{\color{embargo_c}h+$|$v+$|$ld+$|$rd+}}} (n0) ;
+\end{tikzpicture}

@@ -1,0 +1,60 @@
+\clearpage
+\section{I/O}
+\seclabel{io}
+
+Graph grammars are stored in directories with extension ``\textsf{.gps}'' (for
+\emph{g}raph \emph{p}roduction \emph{s}ystem). Each such directory contains all
+information about one graph grammar, including rules, start state(s), control
+program (if any) and system properties, in separate files.
+
+\subsection{Graphs and rules}
+
+The input/output format used by \GROOVE to store rules and graphs is GXL,
+which is an XML format for interchange of graphs. See
+\url{http://www.gupro.de/GXL/} for information about the format, including its
+DTD and XSD; see also \cite{GXL}. There are some conventions in the way we have
+used GXL to encode \GROOVE-specific information.
+
+\paragraph{Edge labels.}
+
+Edge labels are encoded as GXL edge attributes of type \textsf{String}. What is
+actually stored is the full label, including prefixes, as seen in the Edit
+view. Graphs and rules are stored in precisely the same fashion, except that
+rules receive the extension ``\textsf{.gpr}'' (for \emph{g}raph
+\emph{p}roduction \emph{r}ule) whereas graphs have extension ``\textsf{.gst}''
+(for \emph{g}raph \emph{st}ate).
+
+\paragraph{Graph attributes.}
+
+We are using the GXL graph attributes to store some additional information
+about the graphs, such as the name, the fact whether it is a rule, a graph or a
+type graph, and the priority and enabledness (if it is a rule). For the latter
+two see \secref{rule-properties}.
+
+\paragraph{Graph layout.}
+
+Layout encoding is ad hoc, and in fact based on the way the
+graph-rendering library, \JGraph, stores this information internally (see
+\cite{JGraph}). The information is stored in GXL node and edge attributes.
+
+In previous versions of \GROOVE, layout information was stored in separate
+files with a name derived from that of the GXL file by adding the extension
+``\textsf{.gl}''. For instance, the layout of the file \textsf{rule.gpr} was
+contained in \textsf{rule.gpr.gl}.
+
+\subsection{Control programs}
+\seclabel{io-control}
+
+Control programs are stored in plain text in files with extension
+``\textsf{.gcp}'' (for \emph{g}raph \emph{c}ontorl \emph{p}rogram) within the
+grammar directory. If there is a file \textsf{control.gcp}, this is taken to be
+the default control program; others can be loaded and set in the Simulator or
+through the system properties (see below).
+
+\subsection{System properties}
+\seclabel{io-system-properties}
+
+System properties are stored in a file \textsf{system.properties} within the
+grammar directory. The file is a plain text file, with lines of the form
+``\textsf{resource = value}'' for the different properties discussed in
+\secref{system-properties}.

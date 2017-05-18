@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="type" edgeids="false" edgemode="directed" id="type-sim-Reference">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n6">
+            <attr name="layout">
+                <string>195 77 80 34</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>365 70 71 52</string>
+            </attr>
+        </node>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>type:Reference</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n7">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n7">
+            <attr name="label">
+                <string>import:</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n7">
+            <attr name="label">
+                <string>type:Value</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

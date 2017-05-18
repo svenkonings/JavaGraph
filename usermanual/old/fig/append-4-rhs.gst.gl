@@ -1,0 +1,15 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\append-4-rhs.gst
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n56 104 70 18 18 
+n n61 289 140 18 18 
+n n60 286 71 18 18 
+n n59 167 70 18 18 
+e n56 n59 "next" 426 -667 113 79 176 79 11
+n n57 231 140 18 18 
+n n58 106 141 18 18 
+n n62 170 142 18 18 
+e n59 n55 "next" 525 -786 161 79 238 80 11
+e n55 n60 "next" 462 -862 238 80 306 80 11
+n n55 229 71 18 18 

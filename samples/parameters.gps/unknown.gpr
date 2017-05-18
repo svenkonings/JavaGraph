@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="unknown">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="remark">
+            <string>Look at all the lonely people</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1625">
+            <attr name="layout">
+                <string>59 125 37 15</string>
+            </attr>
+        </node>
+        <node id="n1624">
+            <attr name="layout">
+                <string>198 123 37 30</string>
+            </attr>
+        </node>
+        <node id="n1623">
+            <attr name="layout">
+                <string>113 43 217 30</string>
+            </attr>
+        </node>
+        <edge to="n1623" from="n1623">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n1623" from="n1623">
+            <attr name="label">
+                <string>Non-attribute parameter node</string>
+            </attr>
+        </edge>
+        <edge to="n1624" from="n1625">
+            <attr name="label">
+                <string>knows</string>
+            </attr>
+        </edge>
+        <edge to="n1625" from="n1625">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n1624" from="n1624">
+            <attr name="label">
+                <string>Person</string>
+            </attr>
+        </edge>
+        <edge to="n1624" from="n1624">
+            <attr name="label">
+                <string>par:0</string>
+            </attr>
+        </edge>
+        <edge to="n1624" from="n1623">
+            <attr name="label">
+                <string>this</string>
+            </attr>
+        </edge>
+        <edge to="n1623" from="n1623">
+            <attr name="label">
+                <string>The argument will be the node identity</string>
+            </attr>
+        </edge>
+        <edge to="n1625" from="n1625">
+            <attr name="label">
+                <string>Person</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

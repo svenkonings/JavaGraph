@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="transferAB">
+        <attr name="remark">
+            <string>Transfers an edge label from an A-C edge to a B-self-edge</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>237 103 18 18</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>114 101 18 18</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>113 184 18 18</string>
+            </attr>
+        </node>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>del:?x</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>C</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>not:?x</string>
+            </attr>
+            <attr name="layout">
+                <string>72 -3 245 112 325 152 320 58 245 112 12</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>new:transfer</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>new:?x</string>
+            </attr>
+            <attr name="layout">
+                <string>88 0 245 112 303 133 302 85 245 112 12</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>B</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>A</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

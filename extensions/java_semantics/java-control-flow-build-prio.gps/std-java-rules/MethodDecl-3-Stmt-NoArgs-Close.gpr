@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.MethodDecl-3-Stmt-NoArgs-Close">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>172 117 86 48</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>407 27 89 32</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>197 26 100 32</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>313 122 83 32</string>
+            </attr>
+        </node>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Argument</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:MethodDecl</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n4">
+            <attr name="label">
+                <string>stmt</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n4">
+            <attr name="label">
+                <string>not:argument</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n5">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n4">
+            <attr name="label">
+                <string>new:entry</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>test:index = 0</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

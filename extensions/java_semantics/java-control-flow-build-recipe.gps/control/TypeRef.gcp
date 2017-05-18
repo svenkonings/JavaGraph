@@ -1,0 +1,6 @@
+package control;
+
+// Unused: see control.Expr()
+/*recipe TypeRef(node root, node exit, out node entry) {
+	entry := rule.help.assign(root);
+}*/

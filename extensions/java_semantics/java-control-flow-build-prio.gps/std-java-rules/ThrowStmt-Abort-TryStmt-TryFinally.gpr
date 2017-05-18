@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ThrowStmt-Abort-TryStmt-TryFinally">
+        <attr name="priority">
+            <string>3</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>166 18 73 32</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>286 104 55 32</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>18 17 55 32</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>370 79 89 32</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>274 167 83 32</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>170 98 55 32</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>510 251 93 32</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>543 111 58 32</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>284 250 58 32</string>
+            </attr>
+        </node>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:TryStmt</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n5">
+            <attr name="label">
+                <string>finallyBlock</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n5">
+            <attr name="label">
+                <string>finallyExit</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n5">
+            <attr name="label">
+                <string>tryBlock</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n5">
+            <attr name="label">
+                <string>not:catchBlock</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n1">
+            <attr name="label">
+                <string>entry</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>flag:temp</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n2">
+            <attr name="label">
+                <string>new:resumeAbort</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>type:ThrowStmt</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:Abort</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n4">
+            <attr name="label">
+                <string>new:resolving</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 580 141 422 34 200 34 13</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n4">
+            <attr name="label">
+                <string>new:reason</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:Abort</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n7">
+            <attr name="label">
+                <string>reason</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n7">
+            <attr name="label">
+                <string>del:resolving</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 311 266 207 216 197 114 13</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n7">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.TryStmt-7-TryCatchFinally-Init">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>162 137 75 22</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>15 137 75 22</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>150 25 90 22</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>147 246 100 22</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>440 135 55 22</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>294 137 75 22</string>
+            </attr>
+        </node>
+        <edge to="n2" from="n5">
+            <attr name="label">
+                <string>entry</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>not:flag:done</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n3">
+            <attr name="label">
+                <string>new:child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 179 36 82 42 37 148 12</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n4">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:TryStmt</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n3">
+            <attr name="label">
+                <string>new:child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 179 36 283 53 316 148 12</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n1">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n4">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n3">
+            <attr name="label">
+                <string>tryBlock</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n3">
+            <attr name="label">
+                <string>finallyBlock</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>new:flag:done</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Block</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n3">
+            <attr name="label">
+                <string>catchBlock</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

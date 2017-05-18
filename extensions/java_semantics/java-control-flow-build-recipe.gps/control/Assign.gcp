@@ -1,0 +1,18 @@
+package control;
+
+recipe Assign(node root, node exit, out node entry) {
+	node eroot, eentry, rroot;
+	try {
+		// Try to match an assignment without an expression.
+		rroot := rule.Assign-NoExpr(root, exit);
+		// Build the flow for reference.
+		entry := Ref(rroot, root);
+	} else {
+		// Match the expression and the reference of the assignment.
+		eroot, rroot := rule.Assign-WithExpr(root, exit);
+		// Build the flow for expression.
+		eentry := Expr(eroot, root);
+		// Build the flow for reference.
+		entry := Ref(rroot, eentry);
+	}
+}

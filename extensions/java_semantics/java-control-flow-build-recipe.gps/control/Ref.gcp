@@ -1,0 +1,10 @@
+package control;
+
+recipe Ref(node root, node exit, out node entry) {
+	// Recipe for handling all subtypes of the abstract type 'Ref'.
+
+	choice entry := ArrayRef(root, exit);
+	or entry := FieldRef(root, exit);
+	or entry := NameRef(root, exit);
+	or entry := ThisRef(root, exit);
+}

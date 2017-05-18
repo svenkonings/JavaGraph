@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ExplicitConsCall-2-WithArgs-Middle">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n6">
+            <attr name="layout">
+                <string>201 122 83 32</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>155 23 127 32</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>346 109 70 32</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>13 107 148 64</string>
+            </attr>
+        </node>
+        <edge to="n4" from="n7">
+            <attr name="label">
+                <string>argument</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:ExplicitConsCall</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n4">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>test:index = int:sub(E.index,1)</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n5">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n7">
+            <attr name="label">
+                <string>argument</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>id:E</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n7">
+            <attr name="label">
+                <string>new:child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 211 34 102 72 107 134 12</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

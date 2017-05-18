@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="rule" edgeids="false" edgemode="directed" id="ArrayInitializer-1-Start">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>382 47 41 33</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>234 282 82 31</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>229 191 87 31</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>533 196 109 31</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>362 182 61 61</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>144 190 53 31</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>546 287 76 31</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>144 50 41 33</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>186 13 27 33</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>238 47 43 43</string>
+            </attr>
+        </node>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+        <edge from="n5" to="n5">
+            <attr name="label">
+                <string>type:StackElem</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n4">
+            <attr name="label">
+                <string>type:StackValue</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n5">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n3">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>type:ArrayInitializer</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n6">
+            <attr name="label">
+                <string>flow</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n2">
+            <attr name="label">
+                <string>exprLastIndex</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>type:Frame</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>flag:active</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>new:flag:temp</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>not:flag:temp</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n1">
+            <attr name="label">
+                <string>pc</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n5">
+            <attr name="label">
+                <string>del:stack</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n4">
+            <attr name="label">
+                <string>stack</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n3">
+            <attr name="label">
+                <string>type:Array</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n7">
+            <attr name="label">
+                <string>length</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n2">
+            <attr name="label">
+                <string>counter</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n7">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+        <edge from="n9" to="n9">
+            <attr name="label">
+                <string>int:1</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n8">
+            <attr name="label">
+                <string>prod:</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n9">
+            <attr name="label">
+                <string>arg:1</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n7">
+            <attr name="label">
+                <string>int:add</string>
+            </attr>
+        </edge>
+        <edge from="n8" to="n2">
+            <attr name="label">
+                <string>arg:0</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="del-mid">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n211">
+            <attr name="layout">
+                <string>129 105 28 21</string>
+            </attr>
+        </node>
+        <node id="n212">
+            <attr name="layout">
+                <string>232 107 17 17</string>
+            </attr>
+        </node>
+        <node id="n209">
+            <attr name="layout">
+                <string>337 34 17 17</string>
+            </attr>
+        </node>
+        <node id="n208">
+            <attr name="layout">
+                <string>326 105 17 17</string>
+            </attr>
+        </node>
+        <node id="n210">
+            <attr name="layout">
+                <string>296 208 89 21</string>
+            </attr>
+        </node>
+        <edge to="n212" from="n211">
+            <attr name="label">
+                <string>use:{'next\''*}</string>
+            </attr>
+        </edge>
+        <edge to="n209" from="n212">
+            <attr name="label">
+                <string>new:'next\''</string>
+            </attr>
+        </edge>
+        <edge to="n211" from="n211">
+            <attr name="label">
+                <string>use:List</string>
+            </attr>
+        </edge>
+        <edge to="n209" from="n208">
+            <attr name="label">
+                <string>del:'next\''</string>
+            </attr>
+        </edge>
+        <edge to="n208" from="n212">
+            <attr name="label">
+                <string>del:'next\''</string>
+            </attr>
+        </edge>
+        <edge to="n210" from="n208">
+            <attr name="label">
+                <string>del:val</string>
+            </attr>
+        </edge>
+        <edge to="n208" from="n208">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge to="n210" from="n210">
+            <attr name="label">
+                <string>use:{1|2|3|4|6|7|8}</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

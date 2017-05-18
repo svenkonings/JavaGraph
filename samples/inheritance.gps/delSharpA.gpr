@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="delSharpA">
+        <attr name="transitionLabel">
+            <string></string>
+        </attr>
+        <attr name="enabled">
+            <string>true</string>
+        </attr>
+        <attr name="printFormat">
+            <string></string>
+        </attr>
+        <attr name="priority">
+            <string>0</string>
+        </attr>
+        <attr name="remark">
+            <string>Sharp type matching</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n371">
+            <attr name="layout">
+                <string>124 52 38 31</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>37 129 268 31</string>
+            </attr>
+        </node>
+        <edge to="n371" from="n371">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge to="n371" from="n371">
+            <attr name="label">
+                <string>type:#A</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>rem:This mathes only nodes with precisely type A</string>
+            </attr>
+        </edge>
+        <edge to="n371" from="n0">
+            <attr name="label">
+                <string>sharp type</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

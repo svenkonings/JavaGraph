@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.TypeDecl-0-NoFields">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>191 162 73 22</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>31 156 116 22</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>195 241 21 22</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>23 68 79 30</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>194 75 73 22</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>103 249 21 22</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>405 63 39 26</string>
+            </attr>
+        </node>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n6">
+            <attr name="label">
+                <string>method</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n6">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n6">
+            <attr name="label">
+                <string>memberType</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n6">
+            <attr name="label">
+                <string>new:entry</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 228 86 304 130 439 90 12</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:AbsMethodDecl</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>del:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:FieldDecl</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n6">
+            <attr name="label">
+                <string>not:field</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n5">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:Exit</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n1">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

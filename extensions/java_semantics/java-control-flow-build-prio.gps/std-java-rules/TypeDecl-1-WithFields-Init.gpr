@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.TypeDecl-1-WithFields-Init">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n8">
+            <attr name="layout">
+                <string>185 158 109 64</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>38 169 45 32</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>375 155 83 48</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>526 79 31 32</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>340 77 126 48</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>526 158 31 32</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>190 390 189 64</string>
+            </attr>
+        </node>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>id:TD</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n8">
+            <attr name="label">
+                <string>memberType</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n8">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n8">
+            <attr name="label">
+                <string>method</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n8">
+            <attr name="label">
+                <string>field</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>del:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n8">
+            <attr name="label">
+                <string>new:child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 217 177 180 288 224 401 12</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:Exit</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n9">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n9">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n9">
+            <attr name="label">
+                <string>type:TypeDecl</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n1">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:AbsMethodDecl</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n0">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+            <attr name="layout">
+                <string>564 0 224 401 115 303 72 196 13</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>test:index = int:TD.fieldLastIndex</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:FieldDecl</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

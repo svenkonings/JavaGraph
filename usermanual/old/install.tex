@@ -1,0 +1,91 @@
+\section{Getting started}
+
+\subsection{Installation on Windows systems}
+
+To use the GROOVE tool set under windows, download the bin+lib package from the download site explained above and unzip it to any location on your computer. We will refer to the destination folder as GROOVE\_PATH. Under GROOVE\_PATH, you will find a directory \emph{bin} which contains some batchfiles, that refer to the tools contained by the GROOVE tool set (Editor.bat, Simulator.bat, Generator.bat and Imager.bat). Inside the batchfiles, a variable GROOVE\_BIN\_DIR is set. Make sure the value it is set to is your local GROOVE\_PATH.
+
+Then make sure you have a JRE (Java Runtime Environment) version 5.0 (or higher) installed and that you have it in your PATH. You can download a JRE from \url{http://java.sun.com}.
+
+Now double-click on a batch-file to run the desired tool.
+
+\subsection{Installation on UNIX based systems}
+
+To use the GROOVE tool set under windows, download the bin+lib package from the download site explained above and unzip it to any location on your computer. We will refer to the destination folder as GROOVE\_PATH. Under GROOVE\_PATH, you will find a directory \emph{bin} which contains some executable shell-scripts, that refer to the tools contained by the GROOVE tool set (Editor, Simulator, Generator and Imager). Inside the shell-scripts, a variable GROOVE\_BIN\_DIR is set. Make sure the value it is set to is your local GROOVE\_PATH.
+
+Then make sure you have a JRE (Java Runtime Environment) version 5.0 (or higher) installed and that you have it in your PATH. You can download a JRE from \url{http://java.sun.com}.
+
+Now execute a shell-script to run the desired tool.
+
+\subsection{Simulator}
+
+The simulator is used to visually explore a grammar, the resulting transition system, and the states it contains.
+
+\begin{verbatim}
+Usage: Simulator <directory> [<start-state>]
+\end{verbatim}
+
+The Simulator can be started with two command-line options. First, the \emph{directory} containing the graph production system, and second, given a production system, the name of the start state that should be used. Without a start state given, the default start state \emph{start.gst} will be loaded.
+
+Once the Simulator is started, a production system can also be loaded from the menu. Also, a start state other then the default start state can be loaded from the menu as well.
+
+\subsection{Editor}
+
+The editor can be used to edit state graphs and production rules. Command line options are shown below.
+
+\begin{verbatim}
+Usage: Editor <file>
+\end{verbatim}
+
+The optional file argument can contain either a graph (.gst) or a production rule (.gpr).
+
+\subsection{Generator}
+
+The generator will take a grammer, explore it, and store the resulting transition system. Without any options given, a gui will be shown where the available options can be selected. Command line usage is shown below.
+
+\begin{verbatim}
+Usage: Generator  [options] <grammar-location> [<start-graph-name>]
+
+Options:
+-o file Save the result to 'file' (GXL format, default extension .gxl)
+-v val  Set the verbosity to 'val', in the range 0-2 (default = 1)
+-l dir  Log the generation process, writing the file to the directory 'dir'
+-x str  Set the exploration strategy. Legal values for 'str' are:
+  depthfirst - Recursively calls itself on all reachable, non-explored states
+  node-bounded - Only explores states where the node count does not exceed
+    a given bound
+  invariant:[!]<condition> - Stops exploring if the (negated) invariant 
+    condition is violated
+  full - At each pass, asks the LTS for all remaining open states, and 
+    closes them
+  barbed - Closes the state, picks an arbitrary outgoing transition and 
+    continues with the target state if open
+  edge-bounded - Only explores states where the edge counts do not exceed
+    preset bounds
+  live - Stops exploring if a final state is encountered
+  linear - Generates a single outgoing transition and continues with the 
+    target state
+  bounded:[!]<condition> - Explores all states where the (negated) bounding 
+    condition holds
+  branching - At each pass, closes all open states; then continues with the 
+    newly generated open states
+\end{verbatim}
+
+\subsection{Imager}
+
+The imager can generate pictures of state graphs, production rules and transition systems.
+
+\begin{verbatim}
+Imager <input-file> <output-file>
+\end{verbatim}
+
+The Imager can take two arguments, namely the input-file and the output-file. The input-file can be a groove state graph (.gst), a groove production rule (.gpr) or a gxl file, which is created when a transition system is saved. The output-file can be either a .png or a .jpg file.
+
+\subsection{Model Checker}
+
+The model checker can verify properties over graph transition systems generated from graph production systems.
+
+\begin{verbatim}
+ModelChecker <grammar-location> [<property>]
+\end{verbatim}
+
+The Model Checker needs the location of the graph production system which will be verified. The optional property to be checked must be a CTL-formula. If a property is provided, the Model Checker will only verify the graph transition system against this property; if the property is omitted, the Model Checker will ask for properties to be checked in an interactive way. This is usefull when one wants to verify multiple properties: the graph transition system only needs to be generated once.

@@ -1,0 +1,16 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\s2.gst
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n11 216 193 18 18 
+n n10 91 249 18 18 
+e n11 n8 "next" 473 808 230 202 167 206 93 185 13
+e n6 n8 "last" 480 440 179 155 93 185 11
+n n9 148 248 18 18 
+e n8 n10 "val" 500 500 83 195 109 264 12
+n n8 79 176 18 18 
+e n8 n7 "next" 86 278 96 192 105 118 174 83 13
+e n6 n11 "first" 449 468 163 139 230 202 11
+e n7 n11 "next" 441 219 157 81 211 129 230 202 13
+n n7 143 72 18 18 
+n n6 142 130 18 18 

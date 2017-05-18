@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="delWildBorC">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n0">
+            <attr name="layout">
+                <string>42 131 310 15</string>
+            </attr>
+        </node>
+        <node id="n371">
+            <attr name="layout">
+                <string>151 40 37 30</string>
+            </attr>
+        </node>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>rem:Wildcard matching all nodes of type B or C (or subtypes)</string>
+            </attr>
+        </edge>
+        <edge to="n371" from="n0">
+            <attr name="label">
+                <string>rem:wildcard type</string>
+            </attr>
+        </edge>
+        <edge to="n371" from="n371">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge to="n371" from="n371">
+            <attr name="label">
+                <string>type:A</string>
+            </attr>
+        </edge>
+        <edge to="n371" from="n371">
+            <attr name="label">
+                <string>type:?[B,C]</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

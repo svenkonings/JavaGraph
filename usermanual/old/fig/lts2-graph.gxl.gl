@@ -1,0 +1,11 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\lts2.gxl
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+e n140 n139 "<get>" 386 200 258 148 185 172 174 101 12
+n n140 242 137 18 18 
+n n139 164 92 18 18 
+n n138 94 48 18 18 
+e n139 n138 "<get>" 494 164 176 103 108 123 104 57 12
+n n137 27 0 18 18 
+e n138 n137 "<get>" 465 162 106 59 43 73 37 9 12

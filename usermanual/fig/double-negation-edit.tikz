@@ -1,0 +1,9 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n642) at (1.145, -0.950) {\ml{type:Bus\\new:flag:start\\!flag:start}};
+\node[embargo_node] (n641) at (2.520, -0.925) {\ml{not:\\type:Pupil}};
+
+\path[embargo_edge](n641.west |- 1.145, -0.950) -- node[lab] {\ml{!in}} (n642) ;
+\end{tikzpicture}

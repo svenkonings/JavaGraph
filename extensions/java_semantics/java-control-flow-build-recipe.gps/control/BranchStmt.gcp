@@ -1,0 +1,7 @@
+package control;
+
+recipe BranchStmt(node root, node exit, out node entry) {
+	// ******** TODO: Implement this.
+	entry := rule.help.assign(root);
+	// Note: both BreakStmt and ContinueStmt could possibly be handled here.
+}

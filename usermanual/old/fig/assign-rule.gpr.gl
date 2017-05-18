@@ -1,0 +1,8 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\assign-rule.gpr
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n14 170 156 18 18 
+n n12 240 156 18 18 
+n n13 196 76 18 18 
+e n13 n12 "new:x" 636 235 217 85 260 121 249 165 12

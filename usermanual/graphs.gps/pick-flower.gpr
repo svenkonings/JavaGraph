@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="pick-flower">
+        <attr name="enabled">
+            <string>false</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1720">
+            <attr name="layout">
+                <string>79 65 8 15</string>
+            </attr>
+        </node>
+        <node id="n1721">
+            <attr name="layout">
+                <string>80 135 10 15</string>
+            </attr>
+        </node>
+        <node id="n1722">
+            <attr name="layout">
+                <string>164 137 27 15</string>
+            </attr>
+        </node>
+        <node id="n1723">
+            <attr name="layout">
+                <string>159 60 36 15</string>
+            </attr>
+        </node>
+        <node id="n1724">
+            <attr name="layout">
+                <string>167 200 24 15</string>
+            </attr>
+        </node>
+        <edge to="n1720" from="n1720">
+            <attr name="label">
+                <string>exists:</string>
+            </attr>
+        </edge>
+        <edge to="n1721" from="n1720">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge to="n1721" from="n1721">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n1723" from="n1722">
+            <attr name="label">
+                <string>has</string>
+            </attr>
+        </edge>
+        <edge to="n1721" from="n1722">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n1722" from="n1722">
+            <attr name="label">
+                <string>type:Plant</string>
+            </attr>
+        </edge>
+        <edge to="n1723" from="n1723">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge to="n1720" from="n1723">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+        <edge to="n1723" from="n1723">
+            <attr name="label">
+                <string>type:Flower</string>
+            </attr>
+        </edge>
+        <edge to="n1722" from="n1724">
+            <attr name="label">
+                <string>grows</string>
+            </attr>
+        </edge>
+        <edge to="n1724" from="n1724">
+            <attr name="label">
+                <string>type:Field</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

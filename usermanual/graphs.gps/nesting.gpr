@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="nesting">
+        <attr name="enabled">
+            <string>false</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1573">
+            <attr name="layout">
+                <string>100 148 34 15</string>
+            </attr>
+        </node>
+        <node id="n1574">
+            <attr name="layout">
+                <string>190 146 34 15</string>
+            </attr>
+        </node>
+        <node id="n1575">
+            <attr name="layout">
+                <string>147 74 29 15</string>
+            </attr>
+        </node>
+        <node id="n1576">
+            <attr name="layout">
+                <string>95 209 35 15</string>
+            </attr>
+        </node>
+        <node id="n1577">
+            <attr name="layout">
+                <string>267 72 35 15</string>
+            </attr>
+        </node>
+        <edge to="n1573" from="n1573">
+            <attr name="label">
+                <string>exists:</string>
+            </attr>
+        </edge>
+        <edge to="n1575" from="n1573">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge to="n1574" from="n1574">
+            <attr name="label">
+                <string>exists:</string>
+            </attr>
+        </edge>
+        <edge to="n1575" from="n1574">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge to="n1575" from="n1575">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n1576" from="n1576">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+        <edge to="n1573" from="n1576">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge to="n1577" from="n1577">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,523 @@
+The semantics of \Lang{} is defined through a set of operators over \CAut{}
+corresponding to the constructs of the language. For this purpose, we first
+need to define what it means for an automaton to \emph{fail}; this is an
+important concept in the definition of \alapK{} and \tryK-\elseK. The failure
+of an automaton is based on the non-applicability of its initial actions, being
+those rules that are scheduled as a first action.  This set of initial actions
+is defined as follows:
+
+\begin{definition}[initial control actions]
+The initial actions of a given control automaton $\cC$ are defined by
+\begin{align*}
+\Init(\cC) &= \setof{ n \mid q_0 \arrow{F_i \dotsc F_n}\arrow{n} } \cup
+              \setof{ \delta \mid \exists q':q_0 \arrow{F_0 \dotsc F_n} q', q' \in S }
+\end{align*}
+\end{definition}
+
+\iffull
+\begin{definition}[Init of an Automaton]
+\begin{align*}
+Init(\trace{\Lrule{RuleId}}) &= \setof{ \Lrule{RuleId} }\\
+Init(\trace{\Lseq{P_1}{P_2}}) &= \begin{cases}
+		Init(\trace{P_1}) & \text{if $\delta \not\in Init(\trace{P_1})$,}\\
+		Init(\trace{P_1} \setminus \setof{\delta} \cup Init(\trace{P_2})&
+				\text{if $\delta \in Init(\trace{P_1})$.}\\  
+	\end{cases}\\
+Init(\trace{\Lalap{P_1}}) &= Init(\trace{P_1}) \cup \setof{\delta}\\
+%Init(\trace{\Lifelse{P_1}{P_2}{P_3}}) &= Init(\trace{\Lseq{P_1}{P_2}}) \cup Init(\trace{P_3})\\ 
+Init(\trace{\Ltryelse{P_1}{P_2}}) &= Init(\trace{P_1}) \cup Init(\trace{P_2})\\
+\end{align*}
+\end{definition}
+%
+A $\delta$ in the result indicates that --- in the given automaton --- there is
+a path from the start state to a success state consisting of only
+$\lambda$-transitions and failure transitions. In that case, a failure based on
+that $Init$ is undefined, since the automaton is always successful. A failure
+transition is typically only created when a $delta$ is not in the $Init$ of the
+condition.  \fi
+%
+% For the construction of control automata, we define a number of operators over
+% \CAut. 
+In de definitions below, we use control automata $\cC_i = (Q_i, \Sigma,
+\rightarrow_i, q_{0_i}, S_i)$ for $i=1,2$, and we use distinct fresh states
+$q_N,q_M\notin Q_1$.  Due to the lack of space in this paper, we restrict
+ourselves to the most interesting language constructs: single rules, sequential
+composition, \alapK{} and \tryK--\elseK.
+%
+\begin{eqnarray*}
+\cC_{\Lrule{rule}} & =
+   & ( \setof{q_M,q_N}, \Sigma, \setof{(q_N,\Lrule{rule},q_M)}, q_M, \setof{q_N}) \\
+\cC_1;\cC_2 & =
+   & (Q_{1} \setminus S_1 \cup Q_{2}, \Sigma, \rightarrow, q_{0,1}, S_2), \text{where} \\
+  && {\rightarrow} =
+         \begin{array}[t]{@{}l}
+             {\rightarrow_{1}} \setminus \setof{(q,x,q') \mid q \arrow{x}_1 q' \in S_1}
+               \cup \setof{ (q,x,q_{0,2}) \mid q \arrow{x}_1 q' \in S_1 } \\
+             {} \cup {\rightarrow_{2}}
+         \end{array} \\
+\cC_1 \alap & =
+   & (Q_1 \setminus S_1 \cup \setof{q_N}, \Sigma, \rightarrow, q_{0,1}, \setof{q_N}),
+      \text{where} \\
+  && {\rightarrow} =
+         \begin{array}[t]{@{}l}
+             \rightarrow_1 \setminus \setof{ (q,x,q') \mid q \arrow{x}_1 q' \in S_1}
+	        \cup \setof{ (q,x,q_{0,1}) \mid q \arrow{x}_1 q' \in S_1 } \\
+             {} \cup \setof{(q_{0,1},\Init(C_1),q_N) \mid \delta \not\in \Init(C_1)}
+         \end{array} \\
+\cC_1 \tryelse \cC_2 & =
+   & (Q_1 \cup Q_2, \Sigma, \rightarrow, q_{0,1}, S_1 \cup S_2), \text{where} \\
+  && {\rightarrow} = {\rightarrow_{1}} \cup {\rightarrow_{2}}
+          \cup \setof{(q_{0,1},\Init(C_1),q_{0,2}) \mid \delta \not\in \Init(C_1) }
+\end{eqnarray*}
+%
+The following points are noteworthy:
+\begin{itemize}
+\item In the sequential composition $\cC_1;\cC_2$, every transition in $\cC_1$
+  to a success state is redirected to the start state of $\cC_2$.
+\item In the ``alap closure'' $\cC_1\alap$, transitions to success states are
+  redirected to the start state. Optionally, a failure transition is created to
+  a fresh state $q_N$.
+\item In the ``try-else'' operation $\cC_1\tryelse \cC_2$, the start state of
+  $\cC_1$ is optionally connected to the start state of $\cC_2$ by a failure
+  transition.
+\end{itemize}
+%
+Without proof, we state the following property:
+%
+\begin{proposition}
+$\CAut$ is closed under the constructions defined above.
+\end{proposition}
+%
+% \begin{definition}[Sequential Composition]
+% The sequential composition $\cC_1;\cC_2$ is given by $( Q, \Sigma, \rightarrow, q_{0_1}, S_2)$, with:
+% \begin{align*}
+% Q &= Q_{1} \setminus S_1 \cup Q_{2}\\
+% {\rightarrow} &= {\rightarrow_{1}} \setminus \setof{ (q,x,q') \mid q \arrow{x}_1 q' \in S_1 }
+%        \cup {\rightarrow_{2}}
+%        \cup \setof{ (q,x,q_{0,2}) \mid q \arrow{x}_1 q' \in S_1 }
+% \end{align*}
+% \end{definition}
+% %
+% \begin{definition}[The Alap Operator]
+% Given the control automaton $C_1$, the alap operator $C_1\alap$ gives a control automaton $( Q, \Sigma, \rightarrow, q_{0_1}, S)$, with:
+% \begin{align*}
+% Q &= Q_{1} \setminus S_1 \cup \setof{q_N} \text{, where $q_N \not\in Q_1$}\\
+% {\rightarrow} &= \rightarrow_{1}
+% 		\setminus \setof{ (q,x,q') \mid q \arrow{x} q' \in S_1 }
+% 		\cup \setof{ (q,x,q_{0_1}) \mid q \arrow{x} q' \in S_1 }\\
+% 	&\cup\quad\setof{(q_{0_1},Init(C_1),q_N) \mid \delta \not\in Init(C_1) }\\
+% S &= \{q_N\}\\
+% \end{align*}
+% \end{definition}
+% %
+% \begin{definition}[The TryElse Operator]
+% Given the control automata $C_1$ and $C_2$, the TryElse operation $C_1 \tryelse C_2$ is given by $( Q_1 \cup Q_2, \Sigma, \rightarrow, q_{0_1}, S_1 \cup S_2)$, with:
+% \begin{align*}
+% {\rightarrow} &= \rightarrow_{1} \cup \rightarrow_{2}
+% \cup \setof{(q_{0_1},Init(C_1),q_{0_2}) \mid \delta \not\in Init(C_1) }\\
+% \end{align*}
+% \end{definition}
+% %
+% The operators $\downarrow, \nrightarrow,;$ are closed under $\CAut$. Proof of this is omitted due to the limited space available. However, one can easily see that the criterion for failures is met; given the definition of the $Init$ function and the use of this function by the operations, a failure created can only contain those actions that are scheduled first from the failure transition's source state. 
+%
+% %
+% %   RuleId
+% %
+% The automaton for a \Lrule{RuleId} is defined by:
+% \begin{align*}
+% \trace{\Lrule{RuleId}} &=  ( Q, \Sigma, \rightarrow, q_0, S)\\
+% Q &= \setof{q_N,q_M} \text{ ,where $q_N,q_M$ are arbitrarily chosen distinct states.}\\
+% {\rightarrow} &= \setof{(q_N,RuleId,q_M)}\\
+% q_0 &= q_N\\
+% S &= \setof{q_M}\\\
+% \end{align*}
+% A transition labelled with \Lrule{RuleId} connects a start state with a success state. 
+\iffull
+The automaton is illustrated in Figure \ref{fig:aut_rule}.
+\begin{figure}
+\centering
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,semithick,>=stealth']
+\tikzstyle{every state}=[shape=circle,draw]
+\node[state,initial]		(s0) 						{$q_N$};
+\node[state,accepting] 	(s1) [right of=s0]	{$q_M$};
+\path[->]
+(s0)	edge	node 				{$\scriptstyle\Lrule{RuleId}$}	(s1);
+\end{tikzpicture}
+\caption{Control Automaton for \Lrule{RuleId}}
+\label{fig:aut_rule}
+\end{figure}
+\fi
+%
+% Given the automaton for the elementary program and the operators defined for control automata, we can now define the translation from control programs to control automata.
+%
+% \begin{definition}[Translation of Control Programs to Control Automata]
+% Given the programs $\Lrule{P_1}$ and $\Lrule{P_2}$ in \Lang, the translation
+% $trans : \Lang \rightarrow \CAut$ is given by:
+This gives rise to the following semantics function $\semaut-: \Lang \rightarrow
+\Aut$:
+%
+\begin{align*}
+\semaut{\Lseq{P_1}{P_2}} &= \semaut{P_1};\semaut{P_2}\\
+\semaut{\Lalap{P_1}} &= \semaut{P_1}\alap\\
+\semaut{\Ltryelse{P_1}{P_2}} &= \semaut{P_1} \tryelse \semaut{P_2}
+\end{align*}
+%
+Of course, it is important that the new semantics is consistent with the
+existing one. For the purpose of comparison, let $\cA_d$ be the pure system
+automaton with initial state $d$, constructed by freely exploring all
+applicable rules as suggested in Section~\ref{sec:aut}, and for all $P\in
+\Lang$ let $\cA_{P,d}=\cA_d\times \semaut P$; i.e., this is the pure automaton
+controlled by the program. We then have the following result:
+%
+\begin{theorem}\label{th:io=aut}
+For all $P\in \Lang$, $\semio P = \setof{(d,d') \mid q_{0,P,d}
+  \trans{\ell_1\cdots \ell_n}_{P,d} (d',c) \in S_{P,d}}$.
+\end{theorem}
+%
+In words, the input-output behaviour can be retrieved by using the input data
+as start state, and interpreting the data part of the reachable success states
+as output.
+\iffull
+%
+% TRUE
+%
+\begin{definition}
+The program \Ltrue corresponds to the automaton
+$\ltrace Name \rtrace = (\{q_{N},q_{M}\},\{\lambda\},\{(q_{N},\lambda,q_{M})\},q_{N},q_{M})$.
+\end{definition}
+
+Figure \ref{fig:aut_rule} shows the corresponding automaton. It consists of a fresh start state $q_N$, and a fresh success state $q_M$, connected by a $\lambda$-transition.
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{true.png}
+%\caption{Automaton corresponding to a {\tt TRUE}}
+%\label{fig:aut_true}
+%\end{figure}
+\fi
+\iffull
+For the remaining definitions in this section we use programs $P_1, \dotsc , P_n$ written in  {\tt Lang}, and the corresponding automata: \begin{align*}
+CA_{1} &= (Q_1,\Sigma,\rightarrow_{1},q_{0_1},F_{1})\\
+&\quad\vdots\\
+CA_{n} &= (Q_n,\Sigma,\rightarrow_{n},q_{0_n},F_{n})\\
+\end{align*} where $Q_1 \cap Q_2 = Q_2 \cap Q_3 = .... = Q_{n-1} \cap Q_n = \emptyset$ (i.e. the automata have distinct sets of states).
+\fi
+\iffull
+
+\begin{definition}
+$\trace{\Lor{P_1}{P_2}} = ( Q, \Sigma, \rightarrow, q_0, F)$, where:
+\begin{itemize}
+\item $Q = Q_{1} \cup Q_{2} \cup \{q_N\}, q_N \not\in Q_1 \cup Q_2$,
+\item $\rightarrow = \rightarrow_{1} \cup \rightarrow_{2} \cup \{(q_{N}, \lambda, q_{0_1), (q_{N}, \lambda, q_{0_2})\}$,
+\item $q_0 = q_N$,
+\item $S = S_1 \cup S_2$.
+\end{itemize}
+\end{definition}
+
+The automaton is visualised in Figure \ref{fig:aut_bar}. The triangles symbolise the automata representing subprograms, i.e. a triangle labelled by $P_1$ symbolises $CA_1$. The circles on the bottom of a triangle symbolise the successful states of that sub automaton. White circles in the figure represent the successful states of the composed automaton. 
+
+\fi
+\iffull
+The automaton for $\Lseq{P_1}{P_2}$ is defined by:
+\begin{align*}
+\trace{\Lseq{P_1}{P_2}} &= ( Q, \Sigma, \rightarrow, q_0, S)\\
+Q &= Q_{1} \cup Q_{2}\\
+{\rightarrow} &= \rightarrow_{1} \cup \rightarrow_{2} 
+					\cup \setof{(s_{i}, \lambda, q_{0_2}) \mid s_i \in S_1}\\
+q_0 &= q_{0_1}\\
+S &= S_2\\
+\end{align*}
+The success states of $\trace{P_1}$ are connected by $\lambda$-transitions to the start state of $\trace{P_2}$.
+\fi
+\iffull
+The corresponding automaton is shown in Figure \ref{fig:aut_seq}. The automaton is constructed by connected the success states of $CA_1$ with the start state of $CA_2$ using $\lambda$ transitions. The start state of $CA_1$ becomes the start state and the success states of $CA_2$ become the success states of the constructed automaton.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,semithick,>=stealth']
+\tikzstyle{every state}=[shape=circle,draw]
+\node[state,initial]		(s0) 						{$q_N$};
+\node[state,accepting] 	(s1) [right of=s0]	{$q_M$};
+\path[->]
+(s0)	edge	node 				{$\scriptstyle\Lrule{RuleId}$}	(s1);
+\end{tikzpicture}
+\caption{Control Automaton for \Lseq{P_1}{P_2}}
+\label{fig:aut_seq}
+\end{figure}
+\fi
+\iffull
+
+\begin{definition}
+$\ltrace P_1* \rtrace = ( Q, \Sigma, \rightarrow, q_0, S)$, where:
+\begin{itemize}
+\item $Q = Q_{1} \cup \{q_N\}$, where $q_N$ is a fresh state;
+%\item $\Sigma = \Sigma_{1}$;
+\item $\rightarrow = \rightarrow_{1} \cup \{(s_1, \lambda, q_{0_1)|s_1 \in S_1\} \cup \{(q_{0_1},\lambda,q_N)\}$;
+\item $q_{0} = q_{0_1}$;
+\item $S = q_N$.
+\end{itemize}
+\end{definition}
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{star.png}
+%\caption{Automaton corresponding to the program $P_1*$}
+%\label{fig:aut_star}
+%\end{figure}
+
+The automaton is visualised in Figure \ref{fig:aut_star}. The success states of $CA_1$ are connected to the start state by $\lambda$ transitions. Another $\lambda$ transition connects the start state with a fresh success state.
+
+\fi
+\iffull
+The automaton for $\Lalap{P_1}$ is defined by:
+\begin{align*}
+\trace{\Lalap{P_1}} &= ( Q, \Sigma, \rightarrow, q_{0}, S)\\
+Q &= Q_{1} \cup \setof{q_N} \text{, where $q_N \not\in Q_1 \cup \dots \cup Q_n$}\\
+{\rightarrow} &= \rightarrow_{1} \cup \setof{(s_1,\lambda,q_{0_1})|s_1 \in S_1 } \cup\\
+	& \quad \setof{(q_{0_1},Init(\trace{P_1}),q_N) \mid \delta \not\in Init(\trace{P_1}) }\\
+q_{0} &= q_{0_1}\\
+S &= \{q_N\}\\
+\end{align*}
+
+The success states of \trace{P_1} are connected to its start state by $\lambda$-transitions. A failure transition connects this start state with a fresh success state $q_N$ (i.e. $q_N \not\in Q_1$). The failure transition is labeled with a failure set given by the $Init$ of $P_1$. When $\trace{P_1}$ is always successful, no failure transitions is added.
+
+%The automaton is visualised in Figure \ref{fig:aut_alap}. The success states of $CA_1$ are connect by $\lambda$-transitions to its start state. From this start state, a failure transition of the init of $P_1$ is connected to a fresh success state.
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{alap.png}
+%\caption{Automaton corresponding to the program \alap{P_1}}
+%\label{fig:aut_alap}
+%\end{figure}
+
+\fi
+\iffull
+
+\begin{definition}
+$\ltrace \ifskip{P_1}{P_2} \rtrace = (Q,\Sigma,\rightarrow,q_0,S)$, where:
+\begin{itemize}
+\item $Q = Q_1 \cup Q_2 \cup \{ q_N \}$;
+\item $\rightarrow = \rightarrow_1 \cup \rightarrow_2 \cup \cup \{(s_1,\lambda,q_{0_2})|s_1 \in S_1\} \cup \{(q_{0_1},\overline{Init(P_1)},q_N)\}$;
+\item $q_0 = q_{0_1}$;
+\item $S = S_2 \cup \{ q_N \}$.
+\end{itemize}
+\end{definition}
+
+The automaton is visualised in Figure \ref{fig:aut_ifskip}. The success states of $CA_1$ are connected to the start state of $CA_2$ by $\lambda$ transitions. The start state of $CA_1$ is connected to a fresh state by a failure transition of the init of $P_1$. Both the success states of $CA_2$ and the fresh state become success states in the final automaton.
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{if.png}
+%\caption{Automaton corresponding to the program \ifskip{P_1}{P_2}}
+%\label{fig:aut_ifskip}
+%\end{figure}
+
+\begin{align*}
+\trace{\Lifelse{P_1}{P_2}{B_3}} &= (Q,\Sigma,\rightarrow,q_0,S)\\
+Q &= Q_1 \cup Q_2 \cup Q_3\\
+{\rightarrow} &= \rightarrow_1 \cup \rightarrow_2 \cup \rightarrow_3 \cup\\
+	& \quad \setof(s_1,\lambda,q_{0_2}) \mid s_1 \in S_1 } \cup\\
+	& \quad \setof{(q_{0_1},Init(\trace{P_1})},q_{0_3}) \mid \delta \not\in Init(\trace{P_1}}\\
+q_0 &= q_{0_1}\\
+S &= S_2 \cup S_3\\
+\end{align*}
+
+%The automaton is visualised in Figure \ref{fig:aut_ifelse}. The success states of $CA_1$ are connected to the start state of $CA_2$ by $\lambda$ transitions. The start state of $CA_1$ is connected to the start state of $CA_3$ by a failure transition of the init of $P_1$.
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{ifelse.png}
+%\caption{Automaton corresponding to the program \ifelse{P_1}{P_2}{P_3}}
+%\label{fig:aut_ifelse}
+%\end{figure}
+
+\begin{definition}
+$\ltrace \tryskip{P_1} \rtrace = ( Q, \Sigma, \rightarrow, q_0, S)$, where:\\
+\begin{itemize}
+\item $Q = Q_{1} \cup \{ q_N \}$;
+\item $\rightarrow = \rightarrow_{1} \cup \{(q_{0_1},\overline{Init(P_1)},q_N)\}$
+\item $q_0 = q_{0_1}$;
+\item $S = S_1 \cup \{ q_N \} $.
+\end{itemize}
+\end {definition}
+
+The automaton is visualised in Figure \ref{fig:aut_tryskip}. The start state of $CA_1$ is connected by a fresh success state. Both the fresh state and the success states of $CA_1$ become success states in the final automaton. 
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{try.png}
+%\caption{Automaton corresponding to the program \tryskip{P_1}}
+%\label{fig:aut_tryskip}
+%\end{figure}
+
+\fi
+\iffull
+The automaton for \Ltryelse{P_1}{P_2}~is defined by:
+\begin{align*}
+\trace{\Ltryelse{P_1}{P_2}} &= ( Q, \Sigma, \rightarrow, q_0, S)\\
+Q &= Q_1 \cup Q_2\\
+{\rightarrow} &= \rightarrow_{1} \cup \rightarrow_{2} \cup\\
+ & \quad \setof{(q_{0_1},Init(\trace{P_1}),q_{0_2}) \mid \delta \not\in Init(\trace{P_1}) }\\
+q_0 &= q_{0_1}\\
+S &= S_1 \cup S_2\\
+\end {align*}
+The start state of \trace{P_1} is connected with a failure transition to the start state of \trace{P_2}. The success states from both \trace{P_1} and \trace{P_2} become success states in the resulting automaton.
+\fi
+\iffull
+
+\begin{definition}
+$\ltrace \whiledo{P_1}{P_2} \rtrace  = ( Q, \Sigma, \rightarrow, q_0, S)$, where:
+\begin{itemize}
+\item $Q = Q_{1} \cup Q_{2} \cup \{q_N\}$, where $q_N$ is a fresh state;
+%\item $\Sigma = \Sigma_{1} \cup \Sigma_{2}$;
+\item $\rightarrow = \rightarrow_{1} \cup \rightarrow_{2} \cup \{(s_1,\lambda,q_{0_2})|s_1 \in S_1\} \cup \{(s_2,\lambda,q_{0_1})| s_2 \in S_2\} \cup \{(q_{0_1},\overline{Init(P_1},q_N)\}$
+\item $q_0 = q_{0_1}$;
+\item $S = \{q_N\}$.
+\end{itemize}
+\end{definition}
+
+The automaton is visualised in Figure \ref{fig:aut_whiledo}. From the start state it is possible to either enter $CA_1$ or go to a fresh success state following a failure transition of the init of $P_1$. The success states of $CA_1$ are connected to the start state of $CA_2$. The success states of $CA_2$ are connected to the start state of $CA_1$.
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{whiledo.png}
+%\caption{Automaton corresponding to the program \whiledo{P_1}{P_2}}
+%\label{fig:aut_whiledo}
+%\end{figure}
+
+\begin{definition}
+$\ltrace \dowhile{P_1}{P_2} \rtrace  = ( Q, \Sigma, \rightarrow, q_0, S)$, where:
+\begin{itemize}
+\item $Q = Q_{1} \cup Q_{2} \cup \{q_N\}$, where $q_N$ is a fresh state;
+\item $\rightarrow = \rightarrow_{1} \cup \rightarrow_{2} \cup 
+\{(s_1,\lambda,q_{0_2})|s_1 \in S_1\} 
+\cup 
+\{(s_2,\lambda,q_{0_1})| s_2 \in S_2\} 
+\cup 
+\{(q_{0_2},\overline{Init(P_2},q_N)\}$
+\item $q_0 = q_{0_1}$;
+\item $S = \{q_N\}$.
+\end{itemize}
+\end{definition}
+
+The automaton is visualised in Figure \ref{fig:aut_dowhile}. The success states of $CA_1$ are connected to the start state of $CA_2$ by $\lambda$-transitions. The success states of $CA_2$ are connected to the start state of $CA_1$. From the start state of $CA_2$ an failure transition of the init of $P_2$ points to a fresh success state.
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{dowhile.png}
+%\caption{Automaton corresponding to the program \dowhile{P_1}{P_2}}
+%\label{fig:aut_dowhile}
+%\end{figure}
+
+
+\begin{definition}
+$\ltrace \choice{P_1}{P_n} \rtrace = (Q,\Sigma,\rightarrow,q_0,S)$, where $\ltrace C \rtrace = CA_1, \ltrace B_1 \rtrace = CA_2, \ltrace B_2 \rtrace = CA_3$, such that:
+\begin{itemize}
+\item $Q = Q_1 \cup ... \cup Q_n \cup \{ q_N \}$;
+\item $\rightarrow = \rightarrow_1 \cup ... \cup \rightarrow_n \cup \{   (q_n,\lambda,q_{0_i}) \mid 1 \leq i \leq n  \}$;
+\item $q_0 = q_N$;
+\item $S = S_1 \cup ... \cup S_n$.
+\end{itemize}
+\end{definition}
+
+The automaton is visualised in Figure \ref{fig:choice}. A fresh start state is connected to the start states of $CA_1 ... CA_n$ by $\lambda$-transitions. The success states are the union of the success states of $CA_1 ... CA_n$.
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[]{choice.png}
+%\caption{Automaton corresponding to the program \choice{P_1}{P_n}}
+%\label{fig:choice}
+%\end{figure}
+
+\subsection{Equivalence}
+Now we show that the proposed translation relation is trace semantics preserving by showing that, for all language elements, the success traces of the generated automaton are equal to the traces of the original statement as defined in \ref{tab:TraceDefinitionOfSyntax}. A successful trace of an automaton is a sequence of $RuleId$ and failure sets that starts in the start state and ends in any success state. For the definition of the success traces of the constructed automata, we assume that the automata $CA_1 ... CA_n$ corresponding to programs $P_1 ... P_n$ have success traces ${\ltrace P_1 \rtrace}_s ... {\ltrace P_2 \rtrace}_s$.\\
+We will not prove equivalence of all traces; those are merely all possible sub-traces and therefore quite trivial. 
+
+\begin{proof}[RuleId]
+The only success trace of the automaton constructed for a {\tt RuleId} is $RuleId$.
+\end{proof}
+
+\begin{proof}[TRUE]
+The only success trace of the automaton constructed for a {\tt TRUE} is the empty trace.
+\end{proof}
+
+\begin{proof}[$P_1 \mid P_2$]
+From the start state, a choice has to be made to take either branch. From here, the success traces are the success traces of $CA_1$ and $CA_2$. Thus, the success traces of the constructed automata are ${\ltrace P_1 \rtrace}_s \cup {\ltrace P_1 \rtrace}_s$, which corresponds to the success traces of the language statement $P_1 \mid P_2$.
+\end{proof}
+
+\begin{proof}[$P_1;P_2$]
+A successful trace of the automaton constructed for sequential composition is any trace that starts in the start state of $CA_1$ and ends in a success state of $CA_2$. It therefore has to reach a success state of $CA_2$. The success traces are ${\ltrace P_1 \rtrace}_s . {\ltrace P_2 \rtrace}_s$.
+\end{proof}
+
+\begin{proof}[$P_1*$]
+A success trace of the constructed automaton goes through $CA_1$ any number of times, until it goes to $q_N$. The success traces are ${\ltrace P_1 \rtrace}_s*$.
+\end{proof}
+
+\begin{proof}[$\alap{P_1}$]
+A success trace of this automaton loops through $CA_1$ until the init of $P_1$ is disabled and the success state is reached following the failure transition. The success traces of the automaton are $ {ltrace P_1 \rtrace}_s . \overline{Init(P_1)}$. 
+\end{proof}
+
+\begin{proof}[$\ifskip{P_1}{P_2}$]
+A success trace is a trace that goes through $CA_1$ and $CA_2$ or directly reaches a success state by following the failure transition when the init of $P_1$ is disabled. The success traces of the automaton are ${ \ltrace P_1;P_2 \rtrace}_s \cup \overline{Init(P_1)}$.
+\end{proof}
+
+\begin{proof}[$\ifelse{P_1}{P_2}{P_3}$]
+A success trace is a trace that either goes through $CA_1$ and $CA_2$, or follows the failure transition if the init of $P_1$ is disabled, and goes through $CA_3$. The success traces are $ {\ltrace P_1 \rtrace}_s . {\ltrace P_2 \rtrace}_s \cup \overline{Init(P_1)} . {\ltrace P_3 \rtrace}_s$. 
+\end{proof}
+
+\begin{proof}[$\tryskip{P_1}$]
+A success trace can either go through $CA_1$ or follow the failure transition if the init of $P_1$ is disabled. The success traces of the automaton are $ {\ltrace P_1 \rtrace}_s \cup \overline{Init(P_1)}$.
+\end{proof}
+
+\begin{proof}[$\tryelse{P_1}{P_2}$]
+A success trace can either go into $CA_1$, or into $CA_2$ if the init of $P_1$ is disabled. The success traces of the constructed automaton are $ {\ltrace P_1 \rtrace}_s \cup \overline{Init(P_1)}.{\
+ltrace P_2 \rtrace}_s$.
+\end{proof}
+
+\begin{proof}[$\whiledo{P_1}{P_2}$]
+A success trace goes through $CA_1$ and $CA_2$ until the init of $P_1$ is disabled and the success state is reached by following the failure transition. Therefore, the success traces of the automaton are ${\ltrace P_1 \rtrace}_s . {\ltrace P_2 \rtrace}_s . \overline{Init(P_1)}$. 
+\end{proof}
+
+\begin{proof}[$\dowhile{P_1}{P_2}$]
+A success trace of this automaton first goes through $CA_1$. Then it either loops through $CA_2$ and again $CA_1$ until the init of $P_2$ is disabled and the success state is reached by following the failure transition. The success traces are ${\ltrace P_1 \rtrace}_s . ({\ltrace P_2 \rtrace}_s . {\ltrace P_1 \rtrace}_s)* . \overline{Init(P_2)}$.
+\end{proof}
+
+\begin{proof}[choice]
+A success trace is a $\lambda$ transition from the start state to any of the branches, from where it may follow any path to a success state that is reachable from the chosen branch. The success traces of the automata are $ {\ltrace P_1 \rtrace}_s \cup ... \cup {\ltrace P_n \rtrace}_s$.
+\end{proof}
+
+\fi
+\iffull
+The control automaton shown in Figure \ref{fig:ca_example} actually represents the program $\Lseq{\Lalap{\propagate}}{\dispatch}$. Following the definitions above, this is translated to the following automaton:
+%
+\begin{align*}
+%\text{\tt Name} &= \setof{ \propagate, \dispatch}\\
+%\Sigma &= {\tt Name } \cup 2^{\tt Name}\\
+\trace{\Lrule{\dispatch}} &= ( \setof{c_2, c_3}, \Sigma, \setof{(c_2,\dispatch,c_3)}, c_2, \setof{c_3})\\
+%
+\trace{\Lrule{\propagate}} &= ( \setof{c_0, c_1}, \Sigma, \setof{(c_0,\propagate,c_1)}, c_0, \setof{c_1})\\
+%
+Init(\trace{\Lrule{\propagate}}) &= \setof{\propagate}\\
+%
+\trace{\Lalap{\propagate}} &= (\setof{c_0,c_1,c_4}, \Sigma,\rightarrow',c_0, \setof{c_4})\\
+{\rightarrow}' &= \setof{(c_0,\propagate,c_1)} \cup \setof { (c_1,\lambda,c_0) } \cup \setof { (c_0,[\propagate],c_4) }\\
+%
+\trace{\Lseq{\Lalap{\propagate}}{\dispatch}} & = ( Q, \Sigma, {\rightarrow}, q_0, S )\\
+Q &= \setof { c_0, c_1, c_2, c_3, c_4 }\\
+{\rightarrow} &= \setof{(c_0,\propagate,c_1)} \cup \setof { (c_1,\lambda,c_0) } \cup \setof { (c_0,[\propagate],c_4) } \cup \\
+	& \quad\quad \setof { (c_4,\lambda,c_2) } \cup \setof{(c_2,\dispatch,c_3)}\\
+%
+%
+q_0 &= c_0\\
+S &= \setof{c_3}\\
+\end{align*}
+This corresponds to the automaton given in Figure \ref{fig:ca_example}, except that the sequential composition results in an auxiliary node $c_4$ and a $\lambda$-transition to connect the two sub-terms.
+\fi
+
+\subsection{Language Characteristics}
+
+The main contribution of the presented language is that is gives an easy means for defining control automata. However, some characteristics of the language itself are worth highlighting.
+
+The $alap$ in \Lang~differs slightly from the common semantics of $alap$ --- as for example is defined in \cite{HabelPlump01} --- where $\Lalap{P} \sim \Lalap{\Lalap{P}}$. In our language, the failure of \Lalap{P}~is undefined (i.e. $\delta \in Init(\trace{\Lalap{P}})$) meaning that an \Lalap{P}~always terminates successfully; in other words, it is always "possible". Therefore, \Lalap{\Lalap{P}}~never terminates successfully. 
+
+The term \Ltryelse{P_1}{P_2} is a term that --- as far as the authors know --- has not been presented in any other work. Although its meaning can be expressed by \Lalap{}~if $P_1$ and $P_2$ are modified slightly (to present them from having more then one subsequent application), we see this as a useful addition to the language, because it can be used to simplify the specification of the rules. 

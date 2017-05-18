@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.MethodDecl-4-Stmt-WithArgs-Close">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>10 146 86 48</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>55 206 83 32</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>220 200 224 64</string>
+            </attr>
+        </node>
+        <node id="n11">
+            <attr name="layout">
+                <string>118 30 126 48</string>
+            </attr>
+        </node>
+        <edge to="n6" from="n2">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>test:index = 0</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:Argument</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n3">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>test:index = int:MD.argumentLastIndex</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n11" from="n11">
+            <attr name="label">
+                <string>id:MD</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n11">
+            <attr name="label">
+                <string>argument</string>
+            </attr>
+        </edge>
+        <edge to="n11" from="n11">
+            <attr name="label">
+                <string>type:MethodDecl</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n11">
+            <attr name="label">
+                <string>new:child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 181 54 162 136 332 232 12</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n11">
+            <attr name="label">
+                <string>stmt</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

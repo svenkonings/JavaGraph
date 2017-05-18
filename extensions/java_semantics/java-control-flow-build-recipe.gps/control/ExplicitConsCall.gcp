@@ -1,0 +1,21 @@
+package control;
+
+recipe ExplicitConsCall(node root, node exit, out node entry) {
+	try {
+		// Call without arguments.
+		entry := rule.ExplicitConsCall-NoArgs(root, exit);
+	} else {
+		// Call with arguments.
+		int argMax := rule.ExplicitConsCall-ArgCount(root);
+		int argNr := rule.help.zero();
+		node aroot, aentry;
+		node aexit := rule.help.assign(root);
+		do {
+			aroot := rule.ExplicitConsCall-WithArgs(root, argNr);
+			aentry := Expr(aroot, aexit);
+			aexit := rule.help.assign(aentry);
+			argNr := rule.help.add(argNr, 1);
+		} while (rule.help.le(argNr, argMax))
+		entry := rule.help.assign(aentry);
+	}
+}

@@ -1,0 +1,102 @@
+\section{Proofs}\label{app:proofs}
+
+This appendix contains proofs of all the results of this paper.
+
+\begin{proposition}
+Given a control automaton $\cC$, the automaton $\mathit{det}(\cC)$ is a guarded control automaton.
+\end{proposition}
+
+\begin{proof}
+The proof that the created automaton satisfies the requirements (1), (2), and (3) of Def. \ref{def:gca} follows directly from the construction of $\rightarrow$ in Def. \ref{def:det}. Let $\cG = \mathit{det}(\cC)$. For all $q_\cG \in Q_\cG$ with $q_{\cG} \arrow{[F_1 \mid A_1] n}$ and $q_{\cG} \arrow{[F_2 \mid A_2] n}$ it follows that:
+\begin{enumerate}
+\item $FD = fd(q_{\cG},n), F_i \subseteq FD, A_i = FD \setminus F$, which implies that $A \cap F = \emptyset$.
+\item $FD = fd(q_{\cG},n)$ and $A_1 = F_2 \cup A_2 = FD$.
+%
+\item $q_{\cG} \arrow{[F \mid \:] n} q_{\cG}'$ is the transition where $F = fd(q,n), A = \emptyset$. Given Def. \ref{def:fd}, $q_{\cG}'$ exists. 
+%
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+Given a guarded control automaton $\cG$ and a deterministic system automaton $\cA$, $\cA \times \cG$ is deterministic. 
+\end{proposition}
+%
+\begin{proof}
+Given that $\cA$ is deterministic, it contains no $\lambda$-transitions. Then, by construction (Def. \ref{def:prod2}) P contains no $\lambda$-transitions either.
+Let $P = \cA \times \cG$. For all $(q_{\cA},q_{\cG}) \in Q_P$ with $(q_{\cA},q_{\cG}) \arrow{(n,i)} (q_{\cA}',q_{\cG}')$ and $(q_{\cA},q_{\cG}) \arrow{(n,i} (q_{\cA}'',q_{\cG}'')$ we need to show that $(q_{\cA}',q_{\cG}') = (q_{\cA}'',q_{\cG}'')$. Since \cA~is deterministic, we know that $q_{\cA} \arrow{(n,i)}_{\cA} q_{\cA}'$ and $q_{\cA} \arrow{(n,i)}_{\cA} q_{\cA}''$ implies that $q_{\cA}' = q_{\cA}''$. Also, for $q_{\cG} \arrow{[F_1 \mid F_2] n}_{\cG} q_{\cG}'$ and $q_{\cG} \arrow{[F_1 \mid F_2] n}_{\cG} q_{\cG}''$, Def. \ref{def:gca} implies that $q_{\cG}' = q_{\cG}''$. 
+For $q_{\cG} \arrow{[F \mid A] n}_{\cG}$, there is at most one transition where $F \cap enabled(q_{\cA}) = \emptyset$ and $A \subseteq enabled(q_{\cA})$. Def. \ref{def:prod2} implies that $(q_{\cA}',q_{\cG}') = (q_{\cA}'',q_{\cG}'')$.
+\end{proof}
+%
+\begin{proposition}
+If there exists a forward simulation between $\cA_1$ and $\cA_2$, then $\Tr(\cA_1) \subseteq \Tr(\cA_2)$ and $\STr(\cA_1) \subseteq \STr(\cA_2)$.
+\end{proposition}
+%
+\begin{proof}
+Following the definition of the language of an automaton as the set of all traces, we must show that $\cT(\cA_1) \subseteq \cT(\cA_2)$ and $\cT^\tick(\cA_1) \subseteq \cT^\tick(\cA_2)$. Proof is given by induction over the length of the traces.
+\begin{description}
+\item[Hypothesis ($\Tr$)] For all traces $q_{0,1} \Arrow{w} q_1'$ with $\abs{w} = n$, there is a $q_{0,2} \Arrow{w} q_2'$ with $q_1' \rho q_2'$.
+\item[Basis.] The trace $w$ with $\abs{w} = 0$ ends in $q_{0,1}$ and $q_{0,2}$, and $q_{0,1} \rho q_{0,2}$.
+\item[Inductive Step.] Let the hypothesis hold for all traces $w$ with $\abs{w} = n$. For all traces $w'$, with $\abs{w'} = n+1$, there exists a trace $w, \abs{w} = n$, such that $w' = w;(n,i)$. Also, there is a $q_1 \Arrow{(n,i)} q_1'$. From Def. \ref{def:rho}(2) it follows that there is also a transition $q_{2}' \Arrow{(n,i)} q_2''$, and that $q_1'' \rho q_2''$.
+\end{description}
+We must do the same for the successful traces. Since $\STr(\cA_1) \subseteq \Tr(\cA_2)$, we can take a shortcut here, by referring to the hypothesis above for all traces, which we already have proved to be true. For all traces $w \in \STr(\cA_1)$, if follows that $w \in \Tr(\cA_1)$. Then there is a $(q_1, q_2) \in \rho$ with $q_{0,1} \Arrow{w} q_1$ and $q_{0,2} \Arrow{w} q_2$. Also, there exist a $q_1 \Arrow{\epsilon} q_1' \in S_1$. From Def. \ref{def:rho}(3) it follows that there is a $q_2 \Arrow{\epsilon} q_2' \in S_2$, thus $w \in \STr(\cA_2)$.
+\end{proof}
+%
+\begin{proposition}
+Let $\cA$ be a system automaton and $\cC$ a control automaton; then the relation defined by $\rho = \setof{((q_\cA,q_\cC),(q_\cA,qs)) \mid q_\cC \in qs}$ is a forward simulation between $\cA \times \cC$ and $\cA \times \mathit{det}(\cC)$.
+\end{proposition}
+%
+\begin{proof}
+We now give the proofs that (\ref{sim1}), (\ref{sim2}) and (\ref{sim3}) of Def. \ref{def:rho} hold for the proposed $\rho$. Let $\cA_1 = \cA \times \cC, \cG = \mathit{det}(\cC), \cA_2 = \cA \times \cG$.
+%
+\begin{itemize}
+\item[(\ref{sim1})]
+By construction (Def. \ref{def:prod} and Def. \ref{def:prod2})
+$q_{0,1} = (q_{0,\cA},q_{0,\cC})$ and $q_{0,2} = (q_{0,\cA}, \setof{q_{0,\cC}})$; hence it follows that $q_{0,1} \rho q_{0,2}$. 
+%
+\item[(\ref{sim2})]
+Let $(q_\cA,q_\cC) \rho (q_\cA,q_\cG)$ and
+let there be a transition $(q_\cA,q_\cC) \Arrow{(n,i)}_1 (q_{\cA}',q_{\cC}')$.
+Def. \ref{def:prod} implies
+$q_\cC \arrow{F_1 \dotsc F_n}\arrow{n} q_{\cC}'$, $F \cap enabled(q_{\cA}) = \emptyset$, with $F = F_1 \cup \dotsc \cup F_n$, and $q_\cA \Arrow{\epsilon}\arrow{(n,i)} q_{\cA}'$.
+Let $F' = fd(q_{\cG},n) \setminus enabled(q_{\cA})$. Since $q_{\cC} \in q_{\cG}$, Def. \ref{def:gca} implies $F \subseteq F'$, $q_{\cG} \arrow{[A \mid F]n)} q_{\cG}'$ with $A = F' \setminus F$, and $q_{\cC}' \in q_{\cG}'$. From Def. \ref{def:prod2} it follows that $(q_{\cA},q_{\cG}) \Arrow{\epsilon}\arrow{(n,i)}_2 (q_{\cA}',q_{\cG}')$, thus $(q_{\cA}',q_{\cC}') \rho (q_{\cA}',q_{\cG}')$.
+%
+\item[(\ref{sim3})]
+Let $(q_\cA,q_\cC) \rho (q_\cA,q_\cG)$, and $\exists (q_\cA,q_\cC) \Arrow{\epsilon}_1 (q_{\cA}',q_{\cC}') \in S_1$.
+Def. \ref{def:prod} implies $q_{\cA} \in S_\cA$, $\exists q_\cC \arrow{F_1 \dotsc F_n} q_{\cC}' \in S_\cC, F = F_1 \cup \dotsc \cup F_n$, and $F \cap enabled(s) = \emptyset$. Def. \ref{def:det} implies $(q_\cG,F) \in S_{\cG}$. Finally, from Def. \ref{def:prod2} follows $(q_\cA,q_\cG) \in S_2$.
+\end{itemize}
+\end{proof}
+%
+\begin{proposition}
+If there exists a reverse simulation between $\cA_1$ and $\cA_2$, then $\Tr(\cA_2) \subseteq \Tr(\cA_1)$ and $\STr(\cA_2) \subseteq \STr(\cA_1)$.
+\end{proposition}
+%
+\begin{proof}
+Following the definition of the language of an automaton as the set of all traces, we must show that $\Tr(\cA_2) \subseteq \Tr(\cA_1) $ and $\STr(\cA_2)  \subseteq \STr(\cA_1)$. Proof is given by induction over the length of the traces.
+\begin{description}
+\item[Hypothesis ($\Tr$).] For all traces $q_{0,2} \Arrow{w} q_2'$ with $\abs{w} = n$, there is a $R'$, such that for all $q_1' \in R'$, there is a $q_{0,1} \Arrow{w} q_1'$ and $q_2' \rho R'$.
+\item[Basis.] The trace $w$ with $\abs{w} = 0$ ends in $q_{0,1}$ and $q_{0,2}$, and $q_{0,2} \rho \setof{q_{0,1}}$.
+\item[Inductive Step.] Let the hypothesis hold for all traces $w$ with $\abs{w} = n$. For all traces $w'$ with $\abs{w'} = n+1$, there is a $w$ such that $w' = w;(n,i)$. Then there is a $(q_2, R) \in \rho$, with trace $w$ ending in $q_2$ and all $q_1 \in R$. Also, there is a transition $q_2 \Arrow{(n,i)} q_2'$. From Def. \ref{def:rho'}(5) it follows that there is an $R'$, such that for all $q_1' \in R'$, there is a $q_1$ in $R$ with $q_1 \Arrow{(n,i)} q_1'$ with $q_2' \rho R'$.
+\end{description}
+For the successful traces we again take a shortcut by using the proof for all traces. Let $w \in \STr(\cA_2)$, then also $w \in \Tr(\cA_2)$. Then there is a $(q_2,R) \in \rho$ and trace $w$ to $q_2$ and to all $q_1 \in R$. Since $w \in \STr(\cA_2)$, there is a $q_2 \Arrow{\epsilon} q_2' \in S_2$. From Def. \ref{def:rho'}(6) it follows that there is a $q_1 \in R$ for which there is a $q_1 \Arrow{\epsilon} \in S_1$. Thus, $w \in \STr(\cA_1)$.
+\end{proof}
+%
+\begin{proposition}
+Let $\cA$ be a system automaton and $\cC$ a control automaton, and $\cG = det(\cC)$, then the relation defined by $\rho = \setof{ ((q_\cA,q_\cG),R) \mid \forall q_\cC \in q_\cG: (q_\cA,q_\cC) \in R}$ is a reverse simulation between $\cA \times \mathit{det}(\cC)$ and $\cA \times \cC$.
+\end{proposition}
+%
+\begin{proof}
+We now give the proofs that (\ref{sim4}), (\ref{sim5}) and (\ref{sim6}) of Def. \ref{def:rho'} hold for the proposed $\rho$. Let $\cA_1 = \cA \times \cC, \cA_2 = \cA \times det(\cC), \cG = det(\cC)$.
+\begin{itemize}
+\item[(\ref{sim4})]
+By construction (Def. \ref{def:prod} and \ref{def:prod2}) $q_{0,1} = (\cA,\cC)$ and $q_{0,2} = (\cA, \setof{\cC})$; hence it follows that $q_{0,2} \rho \setof{ q_{0,1} }$.
+\item[(\ref{sim5})]
+Let $(q_\cA,q_\cG) \rho R$ and let there be a transition $(q_\cA,q_\cG \arrow{(n,i)}_2 (q_{\cA}',q_{\cG}')$. From Def. \ref{def:prod2} it follows there is a $q_\cA \Arrow{\epsilon}\Arrow{(n,i)}_\cA q_{\cA}'$ and $q_\cG \arrow{([A\mid F]n)} q_{\cG}'$, such that $F \cap enabled(s) = \emptyset$, and $A \subseteq enabled(s)$.
+Def. \ref{def:gca} implies $q_{\cG}' = \{ q_{\cC}' \mid \exists q_{\cC} \in q_{\cG}: q_\cC \arrow{F_1 \dotsc F_n} \arrow{n} q_{\cC}'$ with $F_1 \cup \dotsc \cup F_n \subseteq F \}$. 
+Def. \ref{def:prod} implies $\forall q_{\cC}'.\exists q_{\cC} \in q_{\cG}. (q_\cA,q_\cC) \Arrow{(n,i)}_1 (q_{\cA}',q_{\cC}') \in R'$. 
+\item[(\ref{sim6})]
+Let $(q_\cA,q_\cG) \rho R$ and $(q_\cA,q_\cG) \in S_2$.
+Def. \ref{def:prod2} implies $q_\cA \in S_\cA, \exists F.(q_\cG,F) \in S_\cG: F \cap enabled(s) = \emptyset$.
+Def. \ref{def:gca} implies $\exists q_\cC \in q_\cG: q_\cC \arrow{F_1 \dotsc F_n}_\cC q_{\cC}' \in S_c, F_1 \cup \dotsc \cup F_N = F $.
+Finally, Def. \ref{def:prod} implies $(q_\cA,q_\cC) \in R \wedge (q_\cA,q_\cC) \Arrow{\epsilon} (q_{\cA}',q_{\cC}') \in S_1$.
+\end{itemize}
+\end{proof}

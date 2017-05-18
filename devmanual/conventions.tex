@@ -1,0 +1,34 @@
+\chapter{Guidelines}
+\chlabel{Guidelines}
+
+
+\section{Documentation}
+
+One of the most important things in programming is good and consistent documentation. Javadoc provides a good starting point for this. We therefore require all classes, methods, and fields to be accompanied with appropriate descriptions of their intent, possibly with cross-references to other Java classes.
+
+\section{Package Size and Dependencies}
+
+The basic guideline for packages is to keep the number of classes within reasonable size. The exact maximum number of classes within a package is of course debatable, but this number should never exceed e.g. 100.
+
+Concerning the dependency relations between packages we can be more clear. The basic guideline is to have only {\em one-directional} dependencies between packages.
+
+
+\section{Coding Conventions}
+
+For accessing class fields we apply the following guidelines. The general principle is that of {\em lazy initialization}. This means that whenever accessing a field \x through its \getX-method, we will first check whether \x has already been initialized or is still \nullPnt. If it is \nullPnt, we call the (protected) \computeX-method. The \computeX-method first calls the \createX-method after which it may still need to do some additional computations. The \createX-method only creates a new instance of the correct type.
+
+Listing \ref{l:X-lazy.java} gives an overview of the things discussed above.
+
+\codelisting{java}{X-lazy.java}{Lazy initialization.}
+
+\subsection{Method Level}
+
+\section{Peer Reviews}
+
+Keeping code clear and understandable requires quite a lot of effort. In order to decentralize this process, developers can now and then schedule so called `code reviews'. Code reviews are performed on pieces of code written by other developers. When things are unclear this should be indicated by what we call {\em personal tags}.
+
+\subsection{Personal Tags}
+
+In order to be able to keep track of code being reviewed, individual tags have been introduced for each developer. That is, whenever you review a class or method and want to add some comments, you should include your personal tag (your first name in capital letters) followed by the actual comment. The idea is then that every now and then, developers should take a quick look at all the comments and see whether some comments require some discussion or simple actions to be taken. The use of personal tags is shown in Listing \ref{l:X.java}.
+
+\codelisting{java}{X.java}{Personal tags.}

@@ -1,0 +1,111 @@
+% -----------------------------------------------------------------------------
+% 5-analysis.tex
+% -----------------------------------------------------------------------------
+\section{Discussion and Related Work}
+\stlabel{discussion}
+
+In the previous section we showed how the \Prolog extension for \GROOVE
+supports the graph-based representation of feature models, how extra model
+attributes can be specified as \Prolog predicates and how state space
+exploration can be used to search for feature model configurations. Going back
+to the list of tasks in \stref{problem} (page~\pageref{options}), we see that,
+in fact, all of them are fulfilled.
+
+\subsection{Performance}
+
+There are two major points of evaluation regarding run-time performance of the
+tool set: (i) the time used to explore the state space and store the GTS; and 
+(ii) the time needed to run the \Prolog queries on a given GTS. Item (i)
+covers the standard functionality of \GROOVE, for which an extensive
+body of work exists~\cite{RenVar2004,Rensink2006,CPR2008,GJR2010},
+comprising performance evaluations of several aspects of \GROOVE implementation
+and also comparisons with other tools. Item (ii) concerns the functionality
+introduced by the \Prolog extension, which requires a new analysis.
+
+For the running example of \stref{problem} the time necessary for building
+the GTS and performing the \Prolog queries is negligible (around 2 milliseconds
+in total), since the state space is small. To properly exercise the tool, we
+used a grammar implementing a solution for the leader election case
+study~\cite{LE-GRABATS} proposed at the GraBaTs 2009 tool contest. The purpose
+of this case is to verify a protocol for the election of a leader among a ring
+of processes. The state space size is exponential on the number of processes,
+giving rise to very large transition systems.
+
+\begin{table}
+\centering
+\caption{Performance comparison of \Prolog queries against state space size.}
+\tlabel{perf}
+\begin{tabular}{rr|rr|rr|r}
+\hline
+ & \ \bf Growth & \bf Exploration & \ \bf Growth & \multicolumn{1}{c}{\bf Query}
+& \ \bf Growth & \\
+\bf \# States & \multicolumn{1}{c|}{\bf Ratio} & \bf Time (ms) &
+\multicolumn{1}{c|}{\bf Ratio} & \bf Time (ms) & \multicolumn{1}{c|}{\bf Ratio}
+& \ \bf \# Results\\
+\hline
+10      &      &     251 &      &    < 1 &      & 2 \\
+52      &  5.2 &     347 &  1.4 &      3 &  4.1 & 10 \\
+473     &  9.1 &   1,000 &  2.9 &     30 &  9.0 & 84 \\
+6,358   & 13.4 &   6,001 &  6.0 &    294 &  9.9 & 1,008 \\
+113,102 & 17.8 & 140,961 & 23.5 & 12,238 & 41.6 & 15,840 \\
+\hline
+\end{tabular}
+\end{table}
+
+The results of the experiments are given in \tref{perf}. Column {\bf \# States}
+shows the GTS size for an increasing number of processes. Columns {\bf
+Exploration Time} and {\bf Query Time} give the time in milliseconds needed to
+explore the state space and run the \Prolog queries, respectively. We used a
+query similar to the one given in \stref{query}, that collects all states of the
+GTS where a leader has been elected. The last column lists the number of results
+returned by the query. From the times given in \tref{perf} it can be seen that
+the bulk of the running time is spent on building the GTS, unsurprisingly.
+From the growth ratios we see that the query time increases linearly over the
+GTS size until the second-to-last line. However, at the last line of the table,
+the query time exhibits a larger growth, which can be explained by the large
+amount of backtracking done by the \Prolog interpreter while running the query.
+
+Although further experimentation is certainly in order, we consider these
+initial performance results of the \Prolog extension satisfactory.
+
+\subsection{Related Feature Modelling Approaches}
+
+The analysis of feature models is useful for several reasons, such as to
+efficiently resolve the configuration constraints and to optimise the
+configuration calculation. This analysis is the object of research in many
+directions, which differ in the expressiveness of the models and in the
+configuration strategies. For example, generalised feature trees \cite{Broek2009},
+propositional formulas \cite{Batory2005} and constraint satisfaction problems
+\cite{Benavides2005} have been used for the purpose of analysing feature
+models. Although some of these algorithms are known to be quite efficient, the
+major drawback of such approaches is the rigidity of the analysis method. A
+review of the current techniques for the automated analysis of feature models is
+given in~\cite{Benavides2010}.
+
+Extra feature attributes can be modelled in our approach in at least two ways:
+first, by adding new attributes to the graphs; or secondly, by defining
+predicates in \Prolog that represent such attributes. We chose the last form
+because the values of the attributes used can be quite volatile in this
+application domain. Again, it is possible to annotate the graph with all kinds
+of information, but this would hamper the flexibility of the approach.
+
+\medskip\noindent We want to draw attention to the issue of \emph{staged
+configuration} of product lines. A stage corresponds to the elimination of a set
+of configuration options; the selection of features is deferred through stages
+until no variability is left. Czarnecki \emph{et al.} \cite{Czarnecki2004}
+handle staged configuration using a feature model notation that supports
+the definition of feature cardinality.
+They explore the variability in a feature model per stage, which contains the
+features that can be selected. Hubaux \emph{et al.} \cite{Hubaux2009} propose a
+way to guide the configuration process using workflows which enforce the staged
+configuration in a certain order. Both approaches also handle inter-related
+feature models, in which the configuration order matters but is predefined and
+fixed over the whole configuration process.
+
+We are able to generate all configuration stages of a feature model, as graph
+states, and to inspect these stages in several ways: by querying in which order
+the features (especially the variable features) are selected, or also by making
+several kinds of inspections in these stages. For example, our \GROOVE
+solution supports the analysis of configuration contexts in which a constraint
+has been violated. We can also add extra constraints which are combinations of
+conditions in previous stages.

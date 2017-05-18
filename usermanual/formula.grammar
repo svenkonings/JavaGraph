@@ -1,0 +1,24 @@
+state	: 'true'
+	| 'false'
+	| atom
+	| '!' state
+	| state1 binary state2
+	| 'E' path
+	| 'A' path
+	| '(' state ')'
+
+binary	: '|' | '&' | '->' | '<-' | '<->'
+
+path	: state
+	| '!' path
+	| path1 binary path2
+	| 'X' path
+	| 'F' path
+	| 'G' path
+	| path1 'U' path2
+	| path1 'W' path2
+	| path1 'M' path2
+	| path1 'V' path2
+	| '(' path ')'
+
+atom	: ID | SINGLE_QUOTED | DOUBLE_QUOTED

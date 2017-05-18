@@ -1,0 +1,28 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+% Special colors
+\begin{tikzpicture}[
+% Special color styles
+scale=\tikzscale]
+\node[node] (n8)  at (1.005, -0.260) {\ml{\textbf{Model}}};
+\node[node] (n1)  at (1.645, -1.740) {\ml{\textbf{Feature}\\name = "B"}};
+\node[node] (n9)  at (3.145, -2.540) {\ml{\textbf{Feature}\\name = "E"}};
+\node[node] (n7)  at (2.355, -0.940) {\ml{\textbf{Feature}\\name = "A"}};
+\node[node] (n6)  at (2.355, -0.260) {\ml{\textbf{Tree}}};
+\node[node] (n0)  at (2.400, -3.260) {\ml{\textbf{Excludes}}};
+\node[node] (n12)  at (1.660, -2.540) {\ml{\textbf{Feature}\\name = "D"}};
+\node[node] (n2)  at (3.155, -1.740) {\ml{\textbf{Feature}\\name = "C"}};
+\path[edge] (n0)  -- node[lab]{feature2} (n9) ;
+\path[edge](n8.south -| 1.000, -3.300) -- (1.000, -3.300) -- (n0.west |- 1.000, -3.300);
+\node[lab] at (1.060, -1.300){constraint};
+\path[edge](n8.east |- 2.355, -0.260) -- node[lab]{tree} (n6) ;
+\path[edge](n2.south -| 3.145, -2.540) -- node[lab]{optional} (n9) ;
+\path[edge](n1.south -| 1.660, -2.540) -- node[lab]{optional} (n12) ;
+\path[edge] (n0)  -- node[lab]{feature1} (n12) ;
+\path[edge](n6.south -| 2.355, -0.940) -- node[lab]{root} (n7) ;
+\path[edge] (n7)  -- node[lab]{mandatory} (n2) ;
+\path[edge] (n7)  -- node[lab]{mandatory} (n1) ;
+\userdefinedmacro
+\end{tikzpicture}
+\renewcommand{\userdefinedmacro}{\relax}

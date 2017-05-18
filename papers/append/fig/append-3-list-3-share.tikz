@@ -1,0 +1,35 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+\begin{tikzpicture}[scale=\tikzscale]
+\node[node] (n119)  at (2.445, -1.315) {\ml{1}};
+\node[node] (n116)  at (3.275, -1.335) {\ml{2}};
+\node[node] (n125)  at (4.145, -1.325) {\ml{3}};
+\node[node] (n123)  at (0.915, -2.850) {\ml{append\\control}};
+\node[node] (n117)  at (1.005, -1.875) {\ml{root}};
+\node[node] (n115)  at (1.545, -3.735) {\ml{5}};
+\node[node] (n118)  at (2.875, -1.855){};
+\node[node] (n124)  at (1.885, -1.845){};
+\node[node] (n110)  at (1.935, -0.655) {\ml{4}};
+\node[node] (n121)  at (0.965, -0.950) {\ml{append\\control}};
+\node[node] (n113)  at (3.805, -1.855){};
+\node[node] (n111)  at (2.055, -2.880) {\ml{append\\control}};
+\path[edge] (n121)  -- node[lab]{this} (n124) ;
+\path[edge] (n111)  --  (n117) ;
+\node[lab] at (1.864, -2.632){caller};
+\path[edge](n121.south -| 1.005, -1.875) -- node[lab]{caller} (n117) ;
+\path[edge](n124.east |- 2.875, -1.855) -- node[lab]{next} (n118) ;
+\path[edge] (n121)  -- node[lab]{x} (n110) ;
+\path[edge](n111.north -| 1.885, -1.845) -- node[lab]{this} (n124) ;
+\path[edge] (n113)  -- node[lab]{val} (n125) ;
+\path[edge](n118.east |- 3.805, -1.855) -- node[lab]{next} (n113) ;
+\path[edge] (n123)  -- node[lab]{x} (n115) ;
+\path[edge] (n111)  -- node[lab]{x} (n116) ;
+\path[edge] (n123)  --  (n124) ;
+\node[lab] at (1.202, -2.581){this};
+\path[edge](n117.east |- 1.885, -1.845) -- node[lab]{list} (n124) ;
+\path[edge] (n118)  -- node[lab]{val} (n116) ;
+\path[edge](n123.north -| 1.005, -1.875) -- node[lab]{caller} (n117) ;
+\path[edge] (n124)  -- node[lab]{val} (n119) ;
+\userdefinedmacro
+\end{tikzpicture}
+\renewcommand{\userdefinedmacro}{\relax}

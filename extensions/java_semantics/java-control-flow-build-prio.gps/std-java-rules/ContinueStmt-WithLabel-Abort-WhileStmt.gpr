@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ContinueStmt-WithLabel-Abort-WhileStmt">
+        <attr name="priority">
+            <string>3</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>176 30 77 22</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>419 32 73 22</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>295 179 48 22</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>319 33 40 22</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>159 119 101 22</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>25 30 94 22</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>32 184 73 22</string>
+            </attr>
+        </node>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n3">
+            <attr name="label">
+                <string>reason</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:LabeledStmt</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n2">
+            <attr name="label">
+                <string>exit</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n0">
+            <attr name="label">
+                <string>child</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:ContinueStmt</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:WhileStmt</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n0">
+            <attr name="label">
+                <string>stmt</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n5">
+            <attr name="label">
+                <string>action</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n6">
+            <attr name="label">
+                <string>label</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n3">
+            <attr name="label">
+                <string>del:resolving</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n3">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:Abort</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

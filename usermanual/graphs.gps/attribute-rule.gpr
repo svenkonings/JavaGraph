@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="attribute-rule">
+        <attr name="enabled">
+            <string>false</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1382">
+            <attr name="layout">
+                <string>102 75 51 15</string>
+            </attr>
+        </node>
+        <node id="n1386">
+            <attr name="layout">
+                <string>345 73 19 19</string>
+            </attr>
+        </node>
+        <node id="n1384">
+            <attr name="layout">
+                <string>252 75 22 15</string>
+            </attr>
+        </node>
+        <node id="n1385">
+            <attr name="layout">
+                <string>349 154 11 15</string>
+            </attr>
+        </node>
+        <node id="n1381">
+            <attr name="layout">
+                <string>114 217 27 15</string>
+            </attr>
+        </node>
+        <node id="n1380">
+            <attr name="layout">
+                <string>256 147 19 19</string>
+            </attr>
+        </node>
+        <node id="n1388">
+            <attr name="layout">
+                <string>342 10 23 15</string>
+            </attr>
+        </node>
+        <node id="n1387">
+            <attr name="layout">
+                <string>252 219 22 15</string>
+            </attr>
+        </node>
+        <node id="n1383">
+            <attr name="layout">
+                <string>116 152 22 15</string>
+            </attr>
+        </node>
+        <edge to="n1382" from="n1382">
+            <attr name="label">
+                <string>type:Account</string>
+            </attr>
+        </edge>
+        <edge to="n1383" from="n1382">
+            <attr name="label">
+                <string>del:balance</string>
+            </attr>
+        </edge>
+        <edge to="n1384" from="n1382">
+            <attr name="label">
+                <string>new:balance</string>
+            </attr>
+        </edge>
+        <edge to="n1386" from="n1386">
+            <attr name="label">
+                <string>prod:</string>
+            </attr>
+        </edge>
+        <edge to="n1388" from="n1386">
+            <attr name="label">
+                <string>real:ge</string>
+            </attr>
+        </edge>
+        <edge to="n1385" from="n1386">
+            <attr name="label">
+                <string>arg:1</string>
+            </attr>
+        </edge>
+        <edge to="n1384" from="n1386">
+            <attr name="label">
+                <string>arg:0</string>
+            </attr>
+        </edge>
+        <edge to="n1384" from="n1384">
+            <attr name="label">
+                <string>real:</string>
+            </attr>
+        </edge>
+        <edge to="n1385" from="n1385">
+            <attr name="label">
+                <string>real:0.</string>
+            </attr>
+        </edge>
+        <edge to="n1381" from="n1381">
+            <attr name="label">
+                <string>type:ATM</string>
+            </attr>
+        </edge>
+        <edge to="n1387" from="n1381">
+            <attr name="label">
+                <string>del:amount</string>
+            </attr>
+        </edge>
+        <edge to="n1380" from="n1380">
+            <attr name="label">
+                <string>prod:</string>
+            </attr>
+        </edge>
+        <edge to="n1383" from="n1380">
+            <attr name="label">
+                <string>arg:0</string>
+            </attr>
+        </edge>
+        <edge to="n1387" from="n1380">
+            <attr name="label">
+                <string>arg:1</string>
+            </attr>
+        </edge>
+        <edge to="n1384" from="n1380">
+            <attr name="label">
+                <string>real:sub</string>
+            </attr>
+        </edge>
+        <edge to="n1388" from="n1388">
+            <attr name="label">
+                <string>bool:true</string>
+            </attr>
+        </edge>
+        <edge to="n1387" from="n1387">
+            <attr name="label">
+                <string>real:</string>
+            </attr>
+        </edge>
+        <edge to="n1383" from="n1383">
+            <attr name="label">
+                <string>real:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

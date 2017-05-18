@@ -1,0 +1,14 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\append-4-y.gst
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+e n75 n74 "next" 525 -786 161 79 238 80 11
+e n77 n75 "next" 426 -667 113 79 176 79 11
+n n72 284 140 18 18 
+n n75 167 70 18 18 
+n n78 231 140 18 18 
+n n76 302 68 18 18 
+n n74 229 71 18 18 
+n n71 170 142 18 18 
+n n77 104 70 18 18 
+n n73 106 141 18 18 

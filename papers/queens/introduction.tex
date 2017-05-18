@@ -1,0 +1,56 @@
+% -----------------------------------------------------------------------------
+% introduction.tex
+% -----------------------------------------------------------------------------
+
+\section{Introduction}
+\stlabel{intro}
+
+It is widely understood that the ultimate acceptance of graph transformation as
+a practically useful and valuable modelling technique is largely dependant on
+the availability of reliable tool support. Yet it is almost as widely accepted
+to be a nearly insurmountable challenge to create and especially maintain that
+tool support in an academic context. The main difficulty may not even be the
+lack of manpower but the lack of academic credit that flows from this kind of
+work: how can one package tool maintenance and documentation in such a way that
+the results are publishable within the scientific community?
+
+This paper represents an attempt to overcome this challenge. We discuss, on the
+basis of a well-known example, namely the
+\emph{$N$-queens problem}\footnote{See, e.g.,
+\url{http://en.wikipedia.org/wiki/Eight_queens_puzzle}.}, the design choices
+one has to go through in order to arrive at a solution. The contribution of the
+paper is not so much the solution itself but the actual development process
+followed to find said solution.
+
+The $N$-queens problem is a representative of a certain class of questions
+which can sometimes be solved analytically, by a proof dedicated to the problem
+itself, which then immediately applies to arbitrary instances of the question
+(in this case, arbitrary values for $N$); or they can be regarded and treated as
+search problems, in which the quest is to find a graph (or, more generally, a
+state) with particular properties. Search problems also include model checking
+questions, where one typically searches for a state that \emph{violates} some
+requirements and hence represents erroneous behaviour. These questions can
+be solved, or attempted to be solved, by general, push-button techniques, but
+only \emph{once they have been appropriately modelled}. What constitutes an
+appropriate model is very often a question of trial-and-error: there are always
+many possible ways to capture any given aspect of a problem, some of which make
+the solution harder to find automatically whereas others may actually
+dramatically reduce the search space.
+
+In the case of this paper, we take \GROOVE as our general-purpose tool used to
+solve the problem at hand, and we show how certain tool features can be
+exploited to significantly improve the capacity for treating larger problem
+instances. We present these insights in the form of \emph{guidelines} (or
+\emph{best practices}). Some of these guidelines are valid for any graph
+transformation modelling tool or even for any modelling attempt at all; some are
+dedicated to \GROOVE and address especially the capacity for symmetry reduction.
+
+More information about \GROOVE can be found in, e.g., \cite{Ren03a,GMR+12} and
+the tool user manual; however, this paper is self-contained and understandable
+without prior experience --- even though we heartily recommend trying out the
+example for oneself.
+
+\medskip\noindent In the paper, we first recall the problem
+itself (\stref{problem}) and then develop the solution step-by-step
+(\stref{solution}). We then show the results for this particular problem
+(\stref{discussion}) and conclude in \stref{conclusion}.

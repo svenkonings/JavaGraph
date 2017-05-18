@@ -1,0 +1,66 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n0) at (0.295, -0.295){};
+\node[basic_node] (n1) at (1.095, -0.295){};
+\node[basic_node] (n2) at (1.895, -0.295){};
+\node[basic_node] (n3) at (2.695, -0.295){};
+\node[basic_node] (n4) at (0.295, -1.095){};
+\node[basic_node] (n5) at (1.095, -1.095){};
+\node[basic_node] (n6) at (1.895, -1.095){};
+\node[basic_node] (n7) at (2.695, -1.095){};
+\node[basic_node] (n8) at (0.295, -1.895){};
+\node[basic_node] (n9) at (1.095, -1.895){};
+\node[basic_node] (n10) at (1.895, -1.895){};
+\node[basic_node] (n11) at (2.695, -1.895){};
+\node[basic_node] (n12) at (0.295, -2.695){};
+\node[basic_node] (n13) at (1.095, -2.695){};
+\node[basic_node] (n14) at (1.895, -2.695){};
+\node[basic_node] (n15) at (2.695, -2.695){};
+
+\path[basic_edge, bidirectional](n10.east |- 2.695, -1.895) -- node[lab] {\ml{h}} (n11) ;
+\path[basic_edge, bidirectional](n9.east |- 1.895, -1.895) -- node[lab] {\ml{h}} (n10) ;
+\path[basic_edge, bidirectional](n15.west |- 1.895, -2.695) -- node[lab] {\ml{h}} (n14) ;
+\path[basic_edge, bidirectional](n6.east |- 2.695, -1.095) -- node[lab] {\ml{h}} (n7) ;
+\path[basic_edge, bidirectional](n8.east |- 1.095, -1.895) -- node[lab] {\ml{h}} (n9) ;
+\path[basic_edge, bidirectional](n1.east |- 1.895, -0.295) -- node[lab] {\ml{h}} (n2) ;
+\path[basic_edge, bidirectional](n14.west |- 1.095, -2.695) -- node[lab] {\ml{h}} (n13) ;
+\path[basic_edge, bidirectional](n5.east |- 1.895, -1.095) -- node[lab] {\ml{h}} (n6) ;
+\path[basic_edge, bidirectional](n0.east |- 1.095, -0.295) -- node[lab] {\ml{h}} (n1) ;
+\path[basic_edge, bidirectional](n12.east |- 1.095, -2.695) -- node[lab] {\ml{h}} (n13) ;
+\path[basic_edge, bidirectional](n3.west |- 1.895, -0.295) -- node[lab] {\ml{h}} (n2) ;
+\path[basic_edge, bidirectional](n5.west |- 0.295, -1.095) -- node[lab] {\ml{h}} (n4) ;
+
+\path[basic_edge, bidirectional](n6.south -| 1.895, -1.895) -- node[lab] {\ml{v}} (n10) ;
+\path[basic_edge, bidirectional](n8.north -| 0.295, -1.095) -- node[lab] {\ml{v}} (n4) ;
+\path[basic_edge, bidirectional](n14.north -| 1.895, -1.895) -- node[lab] {\ml{v}} (n10) ;
+\path[basic_edge, bidirectional](n9.north -| 1.095, -1.095) -- node[lab] {\ml{v}} (n5) ;
+\path[basic_edge, bidirectional](n0.south -| 0.295, -1.095) -- node[lab] {\ml{v}} (n4) ;
+\path[basic_edge, bidirectional](n7.north -| 2.695, -0.295) -- node[lab] {\ml{v}} (n3) ;
+\path[basic_edge, bidirectional](n13.north -| 1.095, -1.895) -- node[lab] {\ml{v}} (n9) ;
+\path[basic_edge, bidirectional](n1.south -| 1.095, -1.095) -- node[lab] {\ml{v}} (n5) ;
+\path[basic_edge, bidirectional](n6.north -| 1.895, -0.295) -- node[lab] {\ml{v}} (n2) ;
+\path[basic_edge, bidirectional](n8.south -| 0.295, -2.695) -- node[lab] {\ml{v}} (n12) ;
+\path[basic_edge, bidirectional](n15.north -| 2.695, -1.895) -- node[lab] {\ml{v}} (n11) ;
+\path[basic_edge, bidirectional](n11.north -| 2.695, -1.095) -- node[lab] {\ml{v}} (n7) ;
+
+\path[basic_edge, bidirectional] (n10)  -- node[lab,near end] {\ml{rd}} (n7) ;
+\path[basic_edge, bidirectional] (n6)  -- node[lab,near end] {\ml{ld}} (n1) ;
+\path[basic_edge, bidirectional] (n10)  -- node[lab,near end] {\ml{ld}} (n5) ;
+\path[basic_edge, bidirectional] (n6)  -- node[lab,near end] {\ml{rd}} (n3) ;
+\path[basic_edge, bidirectional] (n14)  -- node[lab,near end] {\ml{rd}} (n11) ;
+\path[basic_edge, bidirectional] (n10)  -- node[lab,near start] {\ml{rd}} (n13) ;
+\path[basic_edge, bidirectional] (n4)  -- node[lab,near end] {\ml{rd}} (n1) ;
+\path[basic_edge, bidirectional] (n9)  -- node[lab,near end] {\ml{rd}} (n6) ;
+\path[basic_edge, bidirectional] (n6)  -- node[lab,near start] {\ml{ld}} (n11) ;
+\path[basic_edge, bidirectional] (n5)  -- node[lab,near end] {\ml{ld}} (n0) ;
+\path[basic_edge, bidirectional] (n9)  -- node[lab,near start] {\ml{ld}} (n14) ;
+\path[basic_edge, bidirectional] (n10)  -- node[lab,near start] {\ml{ld}} (n15) ;
+\path[basic_edge, bidirectional] (n5)  -- node[lab,near end] {\ml{rd}} (n2) ;
+\path[basic_edge, bidirectional] (n2)  -- node[lab,near start] {\ml{ld}} (n7) ;
+\path[basic_edge, bidirectional] (n8)  -- node[lab,near start] {\ml{ld}} (n13) ;
+\path[basic_edge, bidirectional] (n4)  -- node[lab,near start] {\ml{ld}} (n9) ;
+\path[basic_edge, bidirectional] (n8)  -- node[lab,near end] {\ml{rd}} (n5) ;
+\path[basic_edge, bidirectional] (n12)  -- node[lab,near end] {\ml{rd}} (n9) ;
+\end{tikzpicture}

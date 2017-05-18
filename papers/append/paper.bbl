@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{Rensink2007}
+A. Rensink.
+\newblock Isomorphism checking in {\GROOVE}.
+\newblock In A. Z\"undorf and D. Varr\'o, eds., {\em Graph-Based Tools
+  (GraBaTs)}, vol.~1 of {\em Electronic Communications of the EASST}. European
+  Association of Software Science and Technology, September 2007.
+
+\bibitem{SchmidtRenVar2004}
+A. {Rensink}, {Schmidt}, and D. {Varr{\'o}}.
+\newblock Model checking graph transformations: A comparison of two approaches.
+\newblock In H. {Ehrig}, G. {Engels}, F. {Parise-Presicce}, and G. {Rozenberg},
+  eds., {\em International Conference on Graph Transformations (ICGT)}, vol.
+  3256 of {\em Lecture Notes in Computer Science}, pp. 226--241. Springer
+  Verlag, 2004.
+
+\end{thebibliography}

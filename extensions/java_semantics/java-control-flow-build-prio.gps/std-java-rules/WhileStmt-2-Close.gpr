@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.WhileStmt-2-Close">
+        <attr name="transitionLabel">
+            <string></string>
+        </attr>
+        <attr name="enabled">
+            <string>true</string>
+        </attr>
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="printFormat">
+            <string></string>
+        </attr>
+        <attr name="remark">
+            <string></string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n7">
+            <attr name="layout">
+                <string>109 111 91 32</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>424 316 47 32</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>556 319 63 16</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>122 19 63 16</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>216 210 43 32</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>552 223 30 16</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>323 198 63 16</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>335 122 67 16</string>
+            </attr>
+        </node>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:Branch</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>let:match = false</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n7">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n7">
+            <attr name="label">
+                <string>new:condition</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:Branch</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>let:match = true</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n4">
+            <attr name="label">
+                <string>new:condition</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 447 332 327 282 237 226 13</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n4">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>del:flag:done</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n2">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n3">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:WhileStmt</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n5">
+            <attr name="label">
+                <string>new:branch</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 368 130 432 252 447 332 13</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n5">
+            <attr name="label">
+                <string>new:branch</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n5">
+            <attr name="label">
+                <string>action</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n5">
+            <attr name="label">
+                <string>condition</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n5">
+            <attr name="label">
+                <string>new:entry</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n5">
+            <attr name="label">
+                <string>del:exit</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

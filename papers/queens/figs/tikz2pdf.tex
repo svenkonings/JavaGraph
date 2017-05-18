@@ -1,0 +1,15 @@
+
+% TO RUN: pdflatex -shell-escape tikz2pdf
+
+\documentclass{article}
+\usepackage{../groove2tikz}
+\usetikzlibrary{external}
+\tikzexternalize
+
+\pagestyle{empty}
+
+\newcommand{\converttikz}[1]{\tikzsetnextfilename{#1}\input{#1.tikz }}
+
+\begin{document}
+\converttikz{count}
+\end{document}

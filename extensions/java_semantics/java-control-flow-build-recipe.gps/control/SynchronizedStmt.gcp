@@ -1,0 +1,12 @@
+package control;
+
+recipe SynchronizedStmt(node root, node exit, out node entry) {
+	// Find the components and build the unlock node.
+	node eroot, broot, unlock := rule.SynchronizedStmt(root, exit);
+	// Build the expression.
+	entry := Expr(eroot, root);
+	// Build the block.
+	node bentry := Block(broot, unlock);
+	// After locking we flow to the block entry.
+	rule.help.createFlow(root, bentry);
+}

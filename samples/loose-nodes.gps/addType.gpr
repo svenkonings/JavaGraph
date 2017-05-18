@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="addType">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="remark">
+            <string>Adds a Type node label to an arbitrary (possibly unlabelled) node</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n17316">
+            <attr name="layout">
+                <string>143 134 15 15</string>
+            </attr>
+        </node>
+        <node id="n17315">
+            <attr name="layout">
+                <string>91 37 129 15</string>
+            </attr>
+        </node>
+        <edge to="n17315" from="n17315">
+            <attr name="label">
+                <string>Adds a Type node label</string>
+            </attr>
+        </edge>
+        <edge to="n17316" from="n17315">
+            <attr name="label">
+                <string>here</string>
+            </attr>
+        </edge>
+        <edge to="n17316" from="n17316">
+            <attr name="label">
+                <string>new:Type</string>
+            </attr>
+            <attr name="layout">
+                <string>505 1 152 143 209 116 210 176 152 143 12</string>
+            </attr>
+        </edge>
+        <edge to="n17315" from="n17315">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n17316" from="n17316">
+            <attr name="label">
+                <string>not:Type</string>
+            </attr>
+            <attr name="layout">
+                <string>504 0 152 143 94 113 93 174 152 143 12</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

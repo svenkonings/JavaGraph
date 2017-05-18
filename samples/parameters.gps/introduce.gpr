@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="introduce">
+        <attr name="remark">
+            <string>Les amis de mes amis sont mes amis</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1609">
+            <attr name="layout">
+                <string>102 193 64 33</string>
+            </attr>
+        </node>
+        <node id="n1610">
+            <attr name="layout">
+                <string>355 120 57 31</string>
+            </attr>
+        </node>
+        <node id="n1613">
+            <attr name="layout">
+                <string>117 119 57 31</string>
+            </attr>
+        </node>
+        <node id="n1608">
+            <attr name="layout">
+                <string>368 195 41 33</string>
+            </attr>
+        </node>
+        <node id="n1612">
+            <attr name="layout">
+                <string>150 245 207 46</string>
+            </attr>
+        </node>
+        <node id="n1611">
+            <attr name="layout">
+                <string>235 122 57 31</string>
+            </attr>
+        </node>
+        <node id="n1614">
+            <attr name="layout">
+                <string>178 190 176 31</string>
+            </attr>
+        </node>
+        <edge to="n1609" from="n1609">
+            <attr name="label">
+                <string>par:0</string>
+            </attr>
+        </edge>
+        <edge to="n1609" from="n1609">
+            <attr name="label">
+                <string>string:</string>
+            </attr>
+        </edge>
+        <edge to="n1610" from="n1610">
+            <attr name="label">
+                <string>Person</string>
+            </attr>
+        </edge>
+        <edge to="n1608" from="n1610">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge to="n1613" from="n1613">
+            <attr name="label">
+                <string>Person</string>
+            </attr>
+        </edge>
+        <edge to="n1611" from="n1613">
+            <attr name="label">
+                <string>knows</string>
+            </attr>
+        </edge>
+        <edge to="n1609" from="n1613">
+            <attr name="label">
+                <string>name</string>
+            </attr>
+        </edge>
+        <edge to="n1610" from="n1613">
+            <attr name="label">
+                <string>not:=</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 141 127 141 55 399 55 399 128 11</string>
+            </attr>
+        </edge>
+        <edge to="n1610" from="n1613">
+            <attr name="label">
+                <string>not:knows</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 141 127 141 55 399 55 399 128 11</string>
+            </attr>
+        </edge>
+        <edge to="n1610" from="n1613">
+            <attr name="label">
+                <string>new:knows</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 162 127 162 77 379 77 379 128 11</string>
+            </attr>
+        </edge>
+        <edge to="n1608" from="n1608">
+            <attr name="label">
+                <string>par:1</string>
+            </attr>
+        </edge>
+        <edge to="n1608" from="n1608">
+            <attr name="label">
+                <string>string:</string>
+            </attr>
+        </edge>
+        <edge to="n1612" from="n1612">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n1612" from="n1612">
+            <attr name="label">
+                <string>rem:Attribute parameter nodes
+The arguments will be data values</string>
+            </attr>
+        </edge>
+        <edge to="n1608" from="n1612">
+            <attr name="label">
+                <string>rem:2</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 343 276 373 276 388 211 11</string>
+            </attr>
+        </edge>
+        <edge to="n1609" from="n1612">
+            <attr name="label">
+                <string>rem:1</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 186 274 142 274 141 224 11</string>
+            </attr>
+        </edge>
+        <edge to="n1611" from="n1611">
+            <attr name="label">
+                <string>par:</string>
+            </attr>
+        </edge>
+        <edge to="n1611" from="n1611">
+            <attr name="label">
+                <string>Person</string>
+            </attr>
+        </edge>
+        <edge to="n1610" from="n1611">
+            <attr name="label">
+                <string>knows</string>
+            </attr>
+        </edge>
+        <edge to="n1614" from="n1614">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n1614" from="n1614">
+            <attr name="label">
+                <string>rem:Anonymous parameter node</string>
+            </attr>
+        </edge>
+        <edge to="n1611" from="n1614">
+            <attr name="label">
+                <string>rem:this</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

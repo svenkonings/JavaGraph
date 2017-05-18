@@ -1,0 +1,8 @@
+# Layout information for /home/trese/members/rensink/papers/format/fig/assign-rule-input.gxl
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n20 170 156 18 18 
+n n21 196 76 18 18 
+n n22 240 156 18 18 
+e n21 n22 "new:x" 636 235 217 85 260 121 249 165 12

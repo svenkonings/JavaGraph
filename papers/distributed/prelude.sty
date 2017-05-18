@@ -1,0 +1,273 @@
+% -----------------------------------------------------------------------------
+% prelude.sty
+% -----------------------------------------------------------------------------
+
+\usepackage{xspace}
+\usepackage{subfig}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{times}
+\usepackage{groove2tikz}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Layout and numbering %%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{topnumber}{1}
+\setcounter{bottomnumber}{1}
+\def\topfraction{.95}
+\def\bottomfraction{.95}
+\def\textfraction{.05}
+\def\floatpagefraction{.90}
+\setlength{\floatsep}{\medskipamount}
+\setlength{\textfloatsep}{\medskipamount}
+\setlength{\intextsep}{\medskipamount}
+
+% Numbers a paragraph with an equation number
+\newcommand{\setmark}{\refstepcounter{equation}\noindent{\bf \theequation} }
+
+\newcommand{\thlabel}[1]{\label{th:#1}}
+\newcommand{\thref}[1]{Theorem~\ref{th:#1}}
+\newcommand{\colabel}[1]{\label{co:#1}}
+\newcommand{\coref}[1]{Corollary~\ref{co:#1}}
+\newcommand{\llabel}[1]{\label{lem:#1}}
+\newcommand{\lref}[1]{Lemma~\ref{lem:#1}}
+\newcommand{\eqlabel}[1]{\label{eq:#1}}
+\renewcommand{\eqref}[1]{(\ref{eq:#1})}
+\newcommand{\exlabel}[1]{\label{ex:#1}}
+\newcommand{\exref}[1]{Example~\ref{ex:#1}}
+\newcommand{\cjlab}[1]{\label{cj:#1}}
+\newcommand{\cjref}[1]{Conjecture~\ref{cj:#1}}
+\newcommand{\flabel}[1]{\label{fig:#1}}
+\newcommand{\fref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\dlabel}[1]{\label{def:#1}}
+\newcommand{\dref}[1]{Definition~\ref{def:#1}}
+\newcommand{\alabel}[1]{\label{app:#1}}
+\newcommand{\aref}[1]{Appendix~\ref{app:#1}}
+\newcommand{\chlabel}[1]{\label{ch:#1}}
+\newcommand{\chref}[1]{Chapter~\ref{ch:#1}}
+\newcommand{\stlabel}[1]{\label{sec:#1}}
+\newcommand{\stref}[1]{Section~\ref{sec:#1}}
+\newcommand{\tlabel}[1]{\label{tab:#1}}
+\newcommand{\tref}[1]{Table~\ref{tab:#1}}
+\newcommand{\plabel}[1]{\label{prop:#1}}
+\newcommand{\pref}[1]{Proposition~\ref{prop:#1}}
+\newcommand{\nlabel}[1]{\label{not:#1}}
+\newcommand{\nref}[1]{Notation~\ref{not:#1}}
+\newcommand{\pgref}[1]{Page~\pageref{#1}}
+
+\newcommand{\noitemsep}{\itemsep0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Figures %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% reads postscript figure and give caption and label
+% #1 = filename (searched in subdir \figdir) and label (made with \flabel)
+% #2 = caption
+\newcommand\psfig[3][]{%
+    \psfiglab[#1]{#2}{#2}{#3}%
+}
+% reads postscript figure and give caption and label
+% #1 = filename (searched in subdir \figdir)
+% #2 = label (made with \flabel)
+% #3 = caption
+\newcommand{\psfiglab}[4][]{\begin{figure}
+    \begin{center}
+    \includegraphics[#1]{\figdir/#2}
+    \end{center}
+    \vspace*{-\bigskipamount}
+    \caption{#4}
+    \flabel{#3}
+    \vspace*{-\smallskipamount}
+    \end{figure}%
+}
+% reads tex figure and gives caption and label
+% #1 = filename (searched under \figdir/#1.\texfigsuffix) and label (made with \flabel)
+% #2 = caption
+\newcommand{\texfig}[2]{\begin{figure}
+    \begin{center}
+    \inputtexfig{#1}
+    \end{center}
+    \vspace*{-\bigskipamount}
+    \caption{#2}
+    \flabel{#1}
+    \vspace*{-\medskipamount}
+    \end{figure}%
+}
+% reads #1.\texfigsuffix and places it in a centered environment
+\newcommand{\inputtexfig}[1]{\inputfig{#1.\texfigsuffix}}
+% reads #1 and places it in a centered environment
+\newcommand{\inputfig}[1]{\begin{center}\input{\figdir/#1}\end{center}}
+% to be overridden in case you want pstex_t (= fig2dev default)
+\newcommand{\texfigsuffix}{tex}
+% to be overridden in case you want figures to be elsewhere
+\newcommand{\figdir}{fig}
+
+\newlength{\framelength}
+\newcommand{\fparbox}[2]{\framelength#1%
+\advance\framelength-\fboxrule\advance\framelength-\fboxsep
+\advance\framelength-\fboxrule\advance\framelength-\fboxsep
+\fbox{\begin{minipage}{\framelength}
+#2
+\end{minipage}}}
+
+% reads in file and gives it frame label and caption
+% deprecated; use \psfig or \texfig
+\newcommand\xfig[2]{%
+    \begin{figure}%
+    \framebox[\textwidth]{\input{#1}}\caption{#2}\flabel{#1}%
+    \end{figure}%
+}
+%%%%%%%%%%%%%%%%%% Mathematical macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\ifundefined#1{\expandafter\ifx\csname#1\endcsname\relax}
+
+\newcommand{\rotatesymbol}[1]{\mathpalette\rot@tesymbol{#1}}
+\newcommand{\rot@tesymbol}[2]{\rotatebox[origin=c]{180}{$#1#2$}}
+
+\ifundefined{bigsqcap}
+     \def\bigsqcap{\mathop{\rotatesymbol\bigsqcup}}
+\fi
+
+% Function arrow
+\newcommand{\func}{\mathbin{\rightarrow}}
+% Partial function arrow
+\newcommand{\pfunc}{\rightharpoonup}
+% Function type
+\newcommand{\ftype}[2]{\colon {#1} \func {#2}}
+% Partial function type
+\newcommand{\pftype}[2]{\colon {#1} \pfunc {#2}}
+% Equals by definition
+\newcommand{\isdef}{\mathrel{\,\mathord{:}\mathord{=}\,}}
+% Is equivalent by definition
+\newcommand{\iffdef}{\mathrel{\,\mathord{:}\mathord{\Leftrightarrow}\,}}
+
+\ifundefined{qed}\newcommand{\qed}{~\hfill$\Box$}\fi
+% Tick
+\newcommand{\tick}{{\mathord{\checkmark\!}}}
+% Such that
+\newcommand{\st}{.\:}
+% Tuple
+\newcommand{\tup}[1]{{\langle #1 \rangle}}
+% Interval
+\newcommand{\itv}[1]{{(#1)}}
+% Set
+\newcommand{\set}[1]{{\{ #1 \}}}
+% Generic set
+\newcommand{\genset}[2]{{\textstyle\mathopen\{ #1 \mid #2 \mathclose\}}}
+% Powerset
+\newcommand{\powerset}[1]{{\mathbf 2}^{#1}}
+% Power multiset
+\newcommand{\powermul}[1]{\natN^{#1}}
+% Semantic brackets
+\newcommand{\sem}[1]{\mathopen{[\![}#1\mathclose{]\!]}}
+% Empty string
+\newcommand{\emptystr}{\varepsilon}
+% Implies symbol
+\newcommand{\ipy}{\mathrel{\Longrightarrow}}
+% Function restriction
+\newcommand{\restr}{\mathbin{\upharpoonright}}
+% Wildcard parameter
+\newcommand\parm{{\tt\_}}
+% Identity function
+\newcommand{\id}{{\mathit{id}}}
+% Function domain
+\newcommand{\dom}{\mathit{dom}}
+% Function codomain
+\newcommand{\cod}{\mathit{cod}}
+% Arrow (or function) source
+\newcommand{\src}{\mathit{src}}
+% Arrow (or function) target
+\newcommand{\tgt}{\mathit{tgt}}
+
+% Substitution brackets: $\sub r$
+\newcommand{\sub}[1]{\set{#1}}
+% Syntactic mapping of $a$ to $u$: $\mt{a}{u}$
+\newcommand{\mt}[2]{{#2}/{#1}}
+% Syntactic substitution of $a$ by $u$: $\sb{a}{u}$
+\renewcommand{\sb}[2]{\sub{\mt{#1}{#2}}}
+
+% Left arrow head
+\DeclareMathSymbol{\leftarrowhead}{\mathord}{AMSa}{"4C}
+% Right arrow head
+\DeclareMathSymbol{\rightarrowhead}{\mathord}{AMSa}{"4B}
+
+% Set of natural numbers
+\newcommand{\Nat}{\mathbb{N}}
+% Set of integers
+\newcommand{\Int}{\bbbz}
+% Set of booleans
+\newcommand{\Bool}{\bbbb}
+% Set of real numbers
+\newcommand{\Real}{\bbbr}
+
+% Boolean values
+\newcommand{\True}{\ensuremathbf{t\mskip-2mu t}}
+\newcommand{\False}{\ensuremathbf{ff}}
+
+%%%% definition of extensible "transition arrows"
+%
+% auxiliaries
+\newcommand{\linefill}{%
+    \cleaders
+    \hbox{$\smash{\mkern-2mu\mathord-\mkern-2mu}$}%
+    \hfill
+    \vphantom{\lower1pt\hbox{$\rightarrow$}}%
+}
+\newcommand{\Linefill}{%
+    \cleaders
+    \hbox{$\smash{\mkern-2mu\mathord=\mkern-2mu}$}%
+    \hfill
+    \vphantom{\hbox{$\Rightarrow$}}%
+}
+
+% left segment of extensible arrow, no ending
+\newcommand{\xleftnoend}[1][]{\mathrel-_{\vphantom{#1}}\mkern-11mu}
+\newcommand{\xLeftnoend}[1][]{\mathrel=_{\vphantom{#1}}\mkern-8mu}
+% left segment of extensible arrow,arrow head
+\newcommand{\xleftArrow}[1][]{\leftarrow_{\vphantom{#1}}\mkern-11mu}
+% middle segment of extensible arrow
+\newcommand{\xmid}[2][]{\stackrel{#2}{\linefill_{\vphantom{#1}}}}
+\newcommand{\xMid}[2][]{\stackrel{#2}{\Linefill_{\vphantom{#1}}}}
+% right segment of extensible arrow, no ending
+\newcommand{\xrightnoend}[1][]{\mkern-11mu\mathrel-_{#1}}
+% right segment of extensible arrow, arrow head
+\newcommand{\xrightArrow}[1][]{\mkern-11mu\rightarrow_{#1}}
+\newcommand{\xRightArrow}[1][]{\mkern-8mu\Rightarrow_{#1}}
+% make arrow symbol
+\newcommand{\xmake}[1]{\mathrel{\lower1pt\hbox{$#1$}}}
+
+% single-arrow transition
+\newcommand{\trans}[2][]{\xmake{\xleftnoend[#1]\xmid[#1]{#2}\xrightArrow[#1]}}%
+% negative single-arrow transition
+\newcommand{\ntrans}[2][]{\not\trans[#1]{\enspace#2}}
+
+% double-arrow transition
+\newcommand{\Trans}[2][]{\xmake{\xLeftnoend[#1]\xMid[#1]{#2}\xRightArrow[#1]}}%
+% negative double-arrow transition
+\newcommand{\nTrans}[2][]{\not\Trans[#1]{\enspace#2}}
+
+%%%% arrow and relation symbols
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\nea}{\nearrow}
+\newcommand{\nwa}{\nwarrow}
+\newcommand{\sea}{\searrow}
+\newcommand{\na}{\uparrow}
+\newcommand{\sa}{\downarrow}
+% crossed diagonal arrows
+\newcommand{\nsea}{\mathrel{\mathord{\squeeze\nea}\mathord\sea}}
+\newcommand{\nwea}{\mathrel{\mathord{\squeeze\nwarrow}\mathord\nea}}
+% aliases for north and south
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+%\newcommand{\Up}{\Uparrow}
+\newcommand{\Down}{\Downarrow}
+
+\newcommand{\iso}{\cong}
+\newcommand{\sq}{\sqsubset}
+\newcommand{\sqeq}{\sqsubseteq}
+
+%%% Listings definition %%%%
+\lstset{basicstyle=\small\ttfamily}      % have to say this again (but why?)
+\lstset{emphstyle=\underbar}             % benadrukken door onderstrepen
+%\lstset{breaklines=true}                 % breek lange regels (slim) af
+\lstset{escapechar=`}                    % voor speciale typesetting

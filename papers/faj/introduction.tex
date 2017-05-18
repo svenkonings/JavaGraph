@@ -1,0 +1,24 @@
+\section{Introduction}
+
+%%%% PAPER %%%%
+Aspect-oriented programming (AOP) \cite{DBLP:conf/ecoop/KiczalesLMMLLI97} is a popular para{\-}digm that allows for the modular specification of cross-cutting concerns. However, aspect-oriented programs are not easy to get right and even harder to test or debug. For this reason, it is attractive to investigate formal verification for aspectual programs. For the purpose of formal verification of AOP languages and programs, it is essential to specify the semantics of such languages formally and unambiguously.\\
+In this paper we present an operational semantics for Assignment Featherweight Java (AFJ), which is an extension to Featherweight Java (FJ), a minimal subset of Java. This simple language - although not suitable for industrial implementations - is often used for studying the consequences of language extensions. We study an extension of this language with \emph{around advice}, which can  --- combined with a \emph{proceed} statement -- be used to represent before and after advice.\\
+\\
+The specification method in this paper is graph transformations. We claim that graph transformation has two main advantages over traditional, more mathematical notations of operational semantics:
+\begin{list}{$\bullet$}{}
+\item Graph transformation is a formal specification technique that supports rule based specification as well as an intuitive visual representation of states and rules.
+A graph transformations-based operational semantics is better comprehensible than a specification using a mathematical notation.
+\item A graph transformation-based operational semantics directly provides an executable model; given a start graph representing an AFJ program and the graph transformation based operational semantics of the language, this system can be simulated resulting in a labelled transition system (LTS), sometimes better known as a state space or a meta-graph.
+\end{list}
+
+By giving the semantics in this way, the road is opened towards applying existing verification methods, such as the work we have presented in \cite{Staijen+2009}. Also, the LTS lends itself directly for model checking (see \cite{KastenbergRen2006}).\\
+\\
+To increase confidence in the correctness of our definitions, we show that they coincide with a formal specification of the AFJ language in a work called the Common Aspect Semantics Base (CASB) \cite{DDFL-NoE06}. The CASB is a reference model for the runtime semantics of aspect-oriented programming languages.  This work presents a structural operational semantics (SOS) for a the language at hand (AFJ with aspectual extension).\\
+\\
+In the next section we will explain details of Assignment Featherweight Java with around advice.
+Section \ref{sec:gratra} provides a background on graph transformations and the visual notation used in this paper.
+In Section \ref{sec:gr-state}, the graphs are described that represent AFJ programs with advice.
+In Section \ref{sec:gr-rules} we provide a detailed description of the graph transformation based specification of chosen language. 
+In Section \ref{sec:correctness} we discuss the reference semantics and formulate the notion of correctness.
+Section \ref{sec:simulation} shows some example programs and shows the result of simulation.
+Finally, in Section \ref{sec:relatedwork} we discuss related work, followed by our conclusions in Section \ref{sec:gr-conclusion}.

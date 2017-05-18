@@ -1,0 +1,60 @@
+\section{Definitions and Conversions}
+
+In this section we define the two relevant types of graphs: edge-labelled
+graphs as used in \GROOVE, and node-coloured graphs as used in \NAUTY and
+\BLISS, and we define two isomorphism-preserving conversions between these
+classes. All graphs are directed.
+
+We assume a totally ordered universe of labels $\Lab$. These are used both for
+edge labels and for node colours. For a subset $L\subseteq \Lab$, we use
+$\succ_L$ to denote the (partial) successor function mapping each $l\in L$ to
+its next higher label in $L$ (with respect to the total ordering over $\Lab$).
+
+First we formalise edge-labelled graphs and the corresponding notion of
+isomorphism. Isomorphism of edge-labelled graphs is a node bijection that
+preserves and reflects edges (including their labels).
+
+\begin{definition}[Edge-labelled graph]
+  An \emph{edge-labelled graph} $G$ is a tuple $\langle V_G, E_G
+  \rangle$ with a finite nonempty set of nodes $V_G$ and a finite set of edges
+  $E_G \subseteq V_G \times \Lab \times V_G$.  The class of edge-labelled
+  graphs is denoted $\GL$.
+\end{definition}
+
+\begin{definition}[Isomorphism of edge-labelled graphs]
+  Let $G, H \in \GL$. A bijective function $f: V_G \rightarrow V_H$ is called
+  an \emph{isomorphism} if $(v_1,l,v_2) \in E_G$ if and only if
+  $(f(v_1),l,f(v_2)) \in E_H$. If such a function exists, $G$ and $H$ are
+  called \emph{isomorphic}, denoted $G \cong H$.
+\end{definition}
+%
+In node-coloured graphs, on the other hand, each node has a colour, and
+isomorphism also preserves and reflects node colours.
+
+\begin{definition}[Node-coloured graph]
+  A \emph{node-coloured graph} $G$ is a tuple $\langle V_G, E_G, c_G
+  \rangle$ with a finite nonempty set of nodes $V_G$, a set of edges $E_G
+  \subseteq V_G \times V_G$, and a colour function $c_G : V_G \rightarrow \Lab$.
+  The class of node-coloured graphs is denoted $\GC$.
+\end{definition}
+
+\begin{definition}[Isomorphism of node-coloured graphs]
+  Let $G, H \in \GC$. A bijective function $f: V_G \rightarrow V_H$ is called
+  an \emph{isomorphism} if for all $v \in V_G : c_G(v) = c_H(f(v))$, and
+  $(v_1,v_2) \in E_G$ if and only if $(f(v_1),f(v_2)) \in E_H$. If such a
+  function exists, $G$ and $H$ are called \emph{isomorphic}, denoted $G \cong
+  H$.
+\end{definition}
+
+% I don't think this is really necessary... EZ
+% \NAUTY and \BLISS are based on the computation of canonical forms of graphs.
+% By definition, a set of isomorphic graphs has only one canonical form, which
+% serves as an unique representative of the set.
+%
+% \begin{definition}[Canonical representation and canonical form]
+% For a class of graphs $\G$, a \emph{canonical representation} function $\can :
+% \G \rightarrow \G$ computes an isomorphism invariant graph representative for
+% each graph, such that for every pair of graphs $G,H \in \G$, $\can(G) =
+% \can(H)$ if and only if $G \cong H$. If $\can$ is a canonical representation
+% function, $\can(G)$ is called the \emph{canonical form} of $G$.
+% \end{definition}

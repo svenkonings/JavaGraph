@@ -1,0 +1,40 @@
+\title{Controlled Rule Application using Failure Automata}
+\author{Arend Rensink\inst{2} and Tom Staijen\inst{1}}
+\authorrunning{A. Rensink and T. Staijen}
+
+\institute{
+Formal Methods and Tools Group, University of Twente, The Netherlands, \email{rensink@cs.utwente.nl}
+\and 
+Software Engineering Group, University of Twente, The Netherlands, 
+\email{staijen@cs.utwente.nl}
+}
+
+\maketitle
+
+\begin{abstract}
+  Pure rule-based systems typically consist of a single, unstructured set of
+  rules.  The behaviour of such systems is that all rules are applicable in
+  every state. Rules can then only be forced into a certain order of
+  application by adding special elements to the states, which are tested for
+  within the rules. In other words, control over rule applicability is not
+  explicit but has to be encoded in the state, which is bad for
+  understandability and maintainability.
+
+  In this paper, we study so-called \emph{control automata}, which can be added
+  on top of pure rule systems. The resulting behaviour is defined as the
+  product of the original state space and the control automaton.  Control
+  automata include so-called failure transitions, representing the observation
+  of the non-applicability of one or more rules.  The result is a reactive
+  semantics for control expressions, which extends the usual input-output
+  semantics in a consistent manner.
+
+  Control automata may introduce artificial non-determinism into the behaviour,
+  which is an undesirable effect. We introduce \emph{guarded control automata}
+  to get rid of this effect, and we define a semantics-preserving
+  transformation from ordinary control automata to guarded ones.
+%   The contribution of this work consists of control automata with transitions
+%   explicitly representing failures, that give a powerful means for controlling
+%   rule-based systems. Also, a text-based, imperative control language --- with
+%   some new control structures --- gives a simple yet powerful means for
+%   specifying such automata.
+\end{abstract}

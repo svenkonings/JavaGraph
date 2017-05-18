@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="injectivity">
+        <attr name="enabled">
+            <string>false</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1063">
+            <attr name="layout">
+                <string>37 140 66 21</string>
+            </attr>
+        </node>
+        <node id="n1065">
+            <attr name="layout">
+                <string>186 24 76 21</string>
+            </attr>
+        </node>
+        <node id="n1068">
+            <attr name="layout">
+                <string>33 26 76 21</string>
+            </attr>
+        </node>
+        <node id="n1064">
+            <attr name="layout">
+                <string>239 58 76 21</string>
+            </attr>
+        </node>
+        <node id="n1067">
+            <attr name="layout">
+                <string>89 63 76 21</string>
+            </attr>
+        </node>
+        <node id="n1066">
+            <attr name="layout">
+                <string>189 140 75 21</string>
+            </attr>
+        </node>
+        <edge to="n1067" from="n1063">
+            <attr name="label">
+                <string>mother</string>
+            </attr>
+        </edge>
+        <edge to="n1068" from="n1063">
+            <attr name="label">
+                <string>father</string>
+            </attr>
+        </edge>
+        <edge to="n1063" from="n1063">
+            <attr name="label">
+                <string>type:Bride</string>
+            </attr>
+        </edge>
+        <edge to="n1065" from="n1065">
+            <attr name="label">
+                <string>type:Person</string>
+            </attr>
+        </edge>
+        <edge to="n1065" from="n1068">
+            <attr name="label">
+                <string>!=</string>
+            </attr>
+        </edge>
+        <edge to="n1068" from="n1068">
+            <attr name="label">
+                <string>type:Person</string>
+            </attr>
+        </edge>
+        <edge to="n1064" from="n1064">
+            <attr name="label">
+                <string>type:Person</string>
+            </attr>
+        </edge>
+        <edge to="n1064" from="n1067">
+            <attr name="label">
+                <string>not:=</string>
+            </attr>
+        </edge>
+        <edge to="n1067" from="n1067">
+            <attr name="label">
+                <string>type:Person</string>
+            </attr>
+        </edge>
+        <edge to="n1065" from="n1066">
+            <attr name="label">
+                <string>father</string>
+            </attr>
+        </edge>
+        <edge to="n1066" from="n1066">
+            <attr name="label">
+                <string>type:Groom</string>
+            </attr>
+        </edge>
+        <edge to="n1064" from="n1066">
+            <attr name="label">
+                <string>mother</string>
+            </attr>
+        </edge>
+        <edge to="n1063" from="n1066">
+            <attr name="label">
+                <string>new:married</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

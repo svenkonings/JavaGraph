@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ForStmt-32-WithInitCondUpdate-Update-Close">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>348 94 66 48</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>171 95 86 48</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>282 162 83 32</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>263 12 71 32</string>
+            </attr>
+        </node>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:ForStmt</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n2">
+            <attr name="label">
+                <string>new:exit</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n1">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n7">
+            <attr name="label">
+                <string>action</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n7">
+            <attr name="label">
+                <string>increment</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>test:index = 0</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>new:flag:build</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n7">
+            <attr name="label">
+                <string>new:child</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 292 23 374 48 367 105 12</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Assign</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,28 @@
+\ProvidesPackage{eurosans}[1999/07/26 v2.0 Support for Adobe EuroSans (WaS)]
+
+% Copyright (c) Walter Schmidt, Erlangen, 1998-1999
+
+% This program may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.1
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.1 or later is part of all distributions of LaTeX
+% version 1999/06/01 or later.
+
+\DeclareFontFamily{U}{eurosans}{}
+\DeclareFontShape{U}{eurosans}{m}{n}{ <-> zpeurs}{}
+\DeclareFontShape{U}{eurosans}{m}{it}{ <-> zpeuris}{}
+\DeclareFontShape{U}{eurosans}{m}{sl}{<->ssub * eurosans/m/it}{}
+\DeclareFontShape{U}{eurosans}{b}{n}{ <-> zpeubs}{}
+\DeclareFontShape{U}{eurosans}{b}{it}{ <-> zpeubis}{}
+\DeclareFontShape{U}{eurosans}{b}{sl}{<->ssub * eurosans/b/it}{}
+\DeclareFontShape{U}{eurosans}{bx}{n}{<->ssub * eurosans/b/n}{}
+\DeclareFontShape{U}{eurosans}{bx}{sl}{<->ssub * eurosans/b/it}{}
+\DeclareFontShape{U}{eurosans}{bx}{it}{<->ssub * eurosans/b/it}{}
+
+\DeclareRobustCommand{\euro}%
+  {{\fontencoding{U}\fontfamily{eurosans}\selectfont E}}
+
+\endinput
+

@@ -1,0 +1,79 @@
+% -----------------------------------------------------------------------------
+% 6-related.tex
+% -----------------------------------------------------------------------------
+%
+\subsection{Related Tools}
+\stlabel{related}
+
+\PROGRES~\cite{progress} is a specification language which provides several
+mechanisms for defining graph properties, including derived attributes,
+restrictions and paths (unary and binary relations on nodes, which may be
+defined both textually and graphically), graphical queries (called graph tests
+in \PROGRES), and constraints (structural conditions going beyond the expressive
+facilities of graph schemas). In contrast to the \GROOVE/\Prolog integration,
+\PROGRES does not support ad-hoc queries on graphs, and it also does not support
+queries on graph transition systems.
+
+Among other tools for the verification of graph transformation (GT) systems
+we can cite \AUGUR~\cite{KonKoz2008} and \ENFORCE~\cite{AHPZ06}. \AUGUR uses
+abstraction to verify GT grammars with infinite state spaces. \ENFORCE acts as
+proof checker for the correctness high-level programs written as graph
+transformations. While both these tools could be used to analyse the evolution
+of a graph to some degree, the explicit-state model checking approach of \GROOVE
+gives an advantage, since it provides a simpler representation of intermediate
+states that eases the understandability for the layman user. For a more
+comprehensive comparison between \GROOVE and other GT tools see \cite{STTT}.
+
+Concerning other existing combinations of graph transformation tools with
+\Prolog, as far as we are aware, there are only two similar approaches, embodied
+by \VIATRA \cite{VIATRA} and \VMTS \cite{VMTS}, both of which are GT-based tools
+for model transformation.
+
+\subsubsection{\VIATRA.}
+
+Varr\'o and Balogh \cite{VIATRA-MTBE} describe how \VIATRA and \Prolog can be
+used to implement their so called Model Transformation by Example (MTBE)
+approach.
+
+The purpose of MTBE is to semi-automatically derive model transformation rules
+from example relations between source and target model elements. These example
+relations are represented in \VIATRA using a mapping model, formed by the
+source and target meta-models and a reference meta-model to interconnect them.
+The mapping model is translated to \Prolog clauses and an inductive learning
+program is run, producing \Prolog inference rules representing hypothesis that
+are satisfied under the given clauses. These inference rules are then
+translated back to a \VIATRA representation and give rise to model
+transformation rules that can operate on instances of the source and target
+meta-models, following the example relations given in the mapping model. This
+process can be repeated in order to iteratively refine the rules produced.
+
+From the above, it should be clear that the intended use of \Prolog in the
+setting of \VIATRA is quite different from ours, and hence there is little
+basis for a deeper comparison.
+
+\subsubsection{\VMTS.}
+
+At the GraBaTs 2009 tool contest, Siroki {\it et al.} \cite{VMTS-GRABATS}
+presented a solution to the leader election case study using \VMTS and \Prolog.
+
+The goal of their approach is to check if the outcome of a set of model
+transformation rules applied to a given input model complies to certain
+properties. To perform this analysis, first the input model, the transformation
+rules and the control flow graph specifying the order for rule applications are
+all translated from the \VMTS format to a \Prolog representation. Subsequently,
+the \Prolog resolution procedure is used to enumerate the possible output
+models of the transformation. Finally, these output models are checked by
+\Prolog predicates that express the properties one wants to assert.
+
+Their use of \Prolog resolution plays the same role as the state space
+exploration functionality of \GROOVE. However, their approach suffers from the
+need to translate \VMTS objects to \Prolog. The \Prolog resolution procedure is
+not adequate for the exploration of a graph-based state space and therefore
+gives poor performance. Another consequence of the translation is the low
+readability of the generated \Prolog clauses.
+
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

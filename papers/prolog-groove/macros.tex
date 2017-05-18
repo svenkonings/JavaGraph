@@ -1,0 +1,62 @@
+% -----------------------------------------------------------------------------
+% macros.tex
+% -----------------------------------------------------------------------------
+
+\newcommand{\GROOVE} {{\sc groove}\xspace}
+\newcommand{\Prolog} {{\sf Prolog}\xspace}
+\newcommand{\PROLOG} {\Prolog}
+\newcommand{\VIATRA} {{\sc viatra2}\xspace}
+\newcommand{\VMTS}   {{\sc vmts}\xspace}
+\newcommand{\SQL}    {{\sf SQL}\xspace}
+\newcommand{\LTL}    {{\sf LTL}\xspace}
+\newcommand{\CTL}    {{\sf CTL}\xspace}
+\newcommand{\PROGRES} {{\sc progres}\xspace}
+\newcommand{\AUGUR} {{\sc Augur2}\xspace}
+\newcommand{\ENFORCE} {{\sc enforc}e\xspace}
+
+\newcommand{\inputtikz}[1] {\input{figs/#1}}
+
+% Listings styles.
+\lstdefinestyle{prolog}{
+language=Prolog,
+frame=tblr,
+columns=fullflexible,
+basicstyle=\sffamily\footnotesize,
+morekeywords={More?,Yes,No}
+}
+
+% Inline Prolog code.
+\newcommand{\inPro}[1]{\lstinline[style=prolog]!#1!}
+
+\lstdefinestyle{java}{
+language=Java,
+frame=tblr,
+basicstyle=\sffamily\footnotesize,
+columns=fullflexible,
+numbers=left,
+}
+
+% Inline Java code.
+\newcommand{\inJava}[1]{\lstinline[style=java,
+basicstyle=\sffamily\footnotesize]!#1!}
+
+\newcommand{\typeX}[1]{\textbf{\sffamily #1}}
+\newcommand{\type}[1]{\typeX{#1}\xspace}
+\newcommand{\lab}[1]{\textsf{#1}\xspace}
+\newcommand{\flag}[1]{\textit{\sffamily #1}\xspace}
+\newcommand{\feat}[1]{\textsf{#1}\xspace}
+
+% Input Prolog file.
+\newcommand{\profile}{
+grammars/final-feature-model-for-paper.gps/featurequeries.pro}
+% Input parts of the prolog file
+\newcommand{\prolst}[2]{
+\lstinputlisting[style=prolog,firstline=#1,lastline=#2]{\profile}
+}
+
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+%

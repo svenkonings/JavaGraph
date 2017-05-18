@@ -1,0 +1,57 @@
+# Layout information for C:\files\work\research\casb\casb.gps\start.gst
+# Each line contains layout information about a node or edge
+# Version info: v <version number>; 1 = pre-jgraph 5.9, 2 = jgraph 5.9
+#     v 1: label position = (x-permillage, y-permillage)
+#     v 2: label position = (vector permillage, perpendicular distance)
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+v 2
+n n32 405 1181 18 18 
+n n16 656 1262 18 18 
+n n37 1305 151 18 18 
+n n1 1227 1068 18 18 
+n n28 707 551 18 18 
+n n24 1314 86 18 18 
+n n21 38 330 18 18 
+n n15 723 1055 18 18 
+n n14 661 952 18 18 
+n n23 318 651 18 18 
+n n45 718 341 18 18 
+n n2 1172 147 18 18 
+n n17 829 668 18 18 
+n n48 292 1201 18 18 
+n n25 730 668 18 18 
+n n35 180 531 18 18 
+n n19 281 115 18 18 
+n n11 645 1149 18 18 
+n n9 510 538 18 18 
+n n34 430 132 18 18 
+n n38 114 123 18 18 
+n n29 915 995 18 18 
+n n3 384 0 18 18 
+n n30 541 1189 18 18 
+n n31 719 457 18 18 
+n n42 191 321 18 18 
+n n47 114 213 18 18 
+n n39 192 437 18 18 
+n n10 1157 209 18 18 
+n n20 551 949 18 18 
+n n22 786 1211 18 18 
+n n46 1149 1162 18 18 
+n n13 1165 965 18 18 
+n n18 583 1041 18 18 
+n n33 197 653 18 18 
+n n44 1160 1275 18 18 
+n n40 199 29 18 18 
+n n26 114 36 18 18 
+n n5 1055 962 18 18 
+n n8 1165 261 18 18 
+n n12 320 914 18 18 
+n n27 1045 1210 18 18 
+n n4 22 28 18 18 
+n n43 1087 1054 18 18 
+n n6 1310 200 18 18 
+n n0 909 1194 18 18 
+n n7 828 164 18 18 
+n n41 317 524 18 18 
+n n36 1181 79 18 18 

@@ -1,0 +1,8 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\lts1.gxl
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n135 163 89 18 18 
+n n133 22 0 18 18 
+n n134 89 47 18 18 
+e n134 n133 "<get>" 465 162 101 58 35 74 32 9 12

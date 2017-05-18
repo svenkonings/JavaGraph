@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="rule" edgeids="false" edgemode="directed" id="rename">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n8">
+            <attr name="layout">
+                <string>274 140 22 20</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>336 46 19 19</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>216 46 19 19</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>29 200 343 75</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>91 142 22 20</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>155 44 19 19</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>36 44 19 19</string>
+            </attr>
+        </node>
+        <edge from="n8" to="n8">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+        <edge from="n9" to="n8">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n9">
+            <attr name="label">
+                <string>new:p</string>
+            </attr>
+            <attr name="layout">
+                <string>564 -2 225 55 290 20 345 55 11</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n9">
+            <attr name="label">
+                <string>del:?[h,v]</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 225 55 283 83 345 55 11</string>
+            </attr>
+        </edge>
+        <edge from="n7" to="n8">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge from="n6" to="n6">
+            <attr name="label">
+                <string>rem:Rule to rename the edges after the queens are placed.
+We do this to increase the symmetry of the board so that
+iso checking can collapse similar final configurations.
+Left- and right-diagonals are renamed to d-edges.
+Horizontal and vertical edges become p-edges (perpendicular).</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n2">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n1">
+            <attr name="label">
+                <string>del:?[ld,rd]</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 45 53 100 86 164 53 11</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n1">
+            <attr name="label">
+                <string>new:d</string>
+            </attr>
+            <attr name="layout">
+                <string>564 -2 45 53 107 23 164 53 11</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n2">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

@@ -1,0 +1,87 @@
+%\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb}
+% \usepackage{undertilde}
+\usepackage{epsfig}
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage[nothing]{algorithm}
+\usepackage{algorithmic}
+\usepackage{paralist}
+\setdefaultenum{1)}{(a)}{i)}{A)}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{longtable}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,matrix,patterns}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{times}
+
+% EZ: Uncomment this to draw margins on the document.
+% \usepackage{eso-pic}
+
+\newcommand{\super}[1]{\textsuperscript{#1}}
+\newcommand{\sub}[1]{\textsubscript{#1}}
+
+\DeclareMathOperator*{\lub}{lub}
+\DeclareMathOperator*{\glb}{glb}
+\DeclareMathOperator*{\head}{head}
+\DeclareMathOperator*{\tail}{tail}
+\DeclareMathOperator*{\dom}{dom}
+\DeclareMathOperator*{\ran}{ran}
+\DeclareMathOperator*{\successors}{\mathit{succ}}
+\DeclareMathOperator*{\Aut}{Aut}
+
+\newcommand{\powerset}[1]{\mathcal{P}({#1})}
+%\newcommand{\powerset}[1]{\mathbf{2}^{#1}}
+\newcommand{\lubop}{\ensuremath{\sqcup}}
+\newcommand{\biglubop}{\ensuremath{\bigsqcup}}
+\newcommand{\glbop}{\ensuremath{\sqcap}}
+\newcommand{\bigglbop}{\ensuremath{\bigsqcap}}
+\newcommand{\coarserthan}{\ensuremath{\sqsubset}}
+\newcommand{\coarsereq}{\ensuremath{\sqsubseteq}}
+\newcommand{\finerthan}{\ensuremath{\sqsupset}}
+\newcommand{\finereq}{\ensuremath{\sqsupseteq}}
+%\newcommand{\lubop}{\ensuremath{\curlyvee}}
+%\newcommand{\glbop}{\ensuremath{\curlywedge}}
+%\newcommand{\coarserthan}{\ensuremath{\succ}}
+%\newcommand{\coarsereq}{\ensuremath{\succeq}}
+%\newcommand{\finerthan}{\ensuremath{\prec}}
+%\newcommand{\finereq}{\ensuremath{\preceq}}
+
+\floatstyle{plain}
+\newfloat{listing}{thp}{lop}
+\floatname{listing}{Listing}
+
+%\theoremstyle{plain}
+%\newtheorem{thm}{Theorem}[section]
+%\newtheorem{cor}[thm]{Corollary}
+%\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{prop}[thm]{Proposition}
+
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}
+
+\tikzstyle{vertex}=[circle,draw,minimum size=20pt,inner sep=0pt]
+\tikzstyle{edge} = [draw,thick,->,bend right]
+\tikzstyle{node}=[rectangle,draw,minimum width=20pt,inner sep=4pt]
+\tikzstyle{point}=[circle,draw,fill,minimum size=5pt,inner sep=0pt,outer sep=0pt]
+
+% \algsetup{linenosize=\scriptsize}
+
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+\newcommand{\GROOVE}{\textsc{groove}\xspace}
+\newcommand{\NAUTY}{\textsc{nauty}\xspace}
+\newcommand{\BLISS}{\textsc{bliss}\xspace}
+\newcommand{\SAUCY}{\textsc{saucy}\xspace}
+
+\newcommand{\Lab}{\mathsf{Lab}\xspace}
+\newcommand{\can}{\mathsf{can}\xspace}
+\newcommand{\C}{\mathsf{C}\xspace}
+\newcommand{\GL}{\mathcal{G_L}\xspace}
+\newcommand{\GC}{\mathcal{G_C}\xspace}
+\newcommand{\G}{\mathcal{G}\xspace}

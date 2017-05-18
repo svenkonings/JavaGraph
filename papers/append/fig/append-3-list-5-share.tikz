@@ -1,0 +1,43 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+\begin{tikzpicture}[scale=\tikzscale]
+\node[node] (n112)  at (5.520, -2.405) {\ml{11}};
+\node[node] (n116)  at (3.085, -2.405) {\ml{2}};
+\node[node] (n118)  at (2.685, -1.885){};
+\node[node] (n110)  at (1.885, -0.905) {\ml{4}};
+\node[node] (n113)  at (3.485, -1.885){};
+\node[node] (n111)  at (2.055, -2.880) {\ml{append\\control}};
+\node[node] (n119)  at (2.285, -2.405) {\ml{1}};
+\node[node] (n122)  at (4.720, -2.405) {\ml{10}};
+\node[node] (n125)  at (3.885, -2.405) {\ml{3}};
+\node[node] (n123)  at (0.955, -2.880) {\ml{append\\control}};
+\node[node] (n117)  at (0.965, -1.905) {\ml{root}};
+\node[node] (n115)  at (1.895, -3.385) {\ml{5}};
+\node[node] (n124)  at (1.885, -1.885){};
+\node[node] (n121)  at (0.955, -0.980) {\ml{append\\control}};
+\node[node] (n114)  at (4.285, -1.885){};
+\node[node] (n120)  at (5.085, -1.885){};
+\path[edge] (n121)  -- node[lab]{this} (n124) ;
+\path[edge] (n111)  --  (n117) ;
+\node[lab] at (1.866, -2.628){caller};
+\path[edge](n121.south -| 0.965, -1.905) -- node[lab]{caller} (n117) ;
+\path[edge](n124.east |- 2.685, -1.885) -- node[lab]{next} (n118) ;
+\path[edge](n121.east |- 1.885, -0.905) -- node[lab]{x} (n110) ;
+\path[edge](n111.north -| 1.885, -1.885) -- node[lab]{this} (n124) ;
+\path[edge] (n120)  -- node[lab]{val} (n112) ;
+\path[edge] (n113)  -- node[lab]{val} (n125) ;
+\path[edge](n118.east |- 3.485, -1.885) -- node[lab]{next} (n113) ;
+\path[edge] (n123)  -- node[lab]{x} (n115) ;
+\path[edge] (n111)  -- node[lab]{x} (n116) ;
+\path[edge] (n123)  --  (n124) ;
+\node[lab] at (1.205, -2.583){this};
+\path[edge](n117.east |- 1.885, -1.885) -- node[lab]{list} (n124) ;
+\path[edge](n113.east |- 4.285, -1.885) -- node[lab]{next} (n114) ;
+\path[edge](n114.east |- 5.085, -1.885) -- node[lab]{next} (n120) ;
+\path[edge] (n118)  -- node[lab]{val} (n116) ;
+\path[edge](n123.north -| 0.965, -1.905) -- node[lab]{caller} (n117) ;
+\path[edge] (n114)  -- node[lab]{val} (n122) ;
+\path[edge] (n124)  -- node[lab]{val} (n119) ;
+\userdefinedmacro
+\end{tikzpicture}
+\renewcommand{\userdefinedmacro}{\relax}

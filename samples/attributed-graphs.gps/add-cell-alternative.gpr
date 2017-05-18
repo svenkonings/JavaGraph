@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="add-cell-alternative">
+        <attr name="transitionLabel">
+            <string></string>
+        </attr>
+        <attr name="enabled">
+            <string>true</string>
+        </attr>
+        <attr name="priority">
+            <string>0</string>
+        </attr>
+        <attr name="printFormat">
+            <string></string>
+        </attr>
+        <attr name="remark">
+            <string>Adds an indexed cell to the buffer, as long as there are fewer than 5 cells</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n17211">
+            <attr name="layout">
+                <string>280 27 141 30</string>
+            </attr>
+        </node>
+        <node id="n17205">
+            <attr name="layout">
+                <string>65 17 158 45</string>
+            </attr>
+        </node>
+        <edge to="n17211" from="n17211">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n17211" from="n17211">
+            <attr name="label">
+                <string>type:Cell</string>
+            </attr>
+        </edge>
+        <edge to="n17211" from="n17211">
+            <attr name="label">
+                <string>let:order = int:add(int:b.length, int:1)</string>
+            </attr>
+        </edge>
+        <edge to="n17205" from="n17205">
+            <attr name="label">
+                <string>id:b</string>
+            </attr>
+        </edge>
+        <edge to="n17205" from="n17205">
+            <attr name="label">
+                <string>type:Buffer</string>
+            </attr>
+        </edge>
+        <edge to="n17205" from="n17205">
+            <attr name="label">
+                <string>let:length = int:add(int:self.length, int:1)</string>
+            </attr>
+        </edge>
+        <edge to="n17205" from="n17205">
+            <attr name="label">
+                <string>test:int:lt(int:self.length, int:5)</string>
+            </attr>
+        </edge>
+        <edge to="n17211" from="n17205">
+            <attr name="label">
+                <string>entry</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

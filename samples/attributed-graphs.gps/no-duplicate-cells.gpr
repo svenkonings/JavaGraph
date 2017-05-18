@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="no-duplicate-cells">
+        <attr name="remark">
+            <string>Tests that no two distinct cells have the same index</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n17225">
+            <attr name="layout">
+                <string>96 55 41 31</string>
+            </attr>
+        </node>
+        <node id="n17223">
+            <attr name="layout">
+                <string>87 232 231 31</string>
+            </attr>
+        </node>
+        <node id="n17222">
+            <attr name="layout">
+                <string>216 55 41 31</string>
+            </attr>
+        </node>
+        <node id="n17224">
+            <attr name="layout">
+                <string>154 156 44 31</string>
+            </attr>
+        </node>
+        <edge to="n17225" from="n17225">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n17225" from="n17225">
+            <attr name="label">
+                <string>type:Cell</string>
+            </attr>
+        </edge>
+        <edge to="n17224" from="n17225">
+            <attr name="label">
+                <string>order</string>
+            </attr>
+        </edge>
+        <edge to="n17222" from="n17225">
+            <attr name="label">
+                <string>!=</string>
+            </attr>
+        </edge>
+        <edge to="n17223" from="n17223">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n17223" from="n17223">
+            <attr name="label">
+                <string>rem:Explicitly declared as an attribute node</string>
+            </attr>
+        </edge>
+        <edge to="n17224" from="n17223">
+            <attr name="label">
+                <string>rem:this</string>
+            </attr>
+        </edge>
+        <edge to="n17222" from="n17222">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n17222" from="n17222">
+            <attr name="label">
+                <string>type:Cell</string>
+            </attr>
+        </edge>
+        <edge to="n17224" from="n17222">
+            <attr name="label">
+                <string>order</string>
+            </attr>
+        </edge>
+        <edge to="n17224" from="n17224">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n17224" from="n17224">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

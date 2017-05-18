@@ -1,0 +1,33 @@
+%
+\begin{tikzpicture}[scale=\tikzscale,node distance=12ex,
+state/.style={draw, dashed, inner sep=4.5pt},
+trans/.style={->, >=stealth', draw, dashed},
+tlab/.style={fill=white, font=\sf\scriptsize},
+]
+
+\node[state] (s0) {$s_0$
+\begin{tikzpicture}[scale=\tikzscale]
+\node[node,solid] (n0) {\ml{\textbf{A}}};
+\node[node,solid] (n1) [right of=n0] {\ml{\textbf{D}}};
+\path[edge,solid] (n0) edge node[lab]{e} (n1);
+\end{tikzpicture}
+};
+\node[state] (s1) [left of=s0, xshift=-19ex] {$s_1$
+\begin{tikzpicture}[scale=\tikzscale]
+\node[node,solid] (n0) {\ml{\textbf{B}}};
+\node[node,solid] (n1) [right of=n0] {\ml{\textbf{D}}};
+\path[edge,solid] (n0) edge node[lab]{e} (n1);
+\end{tikzpicture}
+};
+\node[state] (s2) [right of=s0, xshift=19ex] {$s_2$
+\begin{tikzpicture}[scale=\tikzscale]
+\node[node,solid] (n0) {\ml{\textbf{C}}};
+\node[node,solid] (n1) [right of=n0] {\ml{\textbf{D}}};
+\path[edge,solid] (n0) edge node[lab]{e} (n1);
+\end{tikzpicture}
+};
+
+\path[trans] (s0) edge node[tlab]{a2b} (s1);
+\path[trans] (s0) edge node[tlab]{a2c} (s2);
+
+\end{tikzpicture}

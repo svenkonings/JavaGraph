@@ -1,0 +1,21 @@
+\chapter{Building and Releasing}
+\chlabel{Building and Releasing}
+
+Whenever a release is to be build, a fixed set of tasks are to be performed. Firstly, you have to make sure that the latests sources still compile correctly. Thereafter, the JUnit tests must be run succesfully.
+
+In order to automate this process, a ant build script is composed. In this script file, different targets make sure that everything will be done in the correct order and whenever a target fails, the entire process fails, resulting in a notification mail message reporting on what happened exactly.
+
+For more information about Apache Ant, see \url{http://ant.apache.org/}.
+
+\section{Nightly Builds}
+
+\section{Build.xml}
+
+The {\tt build.xml} file is included in the {\tt release}-package. The dependencies between the different targets can be visualized in a so called dependency graph. \fref{target-dependencies} shows the dependency graph of the targets in the Ant build script of GROOVE.
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[scale=0.5]{\figdir/target-dependencies}
+  \caption{Dependency graph of th Ant build targets.}
+  \flabel{target-dependencies}
+\end{figure}

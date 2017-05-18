@@ -1,0 +1,13 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\append-4-share.gst
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n26 300 71 18 18 
+n n30 170 142 18 18 
+n n24 104 70 18 18 
+n n28 253 143 18 18 
+n n25 167 70 18 18 
+n n29 106 141 18 18 
+n n27 229 71 18 18 
+e n25 n27 "next" 525 -786 161 79 238 80 11
+e n24 n25 "next" 426 -667 113 79 176 79 11

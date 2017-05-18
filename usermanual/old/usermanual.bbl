@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{Ehrig+1997}
+H.~Ehrig, R.~Heckel, M.~Korff, M.~L{\"o}we, L.~Ribeiro, A.~Wagner, and
+  A.~Corradini.
+\newblock Algebraic approaches to graph transformation, {Part II}: Single
+  pushout approach and comparison with double pushout approach.
+\newblock In {\em Handbook of Graph Grammars and Computing by Graph
+  Transformation}, volume I: Foundations, pages 247--312. World Scientific,
+  1997.
+
+\bibitem{HabelHecTae1996}
+A.~Habel, R.~Heckel, and G.~Taentzer.
+\newblock Graph grammars with negative application conditions.
+\newblock {\em Fundamenta Informaticae}, 26(3-4):287--313, 1996.
+
+\bibitem{Loewe1993}
+M.~L{\"o}we.
+\newblock Algebraic approach to single-pushout graph transformation.
+\newblock {\em Theoretical Computer Science}, 109(1-2):181--224, 1993.
+
+\bibitem{Rensink2003a}
+A.~Rensink.
+\newblock The {GROOVE Simulator}: A tool for state space generation.
+\newblock In J.~L. Pfaltz, M.~Nagl, and B.~B{\"o}hlen, editors, {\em
+  Proceedings of the Second International Workshop on the Applications of Graph
+  Transformations with Industrial Relevance (AGTIVE'03)}, volume 3062 of {\em
+  Lecture Notes in Computer Science}, pages 479--485. Springer, 2003.
+
+\end{thebibliography}

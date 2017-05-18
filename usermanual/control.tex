@@ -1,0 +1,120 @@
+\clearpage
+\section{Control}
+\seclabel{control}
+
+Control is about scheduling rule executions. It provides a much stronger
+mechanism than rule priorities (see \secref{rule-properties}).  Control is
+specified in the form of one or more control programs. The grammar of such
+programs is summarised in \lstcite{control}.
+
+\lstset{
+	basicstyle=\ttfamily\scriptsize
+}
+
+\begin{figure}
+\lstinputlisting
+  [label=\lstprf:control,%
+   caption={Grammar of Control Programs},%
+   language=antlr,
+   frame=single,
+   keywords={program,function,package_decl,import_decl,qual_name,recipe,%
+             par_list,par,block,stat,stat1,stat2,stats,
+             cond,cond1,cond2,
+             expr,expr1,expr2,
+             call,arg_list,arg,literal,decl,type,
+             ID,INT_LIT,STRING_LIT,REAL_LIT}]%
+  {Ctrl.grammar}
+\end{figure}
+
+\medskip\noindent We will use the following terminology:
+%
+\begin{description}
+\item[Action] for a rule or recipe. You may think of actions as named atomic steps; they are visible as transitions in the LTS built up during exploration.
+
+\item[Procedure] for a function or recipe. Procedures may be regarded named, parameterised statements (which are declared as their bodies); the difference between recipes and functions (explained in more detail in \seccite{procedures} below) is that the former are scheduled atomically and hence are actions. Procedures may invoke one another recursively.
+
+\item[Callable] for a rule or procedure; essentially, anything that may be invoked by a call expression (see below).
+\end{description}
+
+\subsection{Control statements and expressions}
+
+A control program is interpreted during exploration of the grammer. In every
+state, the control program decides which actions are scheduled (i.e., allowed
+to be applied). A control program consists of a main control expressions, and
+optionally a set of function definitions. We briefly list the main features of
+the language.
+%
+\begin{itemize}
+\item The smallest programming elements of a control program are the names of
+  the rules in a grammar. Where such a name appears, only the named rule is scheduled.
+
+\item Special cases are the so-called \emph{group calls} \anyK{} and
+  \otherK. Both serve as a kind of wildcard over the available rules: \anyK{}
+  executes any rule in the rule system, whereas \otherK{} executes any rule
+  that does not explicitly appear in the control program. For instance, if the
+  rule system has rules \textsf{a}, \textsf{b} and \textsf{c}, then the
+  control program \textsf{a; \anyK; b; \otherK;} first only allows \textsf{a}
+  to be applied, then one of \textsf{a}, \textsf{b} or \textsf{c}, then
+  \textsf{b}, and then \textsf{c}.
+
+  \anyK and \otherK are only allowed if none of the actions to which they
+  would apply have input-only parameters.
+
+\item Control expressions can be built from rules and wildcards by 
+\begin{itemize}\noitemsep
+\item the infix operator ``\textsf{$|$}'', which specifies a choice among its
+  operands;
+\item the postfix operator ``\textsf{*}'', which specifies that its operand may
+  be scheduled zero or more times in succession;
+\item the postfix operator ``\textsf{+}'', which specifies that its operand may
+  be scheduled one or more times in succession;
+\item The prefix operator ``\textsf{\#}'', which specifies that its operand is
+  scheduled as long as possible. 
+\end{itemize}
+The difference between ``\textsf{a*}'' and ``\textsf{\#a}'' is that the first
+may optionally stop scheduling \textsf{a}, even if it is still applicable,
+whereas the latter will continue trying \textsf{a} until it is no longer applicable.
+
+\item Conditional statements allow the specification of an alternative in case
+  certain rules do not have a matching. The conditions of \ifK,
+  \whileK, \untilK{} and \doK-\whileK{} are restricted to a
+  single rule name, \trueK, or a choice of rules. The condition holds
+  when at least one of the options has a match.
+
+\item The \tryK-\elseK{} statement allows more complex conditions, since the
+  condition is incorporated in the body of the first block. In this case, the
+  condition is true when any first possible rule (according to the block) has a
+  match. The condition is false when the block does not lead to any rule
+  application.  For instance, the program \textsf{\tryK{} \{a;b;\}
+  \elseK{} \{c;d;\}} goes to the second block when rule \textsf{a}
+  does not have a match.
+
+\item The \alapK{} keyword stands for \emph{as long as possible}. In this case,
+  the statement is exited when --- in a new iteration --- the block does not
+  lead to any rule application. Thus, \alapK{} has the same effect as the
+  prefix operator \textsf{\#}, except that it works on the level of statements
+  rather than expresions.
+
+\item The \choiceK-\doK{} statement has the same effect as the
+  \textsf{$|$}-operator, except that it works on the level of statements rather
+  than expressions.
+
+\item Procedures can be defined by the keyword \functionK or \recipeK,
+  followed by the procedure name, an argument list, and a block defining the
+  procedure body. See \seccite{procedures} below for more information.
+\end{itemize}
+
+An example of a control program can be found in the \textsf{control.gps}
+grammar in the \GROOVE samples.
+
+\subsection{Packages and qualified names}
+\seclabel{packages}
+
+\subsection{Procedures: Functions and recipes}
+\seclabel{procedures}
+
+\subsection{Properties: Conditions, invariants and forbidden patterns}
+\seclabel{properties}
+
+
+

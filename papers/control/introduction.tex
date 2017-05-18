@@ -1,0 +1,49 @@
+\section{Introduction}\label{sec:introduction}
+The use of rule-based specification and programming languages to model complex systems is a commonly accepted approach in the field of computer science. In rule-based systems, such as term-rewrite systems and graph rewrite systems, applying a rule in a state typically results in another state, and all rules are scheduled --- allowed to be matched and applied ---  in every state at all times. The result of this process is the full state space 
+
+%The use of graph transformation combines the strengths of rule-based programming and the use graphs, giving rise to visually representing a system, and allowing systems that have to be dynamically changed.
+
+The method of choice of the authors is graph transformation-based specification and programming. In this context, extending the rule system with a mechanism for controlling rule application is very popular. Such constructs, often called \emph{control expressions} can increase the ease of specification in a rule-based language. The results of this paper, however, are not restricted to graph transformation systems.
+
+One of the main advantages of using explicit control expressions, is that it reduces the amount of control information required in the states and rules. Such information quickly complicates the comprehensibility of the entire rule-system, and introduces hidden dependencies between rules. Explicit control expressions,  specified, on the other hand, reduce such control information and provides an explicit view on these dependencies.
+
+Typically, control expressions in the field of graph transformations are equipped with an \emph{input-output} semantics, motivated by an interest in the transformational behaviour of a system. In contrast, we use graph grammars to generate a \emph{reactive} view on the system. Graph grammars are used to generate the full state space of the system, which is used for verification by, for instance, model checking.
+
+\iffull %part of motivation
+
+\subsection{More reasons} 
+We use graph grammars to specify systems, where a graph represents a state of the system, and a set of rules specifies the semantics of the system. However, the modelled system often contains sub-routines that cannot be captured by a single rule. Instead, a tightly coupled set of rules is required to specify the sub-routine. Such rules add state-information about the routine to the graph, to be read and/or modified by other rules in the routine, and most likely to be removed by a finishing rule. By using such an approach, there is information controlling rule applications in both the graphs and the rules. We find this crosscutting behaviour undesirable for a number of reasons: 
+
+\begin{list}{$\bullet$}{}
+\item A strong dependency can exists between rules that is not clearly visible. It might also cause single rules to be harder to understand, because it is not clear where the nodes and edges come from.
+\item In generating the state space for a start configuration and the rule system for the purpose of verification, it is undesirable to have transitions for cleaning up control state.
+\end{list}
+
+Another problem is that - even \emph{with} control information in the rules and the states - some sub-routines are still very hard to model. For example, one might try to specify an operation on every element of a list. When this is done, the system continues applying the next rule. This rule should then match only when all elements of that list are processed. Although this can be done with Negative Application Conditions (NACs), such conditions can become very complex (imagine the list operation to already have a NAC, requiring the follow-up rule to have a NAC over that NAC). Also, these rules merely specify in the NAC what the list-operation specifies as a requirement, causing a sort of repetition, which decreases the maintainability. Not to mention that these requirements clutter the actual purpose of this rule: the performed transformation.
+
+In using explicit control, the folowing advantages can be identified:
+
+\begin{list}{$\bullet$}{}
+\item The implicit processes of the modelled system become more explicit, making the dependencies between rules better understandable. 
+\item Although we do not aim to increase the expressiveness of the rule based formalism, it will be easier to specify complex processes.
+\item As explained in the example above, duplication of requirements regularly and in NACs is reduced by explicitly specifying the rule dependencies in terms of non-applicability.
+\item Rules can then be used just for matching and transforming the state, instead of also encoding which rule to match next or which rule not to be applicable anymore.
+\end{list}
+
+\fi % part of motivation
+
+In this work, we introduce a control mechanism with a reactive semantics. We define so-called \emph{control automata}, which can be added on top of pure rule systems. The resulting behaviour is defined as the product of the original state space and the control automaton.
+Control automata can include transitions that specify the scheduling of a rule, and so-called failure-transitions that describe the observation of a set of rules being non-applicable. 
+A control language is defined for the purpose of specifying such control automata in a simple and intuitive manner.
+Because the product with ordinary control automata can introduce unwanted non-determinism, we also define a variation called \emph{guarded control automata}, which do not have this undesirable effect. 
+
+%We propose to separate control into a control program -- written in a language designed for this purpose -- that will inform the simulation process which rules are scheduled. The program is translated to an automaton, that will direct the simulation process of the rule system. To allow conditional statements in the control language, we need to represent the non-applicability of rules. In the automata, this is represented as failure transitions, which are allowed when one or more rules, specified in a failure set, can not be applied at the given state. 
+
+%In section \ref{sec:automata} we introduce a formalism for control automata and define its semantics when combined with a rule system. In section \ref{sec:language} we will propose a language for the specification of control programs and show the trace semantics of the elements of the language. In section \ref{sec:langsem} we will define the translation from a control program to a control automaton and show that the generated automaton is trace-equivalent to the program it was created from. Section \ref{sec:deterministic} optimisation for control automata is introduced and updated product function is given. We finish with related work, future work, and the conclusion.
+
+\iffull
+In the next section we give a thorough description of graph transformations. Then, we start by defining control automata and show the result of combining such an automaton with system automata: automaton representations of rule systems.
+\else
+In the next section, we start by defining control automata and show the result of combining such an automaton with system automata: automaton representations of rule systems.
+\fi
+In Section \ref{sec:language} we present a control language, and show how programs written in this language can be translated to control automata. In Section \ref{sec:deterministic} we present guarded control automata, and we prove them to be equivalent to the normal automata. Finally, in Section \ref{sec:conclusion} we present our contribution, implementation \& scalability issues, related work, and future work.

@@ -1,0 +1,15 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+% Special colors
+\begin{tikzpicture}[
+% Special color styles
+scale=\tikzscale]
+\node[node] (n2)  at (0.710, -1.340) {\ml{\textbf{Requires}\\{\color{\blue}\textit{$-$ violated}}}};
+\node[node] (n0)  at (0.460, -0.340) {\ml{\textbf{Feature}\\\textit{selected}}};
+\node[node] (n1)  at (1.530, -0.420) {\ml{\textbf{Feature}\\{\color{\green}\textit{$+$ selected}}\\{\color{\red}\textit{! selected}}}};
+\path[edge] (n2)  -- node[lab]{feature2} (n1) ;
+\path[edge](n2.north -| 0.460, -0.340) -- node[lab]{feature1} (n0) ;
+\userdefinedmacro
+\end{tikzpicture}
+\renewcommand{\userdefinedmacro}{\relax}

@@ -1,0 +1,6 @@
+.svn/
+.idea/
+bin/
+out/
+target/
+temp/

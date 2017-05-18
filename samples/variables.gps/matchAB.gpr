@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="matchAB">
+        <attr name="remark">
+            <string>Matches up an A-C-edge label with a B-self-edge label</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>231 94 18 18</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>115 101 18 18</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>114 183 18 18</string>
+            </attr>
+        </node>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>new:match</string>
+            </attr>
+            <attr name="layout">
+                <string>456 0 122 110 242 111 11</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>?x</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>C</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>?x</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>B</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>A</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

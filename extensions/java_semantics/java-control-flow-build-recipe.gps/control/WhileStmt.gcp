@@ -1,0 +1,12 @@
+package control;
+
+recipe WhileStmt(node root, node exit, out node entry) {
+	// Match the condition expression and the action statement.
+	node croot, aroot := rule.WhileStmt-Down(root);
+	// Build the flow for the condition subexpression.
+	entry := Expr(croot, root);
+	// Build the flow for the action statement.
+	node aentry := Stmt(aroot, entry);
+	// Wrap the build as we traverse back in the AST when returning from the recursion.
+	rule.WhileStmt-Up(root, croot, aentry, exit);
+}

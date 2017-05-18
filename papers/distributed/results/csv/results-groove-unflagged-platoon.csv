@@ -1,0 +1,12 @@
+#startstate	index	states	transitions	time	time_iso	space	aborted	comment
+start-03	0	32	53	138	20	1449	?	?
+start-04	1	154	353	386	139	1455	?	?
+start-05	2	705	2102	1239	633	1380	?	?
+start-06	3	3329	12135	3416	1473	3324	?	?
+start-07	4	15473	67244	8104	4709	6293	?	?
+start-08	5	72434	364987	32973	25566	26933	?	?
+start-09	6	338130	1942808	156330	119641	133294	?	?
+start-10	7	1580449	10200436	1015884	884719	1289062	?	?
+start-11	8	?	?	?	?	?	1	"Exceeded time limit (4h)"
+start-12	9	?	?	?	?	?	1	"Exceeded time limit (4h)"
+start-13	10	?	?	?	?	?	1	"Out of memory"

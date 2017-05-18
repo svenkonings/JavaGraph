@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ForStmt-05-WithInit-Init-Close">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>338 234 83 32</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>342 30 66 32</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>150 33 51 32</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>388 135 83 32</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>222 138 71 32</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>197 229 86 48</string>
+            </attr>
+        </node>
+        <edge to="n1" from="n9">
+            <attr name="label">
+                <string>del:exit</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Assign</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n9">
+            <attr name="label">
+                <string>initialization</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n9">
+            <attr name="label">
+                <string>not:increment</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n9">
+            <attr name="label">
+                <string>type:ForStmt</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>test:index = 0</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n9">
+            <attr name="label">
+                <string>new:entry</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n8">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n9">
+            <attr name="label">
+                <string>not:condition</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

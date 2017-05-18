@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="type" id="type">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n5">
+            <attr name="layout">
+                <string>290 428 56 31</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>160 358 70 31</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>506 37 110 31</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>507 68 86 31</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>119 121 42 46</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>68 199 28 31</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>396 57 42 46</string>
+            </attr>
+        </node>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:World</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:GROOVE</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:InstanceModel</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:TypeModel</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>color:255,0,0</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>edge:&quot;&quot;</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:n</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 140 144 91 162 82 215 12</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 140 144 277 200 286 121 140 144 12</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n0">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 140 144 150 340 318 444 12</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n0">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n0">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:N</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 82 215 119 343 182 304 82 215 12</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n1">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>color:0,0,0</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>edge:&quot;&quot;</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:r</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 417 80 491 171 528 116 417 80 12</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n6">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n6">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n6">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n6">
+            <attr name="label">
+                <string>e</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

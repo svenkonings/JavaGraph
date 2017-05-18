@@ -1,0 +1,12 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n5) at (0.415, -1.075) {\ml{Q}};
+\node[nesting_node] (n0) at (1.290, -1.075) {\ml{$\forall$}};
+\node[data_node] (n1) at (1.290, -2.015) {\ml{\textbf{int}}};
+\node[par_node] (n1p)  at (n1.north west) {0};
+
+\path[nesting_edge](n5.east) -- node[lab] {\ml{@}} (n0) ;
+\path[nesting_edge](n0.south) -- node[lab] {\ml{count}} (n1) ;
+\end{tikzpicture}

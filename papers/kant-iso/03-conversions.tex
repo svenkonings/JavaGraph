@@ -1,0 +1,232 @@
+\subsection{Conversions}
+\label{section-conversion}
+
+In order to use the existing tools for isomorphism checking we need a function
+from $\GL$ to $\GC$ that preserves and reflects isomorphism of graphs. In this
+section we present two conversions that have these properties: a layered
+conversion function $\tau_1$ inspired by \cite{mckay2007:nug24} (and used in
+\cite{spermann2008:prob}) and a function $\tau_2$ that converts each edge
+into a distinctly coloured node. As an example we use a representation of a
+bounded buffer, see Fig.~\ref{fig:example-conversion:edge-labelled}. The results
+for both methods are shown in Fig.~\ref{fig:example-conversion-tau1} and
+Fig.~\ref{fig:example-conversion-tau2} respectively.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,semithick]
+\tikzstyle{every node}=[node distance = 4cm, bend angle = 30]
+\foreach \pos/ \name/ \label/ \color/ \textcolor in {
+{(2,0.5)/v_0/Buffer/white/black}, {(2,2.5)/v_1/Cell/white/black},
+{(4,0)/v_2/Cell/white/black}, {(0,0)/v_3/Cell/white/black}}
+\node[node] [fill=\color,text=\textcolor] (\name) at \pos {\label};
+\foreach \source/ \label/ \dest in {v_0/first/v_1}
+\path (\source) edge [->,bend right] node[midway,right] {\label} (\dest);
+\foreach \source/ \label/ \dest in {v_0/last/v_1, v_1/next/v_2,v_2/next/v_3,
+v_3/next/v_1}
+\path (\source) edge [->,bend left] node[midway] {\label} (\dest);
+\end{tikzpicture}
+\caption{An edge-labelled graph $G$ representing a bounded buffer. Node
+labels represent self-edges. The  `Buffer' node points to the first and
+last occupied cells.}
+\label{fig:example-conversion:edge-labelled}
+\end{figure}
+
+\begin{figure}[tbp]
+\centering
+\subfloat[The mapping between labels in the edge labelled graph and colours in
+the converted graph,  used by $\tau_1$.]
+{\label{fig:example-conversion:colour-layers-mapping}
+\begin{tabular}[b]{r c c}
+& $\{\text{Buffer}\}$ & $\{\text{Cell}\}$\\
+& 0                   & 1                 \\
+first $\mapsto 0$ & \framebox{$0,0$} & \framebox{$0,1$}\\
+last $\mapsto 1$ & \framebox{$1,0$} & \framebox{$1,1$}\\
+next $\mapsto 2$ & \framebox{$2,0$} & \framebox{$2,1$}
+\end{tabular}
+}
+\quad\quad
+\subfloat[$\tau_1(G)$.]{\label{fig:example-conversion:colour-layers}
+\begin{minipage}{3.0in}
+\centering
+\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,semithick]
+      \tikzstyle{every node}=[node distance = 4cm, bend angle = 30]
+      \foreach \pos/ \name/ \color/ \textcolor/ \colorcode in {
+        {(2,2)/v_0/white/black/0,0}, {(3.5,2)/v_1/black/white/0,1},
+{(5,2)/v_2/black/white/0,1}, {(6.5,2)/v_3/black/white/0,1},
+        {(2,1)/v_4/yellow/black/1,0}, {(3.5,1)/v_5/gray/white/1,1},
+{(5,1)/v_6/gray/white/1,1}, {(6.5,1)/v_7/gray/white/1,1},
+        {(2,0)/v_8/green/black/2,0}, {(3.5,0)/v_9/blue/white/2,1},
+{(5,0)/v_{10}/blue/white/2,1}, {(6.5,0)/v_{11}/blue/white/2,1}}
+          \node[vertex] [circle split] (\name) at \pos {$\name$ \nodepart{lower}
+{\scriptsize$\colorcode$}};
+      \foreach \source/ \dest in {v_0/v_1, v_4/v_5, v_9/v_{10}, v_{10}/v_{11},
+                                  v_0/v_4, v_1/v_5, v_2/v_6, v_3/v_7,
+                                  v_4/v_8, v_5/v_9, v_6/v_{10}, v_7/v_{11}}
+          \path (\source) edge [->] (\dest);
+      \foreach \source/ \dest in {v_{11}/v_9}
+          \path (\source) edge [->, bend left] (\dest);
+
+      \node at (1,2) {first};
+      \node at (1,1) {last};
+      \node at (1,0) {next};
+
+      \node at (2,3) {$\{\text{Buffer}\}$};
+      \node at (3.5,3) {$\{\text{Cell}\}$};
+      \node at (5,3) {$\{\text{Cell}\}$};
+      \node at (6.5,3) {$\{\text{Cell}\}$};
+\end{tikzpicture}
+\end{minipage}
+}
+\caption{The result of conversion $\tau_1$ for the example in
+Fig.~\ref{fig:example-conversion:edge-labelled}.}
+\label{fig:example-conversion-tau1}
+\end{figure}
+
+\subsubsection{%
+\texorpdfstring{Layered conversion $\tau_1$.}%
+{Layered conversion tau 1}}
+%
+The idea of the first conversion is to create a layer of copies of nodes for
+each distinct edge label. Edges can then be added in the layer that corresponds
+to their labels. Layers are distinguished by the colours that are given to the
+nodes. Nodes that are a copy of the same original are linked to each other by a
+chain of edges, i.e., $v$'s copy in layer $n$ has an edge to $v$'s copy in
+layer $n+1$. Moreover, self-edges of nodes are encoded in the node colour and
+need not to be represented by edges in the converted graph. This means that the
+colour of nodes in the converted graph is based on a combination of
+\begin{inparaenum}
+\item the set of node labels (labels of self-edges) of the corresponding node
+in the original graph, and
+\item the edge label that is represented by the layer in which the node is
+placed.
+\end{inparaenum}
+This mapping is shown in
+Fig.~\ref{fig:example-conversion:colour-layers-mapping} and the result of the
+conversion in Fig.~\ref{fig:example-conversion:colour-layers}.
+
+\begin{definition}[Layered conversion function]
+\label{def:conversion-layered}
+$\tau_1 : \GL \to \GC$ is a  function that maps each $\langle
+V,E\rangle \in \GL$ to a
+node-coloured graph $\langle V', E', c \rangle$ defined by
+\begin{align*}
+V'& = \{ (v,l) \mid v \in V \land l \in L_E \} \\
+E'& = \{ \bigl((v_1,l),(v_2,l)\bigr) \in V' \times V' \mid (v_1,l,v_2) \in E \} \\
+  & \quad {} \cup \{ \bigl((v,l_1),(v,l_2)\bigr) \in V' \times V' \mid
+l_2 \succ_{L_E} l_1 \} \\
+c& = \{ (v', (l,L_v)) \mid v'=(v,l) \in V' \}
+\end{align*}
+where $L_E = \{ l \mid (v_1,l,v_2) \in E \land v_1 \neq v_2 \}$ and $L_v = \{ l
+\mid (v,l,v) \in E \}$ for all $v\in V$.
+\end{definition}
+%
+The following proposition states that the conversion preserves and reflects
+isomorphism. For the proof see the extended version of this
+paper~\cite{kant2010:canonical}.
+
+\begin{proposition}
+\label{prop:tau-1-injective}
+For all $G,H \in \GL$, $G \cong H \iff \tau_1(G) \cong \tau_1(H)$.
+\end{proposition}
+
+\subsubsection{%
+\texorpdfstring{Edge to node conversion $\tau_2$.}%
+{Label to edge conversion tau 2}}
+%
+The second conversion creates a node for each edge in the original
+graph, with a colour corresponding to the label of the edge. Edges are
+added between the original nodes and the edge nodes to capture the structure
+of the original graph. For this conversion a mapping is
+maintained from edge labels to node colours. One special class of colours is
+reserved to designate nodes that represent the nodes in the original graph.
+These colours represent a set of node labels, i.e., the labels of the self-edges
+of the node in the original graph. See
+Fig.~\ref{fig:example-conversion:colour-vertices-mapping} for an example of the
+mapping and Fig.~\ref{fig:example-conversion:colour-vertices} for the resulting
+converted graph.
+
+\begin{figure}[tbp]
+\centering
+\subfloat[The mapping between labels in the edge labelled graph and colours in
+the converted graph, used by $\tau_2$.]
+{\label{fig:example-conversion:colour-vertices-mapping}
+    \begin{minipage}{1.5in}
+    \centering
+    \begin{tabular}[b]{c l l}
+      $\{\text{Buffer}\}$  & $\mapsto$ & \framebox{$0$}   \\ % white
+      $\{\text{Cell}\}$    & $\mapsto$ & \framebox{$1$}   \\  % blue
+      first         & $\mapsto$  & \framebox{$2$}   \\  % grey
+      last          & $\mapsto$  & \framebox{$3$}  \\  % yellow
+      next          & $\mapsto$  & \framebox{$4$}  \\  % green
+    \end{tabular}
+    \end{minipage}
+  }
+  \quad\quad
+  \subfloat[$\tau_2(G)$.]{\label{fig:example-conversion:colour-vertices}
+    \begin{minipage}{2.5in}
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,semithick]
+      \tikzstyle{every node}=[node distance = 4cm, bend angle = 10]
+      \foreach \pos/ \name/ \color/ \textcolor/ \colorcode in {
+        {(2,1)/v_0/white/black/0}, {(2,4)/v_1/blue/white/1},
+        {(4,0.5)/v_2/blue/white/1}, {(0,0.5)/v_3/blue/white/1},
+        {(4,2.5)/v_4/green/black/4},
+{(2,-.5)/v_5/green/black/4},{(0,2.5)/v_6/green/black/4},
+        {(1.5,2.5)/v_7/gray/white/2}, {(2.5,2.5)/v_8/yellow/black/3}}
+          \node[vertex] [circle split] (\name) at \pos {$\name$ \nodepart{lower}
+{\scriptsize$\colorcode$}};
+
+      \foreach \source/ \dest in {v_1/v_4, v_4/v_2, v_2/v_5, v_5/v_3, v_3/v_6,
+v_6/v_1}
+          \path (\source) edge [->] (\dest);
+      \foreach \source/ \dest in {v_0/v_7, v_7/v_1}
+          \path (\source) edge [->] (\dest);
+      \foreach \source/ \dest in {v_0/v_8, v_8/v_1}
+          \path (\source) edge [->] (\dest);
+    \end{tikzpicture}
+    \end{minipage}
+  }
+\caption{The result of conversion $\tau_2$ for the example in
+Fig.~\ref{fig:example-conversion:edge-labelled}.}
+\label{fig:example-conversion-tau2}
+\end{figure}
+
+\begin{definition}[Edge node conversion function $\tau_2$]
+\label{def:conversion-labelvertex}
+$\tau_2 :\GL \rightarrow \GC$ is a function that maps each $\langle
+V,E\rangle \in \GL$ to a node-coloured graph $\langle V', E', c \rangle$ where
+\begin{align*}
+V'& = V \cup E \\
+E'& = \bigl\{ \bigl(v_1,(v_1,l,v_2)\bigr) \mid (v_1,l,v_2) \in E \bigr\}
+   \cup \bigl\{ \bigl((v_1,l,v_2),v_2\bigr) \mid (v_1,l,v_2) \in E \bigr\} \\
+ c& = \bigl\{ \bigl(v, (\mathsf{v},L_v)\bigr) \mid v \in V \bigr\}
+    \cup \bigl\{ \bigl(e, (\mathsf{e},l)\bigr) \mid e=(v_1,l,v_2) \in E, v_1 \neq v_2 \bigr\}
+\end{align*}
+where $L_v = \{ l \mid (v,l,v) \in E \}$ as before.
+\end{definition}
+%
+Here, $\mathsf{v}$ is used to mark a colour as belonging to a node in the
+original graph and $\mathsf{e}$ to mark a colour as representing the label of an
+edge in the original graph. This is necessary to distinguish `edge' nodes from
+`node' nodes in the resulting graph. Again, the proof of the following
+proposition is given in~\cite{kant2010:canonical}.
+
+\begin{proposition}
+\label{prop:tau-2-injective}
+For all $G,H \in \GL$, $G \cong H \iff \tau_2(G) \cong \tau_2(H)$.
+\end{proposition}
+
+\subsubsection{Complexity.}
+%
+Obviously, the size of the graph is a major factor in checking isomorphism.
+For $G=\langle V,E \rangle \in \GL$, with node count $n = |V|$, non-self-edge
+count $m = |E \setminus E_S|$ ($E_S$ being the set of self-edges of $G$), and
+non-self-edge label count $k = |L_E|$, we have:
+%
+\begin{inparaenum}
+\item[(i)] $\tau_1(G)$ has $n \cdot k$ nodes and ${n \cdot (k - 1)} + m$ edges;
+\item[(ii)] $\tau_2(G)$ has $n + m$ nodes and $2 \cdot m$ edges.
+\end{inparaenum}
+%
+Thus, for sparse graphs or graphs with many distinct labels ($m$ small or $k$
+large) we expect $\tau_2$ to result in smaller graphs than $\tau_1$.

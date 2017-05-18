@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph id="graph" role="graph" edgeids="false" edgemode="directed">
+        <node id="n112"/>
+        <node id="n109"/>
+        <node id="n110"/>
+        <node id="n113"/>
+        <node id="n111"/>
+        <edge from="n109" to="n109">
+            <attr name="label">
+                <string>global</string>
+            </attr>
+        </edge>
+        <edge from="n110" to="n113">
+            <attr name="label">
+                <string>a,b</string>
+            </attr>
+        </edge>
+        <edge from="n109" to="n109">
+            <attr name="label">
+                <string>Root</string>
+            </attr>
+        </edge>
+        <edge from="n110" to="n110">
+            <attr name="label">
+                <string>a,b</string>
+            </attr>
+        </edge>
+        <edge from="n109" to="n112">
+            <attr name="label">
+                <string>y</string>
+            </attr>
+        </edge>
+        <edge from="n110" to="n113">
+            <attr name="label">
+                <string>c</string>
+            </attr>
+        </edge>
+        <edge from="n110" to="n110">
+            <attr name="label">
+                <string>c</string>
+            </attr>
+        </edge>
+        <edge from="n109" to="n112">
+            <attr name="label">
+                <string>x</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

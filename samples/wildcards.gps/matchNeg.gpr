@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="matchNeg">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="remark">
+            <string>Shows the use of a negative guerd for a named wildcard</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1805">
+            <attr name="layout">
+                <string>134 129 15 15</string>
+            </attr>
+        </node>
+        <node id="n1802">
+            <attr name="layout">
+                <string>128 219 15 15</string>
+            </attr>
+        </node>
+        <node id="n1803">
+            <attr name="layout">
+                <string>112 63 210 15</string>
+            </attr>
+        </node>
+        <node id="n1804">
+            <attr name="layout">
+                <string>265 127 15 15</string>
+            </attr>
+        </node>
+        <edge to="n1802" from="n1802">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n1803" from="n1803">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n1802" from="n1805">
+            <attr name="label">
+                <string>new:?x</string>
+            </attr>
+        </edge>
+        <edge to="n1803" from="n1803">
+            <attr name="label">
+                <string>x is bound to any label except a and b</string>
+            </attr>
+        </edge>
+        <edge to="n1804" from="n1805">
+            <attr name="label">
+                <string>del:{?x[^a,b]}</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

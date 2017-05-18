@@ -1,0 +1,13 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n37564) at (2.510, -0.450) {\ml{\textbf{Person}\\\textit{?name}}};
+\node[basic_node] (n37563) at (2.640, -1.205) {\ml{\textbf{Person}}};
+\node[basic_node] (n37565) at (2.735, -1.950) {\ml{\textbf{Person}\\{\color{creator_c}+ \textit{?name}}}};
+
+\path[basic_edge](n37563.north -| 2.510, -0.450) -- node[lab] {\ml{father*}} (n37564) ;
+\path[basic_edge] (n37563) .. controls (2.050, -1.390) and (2.100, -1.770) ..  (n37565) 
+node[lab] at (2.126, -1.557) {\ml{son}};
+\path[basic_edge](n37565.north -| 2.640, -1.205) -- node[lab] {\ml{father}} (n37563) ;
+\end{tikzpicture}

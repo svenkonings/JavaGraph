@@ -1,0 +1,9 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n271) at (0.765, -0.690) {\ml{Labels\\Two}};
+\node[basic_node] (n272) at (2.215, -0.705){};
+
+\path[basic_edge](n271.east |- 2.215, -0.705) -- node[lab] {\ml{points\\to}} (n272) ;
+\end{tikzpicture}

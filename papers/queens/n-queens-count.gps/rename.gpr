@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="rename">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n8">
+            <attr name="layout">
+                <string>302 141 22 20</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>366 43 19 19</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>252 45 8 15</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>59 199 343 75</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>91 142 22 20</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>160 46 8 15</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>41 46 8 15</string>
+            </attr>
+        </node>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n9">
+            <attr name="label">
+                <string>type:S</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n9">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:S</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n7">
+            <attr name="label">
+                <string>new:p</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 256 52 318 26 375 52 11</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n7">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n7">
+            <attr name="label">
+                <string>del:?[h,v]</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 256 52 311 85 375 52 11</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>rem:Rule to rename the edges after the queens are placed.
+We do this to increase the symmetry of the board so that
+iso checking can collapse similar final configurations.
+Left- and right-diagonals are renamed to d-edges.
+Horizontal and vertical edges become p-edges (perpendicular).</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>forallx:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:S</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n1">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:S</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>@</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>new:d</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 45 53 107 23 164 53 11</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>del:?[ld,rd]</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 45 53 100 86 164 53 11</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

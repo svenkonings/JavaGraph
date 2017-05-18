@@ -1,0 +1,785 @@
+\usepackage{a4}                         % we're in Europe
+\usepackage{fullpage}                   % get some more space
+\usepackage{latexsym}                   % extra LaTeX 2.09 symbols
+\usepackage{amssymb}                    % extra AMS math symbols
+\usepackage{graphicx}                   % enhanced graphics support
+\usepackage{color}                      % needed for xfig
+\usepackage{listings}                   % for type-setting listings
+\usepackage{eurosans}                   % \euro gives the EUR symbol
+\usepackage{subfigure}
+\usepackage{hyperref}                   % include URLs & hypertext links
+
+%%%%%%%%%%%%%%%%%%%%%%%% Layout and numbering %%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{1}
+\def\topfraction{.90}
+\def\bottomfraction{.90}
+\def\textfraction{.10}
+\def\floatpagefraction{.90}
+%\setlength{\floatsep}{\medskipamount}
+%\setlength{\textfloatsep}{\medskipamount}
+%\setlength{\intextsep}{\medskipamount}
+
+\def\fps@figure{tp}
+\def\fps@table{tp}
+\long\def\@makecaption#1#2{
+ \begin{list}{}
+ {\setlength{\rightmargin}{\leftmargin}
+  \setlength{\topsep}{5pt}
+  \setlength{\partopsep}{0pt}}
+ \centering\item{\em #1: #2}
+ \end{list}}
+
+\newcommand{\noitemsep}{\itemsep0pt}
+
+%\def\@makethmnumber#1#2{\bf #2 #1:}
+%\newlength{\alwaysparindent}\alwaysparindent\parindent
+%\renewcommand{\@begintheorem}[2]{%
+%\begin{list}{$\bullet$}{%\leftmargin\alwaysparindent
+%\parsep0cm\labelwidth\leftmargin}%
+%\advance\@itemdepth\@ne
+%\item[\hskip\labelsep{\bf #2\ #1.}]}
+%\renewcommand{\@opargbegintheorem}[3]{%
+%\begin{list}{$\bullet$}{%\leftmargin\alwaysparindent
+%\parsep0cm\labelwidth\leftmargin}%
+%\advance\@itemdepth\@ne
+%\item[\hskip\labelsep{\bf #2\ #1\ (#3).}]}
+%\renewcommand{\@endtheorem}{\end{list}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}[definition]{Example}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{conjecture}[definition]{Conjecture}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{notation}[definition]{Notation}
+
+%\@addtoreset{figure}{section}
+%\def\thefigure{\arabic{section}.\arabic{figure}}
+%\def\thetable{\arabic{section}.\arabic{table}}
+\let\c@table\c@figure
+\@addtoreset{definition}{section}
+\def\thedefinition{\thesection.\arabic{definition}}
+
+% An environment for re-stating and proving results in an appendix.
+% The proof will be labelled \prooflabel{#2}
+% #1 the kind of result (theorem, lemma etc)
+% #2 the label of the original result
+\newenvironment{oldresult}[2]{%
+    \label{\prooflabel{#2}}
+    \csname @begintheorem\endcsname{#1}{\ref{#2}}%
+}{%
+    \csname @endtheorem\endcsname
+}
+% The label for the proof of an old result
+\newcommand{\prooflabel}[1]{#1-proof}
+
+% Numbers a paragraph with an equation number
+\newcommand{\setmark}{\refstepcounter{equation}\noindent{\bf \theequation} }
+
+\newcommand{\thlabel}[1]{\label{th:#1}}
+\newcommand{\thref}[1]{Theorem~\ref{th:#1}}
+\newcommand{\colabel}[1]{\label{co:#1}}
+\newcommand{\coref}[1]{Corollary~\ref{co:#1}}
+\newcommand{\llabel}[1]{\label{l:#1}}
+\newcommand{\lref}[1]{Lemma~\ref{l:#1}}
+\newcommand{\eqlabel}[1]{\label{eq:#1}}
+\newcommand{\eqref}[1]{$(\ref{eq:#1})$}
+\newcommand{\exlabel}[1]{\label{ex:#1}}
+\newcommand{\exref}[1]{Example~\ref{ex:#1}}
+\newcommand{\cjlab}[1]{\label{cj:#1}}
+\newcommand{\cjref}[1]{Conjecture~\ref{cj:#1}}
+\newcommand{\flabel}[1]{\label{f:#1}}
+\newcommand{\fref}[1]{Figure~\ref{f:#1}}
+\newcommand{\dlabel}[1]{\label{d:#1}}
+\newcommand{\dref}[1]{Definition~\ref{d:#1}}
+\newcommand{\alabel}[1]{\label{a:#1}}
+\newcommand{\aref}[1]{Appendix~\ref{a:#1}}
+\newcommand{\chlabel}[1]{\label{c:#1}}
+\newcommand{\chref}[1]{Chapter~\ref{c:#1}}
+\newcommand{\stlabel}[1]{\label{s:#1}}
+\newcommand{\stref}[1]{Section~\ref{s:#1}}
+\newcommand{\tlabel}[1]{\label{t:#1}}
+\newcommand{\tref}[1]{Table~\ref{t:#1}}
+\newcommand{\plabel}[1]{\label{p:#1}}
+\newcommand{\pref}[1]{Proposition~\ref{p:#1}}
+\newcommand{\nlabel}[1]{\label{n:#1}}
+\newcommand{\nref}[1]{Notation~\ref{n:#1}}
+\newcommand{\pgref}[1]{Page~\pageref{#1}}
+
+%%%%%%%%%%%%%%%%%% Mathematical macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\ifundefined#1{\expandafter\ifx\csname#1\endcsname\relax}
+
+\newcommand{\rotatesymbol}[1]{\mathpalette\rot@tesymbol{#1}}
+\newcommand{\rot@tesymbol}[2]{\rotatebox[origin=c]{180}{$#1#2$}}
+
+\ifundefined{bigsqcap}
+     \def\bigsqcap{\mathop{\rotatesymbol\bigsqcup}}
+\fi
+
+% Function arrow
+\newcommand{\func}{\mathbin{\rightarrow}}
+% Partial function arrow
+\newcommand{\pfunc}{\rightharpoonup}
+% Function type
+\newcommand{\ftype}[2]{\colon {#1} \func {#2}}
+% Partial function type
+\newcommand{\pftype}[2]{\colon {#1} \pfunc {#2}}
+% Equals by definition
+\newcommand{\isdef}{\mathrel{\,\mathord{:}\mathord{=}\,}}
+% Is equivalent by definition
+\newcommand{\iffdef}{\mathrel{\,\mathord{:}\mathord{\Leftrightarrow}\,}}
+
+\ifundefined{qed}\newcommand{\qed}{~\hfill$\Box$}\fi
+% Tick
+\newcommand{\tick}{{\mathord{\checkmark\!}}}
+% Such that
+\newcommand{\st}{.\:}
+% Tuple
+\newcommand{\tuple}[1]{{\langle #1 \rangle}}
+% Interval
+\newcommand{\itv}[1]{{(#1)}}
+% Set
+\newcommand{\set}[1]{{\{ #1 \}}}
+% Generic set
+\newcommand{\genset}[2]{{\textstyle\mathopen\{ #1 \mid #2 \mathclose\}}}
+% Powerset
+\newcommand{\powerset}[1]{{\mathbf 2}^{#1}}
+% Power multiset
+\newcommand{\powermul}[1]{\natN^{#1}}
+% Semantic brackets
+\newcommand{\sem}[1]{\mathopen{[\![}#1\mathclose{]\!]}}
+% Empty string
+\newcommand{\emptystr}{\varepsilon}
+% Implies symbol
+\newcommand{\ipy}{\mathrel{\Longrightarrow}}
+% Function restriction
+\newcommand{\restr}{\mathbin{\upharpoonright}}
+% Wildcard parameter
+\newcommand\parm{{\tt\_}}
+% Identity function
+\newcommand{\id}{{\mathit{id}}}
+% Function domain
+\newcommand{\dom}{\mathit{dom}}
+% Function codomain
+\newcommand{\cod}{\mathit{cod}}
+% Arrow (or function) source
+\newcommand{\src}{\mathit{src}}
+% Arrow (or function) target
+\newcommand{\tgt}{\mathit{tgt}}
+
+% Substitution brackets: $\sub r$
+\newcommand{\sub}[1]{\set{#1}}
+% Syntactic mapping of $a$ to $u$: $\mt{a}{u}$
+\newcommand{\mt}[2]{{#2}/{#1}}
+% Syntactic substitution of $a$ by $u$: $\sb{a}{u}$
+\renewcommand{\sb}[2]{\sub{\mt{#1}{#2}}}
+
+% Left arrow head
+\DeclareMathSymbol{\leftarrowhead}{\mathord}{AMSa}{"4C}
+% Right arrow head
+\DeclareMathSymbol{\rightarrowhead}{\mathord}{AMSa}{"4B}
+
+% Set of natural numbers
+\newcommand{\Nat}{{\mathbf N}}
+% Set of integers
+\newcommand{\Int}{{\mathbf Z}}
+% Set of booleans
+\newcommand{\Bool}{{\mathbf B}}
+% Set of real numbers
+\newcommand{\Real}{{\mathbf R}}
+
+% Boolean values
+\newcommand{\True}{\ensuremathbf{t\mskip-2mu t}}
+\newcommand{\False}{\ensuremathbf{ff}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Rules %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Insert some vertial space around a rule
+\newcommand{\midspace}{\vphantom{\displaystyle\sum}}
+% Insert some vertial space above a rule
+\newcommand{\upspace}{\vphantom{\displaystyle\sum^1}}
+% Insert some vertical space below a rule
+\newcommand{\downspace}{\vphantom{\displaystyle\sum_1}}
+
+% An upper derivation rule in a table (i.e., with extra space above)
+\newcommand{\turule}[2]{\begin{array}[b]{@{}c@{}}\upspace#1\\
+  \hline #2\downspace\end{array}}
+% A lower derivation rule in a table (i.e., with extra space below)
+\newcommand{\tdrule}[2]{\begin{array}[b]{@{}c@{}}\midspace#1\\
+  \hline #2\downspace\end{array}}
+% A derivation rule
+\newcommand{\drule}[2]{\begin{array}[b]{@{}c@{}}\midspace#1\\
+  \hline #2\midspace\end{array}}
+
+% A numbered upper derivation rule in a table (i.e., with extra space above)
+\newcommand{\turulenr}[3]{\turule{#1}{#2}\rulenumber{#3}}
+% A numbered lower derivation rule in a table (i.e., with extra space below)
+\newcommand{\tdrulenr}[3]{\tdrule{#1}{#2}\rulenumber{#3}}
+% A numbered derivation rule
+\newcommand{\drulenr}[3]{\drule{#1}{#2}\rulenumber{#3}}
+% The macro to create the rule number in a numbered rule
+\newcommand{\rulenumber}[1]{\,\raisebox{2ex}{\ensuremath{#1}}}
+
+% A rule in an array, with additional space below and above
+\newcommand{\arule}[2]{\vphantom{\displaystyle\bigcup}#1&#2\\}
+
+% Some macros for numbering rules
+\newcounter{rule}
+\newcommand{\rlabel}[1]{\refstepcounter{rule}\ruledenotation{\therule}\label{r:#1}}
+\newcommand{\rref}[1]{\ruledenotation{\ref{r:#1}}}
+% The denotation for a numbered rule (to be overwritten)
+\newcommand{\ruledenotation}[1]{\ensuremath{\mathrm R_{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%% Single letters in special fonts %%%%%%%%%%%%%%%%%
+
+\newcommand{\ensuremathbf}[1]{\ensuremath{{\mathbf{#1}}}}
+\newcommand{\ensuremathcal}[1]{\ensuremath{{\cal{#1}}}}
+\newcommand{\ensuremathtt}[1]{\ensuremath{{\mathtt{#1}}}}
+\newcommand{\ensuremathrm}[1]{\ensuremath{{\mathrm{#1}}}}
+
+\newcommand\bA{\ensuremathbf A}
+\newcommand\bB{\ensuremathbf B}
+\newcommand\bC{\ensuremathbf C}
+\newcommand\bD{\ensuremathbf D}
+\newcommand\bE{\ensuremathbf E}
+\newcommand\bF{\ensuremathbf F}
+\newcommand\bG{\ensuremathbf G}
+\newcommand\bH{\ensuremathbf H}
+\newcommand\bI{\ensuremathbf I}
+\newcommand\bJ{\ensuremathbf J}
+\newcommand\bK{\ensuremathbf K}
+\newcommand\bL{\ensuremathbf L}
+\newcommand\bM{\ensuremathbf M}
+\newcommand\bN{\ensuremathbf N}
+\newcommand\bO{\ensuremathbf O}
+\newcommand\bP{\ensuremathbf P}
+\newcommand\bQ{\ensuremathbf Q}
+\newcommand\bR{\ensuremathbf R}
+\newcommand\bS{\ensuremathbf S}
+\newcommand\bT{\ensuremathbf T}
+\newcommand\bU{\ensuremathbf U}
+\newcommand\bV{\ensuremathbf V}
+\newcommand\bW{\ensuremathbf W}
+\newcommand\bX{\ensuremathbf X}
+\newcommand\bY{\ensuremathbf Y}
+\newcommand\bZ{\ensuremathbf Z}
+
+\newcommand\cA{\ensuremathcal A}
+\newcommand\cB{\ensuremathcal B}
+\newcommand\cC{\ensuremathcal C}
+\newcommand\cD{\ensuremathcal D}
+\newcommand\cE{\ensuremathcal E}
+\newcommand\cF{\ensuremathcal F}
+\newcommand\cG{\ensuremathcal G}
+\newcommand\cH{\ensuremathcal H}
+\newcommand\cI{\ensuremathcal I}
+\newcommand\cJ{\ensuremathcal J}
+\newcommand\cK{\ensuremathcal K}
+\newcommand\cL{\ensuremathcal L}
+\newcommand\cM{\ensuremathcal M}
+\newcommand\cN{\ensuremathcal N}
+\newcommand\cO{\ensuremathcal O}
+\newcommand\cP{\ensuremathcal P}
+\newcommand\cQ{\ensuremathcal Q}
+\newcommand\cR{\ensuremathcal R}
+\newcommand\cS{\ensuremathcal S}
+\newcommand\cT{\ensuremathcal T}
+\newcommand\cU{\ensuremathcal U}
+\newcommand\cV{\ensuremathcal V}
+\newcommand\cW{\ensuremathcal W}
+\newcommand\cX{\ensuremathcal X}
+\newcommand\cY{\ensuremathcal Y}
+\newcommand\cZ{\ensuremathcal Z}
+
+\newcommand\rA{\ensuremathrm A}
+\newcommand\rB{\ensuremathrm B}
+\newcommand\rC{\ensuremathrm C}
+\newcommand\rD{\ensuremathrm D}
+\newcommand\rE{\ensuremathrm E}
+\newcommand\rF{\ensuremathrm F}
+\newcommand\rG{\ensuremathrm G}
+\newcommand\rH{\ensuremathrm H}
+\newcommand\rI{\ensuremathrm I}
+\newcommand\rJ{\ensuremathrm J}
+\newcommand\rK{\ensuremathrm K}
+\newcommand\rL{\ensuremathrm L}
+\newcommand\rM{\ensuremathrm M}
+\newcommand\rN{\ensuremathrm N}
+\newcommand\rO{\ensuremathrm O}
+\newcommand\rP{\ensuremathrm P}
+\newcommand\rQ{\ensuremathrm Q}
+\newcommand\rR{\ensuremathrm R}
+\newcommand\rS{\ensuremathrm S}
+\newcommand\rT{\ensuremathrm T}
+\newcommand\rU{\ensuremathrm U}
+\newcommand\rV{\ensuremathrm V}
+\newcommand\rW{\ensuremathrm W}
+\newcommand\rX{\ensuremathrm X}
+\newcommand\rY{\ensuremathrm Y}
+\newcommand\rZ{\ensuremathrm Z}
+
+\newcommand\tA{\ensuremathtt A}
+\newcommand\tB{\ensuremathtt B}
+\newcommand\tC{\ensuremathtt C}
+\newcommand\tD{\ensuremathtt D}
+\newcommand\tE{\ensuremathtt E}
+\newcommand\tF{\ensuremathtt F}
+\newcommand\tG{\ensuremathtt G}
+\newcommand\tH{\ensuremathtt H}
+\newcommand\tI{\ensuremathtt I}
+\newcommand\tJ{\ensuremathtt J}
+\newcommand\tK{\ensuremathtt K}
+\newcommand\tL{\ensuremathtt L}
+\newcommand\tM{\ensuremathtt M}
+\newcommand\tN{\ensuremathtt N}
+\newcommand\tO{\ensuremathtt O}
+\newcommand\tP{\ensuremathtt P}
+\newcommand\tQ{\ensuremathtt Q}
+\newcommand\tR{\ensuremathtt R}
+\newcommand\tS{\ensuremathtt S}
+\newcommand\tT{\ensuremathtt T}
+\newcommand\tU{\ensuremathtt U}
+\newcommand\tV{\ensuremathtt V}
+\newcommand\tW{\ensuremathtt W}
+\newcommand\tX{\ensuremathtt X}
+\newcommand\tY{\ensuremathtt Y}
+\newcommand\tZ{\ensuremathtt Z}
+
+% Outputs a text as hyperlink + ordinary text, typeset with \URLfont
+\newcommand{\URL}[1]{\href{#1}{\URLfont{#1}}}
+% Typesets a hyperlink (for overriding)
+\newcommand{\URLfont}[1]{\texttt{#1}}
+
+
+% ----- listings (set defaults) -------------------------------------------
+
+% Define javadoc as a language
+\lstdefinelanguage[1.4]{javadoc}               
+  {keywords={@author,@deprecated,@exception,@link,@param,@return,%
+     @see,@serial,@serialData,@serialField,@since,@throws,@version}}%
+% Define our extension to javadoc as a dialect
+\lstdefinelanguage[OOJ]{javadoc}[1.4]{javadoc}
+  {morekeywords={@require,@ensure,@requires,@ensures,@invariant}} 
+% Our extension to javadoc is to be the default dialect
+\lstset{defaultdialect={[OOJ]javadoc}}         
+
+% standard settings for typesetting Java
+\lstdefinestyle{java}                
+  {language=Java,                        % should be clear
+   tabsize=8,                            % [Arend] this is what xemacs assumes
+   keepspaces=true                       % I know best
+   basicstyle=\small\ttfamily\upshape,   % keep things small and plain
+   commentstyle=\itshape}                % comments italic
+
+% standard settings for typesetting javadoc
+\lstdefinestyle{doc}                 
+  {language=javadoc,                     % should be clear
+   tabsize=8,                            % as for Java
+   keepspaces=true,                      % I know best
+   basicstyle=\small\ttfamily\itshape,   % italic
+   keywordstyle=\bfseries}               % bold (italic) keywords            
+
+% the default, esp. for snippets
+\lstset{style=java}                 
+\lstset{basicstyle=\small\ttfamily}      % have to say this again (but why?)
+\lstset{emphstyle=\underbar}             % benadrukken door onderstrepen
+%\lstset{breaklines=true}                 % breek lange regels (slim) af
+\lstset{escapechar=`}                    % voor speciale typesetting
+
+% java listings
+% Gebruik:
+% \begin{java}[listing-naam]
+% <javacode>
+% \end{java}
+\lstnewenvironment{java}[1][]                                      
+  {\csname lst@TestEOLChar{#1}\endcsname
+   \lstset{style=java}
+   \csname lst@SetFirstLabel\endcsname}
+  {\csname lst@SaveFirstLabel\endcsname}
+
+% java listings met benadrukte woorden
+% Gebruik:
+% \begin{javaemph}[listing-naam]{benadrukte-woorden-lijst}
+% <javacode>
+% \end{javaemph}
+\lstnewenvironment{javaemph}[2][]
+  {\csname lst@TestEOLChar{#1}\endcsname
+   \lstset{style=java}
+   \lstset{emph={#2}}
+   \csname lst@SetFirstLabel\endcsname}
+  {\csname lst@SaveFirstLabel\endcsname}
+
+% environment for javadoc listings
+% Gebruik:
+% \begin{java}[listing-naam]
+% <javacode>
+% \end{java}
+\lstnewenvironment{doc}[1][]  {\csname lst@TestEOLChar{#1}\endcsname
+   \lstset{style=doc}
+   \csname lst@SetFirstLabel\endcsname}
+  {\csname lst@SaveFirstLabel\endcsname}
+
+% code is a verbatim environment in the code font (small)
+\lstnewenvironment{code}[1][]%
+  {\lstset{language=,xleftmargin=4ex,#1}}
+  {}
+
+% snip is for general short snippets (but not special chars)
+% use it whenever possible (allows line breaking and hyphenation)
+% usage (like \texttt): \snip{code}
+\newcommand{\snip}[1]{\texttt{\small #1}}
+
+% jsnip is for java code snippets;
+% use it to format special characters and keywords
+% usage (like \verb): \jsnip`code`
+\let\jsnip\lstinline
+
+% vsnip is for verbatim snippets;
+% use it to format special characters
+% usage (like \verb): \vsnip`code`
+\def\vsnip{\jsnip[language=]}
+
+% subdirectory where to expect source (e.g., java) code
+\newcommand{\javadir}{java}
+\newcommand{\javaextension}{java}
+
+% javafile is for entire files (extension .java)
+% assumed to be placed in a sub-directory \javadir.
+% the filename extension is taken to be \javaextension.
+% Gebruik: \javafile[keyvals]{filenaam-zonder-extensie}
+\newcommand{\javafile}[2][]{%
+    \def\filenaam{\javadir/#2}%
+    \lstinputlisting[#1]{\filenaam.\javaextension}%
+}
+
+% since gobble doesn't work for \lstinputlisting, we need
+% a special command for it, which mimics gobble=4
+\newcommand{\javafilegobble}[2][]{%
+    \setbox0\hbox{\snip{AAAA}}
+    \javafile[xleftmargin=-\wd0,#1]{#2}
+}
+
+% codefile is for entire non-java files (extension to be included)
+% assumed to be placed in a sub-directory 'week1' etc.
+% Gebruik: \codefile{filenaam-met-extensie}
+\newcommand{\codefile}[1]{\lstinputlisting[xleftmargin=4ex,language=]{\srcdir/#1}}
+
+%%%% definition of extensible "transition arrows"
+%
+% auxiliaries
+\newcommand{\linefill}{%
+    \cleaders
+    \hbox{$\smash{\mkern-2mu\mathord-\mkern-2mu}$}%
+    \hfill
+    \vphantom{\lower1pt\hbox{$\rightarrow$}}%
+}
+\newcommand{\Linefill}{%
+    \cleaders
+    \hbox{$\smash{\mkern-2mu\mathord=\mkern-2mu}$}%
+    \hfill
+    \vphantom{\hbox{$\Rightarrow$}}%
+}
+
+% left segment of extensible arrow, no ending
+\newcommand{\xleftnoend}[1][]{\mathrel-_{\vphantom{#1}}\mkern-11mu}
+\newcommand{\xLeftnoend}[1][]{\mathrel=_{\vphantom{#1}}\mkern-8mu}
+% left segment of extensible arrow,arrow head
+\newcommand{\xleftarrow}[1][]{\leftarrow_{\vphantom{#1}}\mkern-11mu}
+% middle segment of extensible arrow
+\newcommand{\xmid}[2][]{\stackrel{#2}{\linefill_{\vphantom{#1}}}}
+\newcommand{\xMid}[2][]{\stackrel{#2}{\Linefill_{\vphantom{#1}}}}
+% right segment of extensible arrow, no ending
+\newcommand{\xrightnoend}[1][]{\mkern-11mu\mathrel-_{#1}}
+% right segment of extensible arrow, arrow head
+\newcommand{\xrightarrow}[1][]{\mkern-11mu\rightarrow_{#1}}
+\newcommand{\xRightarrow}[1][]{\mkern-8mu\Rightarrow_{#1}}
+% make arrow symbol
+\newcommand{\xmake}[1]{\mathrel{\lower1pt\hbox{$#1$}}}
+
+% single-arrow transition
+\newcommand{\trans}[2][]{\xmake{\xleftnoend[#1]\xmid[#1]{#2}\xrightarrow[#1]}}%
+% negative single-arrow transition
+\newcommand{\ntrans}[2][]{\not\trans[#1]{\enspace#2}}
+
+% double-arrow transition
+\newcommand{\Trans}[2][]{\xmake{\xLeftnoend[#1]\xMid[#1]{#2}\xRightarrow[#1]}}%
+% negative double-arrow transition
+\newcommand{\nTrans}[2][]{\not\Trans[#1]{\enspace#2}}
+
+%%%% arrow and relation symbols
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\nea}{\nearrow}
+\newcommand{\nwa}{\nwarrow}
+\newcommand{\sea}{\searrow}
+\newcommand{\na}{\uparrow}
+\newcommand{\sa}{\downarrow}
+% crossed diagonal arrows
+\newcommand{\nsea}{\mathrel{\mathord{\squeeze\nea}\mathord\sea}}
+\newcommand{\nwea}{\mathrel{\mathord{\squeeze\nwarrow}\mathord\nea}}
+% aliases for north and south
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\Up}{\Uparrow}
+\newcommand{\Down}{\Downarrow}
+
+\newcommand{\iso}{\cong}
+\newcommand{\sq}{\sqsubset}
+\newcommand{\sqeq}{\sqsubseteq}
+
+%%%% miscellaneous
+
+% Puts text in a framed box the width of the page, for instance for figures.
+% #1 the text to be framed
+\newcommand{\framepage}[1]{\framebox[\textwidth]{
+\advance\textwidth-\fboxsep
+\advance\textwidth-\fboxsep
+\advance\textwidth-\fboxrule
+\advance\textwidth-\fboxrule
+\parbox{\textwidth}{#1}}}
+
+\newcommand\appearedin[1]{%
+  \parbox{\textwidth}{%
+    \normalsize\bf
+    \unitlength\baselineskip
+    \begin{picture}(0,0)(0,0)
+    \put(0,2){\framepage{\centering #1}}
+    \end{picture}\hfil
+  }
+}
+
+\newcommand{\draft}{%
+\special{ps: plotfile draft}%
+\renewcommand{\thepage}{{\today} --- \arabic{page}}}
+
+% Subformula smashing (= pretending height and depth are 0) and
+% squeezing (= pretending width is 0)
+%
+% auxiliaries
+\def\mathsqueeze#1#2{\setbox0=\hbox{$\m@th#1{#2}$}\wd0=0pt\box0}
+\def\makesqueeze#1{\setbox0=\hbox{#1}\wd0=0pt\box0}
+\newbox\tmpbox
+%
+% smash height only
+\newcommand{\smasht}[1]{%
+    \setbox\tmpbox\hbox{$#1$}%
+    \smash{\copy\tmpbox}%
+    \vphantom{\vtop to\dp\tmpbox{}}%
+}
+% smash depth only
+\newcommand{\smashb}[1]{%
+    \setbox\tmpbox\hbox{$#1$}%
+    \smash{\copy\tmpbox}%
+    \vphantom{\vbox to\ht\tmpbox{}}
+}
+% squeeze
+\def\squeeze{\relax
+    \ifmmode\def\next{\mathpalette\mathsqueeze}%
+    \else\let\next\makesqueeze
+    \fi
+    \next
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Figures %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% reads postscript figure and give caption and label
+% #1 = filename (searched in subdir \figdir) and label (made with \flabel)
+% #2 = caption
+\newcommand\psfig[3][]{%
+    \psfiglab[#1]{#2}{#2}{#3}%
+}
+% reads postscript figure and give caption and label
+% #1 = filename (searched in subdir \figdir)
+% #2 = label (made with \flabel)
+% #3 = caption
+\newcommand{\psfiglab}[4][]{\begin{figure}
+    \begin{center}
+    \includegraphics[#1]{\figdir/#2}
+    \end{center}
+    \vspace*{-\medskipamount}
+    \caption{#4}
+    \flabel{#3}
+    \vspace*{-\medskipamount}
+    \end{figure}%
+}
+% reads tex figure and gives caption and label
+% #1 = filename (searched under \figdir/#1.\texfigsuffix) and label (made with \flabel)
+% #2 = caption
+\newcommand{\texfig}[2]{\begin{figure}
+    \begin{center}
+    \inputtexfig{#1}
+    \end{center}
+    \vspace*{-\bigskipamount}
+    \caption{#2}
+    \flabel{#1}
+    \vspace*{-\medskipamount}
+    \end{figure}%
+}
+% reads #1.\texfigsuffix and places it in a centered environment
+\newcommand{\inputtexfig}[1]{\inputfig{#1.\texfigsuffix}}
+% reads #1 and places it in a centered environment
+\newcommand{\inputfig}[1]{\begin{center}\input{\figdir/#1}\end{center}}
+% to be overridden in case you want pstex_t (= fig2dev default)
+\newcommand{\texfigsuffix}{tex}
+% to be overridden in case you want figures to be elsewhere
+\newcommand{\figdir}{fig/}
+
+\newlength{\framelength}
+\newcommand{\fparbox}[2]{\framelength#1%
+\advance\framelength-\fboxrule\advance\framelength-\fboxsep
+\advance\framelength-\fboxrule\advance\framelength-\fboxsep
+\fbox{\begin{minipage}{\framelength}
+#2
+\end{minipage}}}
+
+% reads in file and gives it frame label and caption
+% deprecated; use \psfig or \texfig
+\newcommand\xfig[2]{%
+    \begin{figure}%
+    \framebox[\textwidth]{\input{#1}}\caption{#2}\flabel{#1}%
+    \end{figure}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Poset macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% poset with 0 elements
+\newcommand\emptypo{\epsilon}
+
+% Posets with 1 element
+\newcommand{\fo}[1]{\makef{c}{#1}}
+
+% posets with 2 elements
+\newcommand{\flfoo}[2]{\makef{ccc}{#1&\enspace&#2}}
+\newcommand{\foo}[2]{\makef{c}{#1\\[\smallskipamount]\\#2}}
+\newcommand{\ft}[2]{\makef{ccc}{#1&\ra&#2\\}}
+
+% posets with 3 elements
+\newcommand{\fooops}[3]{\makef{ccl}{&&#2\\&\nea\\#1&\ra&#3}}
+\newcommand{\fot}[3]{\makef{ccc}{#1\\[\smallskipamount]\\#2&\ra&#3}}
+\newcommand{\foopos}[3]{\makef{ccc}{#1\\&\sea\\#2&\ra&#3}}
+\newcommand{\flfoopos}[3]{\makef{ccccc}{#1&\ra&#3&\la&#2}}
+\newcommand{\fto}[3]{\makef{ccc}{#1&\ra&#2\\[\smallskipamount]\\#3}}
+\newcommand{\fth}[3]{\makef{ccccc}{#1&\ra&#2&\ra&#3}}
+
+% posets with 4 elements
+\newcommand{\ftopos}[4]{\makef{ccccc}{#1&\ra&#2\\&&&\sea\\&&#3&\ra&#4}}
+\newcommand{\ftt}[4]{\makef{ccc}{#1&\ra&#2\\[\smallskipamount]\\#3&\ra&#4}}
+\newcommand{\fooopso}[4]{\makef{ccc}{#1&\ra&#2\\&\sea\\#4&&#3}}
+\newcommand{\foopts}[4]{\makef{ccccc}{#1\\&\sea\\#2&\ra&#3&\ra&#4}}
+\newcommand{\foooops}[4]{\makef{ccc}{#1&&#3\\&\nea\\#2&\ra&#4}}
+\newcommand{\fotops}[4]{\makef{ccccc}{#1&\ra&#2&\ra&#3\\&\sea\\&&#4}}
+\newcommand{\footps}[4]{\makef{ccccc}{#1&\ra&#2\\&\sea\\&&#3&\ra&#4}}
+\newcommand{\fotpos}[4]{\makef{ccccc}{&&#1\\&&&\sea\\#2&\ra&#3&\ra&#4}}
+\newcommand{\foth}[4]{\makef{ccccc}{#1\\&\\#2&\ra&#3&\ra&#4}}
+\newcommand{\ftho}[4]{\makef{ccccc}{#1&\ra&#2&\ra&#3\\&\\#4}}
+\newcommand{\ff}[4]{\makef{ccccccc}{#1&\ra&#2&\ra&#3&\ra&#4}}
+\newcommand{\foopoops}[4]{\makef{ccc}{#1&\ra&#3\\&\nsea\\#2&\ra&#4}}
+\newcommand{\fN}[4]{\makef{ccc}{#1&\ra&#3\\&\nea\\#2&\ra&#4}}
+
+% posets with 5 elements
+\newcommand{\fthoo}[5]{\makef{ccccc}{#1&\ra&#2&\ra&#3\\&\\#4\\&\\#5}}
+\newcommand{\fotho}[5]{\makef{ccccc}{#1\\&\\#2&\ra&#3&\ra&#4\\&\\#5}}
+\newcommand{\ftot}[5]{\makef{ccc}{#1&\ra&#2\\&\\#3\\&\\#4&\ra&#5}}
+\newcommand{\fottps}[5]{\makef{ccccl}{&&#2&\ra&#3\\&\nea\\#1&\ra&#4&\ra&#5}}
+\newcommand{\fott}[5]{\makef{ccc}{#1\\&\\#2&\ra&#3\\&\\#4&\ra&#5}}
+\newcommand{\fv}[5]{\makef{ccccccccc}{#1&\ra&#2&\ra&#3&\ra&#4&\ra&#5}}
+
+% posets with 6 elements
+\newcommand\fothpts[6]{%
+    \makef{ccccccccc}{&&&&#1&\ra&#5&\ra&#6\\&&&&&\nea\\#2&\ra&#3&\ra&#4}%
+}
+\newcommand\fthopts[6]{%
+    \makef{ccccccccc}{#1&\ra&#2&\ra&#3\\&&&&&\sea\\&&&&#4&\ra&#5&\ra&#6}%
+}
+\newcommand\fotoopsops[6]{%
+    \makef{ccccccl}{#1&\ra&#2&\ra&#3&\ra&#4\\&\sea&&&&\sea\\&&#6&&&&#5}%
+}
+
+% outputs a compacted framed array
+\newcommand{\makef}[2]{%
+    \setlength{\fboxsep}{.5mm}%
+    \fbox{$
+        \setlength{\arraycolsep}{0mm}
+        \renewcommand{\arraystretch}{.2}
+        \begin{array}[c]{#1}#2\end{array}
+    $}%
+}
+% outputs a small compacted framed array
+\newcommand{\makefsmall}[2]{%
+    \setlength{\fboxsep}{.5mm}%
+    \fbox{\footnotesize$
+        \setlength{\arraycolsep}{0mm}
+        \renewcommand{\arraystretch}{.2}
+        \begin{array}[c]{#1}#2\end{array}
+    $}%
+}
+
+% ----- fonts ------------------------------------------------------------
+
+% See /usr/share/texmf/tex/latex/psnfss/ot1phv.fd (Linux RedHat 6.2).
+
+% sf: Helvetica (92%)
+
+\DeclareFontFamily{OT1}{phvx}{}
+
+\DeclareFontShape{OT1}{phvx}{m}{n}{ <-> s * [0.92] phvr7t }{}
+\DeclareFontShape{OT1}{phvx}{m}{sc}{ <-> s * [0.92] phvrc7t }{}
+\DeclareFontShape{OT1}{phvx}{m}{sl}{ <-> s * [0.92] phvro7t }{}
+\DeclareFontShape{OT1}{phvx}{mc}{n}{ <-> s * [0.92] phvr7tn }{}
+\DeclareFontShape{OT1}{phvx}{mc}{sc}{ <-> s * [0.92] phvrc7tn }{}
+\DeclareFontShape{OT1}{phvx}{mc}{sl}{ <-> s * [0.92] phvro7tn }{}
+\DeclareFontShape{OT1}{phvx}{b}{n}{ <-> s * [0.92] phvb7t }{}
+\DeclareFontShape{OT1}{phvx}{b}{sc}{ <-> s * [0.92] phvbc7t }{}
+\DeclareFontShape{OT1}{phvx}{b}{sl}{ <-> s * [0.92] phvbo7t }{}
+\DeclareFontShape{OT1}{phvx}{bc}{n}{ <-> s * [0.92] phvb7tn }{}
+\DeclareFontShape{OT1}{phvx}{bc}{sc}{ <-> s * [0.92] phvbc7tn }{}
+\DeclareFontShape{OT1}{phvx}{bc}{sl}{ <-> s * [0.92] phvbo7tn }{}
+
+\DeclareFontShape{OT1}{phvx}{m}{it}{ <-> ssub * phvx/m/sl}{}
+\DeclareFontShape{OT1}{phvx}{mc}{it}{ <-> ssub * phvx/mc/sl}{}
+\DeclareFontShape{OT1}{phvx}{bx}{n}{ <-> ssub * phvx/b/n}{}
+\DeclareFontShape{OT1}{phvx}{bx}{sc}{ <-> ssub * phvx/b/sc}{}
+\DeclareFontShape{OT1}{phvx}{bx}{sl}{ <-> ssub * phvx/b/sl}{}
+\DeclareFontShape{OT1}{phvx}{b}{it}{ <-> ssub * phvx/b/sl}{}
+\DeclareFontShape{OT1}{phvx}{bx}{it}{ <-> ssub * phvx/b/it}{}
+\DeclareFontShape{OT1}{phvx}{bc}{it}{ <-> ssub * phvx/bc/sl}{}
+
+\DeclareFontShape{OT1}{phvx}{m}{ui}{ <-> ssub * phvx/m/it}{}
+\DeclareFontShape{OT1}{phvx}{b}{ui}{ <-> ssub * phvx/b/it}{}
+
+\renewcommand{\sfdefault}{phvx}         % instead of standard Helvetica (phv)
+
+% tt: Courier (97%)
+
+\DeclareFontFamily{OT1}{pcrx}{}
+
+\DeclareFontShape{OT1}{pcrx}{m}{n}{ <-> s * [0.97] pcrr7t }{}
+\DeclareFontShape{OT1}{pcrx}{m}{sc}{ <-> s * [0.97] pcrrc7t }{}
+\DeclareFontShape{OT1}{pcrx}{m}{sl}{ <-> s * [0.97] pcrro7t }{}
+\DeclareFontShape{OT1}{pcrx}{mc}{n}{ <-> s * [0.97] pcrr7tn }{}
+\DeclareFontShape{OT1}{pcrx}{mc}{sc}{ <-> s * [0.97] pcrrc7tn }{}
+\DeclareFontShape{OT1}{pcrx}{mc}{sl}{ <-> s * [0.97] pcrro7tn }{}
+\DeclareFontShape{OT1}{pcrx}{b}{n}{ <-> s * [0.97] pcrb7t }{}
+\DeclareFontShape{OT1}{pcrx}{b}{sc}{ <-> s * [0.97] pcrbc7t }{}
+\DeclareFontShape{OT1}{pcrx}{b}{sl}{ <-> s * [0.97] pcrbo7t }{}
+\DeclareFontShape{OT1}{pcrx}{bc}{n}{ <-> s * [0.97] pcrb7tn }{}
+\DeclareFontShape{OT1}{pcrx}{bc}{sc}{ <-> s * [0.97] pcrbc7tn }{}
+\DeclareFontShape{OT1}{pcrx}{bc}{sl}{ <-> s * [0.97] pcrbo7tn }{}
+
+\DeclareFontShape{OT1}{pcrx}{m}{it}{ <-> ssub * pcrx/m/sl}{}
+\DeclareFontShape{OT1}{pcrx}{mc}{it}{ <-> ssub * pcrx/mc/sl}{}
+\DeclareFontShape{OT1}{pcrx}{bx}{n}{ <-> ssub * pcrx/b/n}{}
+\DeclareFontShape{OT1}{pcrx}{bx}{sc}{ <-> ssub * pcrx/b/sc}{}
+\DeclareFontShape{OT1}{pcrx}{bx}{sl}{ <-> ssub * pcrx/b/sl}{}
+\DeclareFontShape{OT1}{pcrx}{b}{it}{ <-> ssub * pcrx/b/sl}{}
+\DeclareFontShape{OT1}{pcrx}{bx}{it}{ <-> ssub * pcrx/b/it}{}
+\DeclareFontShape{OT1}{pcrx}{bc}{it}{ <-> ssub * pcrx/bc/sl}{}
+
+\DeclareFontShape{OT1}{pcrx}{m}{ui}{ <-> ssub * pcrx/m/it}{}
+\DeclareFontShape{OT1}{pcrx}{b}{ui}{ <-> ssub * pcrx/b/it}{}
+
+\renewcommand{\ttdefault}{pcrx}         % instead of standard Courier (pcr)

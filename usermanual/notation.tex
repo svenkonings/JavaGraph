@@ -1,0 +1,194 @@
+\newcommand\Lab{{\mathbf L}}      % global set of labels
+\newcommand\Node{{\mathbf N}}     % global set of nodes
+\renewcommand{\S}{{\cal S}}         % Sort set variable
+
+\newcommand{\sepChar}{\textsf,}
+\newcommand{\escChar}{\textsf\textbackslash}
+\newcommand{\quoChar}{\textsf'}
+\newcommand{\quo}[1]{``\,\textsf{#1}\,''}
+
+% Typesetting
+\newcommand{\lab}[1]{\textsf{#1}}
+% Binary labels
+\newcommand{\blab}[1]{\lab{#1}}
+% Type labels
+\newcommand{\tlab}[1]{\lab{\bfseries#1}}
+% Flag labels
+\newcommand{\flab}[1]{\lab{\itshape#1}}
+% Regexp labels
+\newcommand{\rlab}[1]{\lab{\itshape#1}}
+
+% Edit view prefixes
+\newcommand{\prf}[1]{%
+  \expandafter\newcommand\csname#1P\endcsname{\lab{#1:}}
+}
+\prf{abs}
+\prf{arg}
+\prf{bool}
+\prf{cnew}
+\prf{color}
+\prf{del}
+\prf{edge}
+\prf{exists}
+\prf{existsx}
+\prf{flag}
+\prf{forall}
+\prf{forallx}
+\prf{id}
+\prf{import}
+\prf{in}
+\prf{int}
+\prf{let}
+\prf{nested}
+\prf{new}
+\prf{not}
+\prf{out}
+\prf{par}
+\prf{parin}
+\prf{parout}
+\prf{part}
+\prf{path}
+\prf{prod}
+\prf{real}
+\prf{rem}
+\prf{string}
+\prf{sub}
+\prf{test}
+\prf{type}
+\prf{use}
+\newcommand{\litP}{\lab{:}}
+
+\renewcommand{\l}[1]{\ensuremath{\mathsf{#1}}}
+
+\newcommand{\xx}{\ensuremath{\mathsf x}}
+\newcommand{\yy}{\ensuremath{\mathsf y}}
+\newcommand{\zz}{\ensuremath{\mathsf z}}
+\newcommand{\expL}{\l{exp}}
+\newcommand{\pathL}{\l{path}}
+\newcommand{\nextL}{\l{next}}
+
+\newcommand{\Append}{\ensuremath{\mathsf{append}}}
+\newcommand{\Val}{\ensuremath{\mathsf{val}}}
+\newcommand{\This}{\ensuremath{\mathsf{this}}}
+\newcommand{\Next}{\ensuremath{\mathsf{next}}}
+\newcommand{\First}{\ensuremath{\mathsf{first}}}
+\newcommand{\Last}{\ensuremath{\mathsf{last}}}
+\newcommand{\Object}{\ensuremath{\mathsf{Object}}}
+\newcommand{\Buffer}{\ensuremath{\mathsf{Buffer}}}
+
+% Special rule labels
+\newcommand{\Open}{\mbox{\lab{start}}}
+\newcommand{\Start}{\mbox{\lab{open}}}
+\newcommand{\Final}{\mbox{\lab{final}}}
+
+\newcommand{\Put}{\ensuremath{\mathsf{\langle put\rangle}}}
+\newcommand{\Get}{\ensuremath{\mathsf{\langle get\rangle}}}
+
+\newcommand{\prefix}{\texttt{<prefix>}}
+\newcommand{\constantSymbol}{\texttt{<value>}}
+\newcommand{\operationSymbol}{\texttt{<operation>}}
+
+% attribute labels
+\newcommand{\current}{\ensuremath{\mathsf{current}}}
+\newcommand{\capacity}{\ensuremath{\mathsf{capacity}}}
+\newcommand{\bufferIndex}{\ensuremath{\mathsf{index}}}
+
+% algebra operations
+\newcommand{\intLT}{\ensuremath{\mathsf{lt}}}
+
+\newcommand{\true}{\ensuremath{\mathsf{true}}}
+%\newcommand{\reOr}{\mathbin{|}}
+%\newcommand{\reSeq}{{.}}
+%\newcommand{\reStar}{{\l{*}}
+%\newcommand{\reOpt}{{\l{?}}
+%\newcommand{\rePlus}{{\l{+}}
+
+\newcommand{\keyword}[1]{\expandafter\newcommand\csname#1K\endcsname
+    {\textsf{\bfseries{#1}}}
+}
+\keyword{choice}
+\keyword{or}
+\keyword{try}
+\keyword{do}
+\keyword{if}
+\keyword{else}
+\keyword{while}
+\keyword{until}
+\keyword{alap}
+\keyword{true}
+\keyword{any}
+\keyword{other}
+\keyword{function}
+\keyword{recipe}
+
+%\renewcommand{\texfigsuffix}{pstex_t}
+
+\newcommand{\grooveURL}{http://groove.cs.utwente.nl}
+\newcommand{\GROOVE}{\textsc{groove}\xspace}
+\newcommand{\JGraph}{\textsc{jgraph}\xspace}
+
+\newcommand{\scale}{.7}
+\newcommand{\graphbox}[1]{%
+    \framebox{\includegraphics[scale=\scale]{\figdir/#1}}%
+}
+\newcommand{\tscale}{1.1}
+\newcommand{\tikzbox}[2][]{%
+    \framebox{\scalebox{\tscale}{\input{\figdir/#2.tikz}}}%
+}
+\newcommand{\tikzboxview}[2]{%
+    \begin{tabular}{@{}l@{}} #1 \\ \tikzbox{#2}\end{tabular}
+}
+\newcommand{\views}[1]{
+  \begin{equation}\eqlabel{#1}
+  \begin{tabular}{@{}c@{}}
+  \tikzboxview{Prefix view}{#1-edit}
+  \quad
+  \tikzboxview{Display view}{#1-display}
+  \end{tabular}
+  \end{equation}
+}
+
+\newcommand{\graphfig}[2]{%
+  \begin{figure}[h]
+    \begin{center}
+      \graphbox{#1}
+    \end{center}
+    \vspace*{-\medskipamount}
+    \caption{#2}
+    \flabel{#1}
+    \vspace*{-\medskipamount}
+  \end{figure} 
+}
+
+% \newcommand{\viewsfig}[2]{%
+%   \begin{figure}[h]
+%     \begin{center}
+%       \graphbox{#1-edit-view}
+%       \qquad
+%       \graphbox{#1}
+%     \end{center}
+%     \vspace*{-\medskipamount}
+%     \caption{#2}
+%     \flabel{#1}
+%     \vspace*{-\medskipamount}
+%   \end{figure} 
+% }
+
+\newcommand{\viewsfig}[3][graph]{%
+  \begin{figure}[h]
+    \begin{center}
+      \expandafter\csname#1box\endcsname{#2-edit-view}
+      \qquad
+      \expandafter\csname#1box\endcsname{#2}
+    \end{center}
+    \vspace*{-\medskipamount}
+    \caption{#3}
+    \flabel{#2}
+    \vspace*{-\medskipamount}
+  \end{figure} 
+}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End: 

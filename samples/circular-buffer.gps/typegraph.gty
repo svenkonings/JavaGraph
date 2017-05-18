@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="type" id="typegraph">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n0">
+            <attr name="layout">
+                <string>360 92 50 21</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>232 90 31 21</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>225 193 48 21</string>
+            </attr>
+        </node>
+        <edge to="n6" from="n7">
+            <attr name="label">
+                <string>first</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+            <attr name="layout">
+                <string>89 2 248 90 248 59 199 59 199 100 232 100 11</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:Cell</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:Buffer</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n6">
+            <attr name="label">
+                <string>val</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n7">
+            <attr name="label">
+                <string>last</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Object</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

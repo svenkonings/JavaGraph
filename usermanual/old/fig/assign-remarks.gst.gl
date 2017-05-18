@@ -1,0 +1,15 @@
+# Layout information for H:\lib\groove\usermanual\fig\assign-remarks.gst
+# Each line contains layout information about a node or edge
+# Version info: v <version number>; 1 = pre-jgraph 5.9, 2 = jgraph 5.9
+#     v 1: label position = (x-permillage, y-permillage)
+#     v 2: label position = (vector permillage, perpendicular distance)
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+v 2
+n n3 253 62 74 28 
+n n2 127 63 28 14 
+n n4 140 123 22 14 
+n n1 175 123 22 14 
+n n0 104 122 22 14 
+e n3 n2 "ordinary node" 465 14 253 73 165 73 11
+e n3 n4 "value node" 500 0 300 96 300 169 146 156 146 143 14

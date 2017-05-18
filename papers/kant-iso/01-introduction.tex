@@ -1,0 +1,61 @@
+\section{Introduction}
+
+In graph-based model checking, where systems are modelled as graph
+transformation systems (see \cite{rensink2008:explicit}) and states are graphs,
+we are proposing to collapse isomorphic graphs to reduce the state space (see
+\cite{rensink2009:isomorphism}). Graph isomorphism checking is not known either
+to be in P or to be NP-complete, but is believed to be neither
+\cite{messmer1999:decision,weisstein2009:isomorphic}. However, despite its
+complexity, experiments have shown that state space reduction modulo isomorphism
+can pay off in a model with sufficient symmetry: see \cite{crouzen2008:gossiping}.
+
+The graph isomorphism problem is usually posed as: are two given graphs
+isomorphic? This problem is studied mostly for unlabelled, sometimes undirected
+graphs (that is, the edges have no labels). In the context of our work,
+however, the following conditions apply:
+%
+\begin{itemize}\itemsep0pt
+\item The problem is a more general one: given a graph and a (large) set of
+  graphs, does the latter contain a graph isomorphic to the first?
+
+\item The graphs are directed and edge-labelled.
+
+\item The graphs themselves are typically not large (up to a thousand nodes, but
+  usually much smaller).
+\end{itemize}
+%
+The first point implies that some algorithms for isomorphism checking, namely
+those that work purely on the basis of a pairwise comparison, are unsuitable
+for our purpose. The second point implies that the existing state-of-the-art
+tools, in particular \NAUTY \cite{mckay2008:nauty24,mckay1981:practical} and
+\BLISS \cite{junttila2008:bliss,junttila2007:engineering}, are only usable after
+a conversion from labelled to unlabelled graphs. The third point implies that
+there is less chance of encountering truly hard cases.
+
+We have implemented isomorphism checking in our tool \GROOVE
+\cite{rensink2009:groove}, inspired by the ideas of McKay
+\cite{mckay1981:practical} that underlie \NAUTY and \BLISS. (More details are
+given below.) A natural question is whether it would be better to use these
+existing tools instead, which are dedicated to the task and should therefore be
+expected to perform better. Arguing against this is the graph conversion
+necessary to use the existing tools. This conversion has two potentially
+deleterious effects:
+%
+% \begin{itemize}\itemsep0pt
+\begin{inparaenum}
+\item the graph size increases;
+\item the structure provided by the edge labels is ``flattened out''.
+% \end{itemize}
+\end{inparaenum}
+%
+We report a series of experiments showing that on some graphs typically
+encountered in graph-based model checking, in fact our own implementation
+outperforms the state-of-the-art tools, even without taking the conversion time
+itself into account.
+
+\medskip\noindent The remainder of the paper is structured as follows. In the
+next section, we describe two different ways to convert labelled to unlabelled
+graphs. Section~\ref{section-experiments} describes the experimental setup and
+the results. In Section~\ref{section-related-work} we describe related work,
+and in Section~\ref{section-conclusions} we present the final conclusions of
+the paper.

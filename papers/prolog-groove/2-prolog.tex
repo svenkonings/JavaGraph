@@ -1,0 +1,243 @@
+% -----------------------------------------------------------------------------
+% 2-prolog.tex
+% -----------------------------------------------------------------------------
+
+\section{\Prolog in \GROOVE}
+\stlabel{prolog}
+
+The \Prolog programming language \cite{Clocksin1984} is the \emph{de facto}
+representative of the logic programming paradigm. Unlike imperative languages,
+\Prolog is declarative: a \Prolog program is composed of predicates about
+objects and their relations, and computations are performed by running queries
+over predicates. Given a query asking whether a predicate holds for a certain
+(given) object, the \Prolog interpreter uses a \emph{resolution} procedure that
+yields a \textsf{yes} or \textsf{no} answer. On the other hand, if a query has
+free variables, the \Prolog engine will enumerate all objects which can be
+assigned to the variables so as to make the predicate true. 
+
+\GROOVE \cite{GROOVE,STTT} is a graph transformation tool set which can
+recursively explore and collect all possible rule applications over a start
+graph: this is referred to as the \emph{exploration of the state space} of a
+graph grammar. The state space is stored as a graph transition system (GTS),
+where each state of the system contains a graph and each transition is labelled
+by a rule application. \GROOVE has a graphical interface called the Simulator,
+for editing graphs and rules, and for exploring and visualising the GTS. The
+main technical contribution of this paper is the integration of a \Prolog
+interpreter into the \GROOVE Simulator.
+
+% -----------------------------------------------------------------------------
+
+\subsection{Functionality Overview}
+
+Before executing \Prolog queries, the standard \GROOVE functionality is used
+to perform a state space exploration of the graph grammar under analysis. The
+exploration produces a GTS, which can then be inspected in queries. At this
+point it is important to stress the difference between \emph{states} and
+\emph{state graphs}. A state is an element of the GTS; it is implemented as an
+object with a unique identity and an associated state graph. A state graph is a
+host graph over which the transformation rules are applied.
+
+\begin{figure}[t]
+\centering
+\inputtikz{ex-lts.tikz}
+\caption{Example GTS with three states and two transitions.}
+\flabel{ex-lts}
+\end{figure}
+
+We illustrate the \Prolog functionality on the basis of a very small example.
+\fref{ex-lts} shows a GTS with three states, represented by dashed boxes: the
+start state $s_0$ and two successor states $s_1$ and $s_2$. Each of the states
+contains a state graph, consisting of two nodes connected by an
+\textsf{e}-labelled edge. The state graph of $s_1$ is obtained from the state
+graph of $s_0$ by applying rule \feat{a2b} (not shown here) which renames an
+\type{A}-node to a \type{B}-node. Analogously, the state graph of $s_2$ is
+produced by applying rule \feat{a2c}. Now consider the following \Prolog query:
+%
+\begin{lstlisting}[style=prolog]
+?- state(X), state_graph(X,GX), has_node_type(GX,'A'),
+    state_next(X,Y), state_graph(Y,GY), has_node_type(GY,'C').
+\end{lstlisting}
+%
+The query is composed of six predicates, interpreted conjunctively from left to
+right (the meaning of characters \inPro{+} and \inPro{?} will be discussed in
+\stref{implementation}):
+%
+\begin{itemize}\noitemsep\renewcommand{\labelitemi}{$\bullet$}
+\item \inPro{state(?State)} iterates over the states of the currently explored
+GTS.
+\item \inPro{state_graph(+State, ?Graph)} binds the state graph of the given
+state to the second argument; \ie, it retrieves the state graph associated with
+the given state.
+\item \inPro{has_node_type(+Graph, +Type)} succeeds if the given graph has
+at least one node of the given type.
+\item \inPro{state_next(+State, ?NextState)} iterates over all successors of
+the given state.
+\end{itemize}
+%
+ The purpose of the query is to search for a state (variable \inPro{Y}) with a
+graph (\inPro{GY}) that has at least one node of type \type{C} and that has a
+predecessor state (\inPro{X}) whose graph (\inPro{GX}) contains a node of type
+\type{A}. Running this query produces the following result, which correctly
+binds \inPro{Y} to state $s_2$:
+%
+\begin{lstlisting}[style=prolog]
+X = s0
+GX = Nodes: [n0, n1]; Edges: [n0--A-->n0, n1--D-->n1, n0--e-->n1]
+Y = s2
+GY = Nodes: [n0, n1]; Edges: [n0--C-->n0, n1--D-->n1, n0--e-->n1]
+Yes
+More?
+No
+\end{lstlisting}
+%
+The output also shows the bindings for the other variables in the query. The
+values printed for variables \inPro{GX} and \inPro{GY} are the
+\inJava{toString} representations of the bound graphs, which show their
+internal structure -- this explains the edge lists with three
+elements\footnote{\GROOVE uses an internal graph representation where nodes have
+very little structure; node types and flags are stored as special self-edges.}.
+In the last two lines of the listing above, the user asked the interpreter if
+there are more results for the query.  Since there are no other states that
+satisfy the query constraints, the answer is negative. If the GTS had more
+states satisfying the query, continuing the execution would eventually produce
+all of them. This is a consequence of the \Prolog resolution procedure, which
+backtracks to predicate \inPro{state_next}, binding \inPro{Y} with other
+successors of \inPro{X}, as well as to \inPro{state}, binding \inPro{X} with
+other states of the GTS.
+
+In addition to using the built-in \GROOVE predicates, users can also define
+their own \Prolog predicates. This ability to expand the \Prolog knowledge-base
+(illustrated on \stref{query}) improves the extensibility of the framework.
+
+% -----------------------------------------------------------------------------
+
+\subsection{Implementation Overview}
+\stlabel{implementation}
+
+\fref{implementation} shows the main elements of the integration of \Prolog
+into the Simulator. \GROOVE is written in Java, so in order to ease the
+coupling, we chose the GNU Prolog for Java
+library\footnote{\url{http://www.gnu.org/software/gnuprologjava/}}
+\cite{Diaz2000} as our \Prolog interpreter. The Simulator state in
+\fref{implementation} stands for the current snapshot of the Simulator
+configuration in memory. It contains Java objects that represent, among others,
+host graphs, transformation rules, and the GTS. The main block of
+\fref{implementation} is the glue code, which connects the \Prolog interpreter
+to the rest of the Simulator. The glue code registers itself in the interpreter
+and is called back when a \Prolog query is run. When called, the glue code
+inspects the Simulator state and tries to bind the Java objects with terms
+(variables) of the query.
+
+\begin{figure}[t]
+\centering
+\inputtikz{implementation.tikz}
+\caption{Integration of the \Prolog interpreter in the \GROOVE Simulator.}
+\flabel{implementation}
+\end{figure}
+%
+% -----------------------------------------------------------------------------
+
+\vspace{-9pt}
+\subsubsection{Built-in Predicates.} Each built-in \GROOVE predicate requires
+some glue code, written partly in \Prolog and partly in Java. When the \Prolog
+interpreter is created, an initialisation phase registers the built-in
+predicates with the interpreter. For instance, \inPro{gts(-GTS)} is a built-in
+predicate that binds the Java GTS object to a \Prolog variable. Predicate
+registration is done with the following query:
+%
+\begin{lstlisting}[style=prolog]
+:- build_in(gts/1, 'groove.prolog.builtin.Predicate_gts').
+\end{lstlisting}
+%
+Predicate \inPro{build_in} is a special interpreter command for creating new
+predicates. The first argument specifies the predicate name and arity, the
+second one gives the name of the Java class that implements the predicate
+functionality.  Here is a simplified listing for the Java
+\inJava{Predicate_gts} class.
+%
+\begin{lstlisting}[style=java]
+public class Predicate_gts extends PrologCode {
+  public int execute(Interpreter interpreter, boolean backtracking, Term[] args) {
+    GTS gts = getSimulatorState().getGTS();
+    if (gts == null) {
+      return FAIL;
+    }
+    return interpreter.unify(args[0], gts);
+  }
+}
+\end{lstlisting}
+%
+When \inPro{gts(X)} is evaluated in a query, the interpreter calls
+\inJava{execute} of \inJava{Predicate_gts}. The third argument of the method is
+an array of \Prolog terms that corresponds to the arguments of the predicate
+--- in this case, \inPro{X}. The method first inspects the Simulator state to
+retrieve the GTS object (line 3). If the object is \inJava{null} the query
+fails, otherwise the object is bound to \inPro{X} (line 7).
+
+% -----------------------------------------------------------------------------
+
+\vspace{-9pt}
+\subsubsection{Argument Modes.} In the above, we have specified predicate
+signatures in which the parameter names were prefixed with special characters.
+These indicate the interaction of the \Prolog interpreter with arguments at
+that position:
+\begin{itemize}\noitemsep
+\item[\textsf{+}] Input parameter: the argument must already be bound to an
+  object of the appropriate type. For example,
+  \inPro{has_node_type(+Graph,+Type)} succeeds if the given graph has a node
+  of the given type.
+ %
+\item[\textsf{--}] Output parameter: the argument should be \emph{free}, \ie,
+  not bound to an object; it will receive a value through the query. For
+  example, \inPro{gts(-GTS)} assigns the object that represents the current
+  GTS of the Simulator.
+ %
+\item[\textsf{?}] Bidirectional parameter: can be used either as input or as
+  output. For example, \inPro{state(?State)} may be used in two ways.  If the
+  argument is already bound to a state, the predicate either succeeds or fails
+  depending on whether that state is part of the current GTS or not.  If the
+  argument is free, it will be bound to a state; backtracking will iterate
+  over the remaining states.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+
+\subsubsection{Backtracking.} The \Prolog resolution procedure is a search for
+valid bindings, in the course of which it may backtrack and re-evaluate
+predicates to retrieve further solutions. This implies that the implementation of
+the built-in predicates must handle backtracking. For example, the following is
+the Java glue code for predicate \inPro{state_next}.
+%
+\begin{lstlisting}[style=java]
+public class Predicate_state_next extends PrologCode {
+  public int execute(Interpreter interpreter, boolean backtracking, Term[] args) {
+    PrologCollectionIterator it;
+    if (backtracking) {
+      it = interpreter.popBacktrackInfo();
+    } else {
+      State state = getSimulatorState().getState(args[0]);
+      it = new PrologCollectionIterator(state.getNextStateSet(), args[1]);
+      interpreter.pushBacktrackInfo(it);
+    }
+    return it.nextSolution();
+  }
+}
+\end{lstlisting}
+%
+The \inJava{backtracking} flag (line~2) is used by the interpreter to indicate
+if the predicate is being evaluated for the first time in a query or if it is
+being called again after backtracking. During the first run, the \inJava{else}
+block (lines 7--9) is executed. First the state object is retrieved along with
+its set of successor states (call to \inJava{state.getNextStateSet()}). This
+set is put into a special iterator along with the argument to be bound
+(line~8), which is then passed to the interpreter and stored as backtrack
+information (line~9). When the method is called again during backtracking, the
+same iterator is retrieved from the interpreter (line~5) and the next solution
+is returned.
+
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+%

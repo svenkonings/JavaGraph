@@ -1,0 +1,11 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n1) at (1.630, -1.285) {\ml{\textbf{B}}};
+\node[basic_node] (n2) at (1.640, -1.855) {\ml{\textbf{D}}};
+\node[basic_node] (n0) at (1.625, -0.715) {\ml{\textbf{A}}};
+
+\path[basic_edge](n0.south -| 1.630, -1.285) -- node[lab] {\ml{next}} (n1) ;
+\path[basic_edge](n1.south -| 1.640, -1.855) -- node[lab] {\ml{next}} (n2) ;
+\end{tikzpicture}

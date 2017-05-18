@@ -1,0 +1,53 @@
+% -----------------------------------------------------------------------------
+% 0-title.tex
+% -----------------------------------------------------------------------------
+
+\title{Knowledge-Based Graph Exploration Analysis}%
+%
+\author{%
+Ism\^enia Galv\~ao\inst{1} \and%
+Eduardo Zambon\inst{2}\thanks{The work of this author is supported by the GRAIL
+project, funded by NWO (Grant 612.000.632).} \and%
+Arend Rensink\inst{2} \and\\%
+Lesley Wevers\inst{2} \and%
+Mehmet Aksit\inst{1}%
+}%
+%
+\institute{%
+Software Engineering Group,\\%
+\email{\{i.galvao, m.aksit\}@ewi.utwente.nl}%
+\and%
+Formal Methods and Tools Group,\\%
+Computer Science Department,\\%
+University of Twente\\%
+PO Box 217, 7500 AE, Enschede, The Netherlands\\%
+\email{\{zambon, rensink\}@cs.utwente.nl}, \email{l.wevers@student.utwente.nl}%
+}%
+%
+\maketitle
+%
+\begin{abstract}
+  In a context where graph transformation is used to explore a space of
+  possible solutions to a given problem, it is almost always necessary to
+  inspect candidate solutions for relevant properties. This means that there is
+  a need for a flexible mechanism to query not only graphs but also their
+  evolution.
+%
+  In this paper we show how to use \Prolog queries to analyse graph
+  exploration. Queries can operate both on the level of individual graphs and
+  on the level of the transformation steps, enabling a very powerful and
+  flexible analysis method. This has been implemented in the graph-based
+  verification tool \GROOVE.
+%
+  As an application of this approach, we show how it gives rise to a
+  competitive analysis technique in the domain of feature modelling.
+\end{abstract}
+%
+\keywords{Graph Exploration Analysis, \Prolog, \GROOVE, Feature Modelling}%
+
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+%

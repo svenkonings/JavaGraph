@@ -1,0 +1,18 @@
+package control;
+
+recipe Expr(node root, node exit, out node entry) {
+	// Recipe for handling all subtypes of the abstract type 'Expr'.
+
+	choice entry := AllocExpr(root, exit);
+	or entry := ArrayAllocExpr(root, exit);
+	or entry := ArrayInitializer(root, exit);
+	or entry := Assign(root, exit);
+	or entry := CastExpr(root, exit);
+	or entry := ClassLitAccess(root, exit);
+	or entry := Lit(root, exit);
+	or entry := MessageSend(root, exit);
+	or entry := OperatorExpr(root, exit);
+	or entry := Ref(root, exit);
+	// Removed since type refences play no role in control flow.
+	// or entry := TypeRef(root, exit);
+}

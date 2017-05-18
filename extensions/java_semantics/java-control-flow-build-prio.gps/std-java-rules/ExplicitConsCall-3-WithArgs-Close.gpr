@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ExplicitConsCall-3-WithArgs-Close">
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2">
+            <attr name="layout">
+                <string>122 39 154 48</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>17 144 83 32</string>
+            </attr>
+        </node>
+        <node id="n7">
+            <attr name="layout">
+                <string>138 261 228 48</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>0 49 83 32</string>
+            </attr>
+        </node>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>id:ECC</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:ExplicitConsCall</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n2">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 165 59 92 23 25 62 12</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n2">
+            <attr name="label">
+                <string>argument</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n2">
+            <attr name="label">
+                <string>new:entry</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n2">
+            <attr name="label">
+                <string>del:exit</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>test:index = int:ECC.argumentLastIndex</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n7">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

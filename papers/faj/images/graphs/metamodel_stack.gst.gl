@@ -1,0 +1,13 @@
+# Layout information for C:\files\work\research\casb\casb.gps\metamodel_stack.gst
+# Each line contains layout information about a node or edge
+# Version info: v <version number>; 1 = pre-jgraph 5.9, 2 = jgraph 5.9
+#     v 1: label position = (x-permillage, y-permillage)
+#     v 2: label position = (vector permillage, perpendicular distance)
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+v 2
+n n6350 386 225 23 15 
+n n6349 292 145 48 30 
+n n6347 482 228 18 15 
+n n6348 435 153 21 15 
+e n6348 n6348 "next" 579 0 466 162 516 121 450 128 450 153 14

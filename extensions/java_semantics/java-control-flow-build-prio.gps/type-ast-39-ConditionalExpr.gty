@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="type" id="type-ast-39-ConditionalExpr">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n0">
+            <attr name="layout">
+                <string>30 60 131 31</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>290 50 81 51</string>
+            </attr>
+        </node>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>import:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>part:out=1:condition</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 117 65 230 10 299 55 11</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:ConditionalExpr</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>part:out=1:valueIfTrue</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 95 75 240 60 330 75 11</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>part:out=1:valueIfFalse</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 95 75 250 90 330 75 11</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

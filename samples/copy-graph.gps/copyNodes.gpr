@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="copyNodes">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n16824">
+            <attr name="layout">
+                <string>236 122 15 15</string>
+            </attr>
+        </node>
+        <node id="n16825">
+            <attr name="layout">
+                <string>93 194 34 15</string>
+            </attr>
+        </node>
+        <node id="n16826">
+            <attr name="layout">
+                <string>94 122 29 15</string>
+            </attr>
+        </node>
+        <node id="n16823">
+            <attr name="layout">
+                <string>192 182 28 15</string>
+            </attr>
+        </node>
+        <node id="n16827">
+            <attr name="layout">
+                <string>312 254 23 15</string>
+            </attr>
+        </node>
+        <edge to="n16823" from="n16824">
+            <attr name="label">
+                <string>copy</string>
+            </attr>
+        </edge>
+        <edge to="n16827" from="n16824">
+            <attr name="label">
+                <string>copy</string>
+            </attr>
+        </edge>
+        <edge to="n16826" from="n16824">
+            <attr name="label">
+                <string>nested:at</string>
+            </attr>
+        </edge>
+        <edge to="n16826" from="n16826">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n16825" from="n16827">
+            <attr name="label">
+                <string>nested:at</string>
+            </attr>
+        </edge>
+        <edge to="n16825" from="n16823">
+            <attr name="label">
+                <string>nested:at</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 192 194 135 201 12</string>
+            </attr>
+        </edge>
+        <edge to="n16823" from="n16823">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n16826" from="n16825">
+            <attr name="label">
+                <string>nested:in</string>
+            </attr>
+        </edge>
+        <edge to="n16825" from="n16825">
+            <attr name="label">
+                <string>exists:</string>
+            </attr>
+        </edge>
+        <edge to="n16827" from="n16827">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

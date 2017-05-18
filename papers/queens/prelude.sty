@@ -1,0 +1,99 @@
+% -----------------------------------------------------------------------------
+% prelude.sty
+% -----------------------------------------------------------------------------
+
+\usepackage{graphics}
+\usepackage{groove2tikz}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{xspace}
+
+% -----------------------------------------------------------------------------
+% Misc
+
+% Suppress hbadness/vbadness warnings
+\vbadness 10000
+\hbadness 10000
+
+% -----------------------------------------------------------------------------
+% Label/reference pairs
+
+% Section
+\newcommand{\stlabel}[1]{\label{sec:#1}}
+\newcommand{\stref}[1]{Section~\ref{sec:#1}}
+\newcommand{\strefs}[2]{Sections~\ref{sec:#1} and \ref{sec:#2}}
+% Figure
+\newcommand{\flabel}[1]{\label{fig:#1}}
+\newcommand{\fref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\frefs}[2]{Figures~\ref{fig:#1} and \ref{fig:#2}}
+% Listing
+\newcommand{\lstlabel}[1]{list:#1}
+\newcommand{\lstref}[1]{Listing~\ref{list:#1}}
+% Table
+\newcommand{\tablabel}[1]{\label{tab:#1}}
+\newcommand{\tabref}[1]{Table~\ref{tab:#1}}
+
+% -----------------------------------------------------------------------------
+% Abbreviations
+
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\etal}{\emph{et al.}\xspace}
+
+% -----------------------------------------------------------------------------
+% Figure Commands
+
+%
+\newcommand{\figspath}{figs/}
+
+% Input figure
+\newcommand{\inputtikz}[1]{\input{\figspath#1.tikz}}
+\newcommand{\inputpdf}[2][1]{\includegraphics[scale=#1]{\figspath#2.pdf}}
+
+% Figure environment
+\newcommand{\putfig}[3][1]{
+\begin{figure}[t]%
+\centering%
+\inputpdf[#1]{#2}%
+\caption{#3}%
+\flabel{#2}%
+\end{figure}%
+}
+
+% Complex figure environment
+\newcommand{\putcompfig}[2]{
+\begin{figure}[t]%
+\centering%
+\input{\figspath#1.tex}%
+\caption{#2}%
+\flabel{#1}%
+\end{figure}%
+}
+
+% -----------------------------------------------------------------------------
+% Listings
+
+% Using Courier font so we can get bold typewriter style.
+\renewcommand{\ttdefault}{pcr}
+
+\lstdefinestyle{control}{
+basicstyle=\footnotesize\ttfamily,
+keywordstyle=\bfseries,
+keywords={alap,try,else},
+numbers=left,
+frame=tb,
+columns=fullflexible,
+morecomment=[l][\rmfamily\itshape]{//}
+}
+
+\lstdefinestyle{prolog}{
+language=Prolog,
+basicstyle=\footnotesize\sffamily,
+numbers=left,
+frame=tb,
+columns=fullflexible,
+morecomment=[l][\rmfamily\itshape]{\%}
+}

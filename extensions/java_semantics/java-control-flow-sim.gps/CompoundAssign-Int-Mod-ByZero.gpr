@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="CompoundAssign-Int-Mod-ByZero">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n15">
+            <attr name="layout">
+                <string>215 198 27 38</string>
+            </attr>
+        </node>
+        <node id="n14">
+            <attr name="layout">
+                <string>203 282 41 38</string>
+            </attr>
+        </node>
+        <node id="n12">
+            <attr name="layout">
+                <string>308 205 57 34</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>456 208 87 34</string>
+            </attr>
+        </node>
+        <node id="n10">
+            <attr name="layout">
+                <string>448 285 103 34</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>634 206 58 52</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>767 210 129 52</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>311 285 57 34</string>
+            </attr>
+        </node>
+        <edge to="n15" from="n15">
+            <attr name="label">
+                <string>int:0</string>
+            </attr>
+        </edge>
+        <edge to="n14" from="n14">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n12">
+            <attr name="label">
+                <string>type:IntVal</string>
+            </attr>
+        </edge>
+        <edge to="n15" from="n12">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:StackValue</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n1">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n1">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n10">
+            <attr name="label">
+                <string>type:StackVariable</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n10">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Frame</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>flag:active</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n0">
+            <attr name="label">
+                <string>stack</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>pc</string>
+            </attr>
+            <attr name="layout">
+                <string>459 -3 686 236 773 236 11</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:CompoundAssign</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>test:operator = &quot;%=&quot;</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:IntVal</string>
+            </attr>
+        </edge>
+        <edge to="n14" from="n3">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

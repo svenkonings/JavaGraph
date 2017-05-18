@@ -1,0 +1,201 @@
+\section{Guarded Control Automata}\label{sec:deterministic}
+
+The product operation defined in Definition \ref{def:prod} can result in a
+system automaton that is non-deterministic in the sense of Def. \ref{def:aut},
+even when system and control automaton are both deterministic.
+
+\begin{example} Consider the following automata:
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,auto,semithick,>=stealth',initial text=]
+\tikzstyle{every state}=[shape=circle,draw,minimum size=5mm]
+\node[state,initial,accepting] (s0)                   	{};
+\node[state,initial,accepting] (s1) [right of=s0]			{};
+\node[state,initial] (c0) [right=1cm of s1]               	{};
+\node[state,accepting] (c1) [right of=c0]                	{};
+\node[state] (c2) [below=1cm of c0]                	{};
+\node[state,accepting] (c3) [right of=c2]                	{};
+
+\node[state,initial] (p0) [right=1cm of c1]                	{};
+\node[state,accepting] (p1) [right of=p0]                	{};
+\node[state] (p2) [below=1cm of p0]                	{};
+\node[state,accepting] (p3) [right of=p2]                	{};
+\path[->]
+(s0) edge	node			{$\scriptstyle (a,0)$}	(s1)
+(c0) edge	node			{$\scriptstyle a,b$}	(c1)
+(c0) edge	node			{$\scriptstyle [b]$}	(c2)
+(c2) edge	node			{$\scriptstyle a$}	(c3)
+(p0) edge	node			{$\scriptstyle (a,0)$}	(p1)
+(p0) edge	node			{$\scriptstyle \lambda$}	(p2)
+(p2) edge	node			{$\scriptstyle (a,0)$}	(p3);
+\end{tikzpicture}
+\end{center}
+%
+\begin{comment}
+\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,auto,semithick,>=stealth',initial text=]
+\tikzstyle{every state}=[shape=circle,draw,minimum size=5mm]
+\node[state,initial] (c0)                	{};
+\node[state] (c1) [right of=c0]                	{};
+\node[state] (c1c3) [below=1cm of c0]                	{};
+\node (s1) [right of=c1]	{};
+\node (s2) [right of=c1c3]	{};
+
+\path[->]
+(c0) edge	node			{$\scriptstyle b$}	(c1)
+	  edge[bend left]	node	{$\scriptstyle [|b] a$}		(c1)
+	  edge	node	{$\scriptstyle [b|] a$}		(c1c3)
+(c1)	edge node	{$\scriptstyle []$}			(s1)
+(c1c3)edge	node	{$\scriptstyle []$}			(s2);
+\end{tikzpicture}
+\end{comment}
+%
+The system automaton on the left and the control automaton in the middle are
+both clearly deterministic, in the sense of Def.~\ref{def:aut}. In their
+product, shown on the right, the rule application $(a,0)$ occurs twice, hence
+this is non-deterministic.
+\end{example}
+
+The desired behaviour of the product of a deterministic control automaton and a control automaton is a deterministic controlled system automaton. 
+For that purpose, we introduce \emph{guarded control automata}. Here, every transition consists of a rule name with a positive and negative guard, both of which are sets of rules. For a transition to be enabled, all rules in the negative guard must fail to be applied, and all rules in the positive guard set must be applicable (i.e. the rule must have at least one match). We also introduce a \emph{determinisation} operation for normal control automata that produces a guarded control automaton. 
+
+We use the notation $q \arrow{[F \mid A]n} q'$ for transitions with guards, where $F$ is the negative and $A$ is the positive guard. When $A = \emptyset$, we use the notation $q \arrow{[F] n} q'$; q\arrow{n}q' denotes that $F = A = \emptyset$.
+
+\begin{definition}[guarded control automaton]\label{def:gca}
+A guarded control automaton is an automaton with $\Sigma = \Fail \times
+2^{\Rule} \times \Rule$ and $S \subseteq Q \times \Fail$. 
+Transitions should satisfy the following constraints for all $q\in Q$:
+\begin{enumerate}
+\item $q \arrow{[F \mid A] n}$ implies $F \cap A = \emptyset$
+\item $q \arrow{[F_1 \mid A_1] n}$ and $q \arrow{[F_2 \mid A_2] n}$ implies
+  $F_1 \cup A_1 = F_2 \cup A_2$
+\item $q \arrow{[F \mid A ] n}$ implies $\exists q \arrow{[F \cup A] n}$.
+\end{enumerate}
+\end{definition}
+%
+The class of guarded control automata is denoted $\GAut$. Note that the success
+states are now also conditional (or guarded).
+
+We define the failure dependency function $fd$, that returns the union of all possible failures that lead to a state where $n$ is allowed. Whether or not these rules fail determines the precise target control states the system can be in.
+
+\begin{definition}[failure dependency]\label{def:fd}
+The failure dependency in a set of states $qs$ for a rule $n$ is defined by:
+\begin{align*}
+fd(qs,n) = \bigcup \setof{ F_i \mid \exists q \in qs : q \arrow{F_1\dotsc F_n} q' \arrow{n} }
+\end{align*}
+\end{definition}
+
+Determinisation of a control automaton is given by a function $\mathit{det}$:
+
+\begin{definition}[control automaton determinisation]\label{def:det}
+Given a control automaton $\cC$, $det(\cC)$ is an automaton with $Q = 2^{Q_\cC} \setminus \emptyset$, $q_0 = \setof{ q_{0,\cC} }$, and ${\rightarrow}$,$S$ are defined by: \begin{align*}
+%&\text{$\rightarrow$ is defined by:}\\
+&\frac
+{FD = fd(q,n) \quad F \subseteq FD \quad A = FD \setminus F }
+{q \arrow{[A \mid F]n} \setof{ q_{\cC}' \mid q_\cC \in q \arrow{F_1 \dotsc F_n}\arrow{n} q_{\cC}', F_1 \cup \dotsc \cup F_n \subseteq F } }\\
+S &= \setof{(q, \cup_i F_i) \mid \exists q_{\cC} \in q: q_{\cC} \arrow{F_1 \dotsc F_n} q_{\cC}' \in S_{\cC} }
+\end{align*}
+\end{definition}
+
+The states in the guarded control automaton are sets of states of the original control automaton. The target state of a transition $q \arrow{[A \mid F]n} q'$ in the guarded control automaton is defined as the set of all states in the original control automaton that can be reached with the failures in $F$ followed by a rule name $n$. The positive guard $A$ of a transition contains the names of those rules that must be enabled, which are those rules that are not in $F$ but are in the failure dependency of $n$ in the source state. 
+A success state is set of tuples consisting of states and failures. Success is a conditional property; we show in the product definition that a product state is a success state if a failure is satisfied by the system component in the product state. A state with the empty failure is an unconditional success state. 
+
+We state the following property:
+
+\begin{proposition}\label{prop:detcisg}
+Given a control automaton $\cC$, the automaton $\mathit{det}(\cC)$ is a guarded control automaton.
+\end{proposition}
+
+The proof can be found in Appendix \ref{app:proofs}. 
+
+\begin{example} Figure \ref{fig:eca_example} shows the guarded control automaton for the control automaton of Figure \ref{fig:ca_example}.
+From the start state, an \propagate~transition is possible to $\setof{c_0,c_1}$, which can be repeated as long as \propagate~is possible. From both $\setof{c_0}$ and $\setof{c_0,c_1}$ a \dispatch~transition is possible to $\setof{c_2}$ if \propagate~fails. The outgoing transition in $\setof{c_2}$ represents the success condition. Since there is only the empty failure set, it is an unconditional success.
+\end{example}
+%
+\begin{figure}
+\centering
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,bend angle=45,semithick,>=stealth',initial text=]
+\tikzstyle{every state}=[shape=circle,draw]
+\node[state,initial] (c0)								{$\scriptstyle\setof{c_0}$};
+\node[state] 			(c0c1)	[right of=c0]		{$\scriptstyle\setof{c_0,c_1}$};
+\node[state] 			(c2)	[below right of=c0]	{$\scriptstyle\setof{c_2}$};
+\node						(S)	[right of=c2]			{};
+%\node[state,accepting](s2) [below right of=s0] {$s_2$};
+%\node[shape=circle](s4) [right of=s2]{};
+\path[->]
+(c0)	edge			node 				{$\scriptstyle\propagate$}				(c0c1)
+		edge			node	[swap]	{$\scriptstyle[\propagate]\dispatch$}	(c2)
+(c0c1)edge			node				{$\scriptstyle[\propagate]\dispatch$}	(c2)
+		edge	[loop right] 	node	{$\scriptstyle\propagate$}			()
+(c2)	edge			node	[swap]	{$\scriptstyle[]$}							(S);
+\end{tikzpicture}
+\caption{Example Extended Control Automaton}
+\label{fig:eca_example}
+\end{figure}
+%
+For the definition of the product of system automata and guarded control automata, we introduce the function $enabled$, which returns a set of rules that are enabled in a given system state or a state reachable after an arbitrary sequence of $\lambda$'s. 
+%
+\begin{definition}[enabled rules]
+Given a system automaton \cA, the function $enabled: Q_{\cA} \rightarrow 2^{\Rule}$ is defined as:
+\begin{align*}
+enabled(q_{\cA}) &= \setof{ n \in \Rule \mid \exists i \in \Id : q_\cA \Arrow{(n,i)}_{\cA} }
+\end{align*}
+\end{definition}
+%
+The semantics of a guarded control automaton is given by the product with a system automaton. This results in another system automaton, where states are tuples of system states and guarded control states, defined as follows:
+%
+\begin{definition}[guarded product]\label{def:prod2}
+Given a system automaton \cA~and a guarded control automaton \cG, the product $\cA \times \cG$ is a system automaton, with $Q \subseteq Q_{\cA} \times Q_{\cG}$, $q_0 = (q_{0,\cA},q_{0,\cG})$, and ${\rightarrow}$, $S$ are defined by:
+\begin{equation*}
+% --> for not-lambda's
+\frac
+{q_{\cA} \arrow{(n,i)}_{\cA} q_{\cA}' \quad
+q_{\cG} \arrow{[F \mid A]n}_{\cG} q_{\cG}' \quad
+F \cap enabled(q_{\cA}) = \emptyset \quad
+A \subseteq enabled(q_{\cA}) } 
+{(q_{\cA},q_{\cG}) \arrow{(n,i)} (q_{\cA}',q_{\cG}') }\\
+% --> for lambda's
+\end{equation*}
+
+\begin{equation*}
+\frac{q_{\cA} \arrow{\lambda}_\cA q_{\cA}'}
+{(q_\cA,q_\cG)\arrow{\lambda}(q_{\cA}',q_{\cG})}
+\quad
+% S:
+\frac
+{q_{\cA} \in S_{\cA} \quad
+(q_{\cG},F) \in S_{\cG} \quad
+F \cap enabled(q_{\cA}) = \emptyset }%end of top of frac
+{(q_{\cA},q_{\cG}) \in S}\\
+\end{equation*}
+\end{definition}
+
+A transition with rule $n$ in \cG~is paired with rule applications of $n$ in the system automaton $\cA$ when none of the rules in the negative guard $F$ are applicable in $q_{\cA}$, and all rules in the positive guard $A$ are applicable in $q_{\cA}$.
+
+The success states are those states where $q_{\cA}$ is a success state, and the failure it is combined with in $S$ is satisfied in $q_{\cA}$.\\
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,bend angle=45,semithick,>=stealth',initial text=]
+\tikzstyle{every state}=[shape=circle,draw]
+\node[state,initial] (s0c0)	{$\scriptstyle \frac{s_0}{\setof{c_0}}$};
+\node[state] 	(s1c0c1)	[right of=s0c0]	{$\scriptstyle \frac{s_1}{\setof{c_0,c_1}}$};
+\node[state] 	(s2c0c1)	[right of=s1c0c1]	{$\scriptstyle \frac{s_2}{\setof{c_0,c_1}}$};
+\node[state,accepting]	(s5c2)	[right of=s2c0c1]	{$\scriptstyle \frac{s_5}{\setof{c_2}}$};
+\path[->]
+(s0c0)	edge			node 		{$\scriptstyle(\propagate,0)$}		(s1c0c1)
+(s1c0c1)	edge			node 		{$\scriptstyle(\propagate,1)$}		(s2c0c1)
+(s2c0c1)	edge			node 		{$\scriptstyle(\dispatch,0)$}		(s5c2);
+\end{tikzpicture}
+\caption{Example Guarded Product Automaton}
+\label{fig:eprod_example}
+\end{figure}
+
+\begin{example}
+Figure \ref{fig:eprod_example} shows the product of the guarded control automaton of Figure \ref{fig:eca_example} and the system automaton of Figure \ref{fig:sa_example}.
+\end{example}
+
+
+As said, the purpose of guarded control automata is to be able to produce deterministic controlled system automata. We state the following property, the proof of which is given in Appendix \ref{app:proofs}:
+
+\begin{proposition}\label{prop:detprod}
+Given a guarded control automaton $\cG$ and a deterministic system automaton $\cA$, $\cA \times \cG$ is deterministic. 
+\end{proposition}

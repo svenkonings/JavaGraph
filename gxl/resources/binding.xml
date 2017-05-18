@@ -1,0 +1,171 @@
+<binding xmlns:ns1="http://www.gupro.de/GXL/gxl-1.0.dtd" name="binding" package="de.gupro.gxl.gxl1" trim-whitespace="true">
+  <namespace uri="http://www.gupro.de/GXL/gxl-1.0.dtd" default="elements"/>
+  <format label="ns1:edgemodeType" type="de.gupro.gxl.gxl1.EdgemodeType" enum-value-method="toString"/>
+  <format label="ns1:directionType" type="de.gupro.gxl.gxl1.DirectionType" enum-value-method="toString"/>
+  <mapping abstract="true" class="de.gupro.gxl.gxl1.AttributedElement" name="attributedElement">
+    <structure map-as="ns1:AttributedElementType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:AttributedElementType" class="de.gupro.gxl.gxl1.AttributedElementType">
+    <value style="attribute" name="id" get-method="getId" set-method="setId" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" class="de.gupro.gxl.gxl1.TypedElement" name="typedElement">
+    <structure map-as="ns1:TypedElementType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:TypedElementType" class="de.gupro.gxl.gxl1.TypedElementType">
+    <structure map-as="ns1:AttributedElementType"/>
+    <structure type="de.gupro.gxl.gxl1.TypeType" get-method="getType" set-method="setType" usage="optional"/>
+    <collection item-type="de.gupro.gxl.gxl1.AttrType" get-method="getAttrList" set-method="setAttrList" usage="optional" create-type="java.util.ArrayList"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:GxlType" class="de.gupro.gxl.gxl1.GxlType">
+    <collection item-type="de.gupro.gxl.gxl1.GraphType" get-method="getGraphList" set-method="setGraphList" usage="optional" create-type="java.util.ArrayList"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.GxlType" name="gxl">
+    <structure map-as="ns1:GxlType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:TypeType" class="de.gupro.gxl.gxl1.TypeType"/>
+  <mapping class="de.gupro.gxl.gxl1.TypeType" name="type">
+    <structure map-as="ns1:TypeType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:graphType" class="de.gupro.gxl.gxl1.GraphType">
+    <structure map-as="ns1:TypedElementType"/>
+    <collection get-method="getChoiceList" set-method="setChoiceList" usage="optional" create-type="java.util.ArrayList">
+      <structure type="de.gupro.gxl.gxl1.GraphType$Choice" ordered="false" choice="true">
+        <structure type="de.gupro.gxl.gxl1.NodeType" test-method="ifNode" get-method="getNode" set-method="setNode" usage="optional"/>
+        <structure type="de.gupro.gxl.gxl1.EdgeType" test-method="ifEdge" get-method="getEdge" set-method="setEdge" usage="optional"/>
+        <structure type="de.gupro.gxl.gxl1.RelType" test-method="ifRel" get-method="getRel" set-method="setRel" usage="optional"/>
+      </structure>
+    </collection>
+    <value style="attribute" name="role" get-method="getRole" set-method="setRole" usage="optional"/>
+    <value style="attribute" name="edgeids" get-method="getEdgeids" set-method="setEdgeids" usage="optional"/>
+    <value style="attribute" name="hypergraph" get-method="getHypergraph" set-method="setHypergraph" usage="optional"/>
+    <value style="attribute" name="edgemode" get-method="getEdgemode" set-method="setEdgemode" usage="optional" format="ns1:edgemodeType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.GraphType" name="graph">
+    <structure map-as="ns1:graphType"/>
+  </mapping>
+  <mapping abstract="true" class="de.gupro.gxl.gxl1.GraphElement" name="graphElement">
+    <structure map-as="ns1:GraphElementType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:GraphElementType" class="de.gupro.gxl.gxl1.GraphElementType">
+    <structure map-as="ns1:TypedElementType"/>
+    <collection item-type="de.gupro.gxl.gxl1.GraphType" get-method="getGraphList" set-method="setGraphList" usage="optional" create-type="java.util.ArrayList"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:NodeType" class="de.gupro.gxl.gxl1.NodeType">
+    <structure map-as="ns1:GraphElementType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.NodeType" name="node">
+    <structure map-as="ns1:NodeType"/>
+  </mapping>
+  <mapping abstract="true" class="de.gupro.gxl.gxl1.LocalConnection" name="localConnection">
+    <structure map-as="ns1:LocalConnectionType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:LocalConnectionType" class="de.gupro.gxl.gxl1.LocalConnectionType">
+    <structure map-as="ns1:GraphElementType"/>
+    <value style="attribute" name="isDirected" get-method="getIsDirected" set-method="setIsDirected" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:EdgeType" class="de.gupro.gxl.gxl1.EdgeType">
+    <structure map-as="ns1:LocalConnectionType"/>
+    <value style="attribute" name="from" get-method="getFrom" set-method="setFrom"/>
+    <value style="attribute" name="to" get-method="getTo" set-method="setTo"/>
+    <value style="attribute" name="fromorder" get-method="getFromorder" set-method="setFromorder" usage="optional"/>
+    <value style="attribute" name="toorder" get-method="getToorder" set-method="setToorder" usage="optional"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.EdgeType" name="edge">
+    <structure map-as="ns1:EdgeType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:RelType" class="de.gupro.gxl.gxl1.RelType">
+    <structure map-as="ns1:LocalConnectionType"/>
+    <collection item-type="de.gupro.gxl.gxl1.RelendType" get-method="getRelendList" set-method="setRelendList" usage="optional" create-type="java.util.ArrayList"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.RelType" name="rel">
+    <structure map-as="ns1:RelType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:RelendType" class="de.gupro.gxl.gxl1.RelendType">
+    <structure map-as="ns1:AttributedElementType"/>
+    <value style="attribute" name="target" get-method="getTarget" set-method="setTarget"/>
+    <value style="attribute" name="role" get-method="getRole" set-method="setRole" usage="optional"/>
+    <value style="attribute" name="direction" get-method="getDirection" set-method="setDirection" usage="optional" format="ns1:directionType"/>
+    <value style="attribute" name="startorder" get-method="getStartorder" set-method="setStartorder" usage="optional"/>
+    <value style="attribute" name="endorder" get-method="getEndorder" set-method="setEndorder" usage="optional"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.RelendType" name="relend">
+    <structure map-as="ns1:RelendType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:AttrType" class="de.gupro.gxl.gxl1.AttrType">
+    <structure map-as="ns1:AttributedElementType"/>
+    <structure map-as="ns1:value-Group" get-method="getValue" set-method="setValue" usage="optional"/>
+    <value style="attribute" name="name" get-method="getName" set-method="setName"/>
+    <value style="attribute" name="kind" get-method="getKind" set-method="setKind" usage="optional"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.AttrType" name="attr">
+    <structure map-as="ns1:AttrType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:value-Group" class="de.gupro.gxl.gxl1.Value">
+    <structure ordered="false" choice="true">
+      <structure type="de.gupro.gxl.gxl1.BagType" test-method="ifBag" get-method="getBag" set-method="setBag" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1.SetType" test-method="ifSet" get-method="getSet" set-method="setSet" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1.SeqType" test-method="ifSeq" get-method="getSeq" set-method="setSeq" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1.TupType" test-method="ifTup" get-method="getTup" set-method="setTup" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1.Bool" test-method="ifBool" get-method="getBool" set-method="setBool" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1.Int" test-method="ifInt" get-method="getInt" set-method="setInt" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1._Float" test-method="ifFloat" get-method="getFloat" set-method="setFloat" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1._String" test-method="ifString" get-method="getString" set-method="setString" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1.LocatorType" test-method="ifLocator" get-method="getLocator" set-method="setLocator" usage="optional"/>
+      <structure type="de.gupro.gxl.gxl1._Enum" test-method="ifEnum" get-method="getEnum" set-method="setEnum" usage="optional"/>
+    </structure>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:LocatorType" class="de.gupro.gxl.gxl1.LocatorType"/>
+  <mapping class="de.gupro.gxl.gxl1.LocatorType" name="locator">
+    <structure map-as="ns1:LocatorType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.Bool" name="bool">
+    <value style="text" get-method="isBool" set-method="setBool"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.Int" name="int">
+    <value style="text" get-method="getInt" set-method="setInt"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1._Float" name="float">
+    <value style="text" get-method="getFloat" set-method="setFloat"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1._String" name="string">
+    <value style="text" get-method="getString" set-method="setString"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.FreeType" name="freeType">
+    <value style="text" get-method="getFreeType" set-method="setFreeType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1._Enum" name="enum">
+    <value style="text" get-method="getEnum" set-method="setEnum"/>
+  </mapping>
+  <mapping abstract="true" class="de.gupro.gxl.gxl1.CompositeValue" name="compositeValue">
+    <structure map-as="ns1:CompositeValueType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:CompositeValueType" class="de.gupro.gxl.gxl1.CompositeValueType">
+    <collection get-method="getValueList" set-method="setValueList" usage="optional" create-type="java.util.ArrayList">
+      <structure map-as="ns1:value-Group"/>
+    </collection>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:BagType" class="de.gupro.gxl.gxl1.BagType">
+    <structure map-as="ns1:CompositeValueType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.BagType" name="bag">
+    <structure map-as="ns1:BagType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:SetType" class="de.gupro.gxl.gxl1.SetType">
+    <structure map-as="ns1:CompositeValueType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.SetType" name="set">
+    <structure map-as="ns1:SetType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:SeqType" class="de.gupro.gxl.gxl1.SeqType">
+    <structure map-as="ns1:CompositeValueType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.SeqType" name="seq">
+    <structure map-as="ns1:SeqType"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:TupType" class="de.gupro.gxl.gxl1.TupType">
+    <structure map-as="ns1:CompositeValueType"/>
+  </mapping>
+  <mapping class="de.gupro.gxl.gxl1.TupType" name="tup">
+    <structure map-as="ns1:TupType"/>
+  </mapping>
+</binding>

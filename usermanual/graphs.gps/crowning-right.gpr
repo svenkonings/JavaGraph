@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="crowning-right">
+        <attr name="enabled">
+            <string>false</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n2433">
+            <attr name="layout">
+                <string>296 151 47 30</string>
+            </attr>
+        </node>
+        <node id="n2434">
+            <attr name="layout">
+                <string>223 78 10 15</string>
+            </attr>
+        </node>
+        <node id="n2432">
+            <attr name="layout">
+                <string>223 155 26 15</string>
+            </attr>
+        </node>
+        <node id="n2431">
+            <attr name="layout">
+                <string>309 79 23 15</string>
+            </attr>
+        </node>
+        <edge to="n2433" from="n2433">
+            <attr name="label">
+                <string>type:Girl</string>
+            </attr>
+        </edge>
+        <edge to="n2433" from="n2433">
+            <attr name="label">
+                <string>new:flag:queen</string>
+            </attr>
+        </edge>
+        <edge to="n2434" from="n2434">
+            <attr name="label">
+                <string>forall:</string>
+            </attr>
+        </edge>
+        <edge to="n2432" from="n2432">
+            <attr name="label">
+                <string>exists=x:</string>
+            </attr>
+        </edge>
+        <edge to="n2434" from="n2432">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge to="n2431" from="n2431">
+            <attr name="label">
+                <string>type:Boy</string>
+            </attr>
+        </edge>
+        <edge to="n2433" from="n2431">
+            <attr name="label">
+                <string>use=x:likes</string>
+            </attr>
+        </edge>
+        <edge to="n2434" from="n2431">
+            <attr name="label">
+                <string>at</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

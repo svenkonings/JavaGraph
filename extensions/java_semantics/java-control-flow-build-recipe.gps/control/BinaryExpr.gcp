@@ -1,0 +1,10 @@
+package control;
+
+recipe BinaryExpr(node root, node exit, out node entry) {
+	// Match the left and right components of the expression.
+	node lroot, rroot := rule.BinaryExpr(root, exit);
+	// Build the flow for the right subexpression.
+	node rentry := Expr(rroot, root);
+	// Build the flow for the left subexpression.
+	entry := Expr(lroot, rentry);
+}

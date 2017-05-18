@@ -1,0 +1,21 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+\begin{tikzpicture}[scale=\tikzscale]
+\node[node] (n164)  at (1.785, -1.125){};
+\node[node] (n162)  at (0.955, -1.975){};
+\node[delnode] (n160)  at (1.805, -2.010) {\ml{append\\control}};
+\node[node] (n159)  at (2.905, -2.025){};
+\node[newnode] (n163)  at (0.960, -1.235) {\ml{void}};
+\node[nacnode] (n161)  at (2.885, -0.715){};
+\node[newnode] (n158)  at (2.905, -1.145){};
+\path[deledge](n160.west |- 0.955, -1.975) -- node[dellab]{caller} (n162) ;
+\path[newedge](n162.north -| 0.960, -1.235) -- node[newlab]{return} (n163) ;
+\path[nacedge] (n164)  -- node[naclab]{next} (n161) ;
+\path[newedge](n164.east |- 2.905, -1.145) -- node[newlab]{next} (n158) ;
+\path[newedge](n158.south -| 2.905, -2.025) -- node[newlab]{val} (n159) ;
+\path[deledge](n160.north -| 1.785, -1.125) -- node[dellab]{this} (n164) ;
+\path[nacedge] (n164)  -- node[naclab]{val} (n159) ;
+\path[deledge](n160.east |- 2.905, -2.025) -- node[dellab]{x} (n159) ;
+\userdefinedmacro
+\end{tikzpicture}
+\renewcommand{\userdefinedmacro}{\relax}

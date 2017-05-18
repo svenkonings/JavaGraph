@@ -1,0 +1,77 @@
+% -----------------------------------------------------------------------------
+% 1-intro.tex
+% -----------------------------------------------------------------------------
+
+\section{Introduction}
+\stlabel{intro}
+
+The practical value of graph transformation (GT) is especially determined by the
+fact that graphs are a very general, widely applicable mathematical structure.
+Virtually every artefact can be understood in terms of entities and relations
+between them, which makes it a graph; and consequently, changes in such an
+artefact can be specified through GT rules.
+
+On the other hand, capability does not automatically imply suitability. For
+instance, though it is possible to express structural properties as (nested)
+graph conditions -- see, for instance, \cite{Rensink2004,HabelPenRen2006} -- in
+practice, if one wants to query a given structure, writing graphical conditions
+to express and test for such queries is not always the most obvious or effective
+way to go about it. This is particularly true if the queries have not been
+predefined but are user-provided.  Instead, there are dedicated languages
+suitable for querying relational structures, such as, for instance, \SQL or
+\PROLOG.
+
+The need for a powerful and flexible query language becomes even more clear
+when one wants to combine static (structural) properties with dynamic ones, so
+as to include the future or past evolution of the structure. For instance,
+temporal logic has been especially introduced to express dynamic properties and
+check them efficiently (see \cite{BaierKat2008} for an overview). However,
+besides lacking accessibility, temporal logic is \emph{propositional}, meaning
+that it takes structural properties as basic building blocks; there is very
+little work on logics that can freely mix static and dynamic aspects of a
+system.
+
+\medskip\noindent An example domain that requires this combination of static
+and dynamic aspects is \emph{feature modelling}. A feature model is a graph in which
+nodes represent possible features (of some system under design) and edges express
+that one feature requires another, is in conflict, or is related in some
+other way. Graph transformation can be used to actually select features (in
+such a way that the constraints are met). The outcome is a (partially) resolved
+model, the quality of which is not only determined by the choices actually made
+but also by the possible choices still remaining. Thus, one would like to query
+a feature model for both its static properties (the choices actually made)
+and for its dynamic properties (the potential further transformation steps).
+ 
+\medskip\noindent In this paper, we describe how one can use \PROLOG to query
+static and dynamic properties of graphs, simultaneously and uniformly.  Besides
+the transformed graphs this requires a graph transition system (GTS), which is
+itself a graph with nodes corresponding to state graphs and edges to rule
+applications. The basic building block of \PROLOG is a \emph{predicate}, which
+expresses a relation between its arguments. Example predicates in our setting
+are:
+\begin{itemize}\noitemsep
+\item The relation between a graph and its nodes or edges;
+\item The relation between an edge and its source or target node, or its label;
+\item The relation between a state of the GTS and its corresponding graph;
+\item The relation between one state of the GTS and the next.
+\end{itemize}
+
+\medskip\noindent A collection of \Prolog predicates forms a
+\emph{knowledge-base}, which is queried during the analysis of a GTS. Using an
+extension of the transformation tool \GROOVE that supports \PROLOG queries, we
+demonstrate the capabilities of this approach on a case study based on feature
+modelling. This domain was chosen due to its applicability on the development
+process of software industries.
+
+\medskip\noindent The paper is organised as follows. We first present the basic
+concepts for querying graphs using \PROLOG (\stref{prolog}); then we describe
+the application to feature modelling in \stref{problem}. An analysis of the
+results can be found in \stref{discussion}. Conclusion and ideas for future work
+are given in \stref{conclusion}.
+
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
+%

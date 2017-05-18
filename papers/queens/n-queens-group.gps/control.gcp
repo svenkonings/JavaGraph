@@ -1,0 +1,9 @@
+ld-group;
+rd-group;
+h-group;
+v-group;
+
+delete; // delete the edges to create a symmetric board.
+
+alap place; // Try to place queens as long as possible.
+count; // Mark the final states with the number of queens placed.

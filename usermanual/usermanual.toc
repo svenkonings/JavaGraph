@@ -1,0 +1,84 @@
+\contentsline {subsection}{\numberline {0.1}Undocumented featores}{3}{subsection.0.1}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}Toolkit Components}{4}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Download}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Installation}{5}{subsection.1.3}
+\contentsline {section}{\numberline {2}Basic Concepts}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}Graphs}{6}{subsection.2.1}
+\contentsline {paragraph}{Type and flag labels.}{6}{section*.2}
+\contentsline {paragraph}{Graph label syntax.}{6}{section*.3}
+\contentsline {subsection}{\numberline {2.2}Rules}{6}{subsection.2.2}
+\contentsline {paragraph}{Rule label syntax.}{8}{section*.4}
+\contentsline {paragraph}{Rule names.}{9}{section*.5}
+\contentsline {paragraph}{Example usage.}{9}{section*.6}
+\contentsline {subsection}{\numberline {2.3}Negations}{9}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Equalities, Mergers and Injectivities}{9}{subsection.2.4}
+\contentsline {paragraph}{Mergers.}{9}{section*.7}
+\contentsline {paragraph}{Injectivities.}{10}{section*.8}
+\contentsline {paragraph}{Counting.}{10}{section*.9}
+\contentsline {paragraph}{Example usage.}{10}{section*.10}
+\contentsline {subsection}{\numberline {2.5}Comments}{10}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Rule properties}{11}{subsection.2.6}
+\contentsline {paragraph}{Priorities.}{11}{section*.11}
+\contentsline {paragraph}{Injectiveness}{11}{section*.12}
+\contentsline {paragraph}{Action role}{11}{section*.13}
+\contentsline {paragraph}{Enabledness.}{11}{section*.14}
+\contentsline {paragraph}{Rule documentation.}{12}{section*.15}
+\contentsline {paragraph}{Formatted output.}{12}{section*.16}
+\contentsline {paragraph}{Transition labels.}{12}{section*.17}
+\contentsline {subsection}{\numberline {2.7}Transition systems}{12}{subsection.2.7}
+\contentsline {paragraph}{Rule systems and grammars}{12}{section*.18}
+\contentsline {subsection}{\numberline {2.8}Typing}{12}{subsection.2.8}
+\contentsline {paragraph}{Type graphs.}{12}{section*.19}
+\contentsline {paragraph}{Subtyping.}{13}{section*.20}
+\contentsline {section}{\numberline {3}Advanced Concepts}{14}{section.3}
+\contentsline {subsection}{\numberline {3.1}Wildcards and Label Variables}{14}{subsection.3.1}
+\contentsline {paragraph}{Type or flag wildcards.}{14}{section*.21}
+\contentsline {paragraph}{Guarded wildcards.}{14}{section*.22}
+\contentsline {paragraph}{Named wildcards.}{14}{section*.23}
+\contentsline {paragraph}{Example usage.}{14}{section*.24}
+\contentsline {subsection}{\numberline {3.2}Regular Expressions}{15}{subsection.3.2}
+\contentsline {paragraph}{Example usage.}{16}{section*.25}
+\contentsline {subsection}{\numberline {3.3}Data Attributes}{16}{subsection.3.3}
+\contentsline {paragraph}{Data values.}{16}{section*.26}
+\contentsline {paragraph}{Operations.}{16}{section*.27}
+\contentsline {paragraph}{Algebras.}{18}{section*.28}
+\contentsline {paragraph}{Example usage.}{18}{section*.29}
+\contentsline {subsection}{\numberline {3.4}Rule Parameters}{19}{subsection.3.4}
+\contentsline {paragraph}{Node identities as arguments}{19}{section*.30}
+\contentsline {paragraph}{Data values as arguments}{19}{section*.31}
+\contentsline {paragraph}{Anonymous parameters}{19}{section*.32}
+\contentsline {paragraph}{Example usage.}{20}{section*.33}
+\contentsline {subsection}{\numberline {3.5}Nested Rules}{20}{subsection.3.5}
+\contentsline {paragraph}{Nesting levels}{20}{section*.34}
+\contentsline {paragraph}{Named nesting levels}{21}{section*.35}
+\contentsline {paragraph}{Counting}{22}{section*.36}
+\contentsline {subsection}{\numberline {3.6}System Properties}{22}{subsection.3.6}
+\contentsline {paragraph}{Algebra family.}{22}{section*.37}
+\contentsline {paragraph}{Match injectivity.}{23}{section*.38}
+\contentsline {paragraph}{Dangling edge check.}{23}{section*.39}
+\contentsline {paragraph}{Creator edge check.}{23}{section*.40}
+\contentsline {paragraph}{Treating the RHSs as NACs.}{23}{section*.41}
+\contentsline {paragraph}{Isomorphism check.}{23}{section*.42}
+\contentsline {paragraph}{Control labels and common labels.}{23}{section*.43}
+\contentsline {paragraph}{Transition parameters.}{23}{section*.44}
+\contentsline {paragraph}{Displaying loops as node labels.}{23}{section*.45}
+\contentsline {paragraph}{Abstraction.}{23}{section*.46}
+\contentsline {subsection}{\numberline {3.7}Beautification}{24}{subsection.3.7}
+\contentsline {paragraph}{Node colouring}{24}{section*.47}
+\contentsline {paragraph}{Nodes-as-edges}{24}{section*.48}
+\contentsline {section}{\numberline {4}Control}{25}{section.4}
+\contentsline {subsection}{\numberline {4.1}Control statements and expressions}{25}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Packages and qualified names}{27}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Procedures: Functions and recipes}{27}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Properties: Conditions, invariants and forbidden patterns}{27}{subsection.4.4}
+\contentsline {section}{\numberline {5}Verification}{28}{section.5}
+\contentsline {subsection}{\numberline {5.1}Exploration}{28}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Model Checking}{28}{subsection.5.2}
+\contentsline {section}{\numberline {6}I/O}{29}{section.6}
+\contentsline {subsection}{\numberline {6.1}Graphs and rules}{29}{subsection.6.1}
+\contentsline {paragraph}{Edge labels.}{29}{section*.49}
+\contentsline {paragraph}{Graph attributes.}{29}{section*.50}
+\contentsline {paragraph}{Graph layout.}{29}{section*.51}
+\contentsline {subsection}{\numberline {6.2}Control programs}{29}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}System properties}{29}{subsection.6.3}

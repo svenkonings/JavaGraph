@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="type" edgeids="false" edgemode="directed" id="type-sim-Relation">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1">
+            <attr name="layout">
+                <string>80 43 70 31</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>382 36 76 46</string>
+            </attr>
+        </node>
+        <node id="n17">
+            <attr name="layout">
+                <string>228 39 88 46</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>87 94 53 31</string>
+            </attr>
+        </node>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>abs:</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>type:SimElem</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>import:</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge from="n17" to="n1">
+            <attr name="label">
+                <string>relation</string>
+            </attr>
+        </edge>
+        <edge from="n17" to="n17">
+            <attr name="label">
+                <string>type:Relation</string>
+            </attr>
+        </edge>
+        <edge from="n17" to="n0">
+            <attr name="label">
+                <string>relation</string>
+            </attr>
+        </edge>
+        <edge from="n17" to="n17">
+            <attr name="label">
+                <string>int:counter</string>
+            </attr>
+        </edge>
+        <edge from="n17" to="n2">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>abs:</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>type:Value</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

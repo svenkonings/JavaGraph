@@ -1,0 +1,30 @@
+# Layout information for C:\grammars\casb.gps\state_after_both_around.gst
+# Each line contains layout information about a node or edge
+# Version info: v <version number>; 1 = pre-jgraph 5.9, 2 = jgraph 5.9
+#     v 1: label position = (x-permillage, y-permillage)
+#     v 2: label position = (vector permillage, perpendicular distance)
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+v 2
+n n109857 181 18 30 30 
+n n109855 108 95 23 30 
+n n109851 185 302 21 15 
+n n109839 107 301 21 15 
+n n109841 108 162 23 30 
+n n109846 282 302 21 15 
+n n109840 19 98 21 15 
+n n109843 101 375 35 15 
+n n109837 272 158 28 30 
+n n109853 273 91 23 30 
+n n109856 17 19 30 30 
+n n109838 183 249 21 15 
+n n109847 23 378 18 15 
+n n109849 19 249 21 15 
+n n109850 183 165 21 15 
+n n109845 17 161 21 30 
+n n109844 18 293 30 30 
+n n109842 179 378 35 15 
+n n109854 7 446 47 30 
+n n109848 184 98 21 15 
+n n109852 92 240 50 30 
+e n109844 n109839 "top" 441 0 38 311 116 311 11

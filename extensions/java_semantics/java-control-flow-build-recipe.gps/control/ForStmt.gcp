@@ -1,0 +1,70 @@
+package control;
+
+recipe ForStmt(node root, node exit, out node entry) {
+	// Vars: c - condition, i - initialization, u - update, a - action, t - temp
+	node aentry;
+	try { // Look for a condition.
+		node croot := rule.ForStmt-WithCond(root);
+		node centry := Expr(croot, root);
+		aentry := ForStmt-TryUpdate(root, centry);
+		// We have a condition so we need to build the branch nodes.
+		rule.ForStmt-Up(root, croot, aentry, exit);
+		entry := ForStmt-TryInit(root, centry);
+	} else { // No condition.
+		aentry := ForStmt-TryUpdate(root, root);
+		// We don't have a condition so we flow back to the action entry.
+		rule.help.createFlow(root, aentry);
+		entry := ForStmt-TryInit(root, aentry);
+	}
+}
+
+function ForStmt-TryUpdate(node root, node texit, out node aentry) {
+	// Match the action root.
+	node aroot := rule.ForStmt-Action(root);
+	try {
+		// Handle the case without update.
+		rule.ForStmt-NoUpdate(root);
+		// Build the action statement.
+		aentry := Stmt(aroot, texit);
+	} else {
+		// We have an update.
+		node uentry := ForStmt-Update(root, texit);
+		// Build the action statement.
+		aentry := Stmt(aroot, uentry);
+	}
+}
+
+function ForStmt-Update(node root, node uexit, out node uentry) {
+	node uroot;
+	int upMax := rule.ForStmt-UpdateCount(root);
+	int upNr :=  rule.help.add(upMax, 0);
+	do {
+		uroot := rule.ForStmt-WithUpdate(root, upNr);
+		uentry := Assign(uroot, uexit);
+		uexit := rule.help.assign(uentry);
+		upNr := rule.help.sub(upNr, 1);
+	} while (rule.help.ge(upNr, 0))
+}
+
+function ForStmt-TryInit(node root, node texit, out node entry) {
+	try {
+		// Handle the case without initialization.
+		rule.ForStmt-NoInit(root);
+		entry := rule.help.assign(texit);
+	} else {
+		// We have an initialization.
+		entry := ForStmt-Init(root, texit);
+	}
+}
+
+function ForStmt-Init(node root, node iexit, out node ientry) {
+	node iroot;
+	int initMax := rule.ForStmt-InitCount(root);
+	int initNr :=  rule.help.add(initMax, 0);
+	do {
+		iroot := rule.ForStmt-WithInit(root, initNr);
+		ientry := Stmt(iroot, iexit);
+		iexit := rule.help.assign(ientry);
+		initNr := rule.help.sub(initNr, 1);
+	} while (rule.help.ge(initNr, 0))
+}

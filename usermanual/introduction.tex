@@ -1,0 +1,92 @@
+\clearpage
+\section{Introduction}
+
+\GROOVE is a project centered around the use of simple graphs for modelling
+any kind of dynamic system for which an abstract visual representation makes sense. The dynamics are specified through graph transformation rules. The core functionality of the tool is to explore all possible rule aplications, in a rich variety of ways, and to perform automatic verification (model checking).
+
+This manual constsis of some download and installation instructions and a
+manual for using the tools included in the \GROOVE tool set. The latter also
+explains the format used for graphs and graph transformations. Together
+with some examples, this should allow you to get started with \GROOVE.
+
+\subsection{Toolkit Components}
+\seclabel{toolkit}
+
+The \GROOVE tool set includes the following tools:
+\begin{description}\noitemsep
+\item[Simulator:] a GUI-based tool that lets you construct, simulate and
+  model check rule systems visually;
+\item[Generator:] a command line tool that lets you simulate and model check
+  rule systems without the performance penalty of the GUI;
+\item[ModelChecker:] a command line tool for CTL model checking;
+\item[PrologChecker:] a command line tool for executing Prolog queries on an explored grammar;
+\item[Imager:] a command line or GUI tool that supports conversions from
+  \GROOVE graphs and rules to other visual formats.
+\item[Viewer:] a stand-alone (GUI) viewer for \GROOVE graphs and rules.
+\end{description}
+
+\subsection{Download}
+
+The \GROOVE tool is distributed under the Apache License, Version 2.0. A copy
+of this license is available on
+\url{http://www.apache.org/licenses/LICENSE-2.0}.  The latest \GROOVE build
+can be downloaded from the \GROOVE sourceforge page:
+
+\begin{center}
+\url{http://sourceforge.net/projects/groove}
+\end{center}
+%
+There are some different packages available on the sourceforge site:
+%
+\begin{itemize}[noitemsep]
+\item \textsf{groove}, the tool itself.
+\item \textsf{groove-samples}, providing some sample grammars.
+\item \textsf{groove-doc}, consisting of some publications about \GROOVE and
+  the theory behind it.
+\end{itemize}
+%
+\GROOVE depends on a number of other libraries, namely:
+
+\DTLsetseparator{;}
+\DTLloadrawdb[noheader,keys={name,description,url,version}]{libraries}{libraries.csv}
+
+\begin{itemize}[noitemsep]
+\DTLforeach{libraries}{%
+  \libname=name,%
+  \libdescr=description,%
+  \liburl=url,%
+  \libversion=version%
+}{
+\item \textsc{\libname}, for \libdescr. \\
+  See \url{\liburl}%
+  \ifthenelse{\equal{\libversion}{}}{}{ (Version included: \libversion)}%
+  .
+}
+\end{itemize}
+
+\subsection{Installation}
+
+Since the entire \GROOVE tool is written in Java, getting it running is
+extremely easy.
+
+\medskip\noindent
+To use the \GROOVE tool set, download the bin+lib package from the download
+site explained above and unzip it to any location on your computer. Let's refer
+to this location as the \GROOVE directory.
+
+The \texttt{bin} subdirectory of the \GROOVE directory contains \texttt{jar}
+files for each of the toolkit programs (see \secref{toolkit}), so
+\texttt{Simulator.jar}, \texttt{Generator.jar} etc. You can use these in either of
+the following ways:
+\begin{itemize}
+\item In an explorer window opened on the \texttt{bin} directory, double-click
+  the icon of the \texttt{jar} file;
+\item On the command line, run
+%
+\begin{verbatim}
+java -jar GROOVE_PATH\bin\Program.jar [parameters]
+\end{verbatim}
+%
+  where \texttt{GROOVE\_PATH} is the groove directory and \texttt{Program} is
+  the toolkit program in question.
+\end{itemize}

@@ -1,0 +1,12 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n1123) at (2.205, -0.855) {\ml{type:State}};
+\node[basic_node] (n1125) at (0.885, -0.865) {\ml{type:State}};
+\node[basic_node] (n1124) at (1.545, -0.235) {\ml{type:Automaton}};
+
+\path[basic_edge] (n1124)  -- node[lab] {\ml{start}} (n1125) ;
+\path[creator_edge](n1125.east |- 2.205, -0.855) -- node[lab] {\ml{new:=}} (n1123) ;
+\path[basic_edge] (n1124)  -- node[lab] {\ml{final}} (n1123) ;
+\end{tikzpicture}

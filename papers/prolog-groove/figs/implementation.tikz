@@ -1,0 +1,45 @@
+\tikzstyle {nodelab} = [
+font=\sffamily\bfseries\footnotesize,
+]
+\tikzstyle {arrow} = [
+draw,
+single arrow,
+fill=green!20,
+minimum height=2cm,
+minimum width=1.5cm,
+nodelab,
+]
+
+\scalebox{.8}{
+\begin{tikzpicture}[rounded corners, thick]
+
+\draw [fill=yellow!20] (0,0) rectangle +(\textwidth*0.95,6);
+\draw (1.6,5.6) node[nodelab] {GROOVE Simulator};
+
+\draw [fill=blue!20] (0.2,0.2) rectangle +(2.7,5);
+\draw (1.5,4.8) node[nodelab] {Simulator State};
+
+\draw [fill=red!20] (0.4,3.5) rectangle +(2.3,0.8);
+\draw (1.55,3.85) node[nodelab] {Host Graphs};
+
+\draw [fill=red!20] (0.4,2.5) rectangle +(2.3,0.8);
+\draw (1.55,2.9) node[nodelab] {Rules};
+
+\draw [fill=red!20] (0.4,1.5) rectangle +(2.3,0.8);
+\draw (1.55,1.9) node[nodelab] {GTS};
+
+\draw [fill=red!20] (0.4,0.5) rectangle +(2.3,0.8);
+\draw (1.55,0.9) node[nodelab] {$\cdots$};
+
+\draw [fill=blue!20] (5.2,0.2) rectangle +(1.5,5);
+\draw (5.9,2.8) node[nodelab] {\ml{Glue\\Code}};
+
+\draw [fill=blue!20] (9.2,0.2) rectangle +(2.2,5);
+\draw (10.3,2.8) node[nodelab] {\ml{Prolog\\Interpreter}};
+
+\node [arrow,shape border rotate=180] at (4.2,2.8) {inspect};
+\node [arrow] at (7.8,4.2) {register};
+\node [arrow,shape border rotate=180] at (8.1,2.5) {call};
+\node [arrow] at (7.8,1) {unify terms};
+
+\end{tikzpicture}}

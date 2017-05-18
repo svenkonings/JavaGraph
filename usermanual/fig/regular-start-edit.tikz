@@ -1,0 +1,15 @@
+% To use this figure in your LaTeX document
+% import the package groove/resources/groove2tikz.sty
+%
+\begin{tikzpicture}[scale=\tikzscale]
+\node[basic_node] (n3) at (2.260, -2.845) {\ml{type:Person}};
+\node[basic_node] (n0) at (2.210, -0.880) {\ml{type:Person\\flag:Gerrit}};
+\node[basic_node] (n1) at (2.210, -1.520) {\ml{type:Person\\flag:Wim}};
+\node[basic_node] (n2) at (2.230, -2.220) {\ml{type:Person\\flag:Arend}};
+
+\path[basic_edge] (n2) .. controls (1.750, -2.310) and (1.640, -2.570) ..  (n3) 
+node[lab] at (1.766, -2.500) {\ml{son}};
+\path[basic_edge](n3.north -| 2.230, -2.220) -- node[lab] {\ml{father}} (n2) ;
+\path[basic_edge](n1.north -| 2.210, -0.880) -- node[lab] {\ml{father}} (n0) ;
+\path[basic_edge](n2.north -| 2.210, -1.520) -- node[lab] {\ml{father}} (n1) ;
+\end{tikzpicture}

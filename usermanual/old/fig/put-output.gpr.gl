@@ -1,0 +1,9 @@
+# Layout information for H:\groove\usermanual\fig\put-output.gpr
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n231 229 138 18 18 
+n n227 36 125 18 18 
+n n228 229 202 18 18 
+n n230 139 75 18 18 
+n n229 139 176 18 18 

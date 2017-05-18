@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="reciprocate">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="remark">
+            <string>Get to know those who know you</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1619">
+            <attr name="layout">
+                <string>136 104 37 30</string>
+            </attr>
+        </node>
+        <node id="n1618">
+            <attr name="layout">
+                <string>146 193 171 15</string>
+            </attr>
+        </node>
+        <node id="n1620">
+            <attr name="layout">
+                <string>289 106 37 30</string>
+            </attr>
+        </node>
+        <edge to="n1618" from="n1618">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge to="n1620" from="n1619">
+            <attr name="label">
+                <string>knows</string>
+            </attr>
+        </edge>
+        <edge to="n1619" from="n1619">
+            <attr name="label">
+                <string>Person</string>
+            </attr>
+        </edge>
+        <edge to="n1620" from="n1620">
+            <attr name="label">
+                <string>Person</string>
+            </attr>
+        </edge>
+        <edge to="n1620" from="n1618">
+            <attr name="label">
+                <string>2</string>
+            </attr>
+        </edge>
+        <edge to="n1619" from="n1619">
+            <attr name="label">
+                <string>par:0</string>
+            </attr>
+        </edge>
+        <edge to="n1619" from="n1620">
+            <attr name="label">
+                <string>not:knows</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 289 111 237 83 183 110 12</string>
+            </attr>
+        </edge>
+        <edge to="n1620" from="n1620">
+            <attr name="label">
+                <string>par:1</string>
+            </attr>
+        </edge>
+        <edge to="n1619" from="n1620">
+            <attr name="label">
+                <string>new:knows</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 293 106 233 49 177 104 12</string>
+            </attr>
+        </edge>
+        <edge to="n1618" from="n1618">
+            <attr name="label">
+                <string>Non-attribute parameter nodes</string>
+            </attr>
+        </edge>
+        <edge to="n1619" from="n1618">
+            <attr name="label">
+                <string>1</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

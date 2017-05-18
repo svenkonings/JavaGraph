@@ -1,0 +1,15 @@
+# Layout information for C:\local\groove\samples\linear-buffer.gps\start.gst
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n31 221 79 18 18 
+e n35 n33 "current" 495 982 133 165 134 54 321 54 322 87 11
+n n33 306 78 18 18 
+n n38 306 182 18 18 
+n n32 306 231 18 18 
+n n30 306 131 18 18 
+n n34 118 228 18 18 
+n n39 221 132 18 18 
+n n35 112 156 18 18 
+n n36 221 182 18 18 
+n n37 222 230 18 18 

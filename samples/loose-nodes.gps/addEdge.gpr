@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="addEdge">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="remark">
+            <string>Adds a &quot;distinct&quot; edge betweed two disctinct nodes</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n17319">
+            <attr name="layout">
+                <string>238 90 15 15</string>
+            </attr>
+        </node>
+        <node id="n17320">
+            <attr name="layout">
+                <string>78 147 207 15</string>
+            </attr>
+        </node>
+        <node id="n17318">
+            <attr name="layout">
+                <string>96 88 15 15</string>
+            </attr>
+        </node>
+        <edge to="n17319" from="n17318">
+            <attr name="label">
+                <string>new:distinct</string>
+            </attr>
+        </edge>
+        <edge to="n17319" from="n17318">
+            <attr name="label">
+                <string>not:distinct</string>
+            </attr>
+            <attr name="layout">
+                <string>250 -32 105 97 174 59 247 99 12</string>
+            </attr>
+        </edge>
+        <edge to="n17319" from="n17318">
+            <attr name="label">
+                <string>not:=</string>
+            </attr>
+            <attr name="layout">
+                <string>250 -32 105 97 174 59 247 99 12</string>
+            </attr>
+        </edge>
+        <edge to="n17320" from="n17320">
+            <attr name="label">
+                <string>The distinct edge is never a self-edge</string>
+            </attr>
+        </edge>
+        <edge to="n17320" from="n17320">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

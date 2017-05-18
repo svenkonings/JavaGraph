@@ -1,0 +1,9 @@
+# Layout information for C:\cygwin\home\ladmin\papers\format\fig\assign-instance-rhs.gst
+# Each line contains layout information about a node or edge
+# Node Format: n <node id> <bounds>
+# Edge Format: e <source id> <target id> <edge label> <relative label position> [<points list> <line style>]
+n n83 150 123 18 18 
+n n85 135 63 18 18 
+n n86 192 123 18 18 
+n n84 100 121 18 18 
+e n85 n83 "x" 86 396 156 72 119 104 157 132 12

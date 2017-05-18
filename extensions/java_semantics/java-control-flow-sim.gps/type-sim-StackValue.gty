@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="type" edgeids="false" edgemode="directed" id="type-sim-StackValue">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n11">
+            <attr name="layout">
+                <string>24 138 53 31</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>24 46 87 31</string>
+            </attr>
+        </node>
+        <edge from="n11" to="n11">
+            <attr name="label">
+                <string>abs:</string>
+            </attr>
+        </edge>
+        <edge from="n11" to="n11">
+            <attr name="label">
+                <string>type:Value</string>
+            </attr>
+        </edge>
+        <edge from="n9" to="n11">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge from="n9" to="n9">
+            <attr name="label">
+                <string>type:StackValue</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

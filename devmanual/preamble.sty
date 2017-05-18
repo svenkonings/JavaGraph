@@ -1,0 +1,122 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PACKAGE INCLUSIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{layout}
+\usepackage{color}                      % needed for xfig
+\usepackage{listings}                   % for type-setting listings (listing.sty is stored in the same directory
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% REFERENCING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\chlabel}[1]{\label{chapter:#1}}
+\newcommand{\chref}[1]{Chapter~\ref{chapter:#1}}
+\newcommand{\alabel}[1]{\label{appendix:#1}}
+\newcommand{\aref}[1]{Appendix~\ref{appendix:#1}}
+\renewcommand{\figurename}{Figure~}
+\newcommand{\flabel}[1]{\label{figure:#1}}
+\newcommand{\fref}[1]{Fig.~\ref{figure:#1}}
+\newcommand{\tbllabel}[1]{\label{table:#1}}
+\newcommand{\tblref}[1]{Table~\ref{table:#1}}
+\newcommand{\dlabel}[1]{\label{def:#1}}
+\newcommand{\dref}[1]{Definition~\ref{def:#1}}
+\newcommand{\stlabel}[1]{\label{section:#1}}
+\newcommand{\stref}[1]{Section~\ref{section:#1}}
+\newcommand{\itemlabel}[1]{\label{item:#1}}
+\newcommand{\itemref}[1]{\ref{item:#1}}
+\newcommand{\thlabel}[1]{\label{theorem:#1}}
+\newcommand{\thref}[1]{Theorem~\ref{theorem:#1}}
+\newcommand{\lmlabel}[1]{\label{lemma:#1}}
+\newcommand{\lmref}[1]{Lemma~\ref{lemma:#1}}
+\newcommand{\rmlabel}[1]{\label{remark:#1}}
+\newcommand{\rmref}[1]{Remark~\ref{remark:#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CODE LISTINGS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% the default, esp. for snippets
+\lstset{
+%       backgroundcolor  = \color{grayshadow},  % define the background of the listing
+        basicstyle       = \small\ttfamily,     % define the font of the source-code
+        breaklines       = true,                % define whether to break lines automatically
+        captionpos       = b,                   % define the caption position, default: t(op)
+        commentstyle     = \it,                 % define the font of comments
+        emphstyle        = \underbar            % define the way to emphasize elements
+        extendedchars    = true,                %
+        firstnumber      = 1,
+        float            = htbp,                %
+        frame            = single,              % define what kind of frame to be drawn around the listing
+        keywordstyle     = \bf,                 % define the font of the keywords
+        numberfirstline  = false,
+        numbers          = left,                % define where to put line-numbers
+        numberstyle      = \tiny,               % define the font of the line-numbers
+        showspaces       = false,               % define whether normal spaces must be shown
+        showstringspaces = false,               % define whether normal string-spaces must be shown
+        showtabs         = false,               % define whether tabs must be shown
+        stepnumber       = 5,                   % define the step-size of the line-numbers
+        stringstyle      = \color{blue},        % define the font of strings
+        tabsize          = 2                    % define the tabsize, default: 8
+}
+
+% standard settings for typesetting Java
+\lstdefinestyle{java}
+{
+  language=Java,                        % should be clear
+  tabsize=4,                            % [Arend] this is what xemacs assumes
+  keepspaces=true                       % I know best
+  basicstyle=\small\ttfamily\upshape,   % keep things small and plain
+  commentstyle=\itshape                 % comments italic
+}
+
+\newcommand{\codelisting}[3]{
+        \noindent
+        \lstinputlisting[
+        language                        = {#1},                                 % set the language of the listing
+        label                           = {l:#2},                               % define the reference-label
+        caption                         = {#3}]                                 % set the caption of the listing
+        {\srcdir/#2}                                                            % set the file to be listed
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\rulescalefactor}{0.5}
+
+\newcommand{\figdir}{fig}
+\newcommand{\srcdir}{src}
+
+\newcommand{\GROOVE}{{\sc GROOVE}\xspace}
+
+\newcommand{\GTS}{{\sc GTS}\xspace}
+
+\newcommand{\dpo}{{\sc dpo}\xspace}
+\newcommand{\spo}{{\sc spo}\xspace}
+
+\newcommand{\rhs}{\ensuremath{\mathsf{RHS}}\xspace}
+\newcommand{\lhs}{\ensuremath{\mathsf{LHS}}\xspace}
+\newcommand{\nac}{\ensuremath{\mathsf{NAC}}\xspace}
+
+\newcommand{\Graph}{\ensuremath{\mathtt{Graph}}\xspace}
+
+\newcommand{\nullPnt}{\ensuremath{\mathtt{null}}\xspace}
+\newcommand{\x}{\ensuremath{\mathtt{x}}\xspace}
+\newcommand{\getX}{\ensuremath{\mathtt{getX()}}\xspace}
+\newcommand{\computeX}{\ensuremath{\mathtt{computeX()}}\xspace}
+\newcommand{\createX}{\ensuremath{\mathtt{createX(\ldots)}}\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COLOUR DEFS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{gray}{gray}{0.5}
+\definecolor{grayshadow}{gray}{0.97}
+\definecolor{bordeaux}{rgb}{0.8,0.1,0.1}

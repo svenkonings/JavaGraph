@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="std-java-rules.ForStmt-16-WithInitCond-Close">
+        <attr name="transitionLabel">
+            <string></string>
+        </attr>
+        <attr name="enabled">
+            <string>true</string>
+        </attr>
+        <attr name="priority">
+            <string>1</string>
+        </attr>
+        <attr name="printFormat">
+            <string></string>
+        </attr>
+        <attr name="remark">
+            <string></string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n0">
+            <attr name="layout">
+                <string>231 46 46 16</string>
+            </attr>
+        </node>
+        <node id="n12">
+            <attr name="layout">
+                <string>398 158 66 32</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>42 266 31 16</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>7 146 91 32</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>406 66 63 16</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>323 238 30 16</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>235 159 51 16</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>23 57 63 16</string>
+            </attr>
+        </node>
+        <node id="n13">
+            <attr name="layout">
+                <string>314 318 63 16</string>
+            </attr>
+        </node>
+        <node id="n8">
+            <attr name="layout">
+                <string>168 306 47 32</string>
+            </attr>
+        </node>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Assign</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n12">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n12">
+            <attr name="label">
+                <string>test:index = 0</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n12">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:Expr</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:Branch</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>let:match = false</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n6">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n6">
+            <attr name="label">
+                <string>new:condition</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n9">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:Stmt</string>
+            </attr>
+        </edge>
+        <edge to="n13" from="n4">
+            <attr name="label">
+                <string>del:entry</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:ForStmt</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n2">
+            <attr name="label">
+                <string>condition</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n2">
+            <attr name="label">
+                <string>new:entry</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n2">
+            <attr name="label">
+                <string>new:branch</string>
+            </attr>
+            <attr name="layout">
+                <string>500 0 260 167 256 278 191 322 13</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n2">
+            <attr name="label">
+                <string>del:exit</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n2">
+            <attr name="label">
+                <string>action</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n2">
+            <attr name="label">
+                <string>new:branch</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n2">
+            <attr name="label">
+                <string>initialization</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n2">
+            <attr name="label">
+                <string>not:increment</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n13" from="n13">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>type:Branch</string>
+            </attr>
+        </edge>
+        <edge to="n8" from="n8">
+            <attr name="label">
+                <string>let:match = true</string>
+            </attr>
+        </edge>
+        <edge to="n13" from="n8">
+            <attr name="label">
+                <string>new:flow</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n8">
+            <attr name="label">
+                <string>new:condition</string>
+            </attr>
+            <attr name="layout">
+                <string>516 0 191 322 148 333 57 274 13</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

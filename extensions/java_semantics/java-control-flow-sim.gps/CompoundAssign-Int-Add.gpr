@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph edgemode="directed" edgeids="false" role="rule" id="CompoundAssign-Int-Add">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n7">
+            <attr name="layout">
+                <string>618 402 87 34</string>
+            </attr>
+        </node>
+        <node id="n9">
+            <attr name="layout">
+                <string>333 326 57 34</string>
+            </attr>
+        </node>
+        <node id="n6">
+            <attr name="layout">
+                <string>798 356 79 34</string>
+            </attr>
+        </node>
+        <node id="n3">
+            <attr name="layout">
+                <string>311 193 57 34</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>767 210 129 52</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>634 206 58 52</string>
+            </attr>
+        </node>
+        <node id="n4">
+            <attr name="layout">
+                <string>467 400 82 34</string>
+            </attr>
+        </node>
+        <node id="n5">
+            <attr name="layout">
+                <string>326 398 71 34</string>
+            </attr>
+        </node>
+        <node id="n10">
+            <attr name="layout">
+                <string>472 186 87 34</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>474 274 103 34</string>
+            </attr>
+        </node>
+        <node id="n11">
+            <attr name="layout">
+                <string>77 386 57 34</string>
+            </attr>
+        </node>
+        <node id="n12">
+            <attr name="layout">
+                <string>328 266 57 34</string>
+            </attr>
+        </node>
+        <node id="n13">
+            <attr name="layout">
+                <string>90 210 43 43</string>
+            </attr>
+        </node>
+        <node id="n14">
+            <attr name="layout">
+                <string>187 182 41 38</string>
+            </attr>
+        </node>
+        <node id="n15">
+            <attr name="layout">
+                <string>207 265 41 38</string>
+            </attr>
+        </node>
+        <node id="n16">
+            <attr name="layout">
+                <string>89 275 41 38</string>
+            </attr>
+        </node>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n7">
+            <attr name="label">
+                <string>type:StackValue</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n7">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge to="n11" from="n7">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+            <attr name="layout">
+                <string>526 -16 621 432 419 495 131 410 12</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n9">
+            <attr name="label">
+                <string>type:IntVal</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n6">
+            <attr name="label">
+                <string>type:FlowElem</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n3">
+            <attr name="label">
+                <string>type:IntVal</string>
+            </attr>
+        </edge>
+        <edge to="n14" from="n3">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>type:CompoundAssign</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n2">
+            <attr name="label">
+                <string>test:operator = &quot;+=&quot;</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n2">
+            <attr name="label">
+                <string>flow</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>type:Frame</string>
+            </attr>
+        </edge>
+        <edge to="n0" from="n0">
+            <attr name="label">
+                <string>flag:active</string>
+            </attr>
+        </edge>
+        <edge to="n6" from="n0">
+            <attr name="label">
+                <string>new:pc</string>
+            </attr>
+        </edge>
+        <edge to="n7" from="n0">
+            <attr name="label">
+                <string>stack</string>
+            </attr>
+        </edge>
+        <edge to="n2" from="n0">
+            <attr name="label">
+                <string>del:pc</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n0">
+            <attr name="label">
+                <string>stack</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n4">
+            <attr name="label">
+                <string>type:StackElem</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n5">
+            <attr name="label">
+                <string>type:Variable</string>
+            </attr>
+        </edge>
+        <edge to="n11" from="n5">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n9" from="n5">
+            <attr name="label">
+                <string>del:value</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n10">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge to="n10" from="n10">
+            <attr name="label">
+                <string>type:StackValue</string>
+            </attr>
+        </edge>
+        <edge to="n3" from="n10">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n10">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>del:</string>
+            </attr>
+        </edge>
+        <edge to="n1" from="n1">
+            <attr name="label">
+                <string>type:StackVariable</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n1">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n5" from="n1">
+            <attr name="label">
+                <string>variable</string>
+            </attr>
+        </edge>
+        <edge to="n4" from="n1">
+            <attr name="label">
+                <string>next</string>
+            </attr>
+        </edge>
+        <edge to="n11" from="n11">
+            <attr name="label">
+                <string>new:</string>
+            </attr>
+        </edge>
+        <edge to="n11" from="n11">
+            <attr name="label">
+                <string>type:IntVal</string>
+            </attr>
+        </edge>
+        <edge to="n16" from="n11">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n12" from="n12">
+            <attr name="label">
+                <string>type:IntVal</string>
+            </attr>
+        </edge>
+        <edge to="n15" from="n12">
+            <attr name="label">
+                <string>value</string>
+            </attr>
+        </edge>
+        <edge to="n13" from="n13">
+            <attr name="label">
+                <string>prod:</string>
+            </attr>
+        </edge>
+        <edge to="n16" from="n13">
+            <attr name="label">
+                <string>int:add</string>
+            </attr>
+        </edge>
+        <edge to="n15" from="n13">
+            <attr name="label">
+                <string>arg:0</string>
+            </attr>
+        </edge>
+        <edge to="n14" from="n13">
+            <attr name="label">
+                <string>arg:1</string>
+            </attr>
+        </edge>
+        <edge to="n14" from="n14">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+        <edge to="n15" from="n15">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+        <edge to="n16" from="n16">
+            <attr name="label">
+                <string>int:</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>

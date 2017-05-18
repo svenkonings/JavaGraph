@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
+    <graph role="rule" edgeids="false" edgemode="directed" id="place">
+        <attr name="$version">
+            <string>curly</string>
+        </attr>
+        <node id="n1">
+            <attr name="layout">
+                <string>300 106 10 17</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>112 98 25 34</string>
+            </attr>
+        </node>
+        <node id="n2">
+            <attr name="layout">
+                <string>50 168 491 85</string>
+            </attr>
+        </node>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n0">
+            <attr name="label">
+                <string>h+|v+|ld+|rd+</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>Q</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>not:Q</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>new:Q</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>rem:</string>
+            </attr>
+        </edge>
+        <edge from="n2" to="n2">
+            <attr name="label">
+                <string>rem:How to read this rule:
+Find a node that doesn't have a queen already (&quot;!Q&quot;) and place a new queen,
+but only do so if this position is not under attack by another existing queen,
+i.e., it should not be possible to reach the selected node in a straigh line
+(either horizontally - &quot;h+&quot;, vertically - &quot;v+&quot; or diagonally - &quot;ld+&quot; or &quot;rd+&quot;).</string>
+            </attr>
+        </edge>
+    </graph>
+</gxl>
