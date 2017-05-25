@@ -24,6 +24,7 @@ import groove.grammar.host.DefaultHostGraph;
 import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
 import groove.grammar.type.LabelPattern;
+import groove.graph.GGraph;
 import groove.util.parse.FormatException;
 import junit.framework.Assert;
 
@@ -76,15 +77,15 @@ public class LabelPatternTest {
         HostNode i1 =
             graph.getFactory().createNode(intAlgebra,
                 intAlgebra.toValueFromJava(11));
-        graph.addNode(i1);
+        ((GGraph) graph).addNode(i1);
         HostNode i2 =
             graph.getFactory().createNode(intAlgebra,
                 intAlgebra.toValueFromJava(22));
-        graph.addNode(i2);
+        ((GGraph) graph).addNode(i2);
         HostNode s =
             graph.getFactory().createNode(stringAlgebra,
                 stringAlgebra.toValueFromJava("text"));
-        graph.addNode(s);
+        ((GGraph) graph).addNode(s);
         graph.addEdge(n1, "i1", i1);
         graph.addEdge(n1, "i2", i2);
         graph.addEdge(n1, "s", s);

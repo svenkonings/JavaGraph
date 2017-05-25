@@ -151,7 +151,7 @@ public class SettingParser implements Parser<Setting<?,?>> {
     @SuppressWarnings("unchecked")
     @Override
     public Class<? extends Setting<?,?>> getValueType() {
-        return (Class<? extends Setting<?,?>>) Setting.class;
+        return null; // FIXME
     }
 
     @Override

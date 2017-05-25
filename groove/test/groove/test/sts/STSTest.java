@@ -6,6 +6,7 @@ import groove.grammar.host.HostEdge;
 import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
 import groove.grammar.model.GrammarModel;
+import groove.graph.GGraph;
 import groove.lts.GTS;
 import groove.lts.GraphState;
 import groove.lts.MatchResult;
@@ -98,9 +99,9 @@ public class STSTest extends TestCase {
             this.g3.getFactory().createEdge(this.n3[0], "y", this.n3[2]);
 
         for (int i = 0; i < 3; i++) {
-            this.g1.addNode(this.n1[i]);
-            this.g2.addNode(this.n2[i]);
-            this.g3.addNode(this.n3[i]);
+            ((GGraph) this.g1).addNode(this.n1[i]);
+            ((GGraph) this.g2).addNode(this.n2[i]);
+            ((GGraph) this.g3).addNode(this.n3[i]);
         }
 
         for (int i = 0; i < 2; i++) {

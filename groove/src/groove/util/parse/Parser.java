@@ -367,7 +367,7 @@ abstract public interface Parser<T> {
         @SuppressWarnings("unchecked")
         public SplitParser(Parser<T> inner) {
             assert inner != null;
-            this.valueType = (Class<List<T>>) new ArrayList<T>().getClass();
+            this.valueType = null; // FIXME
             this.inner = inner;
         }
 
