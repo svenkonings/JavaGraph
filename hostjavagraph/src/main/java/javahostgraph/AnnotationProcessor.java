@@ -29,15 +29,19 @@ import java.util.Set;
 
 public class AnnotationProcessor extends AbstractProcessor {
 
-    public static final String NODE = "javagraph.annotations.Node";
+    public static final String FOLDER = "javahostgraph";
+    public static final String PACKAGE = "javahostgraph.annotations.";
+    public static final String TYPEGRAPH_FILE = "TypeGraph.obj";
 
-    public static final String NODE_CREATE = "javagraph.annotations.NodeCreate";
-    public static final String NODE_DELETE = "javagraph.annotations.NodeDelete";
-    public static final String NODE_VISIT = "javagraph.annotations.NodeVisit";
+    public static final String NODE = PACKAGE + "Node";
 
-    public static final String EDGE_CREATE = "javagraph.annotations.EdgeCreate";
-    public static final String EDGE_DELETE = "javagraph.annotations.EdgeDelete";
-    public static final String EDGE_VISIT = "javagraph.annotations.EdgeVisit";
+    public static final String NODE_CREATE = PACKAGE + "NodeCreate";
+    public static final String NODE_DELETE = PACKAGE + "NodeDelete";
+    public static final String NODE_VISIT = PACKAGE + "NodeVisit";
+
+    public static final String EDGE_CREATE = PACKAGE + "EdgeCreate";
+    public static final String EDGE_DELETE = PACKAGE + "EdgeDelete";
+    public static final String EDGE_VISIT = PACKAGE + "EdgeVisit";
 
     private TypeGraph graph;
     private Types types;
@@ -69,7 +73,7 @@ public class AnnotationProcessor extends AbstractProcessor {
         types = processingEnv.getTypeUtils();
         messager = processingEnv.getMessager();
         try {
-            graphFile = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, "javagraph", "TypeGraph.obj");
+            graphFile = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, FOLDER, TYPEGRAPH_FILE);
         } catch (IOException e) {
             error("TypeGraph could not be created: %s", e.getMessage());
         }

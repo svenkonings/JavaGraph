@@ -1,5 +1,7 @@
 package javahostgraph.graph;
 
+import groove.grammar.AnchorKind;
+import groove.grammar.host.HostNode;
 import javahostgraph.typegraph.TypeEdge;
 import javahostgraph.typegraph.TypeGraph;
 import javahostgraph.typegraph.TypeNode;
@@ -11,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
-public class Node<S> {
+public class Node<S> implements HostNode {
 
     private final TypeGraph typeGraph;
 
@@ -116,5 +118,20 @@ public class Node<S> {
     @Override
     public String toString() {
         return object.toString();
+    }
+
+    @Override
+    public AnchorKind getAnchorKind() {
+        return AnchorKind.NODE;
+    }
+
+    @Override
+    public groove.grammar.type.TypeNode getType() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int getNumber() {
+        return hashCode();
     }
 }

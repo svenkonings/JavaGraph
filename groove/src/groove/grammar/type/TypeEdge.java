@@ -36,7 +36,7 @@ public class TypeEdge extends AEdge<TypeNode,TypeLabel>implements TypeElement {
      * Don't call directly; use {@link TypeFactory} methods instead.
      * @see TypeFactory#createEdge(TypeNode, Label, TypeNode)
      */
-    TypeEdge(TypeNode source, TypeLabel label, TypeNode target, TypeGraph graph) {
+    public TypeEdge(TypeNode source, TypeLabel label, TypeNode target, TypeGraph graph) {
         super(source, label, target);
         assert graph != null;
         assert source.equals(target) || label.getRole() == BINARY : String

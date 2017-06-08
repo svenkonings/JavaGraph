@@ -10,6 +10,9 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Set;
 
+import static javahostgraph.AnnotationProcessor.FOLDER;
+import static javahostgraph.AnnotationProcessor.TYPEGRAPH_FILE;
+
 public class TypeGraph implements Serializable {
 
     private static TypeGraph graph = null;
@@ -24,10 +27,11 @@ public class TypeGraph implements Serializable {
     }
 
     public static TypeGraph loadGraph() {
-        URL url = TypeGraph.class.getClassLoader().getResource("javagraph/TypeGraph.obj");
+        URL url = TypeGraph.class.getClassLoader().getResource(FOLDER + "/" + TYPEGRAPH_FILE);
         if (url != null) {
             return loadGraph(url);
         } else {
+            new IOException("Typegraph not found").printStackTrace();
             return new TypeGraph();
         }
     }

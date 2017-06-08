@@ -1,16 +1,26 @@
 package javahostgraph.graph;
 
+import com.google.common.collect.Sets;
+import groove.algebra.AlgebraFamily;
+import groove.grammar.host.HostEdge;
+import groove.grammar.host.HostFactory;
+import groove.grammar.host.HostGraph;
+import groove.grammar.host.HostNode;
+import groove.graph.*;
+import groove.graph.Edge;
+import groove.util.parse.FormatErrorSet;
 import javahostgraph.typegraph.TypeGraph;
 import javahostgraph.typegraph.TypeNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
-public class Graph {
+public class Graph implements HostGraph{
 
     private static Graph graph = null;
 
@@ -70,5 +80,133 @@ public class Graph {
     @Override
     public String toString() {
         return visitNodes().toString();
+    }
+
+    @Override
+    public Set<? extends HostNode> nodeSet() {
+        return visitNodes();
+    }
+
+    @Override
+    public Set<? extends HostEdge> edgeSet() {
+        Set<javahostgraph.graph.Edge<?, ?>> edgeSet = new HashSet<>();
+        for (Node node : visitNodes()) {
+            edgeSet.addAll(node.visitEdges());
+        }
+        return edgeSet;
+    }
+
+    @Override
+    public Set<? extends HostEdge> edgeSet(groove.graph.Node node) {
+        return Sets.union(inEdgeSet(node), outEdgeSet(node));
+    }
+
+    @Override
+    public Set<? extends HostEdge> inEdgeSet(groove.graph.Node node) {
+        return edgeSet().stream().filter(edge -> edge.target().equals(node)).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<? extends HostEdge> outEdgeSet(groove.graph.Node node) {
+        return ((Node<?>) node).visitEdges();
+    }
+
+    @Override
+    public Set<? extends HostEdge> edgeSet(Label label) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isFixed() {
+        return false;
+    }
+
+    @Override
+    public boolean containsNode(groove.graph.Node node) {
+        return nodeSet().contains(node);
+    }
+
+    @Override
+    public boolean containsEdge(Edge edge) {
+        return edgeSet().contains(edge);
+    }
+
+    @Override
+    public boolean setFixed() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean hasInfo() {
+        return false;
+    }
+
+    @Override
+    public GraphInfo getInfo() {
+        return new GraphInfo();
+    }
+
+    @Override
+    public HostGraph newGraph(String name) {
+        return this;
+    }
+
+    @Override
+    public void setName(String name) {
+    }
+
+    @Override
+    public HostNode addNode() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean addNode(HostNode node) {
+        return false;
+    }
+
+    @Override
+    public boolean addEdge(HostEdge edge) {
+        return false;
+    }
+
+    @Override
+    public boolean removeEdge(HostEdge edge) {
+        return false;
+    }
+
+    @Override
+    public boolean removeNode(HostNode node) {
+        return false;
+    }
+
+    @Override
+    public HostGraph clone() {
+        return this;
+    }
+
+    @Override
+    public HostGraph clone(AlgebraFamily family) {
+        return this;
+    }
+
+    @Override
+    public HostFactory getFactory() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public String getName() {
+        return "";
+    }
+
+    @Override
+    public GraphRole getRole() {
+        return GraphRole.HOST;
+    }
+
+    @Override
+    public FormatErrorSet checkTypeConstraints() {
+        return new FormatErrorSet();
     }
 }
