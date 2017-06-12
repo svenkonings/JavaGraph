@@ -33,8 +33,11 @@ public class Graph implements HostGraph {
 
     private final TypeGraph typeGraph;
 
+    private String name;
+
     public Graph() {
         typeGraph = TypeGraph.getInstance();
+        name = "javagraph";
     }
 
     public <T> Node<T> createNode(Class<T> nodeClass) {
@@ -118,7 +121,7 @@ public class Graph implements HostGraph {
 
     @Override
     public boolean isFixed() {
-        return false;
+        return true;
     }
 
     @Override
@@ -152,7 +155,8 @@ public class Graph implements HostGraph {
     }
 
     @Override
-    public void setName(String name) {
+    public void setName(String newName) {
+        name = newName;
     }
 
     @Override
@@ -197,7 +201,7 @@ public class Graph implements HostGraph {
 
     @Override
     public String getName() {
-        return "";
+        return name;
     }
 
     @Override
