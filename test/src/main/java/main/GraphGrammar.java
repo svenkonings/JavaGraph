@@ -1,7 +1,7 @@
 package main;
 
 import groove.grammar.Grammar;
-import javahostgraph.graph.Graph;
+import javagraph.graph.Graph;
 
 import java.nio.file.Path;
 
