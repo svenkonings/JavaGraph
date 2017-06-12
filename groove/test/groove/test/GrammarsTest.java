@@ -76,7 +76,7 @@ public class GrammarsTest {
     }
 
     /** Location of the (downloaded) samples module of SourceForge. */
-    private static final String SAMPLE_DIR = "../groove-samples";
+    private static final String SAMPLE_DIR = "../samples";
     /** Location of the (downloaded) grammars module of SourceForge. */
-    private static final String GRAMMAR_DIR = "../groove-grammars";
+    private static final String GRAMMAR_DIR = "../grammars";
 }
