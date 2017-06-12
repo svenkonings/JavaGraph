@@ -7,6 +7,10 @@ import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeLabel;
 import groove.graph.EdgeRole;
 import javahostgraph.typegraph.TypeGraph;
+import javahostgraph.typegraph.TypeNode;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 @SuppressWarnings("unchecked")
 public class Edge<S, T> implements HostEdge{
@@ -20,6 +24,18 @@ public class Edge<S, T> implements HostEdge{
         typeGraph = TypeGraph.getInstance();
         source = sourceNode;
         target = targetNode;
+    }
+
+    public Node<S> getSource() {
+        return source;
+    }
+
+    public Node<T> getTarget() {
+        return target;
+    }
+
+    public boolean deleteEdge() {
+        return source.deleteEdge(target);
     }
 
     @Override

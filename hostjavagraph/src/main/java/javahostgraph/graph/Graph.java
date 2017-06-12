@@ -6,21 +6,21 @@ import groove.grammar.host.HostEdge;
 import groove.grammar.host.HostFactory;
 import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
-import groove.graph.*;
-import groove.graph.Edge;
+import groove.graph.GraphInfo;
+import groove.graph.GraphRole;
+import groove.graph.Label;
 import groove.util.parse.FormatErrorSet;
 import javahostgraph.typegraph.TypeGraph;
 import javahostgraph.typegraph.TypeNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
-public class Graph implements HostGraph{
+public class Graph implements HostGraph {
 
     private static Graph graph = null;
 
@@ -127,13 +127,13 @@ public class Graph implements HostGraph{
     }
 
     @Override
-    public boolean containsEdge(Edge edge) {
+    public boolean containsEdge(groove.graph.Edge edge) {
         return edgeSet().contains(edge);
     }
 
     @Override
     public boolean setFixed() {
-        throw new UnsupportedOperationException();
+        return true;
     }
 
     @Override
@@ -162,22 +162,22 @@ public class Graph implements HostGraph{
 
     @Override
     public boolean addNode(HostNode node) {
-        return false;
+        return createNode(((Node<?>) node).getObjectClass()) != null;
     }
 
     @Override
     public boolean addEdge(HostEdge edge) {
-        return false;
+        return ((Edge<?, ?>) edge).getSource().createEdge(((Edge<?, ?>) edge).getTarget()) != null;
     }
 
     @Override
     public boolean removeEdge(HostEdge edge) {
-        return false;
+        return ((Edge<?, ?>) edge).deleteEdge();
     }
 
     @Override
     public boolean removeNode(HostNode node) {
-        return false;
+        return ((Node<?>) node).deleteNode();
     }
 
     @Override
@@ -192,7 +192,7 @@ public class Graph implements HostGraph{
 
     @Override
     public HostFactory getFactory() {
-        throw new UnsupportedOperationException();
+        return new GraphFactory(this);
     }
 
     @Override
