@@ -1,4 +1,4 @@
-package javahostgraph.graph;
+package javagraph.graph;
 
 import com.google.common.collect.Sets;
 import groove.algebra.AlgebraFamily;
@@ -10,8 +10,8 @@ import groove.graph.GraphInfo;
 import groove.graph.GraphRole;
 import groove.graph.Label;
 import groove.util.parse.FormatErrorSet;
-import javahostgraph.typegraph.TypeGraph;
-import javahostgraph.typegraph.TypeNode;
+import javagraph.typegraph.TypeGraph;
+import javagraph.typegraph.TypeNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -89,7 +89,7 @@ public class Graph implements HostGraph {
 
     @Override
     public Set<? extends HostEdge> edgeSet() {
-        Set<javahostgraph.graph.Edge<?, ?>> edgeSet = new HashSet<>();
+        Set<javagraph.graph.Edge<?, ?>> edgeSet = new HashSet<>();
         for (Node node : visitNodes()) {
             edgeSet.addAll(node.visitEdges());
         }

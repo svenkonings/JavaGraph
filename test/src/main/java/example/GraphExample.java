@@ -1,8 +1,8 @@
 package example;
 
-import javahostgraph.graph.Graph;
-import javahostgraph.graph.Node;
-import javahostgraph.typegraph.TypeGraph;
+import javagraph.graph.Graph;
+import javagraph.graph.Node;
+import javagraph.typegraph.TypeGraph;
 
 public class GraphExample {
     public static void main(String[] args) {

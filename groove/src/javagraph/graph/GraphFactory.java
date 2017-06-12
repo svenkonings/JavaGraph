@@ -1,4 +1,4 @@
-package javahostgraph.graph;
+package javagraph.graph;
 
 import groove.algebra.Algebra;
 import groove.grammar.host.*;

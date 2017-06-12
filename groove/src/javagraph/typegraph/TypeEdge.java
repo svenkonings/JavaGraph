@@ -1,4 +1,4 @@
-package javahostgraph.typegraph;
+package javagraph.typegraph;
 
 import java.io.Serializable;
 import java.util.ArrayList;

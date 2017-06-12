@@ -1,6 +1,6 @@
 package example;
 
-import javahostgraph.annotations.*;
+import javagraph.annotations.*;
 
 import java.util.Collections;
 import java.util.HashSet;

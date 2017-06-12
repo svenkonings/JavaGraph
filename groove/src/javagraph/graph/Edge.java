@@ -1,4 +1,4 @@
-package javahostgraph.graph;
+package javagraph.graph;
 
 import groove.grammar.AnchorKind;
 import groove.grammar.host.HostEdge;
@@ -6,11 +6,7 @@ import groove.grammar.host.HostNode;
 import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeLabel;
 import groove.graph.EdgeRole;
-import javahostgraph.typegraph.TypeGraph;
-import javahostgraph.typegraph.TypeNode;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import javagraph.typegraph.TypeGraph;
 
 @SuppressWarnings("unchecked")
 public class Edge<S, T> implements HostEdge{

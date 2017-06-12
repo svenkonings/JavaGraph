@@ -1,4 +1,4 @@
-package javahostgraph.typegraph;
+package javagraph.typegraph;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;

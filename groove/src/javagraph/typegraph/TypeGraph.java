@@ -1,4 +1,4 @@
-package javahostgraph.typegraph;
+package javagraph.typegraph;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -10,10 +10,11 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Set;
 
-import static javahostgraph.AnnotationProcessor.FOLDER;
-import static javahostgraph.AnnotationProcessor.TYPEGRAPH_FILE;
-
 public class TypeGraph implements Serializable {
+
+    public static final String FOLDER = "javagraph";
+    public static final String PACKAGE = "javagraph.annotations.";
+    public static final String TYPEGRAPH_FILE = "TypeGraph.obj";
 
     private static TypeGraph graph = null;
 

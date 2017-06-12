@@ -1,10 +1,10 @@
-package javahostgraph.graph;
+package javagraph.graph;
 
 import groove.grammar.AnchorKind;
 import groove.grammar.host.HostNode;
-import javahostgraph.typegraph.TypeEdge;
-import javahostgraph.typegraph.TypeGraph;
-import javahostgraph.typegraph.TypeNode;
+import javagraph.typegraph.TypeEdge;
+import javagraph.typegraph.TypeGraph;
+import javagraph.typegraph.TypeNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

@@ -1,4 +1,4 @@
-package javahostgraph.graph;
+package javagraph.graph;
 
 public class GraphException extends RuntimeException {
     public GraphException(String message, Object... args) {

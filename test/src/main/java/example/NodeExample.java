@@ -1,9 +1,9 @@
 package example;
 
-import javahostgraph.annotations.Node;
-import javahostgraph.annotations.NodeCreate;
-import javahostgraph.annotations.NodeDelete;
-import javahostgraph.annotations.NodeVisit;
+import javagraph.annotations.Node;
+import javagraph.annotations.NodeCreate;
+import javagraph.annotations.NodeDelete;
+import javagraph.annotations.NodeVisit;
 
 import java.util.Collections;
 import java.util.Set;

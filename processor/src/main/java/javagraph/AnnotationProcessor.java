@@ -1,11 +1,11 @@
-package javahostgraph;
+package javagraph;
 
 import com.google.auto.common.MoreElements;
 import com.google.auto.common.MoreTypes;
-import javahostgraph.annotations.Node;
-import javahostgraph.typegraph.TypeEdge;
-import javahostgraph.typegraph.TypeGraph;
-import javahostgraph.typegraph.TypeNode;
+import javagraph.annotations.Node;
+import javagraph.typegraph.TypeEdge;
+import javagraph.typegraph.TypeGraph;
+import javagraph.typegraph.TypeNode;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
@@ -27,11 +27,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AnnotationProcessor extends AbstractProcessor {
+import static javagraph.typegraph.TypeGraph.*;
 
-    public static final String FOLDER = "javahostgraph";
-    public static final String PACKAGE = "javahostgraph.annotations.";
-    public static final String TYPEGRAPH_FILE = "TypeGraph.obj";
+public class AnnotationProcessor extends AbstractProcessor {
 
     public static final String NODE = PACKAGE + "Node";
 
