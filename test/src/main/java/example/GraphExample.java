@@ -1,8 +1,8 @@
 package example;
 
+import javagraph.TypeGraphLoader;
 import javagraph.graph.Graph;
 import javagraph.graph.Node;
-import javagraph.typegraph.TypeGraph;
 
 public class GraphExample {
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class GraphExample {
     }
 
     public static void nodeExample(Graph graph) {
-        System.out.println("TypeGraph=" + TypeGraph.getInstance());
+        System.out.println("TypeGraph=" + TypeGraphLoader.getInstance());
         System.out.println("Nodes=" + graph.visitNodes());
 
         Node<NodeExample> node = graph.createNode(NodeExample.class);
@@ -25,7 +25,7 @@ public class GraphExample {
     }
 
     public static void edgeExample(Graph graph) {
-        System.out.println("TypeGraph=" + TypeGraph.getInstance());
+        System.out.println("TypeGraph=" + TypeGraphLoader.getInstance());
         System.out.println("Nodes=" + graph.visitNodes());
 
         Node<EdgeExample> sourceNode = graph.createNode(EdgeExample.class);

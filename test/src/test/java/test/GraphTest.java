@@ -3,9 +3,9 @@ package test;
 import example.AnotherNodeExample;
 import example.EdgeExample;
 import example.NodeExample;
+import javagraph.TypeGraphLoader;
 import javagraph.graph.Graph;
 import javagraph.graph.Node;
-import javagraph.typegraph.TypeGraph;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,7 +15,7 @@ public class GraphTest {
     @Test
     public void nodeTest() {
         Graph graph = new Graph();
-        assertNotNull(TypeGraph.getInstance());
+        assertNotNull(TypeGraphLoader.getInstance());
         assertTrue(graph.visitNodes().isEmpty());
         assertTrue(graph.visitNode(NodeExample.class).isEmpty());
 
@@ -43,7 +43,7 @@ public class GraphTest {
     @Test
     public void edgeTest() {
         Graph graph = new Graph();
-        assertNotNull(TypeGraph.getInstance());
+        assertNotNull(TypeGraphLoader.getInstance());
         assertTrue(graph.visitNodes().isEmpty());
 
         Node<EdgeExample> sourceNode = graph.createNode(EdgeExample.class);

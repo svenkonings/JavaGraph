@@ -1,11 +1,8 @@
-package javagraph.typegraph;
+package javagraph.classgraph;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class TypeEdge implements Serializable {
+public class ClassEdge implements Serializable {
 
     private final String source;
     private final String target;
@@ -14,7 +11,7 @@ public class TypeEdge implements Serializable {
     private String edgeDelete;
     private String edgeVisit;
 
-    public TypeEdge(String source, String target) {
+    public ClassEdge(String source, String target) {
         this.source = source;
         this.target = target;
     }
@@ -70,14 +67,5 @@ public class TypeEdge implements Serializable {
             throw new IllegalStateException("EdgeVisit can only be set once");
         }
         edgeVisit = visit;
-    }
-
-    @Override
-    public String toString() {
-        List<String> methods = new ArrayList<>();
-        if (hasEdgeCreate()) methods.add("EdgeCreate=" + getEdgeCreate());
-        if (hasEdgeDelete()) methods.add("EdgeDelete=" + getEdgeDelete());
-        if (hasEdgeVisit()) methods.add("EdgeVisit=" + getEdgeVisit());
-        return getSource() + "-->" + getTarget() + methods.stream().collect(Collectors.joining(", ", "{", "}"));
     }
 }

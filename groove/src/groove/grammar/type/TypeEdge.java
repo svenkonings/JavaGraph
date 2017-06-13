@@ -172,4 +172,54 @@ public class TypeEdge extends AEdge<TypeNode,TypeLabel>implements TypeElement {
 
     /** Out multiplicity of the edge type, if any. */
     private Multiplicity outMult;
+
+    // Added methods
+    private String edgeVisit;
+    private String edgeCreate;
+    private String edgeDelete;
+
+    public String getEdgeVisit() {
+        return edgeVisit;
+    }
+
+    public boolean hasEdgeVisit() {
+        return edgeVisit != null;
+    }
+
+    public void setEdgeVisit(String visit) {
+        if (hasEdgeVisit()) {
+            throw new IllegalStateException("EdgeVisit can only be set once");
+        }
+        edgeVisit = visit;
+    }
+
+    public String getEdgeCreate() {
+        return edgeCreate;
+    }
+
+    public boolean hasEdgeCreate() {
+        return edgeCreate != null;
+    }
+
+    public void setEdgeCreate(String create) {
+        if (hasEdgeCreate()) {
+            throw new IllegalStateException("EdgeCreate can only be set once");
+        }
+        edgeCreate = create;
+    }
+
+    public String getEdgeDelete() {
+        return edgeDelete;
+    }
+
+    public boolean hasEdgeDelete() {
+        return edgeDelete != null;
+    }
+
+    public void setEdgeDelete(String delete) {
+        if (hasEdgeDelete()) {
+            throw new IllegalStateException("EdgeDelete can only be set once");
+        }
+        edgeDelete = delete;
+    }
 }

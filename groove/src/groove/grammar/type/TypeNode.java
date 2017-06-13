@@ -230,4 +230,54 @@ public class TypeNode implements Node, TypeElement {
     private final int nr;
     /** The type of this node. */
     private final @NonNull TypeLabel type;
+
+    // Added methods
+    private String nodeVisit;
+    private String nodeCreate;
+    private String nodeDelete;
+
+    public String getNodeVisit() {
+        return nodeVisit;
+    }
+
+    public boolean hasNodeVisit() {
+        return nodeVisit != null;
+    }
+
+    public void setNodeVisit(String visit) {
+        if (hasNodeVisit()) {
+            throw new IllegalStateException("NodeVisit can only be set once");
+        }
+        nodeVisit = visit;
+    }
+
+    public String getNodeCreate() {
+        return nodeCreate;
+    }
+
+    public boolean hasNodeCreate() {
+        return nodeCreate != null;
+    }
+
+    public void setNodeCreate(String create) {
+        if (hasNodeCreate()) {
+            throw new IllegalStateException("NodeCreate can only be set once");
+        }
+        nodeCreate = create;
+    }
+
+    public String getNodeDelete() {
+        return nodeDelete;
+    }
+
+    public boolean hasNodeDelete() {
+        return nodeDelete != null;
+    }
+
+    public void setNodeDelete(String delete) {
+        if (hasNodeDelete()) {
+            throw new IllegalStateException("NodeDelete can only be set once");
+        }
+        nodeDelete = delete;
+    }
 }

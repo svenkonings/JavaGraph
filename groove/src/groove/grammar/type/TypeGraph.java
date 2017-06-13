@@ -16,6 +16,7 @@
  */
 package groove.grammar.type;
 
+import static groove.graph.EdgeRole.BINARY;
 import static groove.graph.EdgeRole.FLAG;
 import static groove.graph.EdgeRole.NODE_TYPE;
 import static groove.graph.GraphRole.TYPE;
@@ -1481,5 +1482,20 @@ public class TypeGraph extends NodeSetEdgeSetGraph<TypeNode,TypeEdge> implements
             }
             return result;
         }
+    }
+
+    // Added methods
+    public TypeNode getNodeByClass(Class<?> nodeClass) {
+        return getNodeByName(nodeClass.getCanonicalName());
+    }
+
+    public TypeNode getNodeByName(String label) {
+        TypeLabel typeLabel = TypeLabel.createLabel(NODE_TYPE, label);
+        return getNode(typeLabel);
+    }
+
+    public TypeEdge getEdge(TypeNode source, String label, TypeNode target) {
+        TypeLabel typeLabel = TypeLabel.createLabel(BINARY, label);
+        return getTypeEdge(source, typeLabel, target, true);
     }
 }
