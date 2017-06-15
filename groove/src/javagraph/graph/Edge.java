@@ -24,6 +24,11 @@ public class Edge<S, T> implements HostEdge {
         return source;
     }
 
+    @Override
+    public TypeLabel label() {
+        return typeEdge.label();
+    }
+
     public Node<T> getTarget() {
         return target;
     }
@@ -77,12 +82,6 @@ public class Edge<S, T> implements HostEdge {
     @Override
     public AnchorKind getAnchorKind() {
         return AnchorKind.EDGE;
-    }
-
-    // TODO: Label
-    @Override
-    public TypeLabel label() {
-        return typeEdge.label();
     }
 
     @Override

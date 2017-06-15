@@ -54,7 +54,7 @@ public class RuleEdge extends AEdge<RuleNode,RuleLabel> implements RuleElement {
                     this.matchingTypes.add(typeEdge);
                 }
             }
-        } else if (type == null) {
+        } else if (type == null || type.getSubtypes() == null) {
             this.matchingTypes = emptySet();
             this.typeGuards = emptyList();
         } else {

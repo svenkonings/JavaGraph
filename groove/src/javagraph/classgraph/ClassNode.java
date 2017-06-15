@@ -17,7 +17,7 @@ public class ClassNode implements Serializable {
 
     public ClassNode(String name) {
         this.name = name;
-        edges = new HashMap<>();
+        this.edges = new HashMap<>();
     }
 
     public String getName() {
@@ -69,8 +69,9 @@ public class ClassNode implements Serializable {
         nodeVisit = visit;
     }
 
-    public ClassEdge computeEdgeIfAbsent(String target) {
-        return edges.computeIfAbsent(target, key -> new ClassEdge(name, key));
+    public ClassEdge computeEdgeIfAbsent(String node, String label) {
+        String target = node + "(" + label + ")";
+        return edges.computeIfAbsent(target, key -> new ClassEdge(name, label, node));
     }
 
     public Set<ClassEdge> getEdges() {

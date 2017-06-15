@@ -6,7 +6,7 @@ import groove.grammar.type.TypeGraph;
 import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.EdgeRole;
-import groove.util.parse.FormatException;
+import groove.graph.Label;
 import javagraph.classgraph.ClassGraph;
 
 import java.io.IOException;
@@ -48,9 +48,9 @@ public class TypeGraphLoader {
         });
         classGraph.getNodes().stream().flatMap(classNode -> classNode.getEdges().stream()).forEach(edge -> {
             TypeNode sourceNode = typeGraph.getNodeByName(edge.getSource());
+            Label label = TypeLabel.createLabel(EdgeRole.BINARY, edge.getLabel());
             TypeNode targetNode = typeGraph.getNodeByName(edge.getTarget());
-            // TODO: Edge labels
-            TypeEdge typeEdge = typeGraph.addEdge(sourceNode, "", targetNode);
+            TypeEdge typeEdge = typeGraph.addEdge(sourceNode, label, targetNode);
             typeEdge.setEdgeVisit(edge.getEdgeVisit());
             typeEdge.setEdgeCreate(edge.getEdgeCreate());
             typeEdge.setEdgeDelete(edge.getEdgeDelete());

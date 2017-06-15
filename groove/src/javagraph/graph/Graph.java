@@ -135,7 +135,6 @@ public class Graph implements HostGraph {
         if (node instanceof Node<?>) {
             return ((Node<?>) node).visitEdges();
         } else {
-            // TODO: inefficient
             return edgeSet().stream().filter(edge -> edge.source().equals(node)).collect(Collectors.toSet());
         }
     }

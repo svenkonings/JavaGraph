@@ -2,6 +2,9 @@ package javagraph;
 
 import com.google.auto.common.MoreElements;
 import com.google.auto.common.MoreTypes;
+import javagraph.annotations.EdgeCreate;
+import javagraph.annotations.EdgeDelete;
+import javagraph.annotations.EdgeVisit;
 import javagraph.annotations.Node;
 import javagraph.classgraph.ClassEdge;
 import javagraph.classgraph.ClassGraph;
@@ -219,7 +222,7 @@ public class AnnotationProcessor extends AbstractProcessor {
         }
         if (!MoreTypes.isTypeOf(Set.class, executableType.getReturnType())) {
             error(annotation, element, "Methods annotated with @NodeVisit should return a Set of nodes");
-            return;
+            valid = false;
         }
         if (!executableType.getParameterTypes().isEmpty()) {
             error(annotation, element, "Methods annotated with @NodeVisit should have no parameters");
@@ -318,6 +321,72 @@ public class AnnotationProcessor extends AbstractProcessor {
         }
     }
 
+    private void processEdgeVisit(AnnotationMirror annotation, ClassNode node, Element element) {
+        boolean valid = true;
+        ExecutableElement executableElement;
+        ExecutableType executableType;
+        try {
+            executableElement = MoreElements.asExecutable(element);
+            executableType = MoreTypes.asExecutable(element.asType());
+        } catch (IllegalArgumentException e) {
+            error(annotation, element, "@EdgeVisit should only be used for methods");
+            return;
+        }
+        EdgeVisit edgeVisit = executableElement.getAnnotation(EdgeVisit.class);
+        if (edgeVisit == null) {
+            error(annotation, element, "Can't find @EdgeVisit annotation");
+            return;
+        }
+        if (!executableElement.getModifiers().contains(Modifier.PUBLIC)) {
+            error(annotation, element, "Methods annotated with @EdgeVisit should be public");
+            valid = false;
+        }
+        if (executableElement.getModifiers().contains(Modifier.STATIC)) {
+            error(annotation, element, "Methods annotated with @EdgeVisit shouldn't be static");
+            valid = false;
+        }
+        if (!MoreTypes.isTypeOf(Set.class, executableType.getReturnType())) {
+            error(annotation, element, "Methods annotated with @EdgeVisit should return a Set of target nodes");
+            valid = false;
+        }
+        if (!executableType.getParameterTypes().isEmpty()) {
+            error(annotation, element, "Methods annotated with @EdgeVisit should have no parameters");
+            valid = false;
+        }
+        DeclaredType declaredType;
+        try {
+            declaredType = MoreTypes.asDeclared(executableType.getReturnType());
+        } catch (IllegalArgumentException e) {
+            error(annotation, element, "Methods annotated with @EdgeVisit should return a Set of target nodes");
+            return;
+        }
+        List<? extends TypeMirror> typeArguments = declaredType.getTypeArguments();
+        if (typeArguments.size() != 1) {
+            error(annotation, element, "Methods annotated with @EdgeVisit should return a Set of target nodes");
+            return;
+        }
+        TypeMirror targetType = typeArguments.get(0);
+        TypeElement targetElement;
+        try {
+            targetElement = MoreTypes.asTypeElement(targetType);
+        } catch (IllegalArgumentException e) {
+            error(annotation, element, "The target should be a node");
+            return;
+        }
+        if (targetElement.getAnnotation(Node.class) == null) {
+            error(annotation, element, "The target should be a node");
+            valid = false;
+        }
+        if (valid) {
+            try {
+                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString(), edgeVisit.value());
+                edge.setEdgeVisit(executableElement.getSimpleName().toString());
+            } catch (IllegalStateException e) {
+                error(annotation, element, "There can only be one @EdgeVisit for every edge");
+            }
+        }
+    }
+
     private void processEdgeCreate(AnnotationMirror annotation, ClassNode node, Element element) {
         boolean valid = true;
         ExecutableElement executableElement;
@@ -327,6 +396,11 @@ public class AnnotationProcessor extends AbstractProcessor {
             executableType = MoreTypes.asExecutable(element.asType());
         } catch (IllegalArgumentException e) {
             error(annotation, element, "@EdgeCreate should only be used for methods");
+            return;
+        }
+        EdgeCreate edgeCreate = executableElement.getAnnotation(EdgeCreate.class);
+        if (edgeCreate == null) {
+            error(annotation, element, "Can't find @EdgeCreate annotation");
             return;
         }
         if (!executableElement.getModifiers().contains(Modifier.PUBLIC)) {
@@ -356,10 +430,11 @@ public class AnnotationProcessor extends AbstractProcessor {
         }
         if (targetElement.getAnnotation(Node.class) == null) {
             error(annotation, element, "The target should be a node");
+            valid = false;
         }
         if (valid) {
             try {
-                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString());
+                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString(), edgeCreate.value());
                 edge.setEdgeCreate(executableElement.getSimpleName().toString());
             } catch (IllegalStateException e) {
                 error(annotation, element, "There can only be one @EdgeCreate for every edge");
@@ -376,6 +451,11 @@ public class AnnotationProcessor extends AbstractProcessor {
             executableType = MoreTypes.asExecutable(element.asType());
         } catch (IllegalArgumentException e) {
             error(annotation, element, "@EdgeDelete should only be used for methods");
+            return;
+        }
+        EdgeDelete edgeDelete = executableElement.getAnnotation(EdgeDelete.class);
+        if (edgeDelete == null) {
+            error(annotation, element, "Can't find @EdgeDelete annotation");
             return;
         }
         if (!executableElement.getModifiers().contains(Modifier.PUBLIC)) {
@@ -405,73 +485,14 @@ public class AnnotationProcessor extends AbstractProcessor {
         }
         if (targetElement.getAnnotation(Node.class) == null) {
             error(annotation, element, "The target should be a node");
+            valid = false;
         }
         if (valid) {
             try {
-                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString());
+                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString(), edgeDelete.value());
                 edge.setEdgeDelete(executableElement.getSimpleName().toString());
             } catch (IllegalStateException e) {
                 error(annotation, element, "There can only be one @EdgeDelete for every edge");
-            }
-        }
-    }
-
-    private void processEdgeVisit(AnnotationMirror annotation, ClassNode node, Element element) {
-        boolean valid = true;
-        ExecutableElement executableElement;
-        ExecutableType executableType;
-        try {
-            executableElement = MoreElements.asExecutable(element);
-            executableType = MoreTypes.asExecutable(element.asType());
-        } catch (IllegalArgumentException e) {
-            error(annotation, element, "@EdgeVisit should only be used for methods");
-            return;
-        }
-        if (!executableElement.getModifiers().contains(Modifier.PUBLIC)) {
-            error(annotation, element, "Methods annotated with @EdgeCreate should be public");
-            valid = false;
-        }
-        if (executableElement.getModifiers().contains(Modifier.STATIC)) {
-            error(annotation, element, "Methods annotated with @EdgeCreate shouldn't be static");
-            valid = false;
-        }
-        if (!MoreTypes.isTypeOf(Set.class, executableType.getReturnType())) {
-            error(annotation, element, "Methods annotated with @EdgeCreate should return a Set of target nodes");
-            return;
-        }
-        if (!executableType.getParameterTypes().isEmpty()) {
-            error(annotation, element, "Methods annotated with @EdgeCreate should have no parameters");
-            valid = false;
-        }
-        DeclaredType declaredType;
-        try {
-            declaredType = MoreTypes.asDeclared(executableType.getReturnType());
-        } catch (IllegalArgumentException e) {
-            error(annotation, element, "Methods annotated with @EdgeCreate should return a Set of target nodes");
-            return;
-        }
-        List<? extends TypeMirror> typeArguments = declaredType.getTypeArguments();
-        if (typeArguments.size() != 1) {
-            error(annotation, element, "Methods annotated with @EdgeCreate should return a Set of target nodes");
-            return;
-        }
-        TypeMirror targetType = typeArguments.get(0);
-        TypeElement targetElement;
-        try {
-            targetElement = MoreTypes.asTypeElement(targetType);
-        } catch (IllegalArgumentException e) {
-            error(annotation, element, "The target should be a node");
-            return;
-        }
-        if (targetElement.getAnnotation(Node.class) == null) {
-            error(annotation, element, "The target should be a node");
-        }
-        if (valid) {
-            try {
-                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString());
-                edge.setEdgeVisit(executableElement.getSimpleName().toString());
-            } catch (IllegalStateException e) {
-                error(annotation, element, "There can only be one @EdgeVisit for every edge");
             }
         }
     }

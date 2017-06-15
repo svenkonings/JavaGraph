@@ -5,19 +5,25 @@ import java.io.Serializable;
 public class ClassEdge implements Serializable {
 
     private final String source;
+    private final String label;
     private final String target;
 
     private String edgeCreate;
     private String edgeDelete;
     private String edgeVisit;
 
-    public ClassEdge(String source, String target) {
+    public ClassEdge(String source, String label, String target) {
         this.source = source;
+        this.label = label;
         this.target = target;
     }
 
     public String getSource() {
         return source;
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public String getTarget() {
