@@ -1,17 +1,17 @@
 package javagraph.graph;
 
-import com.google.common.collect.Sets;
 import groove.algebra.AlgebraFamily;
 import groove.grammar.host.HostEdge;
 import groove.grammar.host.HostFactory;
 import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
+import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeNode;
 import groove.graph.GraphInfo;
 import groove.graph.GraphRole;
 import groove.graph.Label;
 import groove.util.parse.FormatErrorSet;
-import javagraph.typegraph.TypeGraph;
-import javagraph.typegraph.TypeNode;
+import javagraph.TypeGraphLoader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "SuspiciousMethodCalls", "MethodDoesntCallSuperMethod"})
 public class Graph implements HostGraph {
 
     private static Graph graph = null;
@@ -32,16 +32,22 @@ public class Graph implements HostGraph {
     }
 
     private final TypeGraph typeGraph;
-
+    private final GraphFactory graphFactory;
     private String name;
+    private GraphInfo graphInfo;
 
     public Graph() {
-        typeGraph = TypeGraph.getInstance();
-        name = "javagraph";
+        this("javagraph");
+    }
+
+    public Graph(String graphName) {
+        typeGraph = TypeGraphLoader.getInstance();
+        graphFactory = new GraphFactory(this);
+        name = graphName;
     }
 
     public <T> Node<T> createNode(Class<T> nodeClass) {
-        TypeNode typeNode = typeGraph.getNode(nodeClass);
+        TypeNode typeNode = typeGraph.getNodeByClass(nodeClass);
         T node;
         try {
             Method createNode = nodeClass.getMethod(typeNode.getNodeCreate());
@@ -53,7 +59,7 @@ public class Graph implements HostGraph {
     }
 
     public <T> Set<Node<T>> visitNode(Class<T> nodeClass) {
-        TypeNode typeNode = typeGraph.getNode(nodeClass);
+        TypeNode typeNode = typeGraph.getNodeByClass(nodeClass);
         Set<T> nodes;
         try {
             Method visitNode = nodeClass.getMethod(typeNode.getNodeVisit());
@@ -66,10 +72,13 @@ public class Graph implements HostGraph {
 
     public Set<Node<?>> visitNodes() {
         Set<Node<?>> nodes = new HashSet<>();
-        for (TypeNode typeNode : typeGraph.getNodes()) {
+        for (TypeNode typeNode : typeGraph.nodeSet()) {
+            if (!typeNode.isJavaNode()) {
+                continue;
+            }
             Set<?> visitNodes;
             try {
-                Class<?> nodeClass = Class.forName(typeNode.getName());
+                Class<?> nodeClass = Class.forName(typeNode.text());
                 Method visitNode = nodeClass.getMethod(typeNode.getNodeVisit());
                 visitNodes = (Set<?>) visitNode.invoke(null);
             } catch (ClassCastException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
@@ -78,6 +87,18 @@ public class Graph implements HostGraph {
             visitNodes.stream().map(Node::new).forEach(nodes::add);
         }
         return nodes;
+    }
+
+    public <S, T> Set<Edge<S, T>> visitEdge(Class<S> sourceClass, Class<T> targetClass) {
+        return visitNode(sourceClass).stream().flatMap(node -> node.visitEdge(targetClass).stream()).collect(Collectors.toSet());
+    }
+
+    public <S> Set<Edge<S, ?>> visitEdges(Class<S> nodeClass) {
+        return visitNode(nodeClass).stream().flatMap(node -> node.visitEdges().stream()).collect(Collectors.toSet());
+    }
+
+    public Set<Edge<?, ?>> visitEdges() {
+        return visitNodes().stream().flatMap(node -> node.visitEdges().stream()).collect(Collectors.toSet());
     }
 
     @Override
@@ -92,31 +113,37 @@ public class Graph implements HostGraph {
 
     @Override
     public Set<? extends HostEdge> edgeSet() {
-        Set<javagraph.graph.Edge<?, ?>> edgeSet = new HashSet<>();
-        for (Node node : visitNodes()) {
-            edgeSet.addAll(node.visitEdges());
-        }
-        return edgeSet;
+        return visitEdges();
     }
 
     @Override
     public Set<? extends HostEdge> edgeSet(groove.graph.Node node) {
-        return Sets.union(inEdgeSet(node), outEdgeSet(node));
+        Set<HostEdge> edgeSet = new HashSet<>();
+        edgeSet.addAll(inEdgeSet(node));
+        edgeSet.addAll(outEdgeSet(node));
+        return edgeSet;
     }
 
     @Override
     public Set<? extends HostEdge> inEdgeSet(groove.graph.Node node) {
+        // TODO: inefficient
         return edgeSet().stream().filter(edge -> edge.target().equals(node)).collect(Collectors.toSet());
     }
 
     @Override
     public Set<? extends HostEdge> outEdgeSet(groove.graph.Node node) {
-        return ((Node<?>) node).visitEdges();
+        if (node instanceof Node<?>) {
+            return ((Node<?>) node).visitEdges();
+        } else {
+            // TODO: inefficient
+            return edgeSet().stream().filter(edge -> edge.source().equals(node)).collect(Collectors.toSet());
+        }
     }
 
     @Override
     public Set<? extends HostEdge> edgeSet(Label label) {
-        throw new UnsupportedOperationException();
+        // TODO: inefficient
+        return edgeSet().stream().filter(edge -> edge.label().equals(label)).collect(Collectors.toSet());
     }
 
     @Override
@@ -141,17 +168,20 @@ public class Graph implements HostGraph {
 
     @Override
     public boolean hasInfo() {
-        return false;
+        return graphInfo != null;
     }
 
     @Override
     public GraphInfo getInfo() {
-        return new GraphInfo();
+        if (graphInfo == null) {
+            graphInfo = new GraphInfo();
+        }
+        return graphInfo;
     }
 
     @Override
     public HostGraph newGraph(String name) {
-        return this;
+        return new Graph(name);
     }
 
     @Override
@@ -166,22 +196,30 @@ public class Graph implements HostGraph {
 
     @Override
     public boolean addNode(HostNode node) {
-        return createNode(((Node<?>) node).getObjectClass()) != null;
+        return false;
     }
 
     @Override
     public boolean addEdge(HostEdge edge) {
-        return ((Edge<?, ?>) edge).getSource().createEdge(((Edge<?, ?>) edge).getTarget()) != null;
+        return false;
     }
 
     @Override
     public boolean removeEdge(HostEdge edge) {
-        return ((Edge<?, ?>) edge).deleteEdge();
+        if (edge instanceof Edge<?, ?>) {
+            return ((Edge<?, ?>) edge).deleteEdge();
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
     public boolean removeNode(HostNode node) {
-        return ((Node<?>) node).deleteNode();
+        if (node instanceof Node<?>) {
+            return ((Node<?>) node).deleteNode();
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
@@ -196,7 +234,7 @@ public class Graph implements HostGraph {
 
     @Override
     public HostFactory getFactory() {
-        return new GraphFactory(this);
+        return graphFactory;
     }
 
     @Override
@@ -211,6 +249,6 @@ public class Graph implements HostGraph {
 
     @Override
     public FormatErrorSet checkTypeConstraints() {
-        return new FormatErrorSet();
+        return getTypeGraph().check(this);
     }
 }

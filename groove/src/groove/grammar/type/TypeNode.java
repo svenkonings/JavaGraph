@@ -236,6 +236,10 @@ public class TypeNode implements Node, TypeElement {
     private String nodeCreate;
     private String nodeDelete;
 
+    public boolean isJavaNode() {
+        return nodeVisit != null && nodeCreate != null && nodeDelete != null;
+    }
+
     public String getNodeVisit() {
         return nodeVisit;
     }

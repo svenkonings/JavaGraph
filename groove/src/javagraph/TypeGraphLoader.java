@@ -6,6 +6,7 @@ import groove.grammar.type.TypeGraph;
 import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.EdgeRole;
+import groove.util.parse.FormatException;
 import javagraph.classgraph.ClassGraph;
 
 import java.io.IOException;
@@ -30,8 +31,17 @@ public class TypeGraphLoader {
     public static TypeGraph loadGraph() {
         ClassGraph classGraph = loadClassGraph();
         TypeGraph typeGraph = new TypeGraph(QualName.name(FOLDER));
+//        TypeNode topNode = typeGraph.getFactory().getTopNode();
+//        topNode.setAbstract(true);
+//        TypeEdge topEdge = typeGraph.addEdge(topNode, "", topNode);
+//        topEdge.setAbstract(true);
         classGraph.getNodes().forEach(node -> {
             TypeNode typeNode = typeGraph.addNode(TypeLabel.createLabel(EdgeRole.NODE_TYPE, node.getName()));
+//            try {
+//                typeGraph.addInheritance(typeNode, topNode);
+//            } catch (FormatException e) {
+//                e.printStackTrace();
+//            }
             typeNode.setNodeVisit(node.getNodeVisit());
             typeNode.setNodeCreate(node.getNodeCreate());
             typeNode.setNodeDelete(node.getNodeDelete());

@@ -3,17 +3,20 @@ package javagraph.graph;
 import groove.algebra.Algebra;
 import groove.grammar.host.*;
 import groove.grammar.rule.RuleToHostMap;
-import groove.grammar.type.*;
+import groove.grammar.type.TypeEdge;
+import groove.grammar.type.TypeNode;
+import groove.graph.Element;
 import groove.graph.Label;
 import groove.graph.NodeFactory;
 import groove.util.Dispenser;
+import javagraph.TypeGraphLoader;
 
 public class GraphFactory extends HostFactory {
 
     private final Graph graph;
 
     protected GraphFactory(Graph graph) {
-        super(null, false);
+        super(TypeGraphLoader.getInstance().getFactory(), false);
         this.graph = graph;
     }
 
@@ -24,17 +27,17 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public boolean isUsed(int nr) {
-        return nr < graph.nodeCount();
+        return graph.nodeSet().stream().anyMatch(node -> node.getNumber() == nr);
     }
 
     @Override
     public int getMaxNodeNr() {
-        return graph.nodeCount();
+        return graph.nodeSet().stream().mapToInt(Element::getNumber).max().orElse(0);
     }
 
     @Override
     public HostNode getNode(int nr) {
-        return graph.nodeSet().stream().skip(nr).findFirst().orElse(null);
+        return graph.nodeSet().stream().filter(node -> node.getNumber() == nr).findAny().orElse(null);
     }
 
     @Override
@@ -54,22 +57,33 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostNode createNode(Dispenser dispenser) {
-        return graph.addNode(dispenser.getNext());
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public HostEdge createEdge(HostNode source, String text, HostNode target) {
-        return ((Node<?>) source).createEdge((Node<?>) target);
+        if (source instanceof Node<?> && target instanceof Node<?>) {
+            Node<?> sourceNode = (Node<?>) source;
+            Node<?> targetNode = (Node<?>) target;
+            return sourceNode.createEdge(targetNode);
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
     public NodeFactory<HostNode> nodes(TypeNode type) {
-        return this;
+        try {
+            return new GraphNodeFactory(type);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public NodeFactory<HostNode> values(Algebra<?> algebra, Object value) {
-        return this;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -79,7 +93,13 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, Label label, HostNode target) {
-        return ((Node<?>) source).createEdge((Node<?>) target);
+        if (source instanceof Node<?> && target instanceof Node<?>) {
+            Node<?> sourceNode = (Node<?>) source;
+            Node<?> targetNode = (Node<?>) target;
+            return sourceNode.createEdge(targetNode);
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
@@ -94,41 +114,85 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, TypeEdge type, HostNode target) {
-        return ((Node<?>) source).createEdge((Node<?>) target);
-    }
-
-    @Override
-    public TypeLabel createLabel(String text) {
-        throw new UnsupportedOperationException();
+        if (source instanceof Node<?> && target instanceof Node<?>) {
+            Node<?> sourceNode = (Node<?>) source;
+            Node<?> targetNode = (Node<?>) target;
+            return sourceNode.createEdge(targetNode);
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
     public HostGraphMorphism createMorphism() {
-        throw new UnsupportedOperationException();
+        return new HostGraphMorphism(this);
     }
 
     @Override
     public RuleToHostMap createRuleToHostMap() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public TypeGraph getTypeGraph() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public TypeFactory getTypeFactory() {
-        throw new UnsupportedOperationException();
+        return new RuleToHostMap(this);
     }
 
     @Override
     public HostNode[] normalise(HostNode[] nodes) {
-        throw new UnsupportedOperationException();
+        return nodes;
     }
 
     @Override
     public boolean isSimple() {
-        return false;
+        return true;
+    }
+
+    public class GraphNodeFactory extends NodeFactory<HostNode> {
+
+        private final TypeNode typeNode;
+        private final Class<?> nodeClass;
+        private final Dispenser nodeNrDispenser;
+
+        public GraphNodeFactory(TypeNode type) throws ClassNotFoundException {
+            typeNode = type;
+            nodeClass = Class.forName(typeNode.text());
+            nodeNrDispenser = Dispenser.counter();
+        }
+
+        @Override
+        public HostNode createNode() {
+            return graph.createNode(nodeClass);
+        }
+
+        @Override
+        public HostNode createNode(int nr) {
+            return graph.createNode(nodeClass);
+        }
+
+        @Override
+        public HostNode createNode(Dispenser dispenser) {
+            return graph.createNode(nodeClass);
+        }
+
+        @Override
+        protected HostNode getNode(int nr) {
+            return GraphFactory.this.getNode(nr);
+        }
+
+        @Override
+        protected void registerNode(HostNode node) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        protected boolean isAllowed(HostNode node) {
+            return typeNode.equals(node.getType());
+        }
+
+        @Override
+        protected HostNode newNode(int nr) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        protected Dispenser getNodeNrDispenser() {
+            return nodeNrDispenser;
+        }
     }
 }

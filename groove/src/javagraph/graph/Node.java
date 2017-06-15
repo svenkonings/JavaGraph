@@ -2,9 +2,10 @@ package javagraph.graph;
 
 import groove.grammar.AnchorKind;
 import groove.grammar.host.HostNode;
-import javagraph.typegraph.TypeEdge;
-import javagraph.typegraph.TypeGraph;
-import javagraph.typegraph.TypeNode;
+import groove.grammar.type.TypeEdge;
+import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeNode;
+import javagraph.TypeGraphLoader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,26 +19,27 @@ public class Node<S> implements HostNode {
     private final TypeGraph typeGraph;
 
     private final S object;
-    private final Class<?> objectClass;
+    private final Class<S> objectClass;
     private final TypeNode typeNode;
 
     public Node(S nodeObject) {
-        typeGraph = TypeGraph.getInstance();
+        typeGraph = TypeGraphLoader.getInstance();
 
         object = nodeObject;
-        objectClass = object.getClass();
-        typeNode = typeGraph.getNode(objectClass);
+        objectClass = (Class<S>) object.getClass();
+        typeNode = typeGraph.getNodeByClass(objectClass);
     }
 
     public S getObject() {
         return object;
     }
 
-    public Class<?> getObjectClass() {
+    public Class<S> getObjectClass() {
         return objectClass;
     }
 
-    public TypeNode getTypeNode() {
+    @Override
+    public TypeNode getType() {
         return typeNode;
     }
 
@@ -55,8 +57,8 @@ public class Node<S> implements HostNode {
     public <T> Edge<S, T> createEdge(Node<T> targetNode) {
         T target = targetNode.getObject();
         Class<?> targetClass = targetNode.getObjectClass();
-        TypeNode targetTypeNode = targetNode.getTypeNode();
-        TypeEdge typeEdge = typeNode.getEdge(targetTypeNode);
+        TypeNode targetTypeNode = targetNode.getType();
+        TypeEdge typeEdge = typeGraph.getEdge(typeNode, "", targetTypeNode);
         boolean created;
         try {
             Method createEdge = objectClass.getMethod(typeEdge.getEdgeCreate(), targetClass);
@@ -74,8 +76,8 @@ public class Node<S> implements HostNode {
     public <T> boolean deleteEdge(Node<T> targetNode) {
         T target = targetNode.getObject();
         Class<?> targetClass = targetNode.getObjectClass();
-        TypeNode targetTypeNode = targetNode.getTypeNode();
-        TypeEdge typeEdge = typeNode.getEdge(targetTypeNode);
+        TypeNode targetTypeNode = targetNode.getType();
+        TypeEdge typeEdge = typeGraph.getEdge(typeNode, "", targetTypeNode);
         boolean deleted;
         try {
             Method deleteEdge = objectClass.getMethod(typeEdge.getEdgeDelete(), targetClass);
@@ -87,8 +89,8 @@ public class Node<S> implements HostNode {
     }
 
     public <T> Set<Edge<S, T>> visitEdge(Class<T> targetClass) {
-        TypeNode targetTypeNode = typeGraph.getNode(targetClass);
-        TypeEdge typeEdge = typeNode.getEdge(targetTypeNode);
+        TypeNode targetTypeNode = typeGraph.getNodeByClass(targetClass);
+        TypeEdge typeEdge = typeGraph.getEdge(typeNode, "", targetTypeNode);
         Set<T> targets;
         try {
             Method visitEdge = objectClass.getMethod(typeEdge.getEdgeVisit());
@@ -101,7 +103,7 @@ public class Node<S> implements HostNode {
 
     public Set<Edge<S, ?>> visitEdges() {
         Set<Edge<S, ?>> edges = new HashSet<>();
-        for (TypeEdge typeEdge : typeNode.getEdges()) {
+        for (TypeEdge typeEdge : typeGraph.outEdgeSet(typeNode)) {
             Set<?> targets;
             try {
                 Method visitEdge = objectClass.getMethod(typeEdge.getEdgeVisit());
@@ -116,6 +118,28 @@ public class Node<S> implements HostNode {
     }
 
     @Override
+    public int hashCode() {
+        int result = typeNode.hashCode();
+        result = 31 * result + objectClass.hashCode();
+        result = 31 * result + object.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Node<?>) {
+            Node<?> node = (Node<?>) obj;
+            return getType().equals(node.getType()) &&
+                    getObjectClass().equals(node.getObjectClass()) &&
+                    getObject().equals(node.getObject());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         return object.toString();
     }
@@ -123,11 +147,6 @@ public class Node<S> implements HostNode {
     @Override
     public AnchorKind getAnchorKind() {
         return AnchorKind.NODE;
-    }
-
-    @Override
-    public groove.grammar.type.TypeNode getType() {
-        throw new UnsupportedOperationException();
     }
 
     @Override
