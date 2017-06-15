@@ -31,17 +31,8 @@ public class TypeGraphLoader {
     public static TypeGraph loadGraph() {
         ClassGraph classGraph = loadClassGraph();
         TypeGraph typeGraph = new TypeGraph(QualName.name(FOLDER));
-//        TypeNode topNode = typeGraph.getFactory().getTopNode();
-//        topNode.setAbstract(true);
-//        TypeEdge topEdge = typeGraph.addEdge(topNode, "", topNode);
-//        topEdge.setAbstract(true);
         classGraph.getNodes().forEach(node -> {
             TypeNode typeNode = typeGraph.addNode(TypeLabel.createLabel(EdgeRole.NODE_TYPE, node.getName()));
-//            try {
-//                typeGraph.addInheritance(typeNode, topNode);
-//            } catch (FormatException e) {
-//                e.printStackTrace();
-//            }
             typeNode.setNodeVisit(node.getNodeVisit());
             typeNode.setNodeCreate(node.getNodeCreate());
             typeNode.setNodeDelete(node.getNodeDelete());
