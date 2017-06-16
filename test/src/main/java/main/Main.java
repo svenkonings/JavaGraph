@@ -39,6 +39,7 @@ public class Main {
         grammar.setStartGraph(graph);
 
         RuleFactory ruleFactory = RuleFactory.newInstance(graph.getTypeGraph().getFactory());
+
         RuleGraph lhs = new RuleGraph("lhs", false, ruleFactory);
         RuleNode source = ruleFactory.nodes(graph.getTypeGraph().getNodeByClass(EdgeExample.class), true, Collections.emptyList()).createNode();
         lhs.addNode(source);
@@ -46,12 +47,13 @@ public class Main {
         lhs.addNode(target);
         lhs.addEdge(source, "", target);
         lhs.setFixed();
+
         RuleGraph rhs = new RuleGraph("rhs", false, ruleFactory);
         RuleNode newNode = ruleFactory.nodes(graph.getTypeGraph().getNodeByClass(AnotherNodeExample.class), true, Collections.emptyList()).createNode();
         rhs.addNode(newNode);
         rhs.setFixed();
 
-        Condition condition = new Condition("test", Condition.Op.EXISTS, lhs, null, properties);
+        Condition condition = new Condition("test", Condition.Op.EXISTS, lhs, null, grammar.getProperties());
         Rule rule = new Rule(condition, rhs, null);
         rule.setFixed();
         condition.setRule(rule);
