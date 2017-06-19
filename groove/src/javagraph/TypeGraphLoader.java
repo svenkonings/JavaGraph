@@ -40,7 +40,7 @@ public class TypeGraphLoader {
         });
         classGraph.getNodes().stream().flatMap(classNode -> classNode.getEdges().stream()).forEach(edge -> {
             TypeNode sourceNode = typeGraph.getNodeByName(edge.getSource());
-            Label label = TypeLabel.createLabel(EdgeRole.BINARY, edge.getLabel());
+            Label label = TypeLabel.createLabel(edge.getLabel());
             TypeNode targetNode = typeGraph.getNodeByName(edge.getTarget());
             TypeEdge typeEdge = typeGraph.addEdge(sourceNode, label, targetNode);
             typeEdge.setEdgeVisit(edge.getEdgeVisit());

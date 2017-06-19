@@ -93,6 +93,9 @@ public class JavaGraph {
 
     private static void initTypeGraph(TypeGraph typeGraph, TypeGraph javaGraph) {
         for (TypeNode javaNode : javaGraph.nodeSet()) {
+            if (!javaNode.isJavaNode()) {
+                continue;
+            }
             TypeNode node = typeGraph.getNode(javaNode.label());
             if (node == null) {
                 throw new GraphException("Missing node %s in Groove TypeGraph", javaNode);
@@ -103,6 +106,9 @@ public class JavaGraph {
             node.setNodeDelete(javaNode.getNodeDelete());
         }
         for (TypeEdge javaEdge : javaGraph.edgeSet()) {
+            if (!javaEdge.isJavaEdge()) {
+                continue;
+            }
             TypeNode source = typeGraph.getNode(javaEdge.source().label());
             TypeNode target = typeGraph.getNode(javaEdge.target().label());
             TypeEdge edge = typeGraph.getTypeEdge(source, javaEdge.label(), target, true);

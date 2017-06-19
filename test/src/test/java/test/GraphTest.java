@@ -51,8 +51,8 @@ public class GraphTest {
         TypeNode edgeExampleType = typeGraph.getNodeByName("EdgeExample");
         TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
         TypeNode anotherNodeExampleType = typeGraph.getNodeByName("AnotherNodeExample");
-        TypeLabel labelExample = TypeLabel.createLabel(EdgeRole.BINARY, "LabelExample");
-        TypeLabel anotherLabelExample = TypeLabel.createLabel(EdgeRole.BINARY, "AnotherLabelExample");
+        TypeLabel labelExample = TypeLabel.createLabel("LabelExample");
+        TypeLabel anotherLabelExample = TypeLabel.createLabel("AnotherLabelExample");
 
         assertNotNull(TypeGraphLoader.getInstance());
         assertTrue(graph.visitNodes().isEmpty());

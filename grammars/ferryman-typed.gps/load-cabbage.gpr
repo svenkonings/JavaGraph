@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
-    <graph role="rule" edgeids="false" edgemode="directed" id="eat">
+    <graph role="rule" edgeids="false" edgemode="directed" id="load-cabbage">
         <attr name="$version">
             <string>curly</string>
         </attr>
-        <node id="n35">
+        <node id="n87">
             <attr name="layout">
-                <string>39 76 36 15</string>
+                <string>90 201 30 18</string>
             </attr>
         </node>
-        <node id="n36">
+        <node id="n90">
             <attr name="layout">
-                <string>51 206 19 19</string>
+                <string>311 198 30 18</string>
             </attr>
         </node>
-        <node id="n37">
+        <node id="n88">
             <attr name="layout">
-                <string>121 141 30 15</string>
+                <string>207 135 28 18</string>
             </attr>
         </node>
-        <node id="n34">
+        <node id="n89">
             <attr name="layout">
-                <string>185 61 29 15</string>
+                <string>80 95 36 18</string>
             </attr>
         </node>
-        <edge from="n35" to="n35">
-            <attr name="label">
-                <string>type:Cargo</string>
-            </attr>
-        </edge>
-        <edge from="n35" to="n36">
-            <attr name="label">
-                <string>likes</string>
-            </attr>
-        </edge>
-        <edge from="n35" to="n37">
-            <attr name="label">
-                <string>on</string>
-            </attr>
-        </edge>
-        <edge from="n36" to="n36">
-            <attr name="label">
-                <string>del:</string>
-            </attr>
-        </edge>
-        <edge from="n36" to="n36">
-            <attr name="label">
-                <string>type:Cargo</string>
-            </attr>
-        </edge>
-        <edge from="n36" to="n37">
-            <attr name="label">
-                <string>on</string>
-            </attr>
-        </edge>
-        <edge from="n37" to="n37">
+        <edge from="n87" to="n87">
             <attr name="label">
                 <string>type:Bank</string>
             </attr>
         </edge>
-        <edge from="n34" to="n34">
+        <edge from="n90" to="n90">
+            <attr name="label">
+                <string>type:Bank</string>
+            </attr>
+        </edge>
+        <edge from="n90" to="n87">
+            <attr name="label">
+                <string>!=</string>
+            </attr>
+        </edge>
+        <edge from="n88" to="n88">
             <attr name="label">
                 <string>type:Boat</string>
             </attr>
         </edge>
-        <edge from="n34" to="n37">
+        <edge from="n88" to="n87">
             <attr name="label">
-                <string>!moored</string>
+                <string>del:moored</string>
+            </attr>
+        </edge>
+        <edge from="n88" to="n90">
+            <attr name="label">
+                <string>new:go</string>
+            </attr>
+        </edge>
+        <edge from="n89" to="n89">
+            <attr name="label">
+                <string>type:Cabbage</string>
+            </attr>
+        </edge>
+        <edge from="n89" to="n88">
+            <attr name="label">
+                <string>new:in</string>
+            </attr>
+        </edge>
+        <edge from="n89" to="n87">
+            <attr name="label">
+                <string>del:on</string>
             </attr>
         </edge>
     </graph>

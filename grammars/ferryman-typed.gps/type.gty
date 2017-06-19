@@ -6,32 +6,27 @@
         </attr>
         <node id="n1">
             <attr name="layout">
-                <string>65 118 29 15</string>
+                <string>65 116 28 18</string>
             </attr>
         </node>
         <node id="n0">
             <attr name="layout">
-                <string>262 102 30 45</string>
-            </attr>
-        </node>
-        <node id="n2">
-            <attr name="layout">
-                <string>158 219 36 15</string>
+                <string>262 97 30 54</string>
             </attr>
         </node>
         <node id="n3">
             <attr name="layout">
-                <string>164 292 29 15</string>
+                <string>164 290 29 18</string>
             </attr>
         </node>
         <node id="n4">
             <attr name="layout">
-                <string>251 293 53 15</string>
+                <string>251 291 53 18</string>
             </attr>
         </node>
         <node id="n5">
             <attr name="layout">
-                <string>69 294 28 15</string>
+                <string>68 292 30 18</string>
             </attr>
         </node>
         <edge from="n1" to="n1">
@@ -64,42 +59,9 @@
                 <string>flag:right</string>
             </attr>
         </edge>
-        <edge from="n2" to="n2">
-            <attr name="label">
-                <string>abs:</string>
-            </attr>
-        </edge>
-        <edge from="n2" to="n2">
-            <attr name="label">
-                <string>type:Cargo</string>
-            </attr>
-        </edge>
-        <edge from="n2" to="n2">
-            <attr name="label">
-                <string>abs:likes</string>
-            </attr>
-            <attr name="layout">
-                <string>500 0 168 230 247 227 247 227 11</string>
-            </attr>
-        </edge>
-        <edge from="n2" to="n1">
-            <attr name="label">
-                <string>in</string>
-            </attr>
-        </edge>
-        <edge from="n2" to="n0">
-            <attr name="label">
-                <string>on</string>
-            </attr>
-        </edge>
         <edge from="n3" to="n3">
             <attr name="label">
                 <string>type:Goat</string>
-            </attr>
-        </edge>
-        <edge from="n3" to="n2">
-            <attr name="label">
-                <string>sub:</string>
             </attr>
         </edge>
         <edge from="n3" to="n4">
@@ -107,14 +69,29 @@
                 <string>likes</string>
             </attr>
         </edge>
+        <edge from="n3" to="n1">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge from="n3" to="n0">
+            <attr name="label">
+                <string>on</string>
+            </attr>
+        </edge>
         <edge from="n4" to="n4">
             <attr name="label">
                 <string>type:Cabbage</string>
             </attr>
         </edge>
-        <edge from="n4" to="n2">
+        <edge from="n4" to="n1">
             <attr name="label">
-                <string>sub:</string>
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge from="n4" to="n0">
+            <attr name="label">
+                <string>on</string>
             </attr>
         </edge>
         <edge from="n5" to="n5">
@@ -122,14 +99,19 @@
                 <string>type:Wolf</string>
             </attr>
         </edge>
-        <edge from="n5" to="n2">
-            <attr name="label">
-                <string>sub:</string>
-            </attr>
-        </edge>
         <edge from="n5" to="n3">
             <attr name="label">
                 <string>likes</string>
+            </attr>
+        </edge>
+        <edge from="n5" to="n1">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge from="n5" to="n0">
+            <attr name="label">
+                <string>on</string>
             </attr>
         </edge>
     </graph>
