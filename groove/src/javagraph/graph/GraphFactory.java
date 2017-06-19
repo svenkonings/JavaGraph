@@ -4,6 +4,7 @@ import groove.algebra.Algebra;
 import groove.grammar.host.*;
 import groove.grammar.rule.RuleToHostMap;
 import groove.grammar.type.TypeEdge;
+import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.Element;
 import groove.graph.Label;
@@ -62,10 +63,11 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, String text, HostNode target) {
-        if (source instanceof Node<?> && target instanceof Node<?>) {
-            Node<?> sourceNode = (Node<?>) source;
-            Node<?> targetNode = (Node<?>) target;
-            return sourceNode.createEdge(targetNode);
+        if (source instanceof Node && target instanceof Node) {
+            Node sourceNode = (Node) source;
+            TypeLabel typeLabel = TypeLabel.createLabel(text);
+            Node targetNode = (Node) target;
+            return sourceNode.createEdge(typeLabel, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -93,10 +95,11 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, Label label, HostNode target) {
-        if (source instanceof Node<?> && target instanceof Node<?>) {
-            Node<?> sourceNode = (Node<?>) source;
-            Node<?> targetNode = (Node<?>) target;
-            return sourceNode.createEdge(targetNode);
+        if (source instanceof Node && label instanceof TypeLabel && target instanceof Node) {
+            Node sourceNode = (Node) source;
+            TypeLabel typeLabel = (TypeLabel) label;
+            Node targetNode = (Node) target;
+            return sourceNode.createEdge(typeLabel, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -114,10 +117,11 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, TypeEdge type, HostNode target) {
-        if (source instanceof Node<?> && target instanceof Node<?>) {
-            Node<?> sourceNode = (Node<?>) source;
-            Node<?> targetNode = (Node<?>) target;
-            return sourceNode.createEdge(targetNode);
+        if (source instanceof Node && target instanceof Node) {
+            Node sourceNode = (Node) source;
+            TypeLabel typeLabel = type.label();
+            Node targetNode = (Node) target;
+            return sourceNode.createEdge(typeLabel, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -146,28 +150,26 @@ public class GraphFactory extends HostFactory {
     public class GraphNodeFactory extends NodeFactory<HostNode> {
 
         private final TypeNode typeNode;
-        private final Class<?> nodeClass;
         private final Dispenser nodeNrDispenser;
 
         public GraphNodeFactory(TypeNode type) throws ClassNotFoundException {
             typeNode = type;
-            nodeClass = Class.forName(typeNode.text());
             nodeNrDispenser = Dispenser.counter();
         }
 
         @Override
         public HostNode createNode() {
-            return graph.createNode(nodeClass);
+            return graph.createNode(typeNode);
         }
 
         @Override
         public HostNode createNode(int nr) {
-            return graph.createNode(nodeClass);
+            return graph.createNode(typeNode);
         }
 
         @Override
         public HostNode createNode(Dispenser dispenser) {
-            return graph.createNode(nodeClass);
+            return graph.createNode(typeNode);
         }
 
         @Override

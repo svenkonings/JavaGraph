@@ -2,6 +2,7 @@ package javagraph;
 
 import com.google.auto.common.MoreElements;
 import com.google.auto.common.MoreTypes;
+import groove.util.parse.StringHandler;
 import javagraph.annotations.EdgeCreate;
 import javagraph.annotations.EdgeDelete;
 import javagraph.annotations.EdgeVisit;
@@ -22,7 +23,6 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 import javax.tools.FileObject;
-import javax.tools.StandardLocation;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Collections;
@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 
 import static javagraph.TypeGraphLoader.*;
+import static javax.tools.StandardLocation.CLASS_OUTPUT;
 
 public class AnnotationProcessor extends AbstractProcessor {
 
@@ -74,7 +75,7 @@ public class AnnotationProcessor extends AbstractProcessor {
         types = processingEnv.getTypeUtils();
         messager = processingEnv.getMessager();
         try {
-            graphFile = processingEnv.getFiler().createResource(StandardLocation.CLASS_OUTPUT, FOLDER, TYPEGRAPH_FILE);
+            graphFile = processingEnv.getFiler().createResource(CLASS_OUTPUT, FOLDER, TYPEGRAPH_FILE);
         } catch (IOException e) {
             error("TypeGraph could not be created: %s", e.getMessage());
         }
@@ -97,7 +98,7 @@ public class AnnotationProcessor extends AbstractProcessor {
         for (TypeElement annotation : annotations) {
             if (NODE.equals(annotation.getQualifiedName().toString())) {
                 Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(annotation);
-                processNode(unhandledElements, elements);
+                processNode(elements, unhandledElements);
             }
         }
         for (Element element : unhandledElements) {
@@ -127,7 +128,7 @@ public class AnnotationProcessor extends AbstractProcessor {
         }
     }
 
-    private void processNode(Set<Element> unhandledAnnotations, Set<? extends Element> elements) {
+    private void processNode(Set<? extends Element> elements, Set<Element> unhandledElements) {
         for (Element element : elements) {
             boolean valid = true;
             TypeElement typeElement;
@@ -137,7 +138,17 @@ public class AnnotationProcessor extends AbstractProcessor {
                 error(NODE, element, "@Node should only be used for types");
                 continue;
             }
-            ClassNode node = new ClassNode(typeElement.getQualifiedName().toString());
+            Node nodeAnntation = element.getAnnotation(Node.class);
+            if (nodeAnntation == null) {
+                error(NODE, element, "Can't find @Node annotation");
+                return;
+            }
+            String name = nodeAnntation.value();
+            if (!StringHandler.isIdentifier(name)) {
+                error(NODE, element, "Node name is not a valid identifier");
+                valid = false;
+            }
+            ClassNode node = new ClassNode(name, typeElement.getQualifiedName().toString());
             for (Element enclosedElement : typeElement.getEnclosedElements()) {
                 for (AnnotationMirror annotationMirror : enclosedElement.getAnnotationMirrors()) {
                     boolean remove = true;
@@ -165,7 +176,7 @@ public class AnnotationProcessor extends AbstractProcessor {
                             break;
                     }
                     if (remove) {
-                        unhandledAnnotations.remove(enclosedElement);
+                        unhandledElements.remove(enclosedElement);
                     }
                 }
             }
@@ -373,13 +384,19 @@ public class AnnotationProcessor extends AbstractProcessor {
             error(annotation, element, "The target should be a node");
             return;
         }
-        if (targetElement.getAnnotation(Node.class) == null) {
+        Node targetAnntation = targetElement.getAnnotation(Node.class);
+        if (targetAnntation == null) {
             error(annotation, element, "The target should be a node");
+            return;
+        }
+        String targetName = targetAnntation.value();
+        if (!StringHandler.isIdentifier(targetName)) {
+            error(NODE, element, "Node name is not a valid identifier");
             valid = false;
         }
         if (valid) {
             try {
-                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString(), edgeVisit.value());
+                ClassEdge edge = node.computeEdgeIfAbsent(targetName, edgeVisit.value());
                 edge.setEdgeVisit(executableElement.getSimpleName().toString());
             } catch (IllegalStateException e) {
                 error(annotation, element, "There can only be one @EdgeVisit for every edge");
@@ -428,13 +445,19 @@ public class AnnotationProcessor extends AbstractProcessor {
             error(annotation, element, "The target should be a node");
             return;
         }
-        if (targetElement.getAnnotation(Node.class) == null) {
+        Node targetAnntation = targetElement.getAnnotation(Node.class);
+        if (targetAnntation == null) {
             error(annotation, element, "The target should be a node");
+            return;
+        }
+        String targetName = targetAnntation.value();
+        if (!StringHandler.isIdentifier(targetName)) {
+            error(NODE, element, "Node name is not a valid identifier");
             valid = false;
         }
         if (valid) {
             try {
-                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString(), edgeCreate.value());
+                ClassEdge edge = node.computeEdgeIfAbsent(targetName, edgeCreate.value());
                 edge.setEdgeCreate(executableElement.getSimpleName().toString());
             } catch (IllegalStateException e) {
                 error(annotation, element, "There can only be one @EdgeCreate for every edge");
@@ -483,13 +506,19 @@ public class AnnotationProcessor extends AbstractProcessor {
             error(annotation, element, "The target should be a node");
             return;
         }
-        if (targetElement.getAnnotation(Node.class) == null) {
+        Node targetAnntation = targetElement.getAnnotation(Node.class);
+        if (targetAnntation == null) {
             error(annotation, element, "The target should be a node");
+            return;
+        }
+        String targetName = targetAnntation.value();
+        if (!StringHandler.isIdentifier(targetName)) {
+            error(NODE, element, "Node name is not a valid identifier");
             valid = false;
         }
         if (valid) {
             try {
-                ClassEdge edge = node.computeEdgeIfAbsent(targetElement.getQualifiedName().toString(), edgeDelete.value());
+                ClassEdge edge = node.computeEdgeIfAbsent(targetName, edgeDelete.value());
                 edge.setEdgeDelete(executableElement.getSimpleName().toString());
             } catch (IllegalStateException e) {
                 error(annotation, element, "There can only be one @EdgeDelete for every edge");

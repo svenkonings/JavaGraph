@@ -1485,10 +1485,6 @@ public class TypeGraph extends NodeSetEdgeSetGraph<TypeNode,TypeEdge> implements
     }
 
     // Added methods
-    public TypeNode getNodeByClass(Class<?> nodeClass) {
-        return getNodeByName(nodeClass.getCanonicalName());
-    }
-
     public TypeNode getNodeByName(String label) {
         TypeLabel typeLabel = TypeLabel.createLabel(NODE_TYPE, label);
         return getNode(typeLabel);

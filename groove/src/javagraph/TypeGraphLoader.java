@@ -32,7 +32,8 @@ public class TypeGraphLoader {
         ClassGraph classGraph = loadClassGraph();
         TypeGraph typeGraph = new TypeGraph(QualName.name(FOLDER));
         classGraph.getNodes().forEach(node -> {
-            TypeNode typeNode = typeGraph.addNode(TypeLabel.createLabel(EdgeRole.NODE_TYPE, node.getName()));
+            TypeNode typeNode = typeGraph.addNode(TypeLabel.createLabel(EdgeRole.NODE_TYPE, node.getNodeName()));
+            typeNode.setNodeClassName(node.getClassName());
             typeNode.setNodeVisit(node.getNodeVisit());
             typeNode.setNodeCreate(node.getNodeCreate());
             typeNode.setNodeDelete(node.getNodeDelete());

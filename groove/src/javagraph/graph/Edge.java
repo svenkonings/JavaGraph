@@ -8,19 +8,19 @@ import groove.grammar.type.TypeLabel;
 import groove.graph.EdgeRole;
 import javagraph.TypeGraphLoader;
 
-public class Edge<S, T> implements HostEdge {
+public class Edge implements HostEdge {
 
-    private final Node<S> source;
-    private final Node<T> target;
+    private final Node source;
     private final TypeEdge typeEdge;
+    private final Node target;
 
-    public Edge(Node<S> sourceNode, Node<T> targetNode) {
+    public Edge(Node sourceNode, TypeEdge type, Node targetNode) {
         source = sourceNode;
+        typeEdge = type;
         target = targetNode;
-        typeEdge = TypeGraphLoader.getInstance().getEdge(source.getType(), "", target.getType());
     }
 
-    public Node<S> getSource() {
+    public Node getSource() {
         return source;
     }
 
@@ -29,17 +29,17 @@ public class Edge<S, T> implements HostEdge {
         return typeEdge.label();
     }
 
-    public Node<T> getTarget() {
-        return target;
-    }
-
     @Override
     public TypeEdge getType() {
         return typeEdge;
     }
 
+    public Node getTarget() {
+        return target;
+    }
+
     public boolean deleteEdge() {
-        return source.deleteEdge(target);
+        return source.deleteEdge(label(), target);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class Edge<S, T> implements HostEdge {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof Edge<?, ?>) {
-            Edge<?, ?> edge = (Edge<?, ?>) obj;
+        } else if (obj instanceof Edge) {
+            Edge edge = (Edge) obj;
             return getType().equals(edge.getType()) &&
                     getSource().equals(edge.getSource()) &&
                     getTarget().equals(edge.getTarget());
@@ -66,7 +66,7 @@ public class Edge<S, T> implements HostEdge {
 
     @Override
     public String toString() {
-        return source.toString() + "-->" + target.toString();
+        return source + "--" + label() + "-->" + target;
     }
 
     @Override

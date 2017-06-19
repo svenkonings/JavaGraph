@@ -174,7 +174,7 @@ public class RegExprTyperTest {
         TypeNode[][] n1 = {{A, A}, {A, A1}, {A, A2}, {A1, A}, {A1, A1}, {A1, A2}, {A2, A}, {A2, A1},
             {A2, A2}, {B, B}, {B, B1}, {B1, B}, {B1, B1}, {C, C}, {D, D}, {XInt, XInt},
             {XReal, XReal}, {XString, XString}, {XBool, XBool}};
-//        equals("=", n1);
+//        equals("=", n1); FIXME
         this.implicit = true;
         TypeNode[][] n2 =
             {{Top, Top}, {IInt, IInt}, {IReal, IReal}, {IString, IString}, {IBool, IBool}};

@@ -16,18 +16,18 @@
  */
 package groove.grammar.type;
 
-import static groove.graph.EdgeRole.NODE_TYPE;
-
-import java.awt.Color;
-import java.util.Set;
-
-import org.eclipse.jdt.annotation.NonNull;
-
 import groove.grammar.AnchorKind;
 import groove.graph.EdgeRole;
 import groove.graph.Label;
 import groove.graph.Node;
 import groove.util.line.Line;
+import javagraph.graph.GraphException;
+import org.eclipse.jdt.annotation.NonNull;
+
+import java.awt.*;
+import java.util.Set;
+
+import static groove.graph.EdgeRole.NODE_TYPE;
 
 /**
  * Node in a type graph.
@@ -232,12 +232,40 @@ public class TypeNode implements Node, TypeElement {
     private final @NonNull TypeLabel type;
 
     // Added methods
+    private String nodeClassName;
+    private Class<?> nodeClass;
     private String nodeVisit;
     private String nodeCreate;
     private String nodeDelete;
 
     public boolean isJavaNode() {
-        return nodeVisit != null && nodeCreate != null && nodeDelete != null;
+        return nodeClassName != null && nodeVisit != null && nodeCreate != null && nodeDelete != null;
+    }
+
+    public String getNodeClassName() {
+        return nodeClassName;
+    }
+
+    public boolean hasNodeClassName() {
+        return nodeClassName != null;
+    }
+
+    public void setNodeClassName(String name) {
+        if (hasNodeClassName()) {
+            throw new IllegalStateException("ClassName can only be set once");
+        }
+        nodeClassName = name;
+    }
+
+    public Class<?> getNodeClass() {
+        if (nodeClass == null) {
+            try {
+                nodeClass = Class.forName(nodeClassName);
+            } catch (ClassNotFoundException e) {
+                throw new GraphException(e);
+            }
+        }
+        return nodeClass;
     }
 
     public String getNodeVisit() {

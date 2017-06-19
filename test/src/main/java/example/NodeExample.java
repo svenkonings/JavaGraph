@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-@Node
+@Node("NodeExample")
 public class NodeExample {
 
     private static final Set<NodeExample> nodes = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap<>()));

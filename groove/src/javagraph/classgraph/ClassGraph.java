@@ -1,28 +1,26 @@
 package javagraph.classgraph;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class ClassGraph implements Serializable {
 
-    private final Map<String, ClassNode> nodes;
+    private final Set<ClassNode> nodes;
 
     public ClassGraph() {
-        this.nodes = new HashMap<>();
+        this.nodes = new HashSet<>();
     }
 
     public void addNode(ClassNode node) {
-        String name = node.getName();
-        if (nodes.containsKey(name)) {
+        if (nodes.contains(node)) {
             throw new IllegalArgumentException("Node " + node + " already exists");
         }
-        nodes.put(name, node);
+        nodes.add(node);
     }
 
     public Set<ClassNode> getNodes() {
-        return new HashSet<>(nodes.values());
+        return Collections.unmodifiableSet(nodes);
     }
 }

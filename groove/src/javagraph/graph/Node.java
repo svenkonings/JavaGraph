@@ -4,6 +4,7 @@ import groove.grammar.AnchorKind;
 import groove.grammar.host.HostNode;
 import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import javagraph.TypeGraphLoader;
 
@@ -13,28 +14,25 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unchecked")
-public class Node<S> implements HostNode {
+public class Node implements HostNode {
 
-    private final TypeGraph typeGraph;
-
-    private final S object;
-    private final Class<S> objectClass;
     private final TypeNode typeNode;
+    private final TypeGraph typeGraph;
+    private final Object object;
+    private final Class<?> objectClass;
 
-    public Node(S nodeObject) {
-        typeGraph = TypeGraphLoader.getInstance();
-
+    public Node(TypeNode type, Object nodeObject) {
+        typeNode = type;
+        typeGraph = typeNode.getGraph();
         object = nodeObject;
-        objectClass = (Class<S>) object.getClass();
-        typeNode = typeGraph.getNodeByClass(objectClass);
+        objectClass = typeNode.getNodeClass();
     }
 
-    public S getObject() {
+    public Object getObject() {
         return object;
     }
 
-    public Class<S> getObjectClass() {
+    public Class<?> getObjectClass() {
         return objectClass;
     }
 
@@ -54,55 +52,51 @@ public class Node<S> implements HostNode {
         return deleted;
     }
 
-    public <T> Edge<S, T> createEdge(Node<T> targetNode) {
-        T target = targetNode.getObject();
-        Class<?> targetClass = targetNode.getObjectClass();
-        TypeNode targetTypeNode = targetNode.getType();
-        TypeEdge typeEdge = typeGraph.getEdge(typeNode, "", targetTypeNode);
+    public Edge createEdge(TypeLabel label, Node targetNode) {
+        TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetNode.getType(), true);
         boolean created;
         try {
-            Method createEdge = objectClass.getMethod(typeEdge.getEdgeCreate(), targetClass);
-            created = (boolean) createEdge.invoke(object, target);
+            Method createEdge = objectClass.getMethod(typeEdge.getEdgeCreate(), targetNode.getObjectClass());
+            created = (boolean) createEdge.invoke(object, targetNode.getObject());
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new GraphException(e);
         }
         if (created) {
-            return new Edge<>(this, targetNode);
+            return new Edge(this, typeEdge, targetNode);
         } else {
             return null;
         }
     }
 
-    public <T> boolean deleteEdge(Node<T> targetNode) {
-        T target = targetNode.getObject();
-        Class<?> targetClass = targetNode.getObjectClass();
-        TypeNode targetTypeNode = targetNode.getType();
-        TypeEdge typeEdge = typeGraph.getEdge(typeNode, "", targetTypeNode);
+    public boolean deleteEdge(TypeLabel label, Node targetNode) {
+        TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetNode.getType(), true);
         boolean deleted;
         try {
-            Method deleteEdge = objectClass.getMethod(typeEdge.getEdgeDelete(), targetClass);
-            deleted = (boolean) deleteEdge.invoke(object, target);
+            Method deleteEdge = objectClass.getMethod(typeEdge.getEdgeDelete(), targetNode.getObjectClass());
+            deleted = (boolean) deleteEdge.invoke(object, targetNode.getObject());
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new GraphException(e);
         }
         return deleted;
     }
 
-    public <T> Set<Edge<S, T>> visitEdge(Class<T> targetClass) {
-        TypeNode targetTypeNode = typeGraph.getNodeByClass(targetClass);
-        TypeEdge typeEdge = typeGraph.getEdge(typeNode, "", targetTypeNode);
-        Set<T> targets;
+    public Set<Edge> visitEdge(TypeLabel label, TypeNode targetTypeNode) {
+        TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetTypeNode, true);
+        Set<?> targets;
         try {
             Method visitEdge = objectClass.getMethod(typeEdge.getEdgeVisit());
-            targets = (Set<T>) visitEdge.invoke(object);
+            targets = (Set<?>) visitEdge.invoke(object);
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new GraphException(e);
         }
-        return targets.stream().map(Node::new).map(target -> new Edge<>(this, target)).collect(Collectors.toSet());
+        return targets.stream()
+                .map(target -> new Node(targetTypeNode, target))
+                .map(target -> new Edge(this, typeEdge, target))
+                .collect(Collectors.toSet());
     }
 
-    public Set<Edge<S, ?>> visitEdges() {
-        Set<Edge<S, ?>> edges = new HashSet<>();
+    public Set<Edge> visitEdges() {
+        Set<Edge> edges = new HashSet<>();
         for (TypeEdge typeEdge : typeGraph.outEdgeSet(typeNode)) {
             Set<?> targets;
             try {
@@ -111,8 +105,10 @@ public class Node<S> implements HostNode {
             } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new GraphException(e);
             }
-            targets.stream().map(Node::new).map(target -> new Edge<>(this, target)).forEach(edges::add);
-
+            targets.stream()
+                    .map(target -> new Node(typeEdge.target(), target))
+                    .map(target -> new Edge(this, typeEdge, target))
+                    .forEach(edges::add);
         }
         return edges;
     }
@@ -120,7 +116,6 @@ public class Node<S> implements HostNode {
     @Override
     public int hashCode() {
         int result = typeNode.hashCode();
-        result = 31 * result + objectClass.hashCode();
         result = 31 * result + object.hashCode();
         return result;
     }
@@ -129,10 +124,9 @@ public class Node<S> implements HostNode {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof Node<?>) {
-            Node<?> node = (Node<?>) obj;
+        } else if (obj instanceof Node) {
+            Node node = (Node) obj;
             return getType().equals(node.getType()) &&
-                    getObjectClass().equals(node.getObjectClass()) &&
                     getObject().equals(node.getObject());
         } else {
             return false;

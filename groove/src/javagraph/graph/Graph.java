@@ -6,7 +6,9 @@ import groove.grammar.host.HostFactory;
 import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
 import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
+import groove.graph.AGraph;
 import groove.graph.GraphInfo;
 import groove.graph.GraphRole;
 import groove.graph.Label;
@@ -41,69 +43,80 @@ public class Graph implements HostGraph {
     }
 
     public Graph(String graphName) {
-        typeGraph = TypeGraphLoader.getInstance();
-        graphFactory = new GraphFactory(this);
+        this(graphName, TypeGraphLoader.getInstance());
+    }
+
+    public Graph(String graphName, TypeGraph type) {
         name = graphName;
+        typeGraph = type;
+        graphFactory = new GraphFactory(this);
     }
 
-    public <T> Node<T> createNode(Class<T> nodeClass) {
-        TypeNode typeNode = typeGraph.getNodeByClass(nodeClass);
-        T node;
+    public Node createNode(TypeNode typeNode) {
+        Object node;
         try {
-            Method createNode = nodeClass.getMethod(typeNode.getNodeCreate());
-            node = (T) createNode.invoke(null);
+            Method createNode = typeNode.getNodeClass().getMethod(typeNode.getNodeCreate());
+            node = createNode.invoke(null);
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new GraphException(e);
         }
-        return new Node<>(node);
+        return new Node(typeNode, node);
     }
 
-    public <T> Set<Node<T>> visitNode(Class<T> nodeClass) {
-        TypeNode typeNode = typeGraph.getNodeByClass(nodeClass);
-        Set<T> nodes;
+    public Set<Node> visitNode(TypeNode typeNode) {
+        Set<?> nodes;
         try {
-            Method visitNode = nodeClass.getMethod(typeNode.getNodeVisit());
-            nodes = (Set<T>) visitNode.invoke(null);
+            Method visitNode = typeNode.getNodeClass().getMethod(typeNode.getNodeVisit());
+            nodes = (Set<?>) visitNode.invoke(null);
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new GraphException(e);
         }
-        return nodes.stream().map(Node::new).collect(Collectors.toSet());
+        return nodes.stream()
+                .map(node -> new Node(typeNode, node))
+                .collect(Collectors.toSet());
     }
 
-    public Set<Node<?>> visitNodes() {
-        Set<Node<?>> nodes = new HashSet<>();
+    public Set<Node> visitNodes() {
+        Set<Node> nodes = new HashSet<>();
         for (TypeNode typeNode : typeGraph.nodeSet()) {
             if (!typeNode.isJavaNode()) {
                 continue;
             }
             Set<?> visitNodes;
             try {
-                Class<?> nodeClass = Class.forName(typeNode.text());
-                Method visitNode = nodeClass.getMethod(typeNode.getNodeVisit());
+                Method visitNode = typeNode.getNodeClass().getMethod(typeNode.getNodeVisit());
                 visitNodes = (Set<?>) visitNode.invoke(null);
-            } catch (ClassCastException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new GraphException(e);
             }
-            visitNodes.stream().map(Node::new).forEach(nodes::add);
+            visitNodes.stream()
+                    .map(node -> new Node(typeNode, node))
+                    .forEach(nodes::add);
         }
         return nodes;
     }
 
-    public <S, T> Set<Edge<S, T>> visitEdge(Class<S> sourceClass, Class<T> targetClass) {
-        return visitNode(sourceClass).stream().flatMap(node -> node.visitEdge(targetClass).stream()).collect(Collectors.toSet());
+    public Set<Edge> visitEdge(TypeNode sourceType, TypeLabel label, TypeNode targetType) {
+        return visitNode(sourceType).stream()
+                .flatMap(node -> node.visitEdge(label, targetType).stream())
+                .collect(Collectors.toSet());
     }
 
-    public <S> Set<Edge<S, ?>> visitEdges(Class<S> nodeClass) {
-        return visitNode(nodeClass).stream().flatMap(node -> node.visitEdges().stream()).collect(Collectors.toSet());
+    public Set<Edge> visitEdges(TypeNode typeNode) {
+        return visitNode(typeNode).stream()
+                .flatMap(node -> node.visitEdges().stream())
+                .collect(Collectors.toSet());
     }
 
-    public Set<Edge<?, ?>> visitEdges() {
-        return visitNodes().stream().flatMap(node -> node.visitEdges().stream()).collect(Collectors.toSet());
+    public Set<Edge> visitEdges() {
+        return visitNodes().stream()
+                .flatMap(node -> node.visitEdges().stream())
+                .collect(Collectors.toSet());
     }
 
     @Override
     public String toString() {
-        return visitNodes().toString();
+        return AGraph.toString(this);
     }
 
     @Override
@@ -127,22 +140,28 @@ public class Graph implements HostGraph {
     @Override
     public Set<? extends HostEdge> inEdgeSet(groove.graph.Node node) {
         // TODO: inefficient
-        return edgeSet().stream().filter(edge -> edge.target().equals(node)).collect(Collectors.toSet());
+        return edgeSet().stream()
+                .filter(edge -> edge.target().equals(node))
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Set<? extends HostEdge> outEdgeSet(groove.graph.Node node) {
-        if (node instanceof Node<?>) {
-            return ((Node<?>) node).visitEdges();
+        if (node instanceof Node) {
+            return ((Node) node).visitEdges();
         } else {
-            return edgeSet().stream().filter(edge -> edge.source().equals(node)).collect(Collectors.toSet());
+            return edgeSet().stream()
+                    .filter(edge -> edge.source().equals(node))
+                    .collect(Collectors.toSet());
         }
     }
 
     @Override
     public Set<? extends HostEdge> edgeSet(Label label) {
         // TODO: inefficient
-        return edgeSet().stream().filter(edge -> edge.label().equals(label)).collect(Collectors.toSet());
+        return edgeSet().stream()
+                .filter(edge -> edge.label().equals(label))
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -205,8 +224,8 @@ public class Graph implements HostGraph {
 
     @Override
     public boolean removeEdge(HostEdge edge) {
-        if (edge instanceof Edge<?, ?>) {
-            return ((Edge<?, ?>) edge).deleteEdge();
+        if (edge instanceof Edge) {
+            return ((Edge) edge).deleteEdge();
         } else {
             throw new UnsupportedOperationException();
         }
@@ -214,8 +233,8 @@ public class Graph implements HostGraph {
 
     @Override
     public boolean removeNode(HostNode node) {
-        if (node instanceof Node<?>) {
-            return ((Node<?>) node).deleteNode();
+        if (node instanceof Node) {
+            return ((Node) node).deleteNode();
         } else {
             throw new UnsupportedOperationException();
         }

@@ -434,7 +434,7 @@ class Edge2SearchItem extends AbstractSearchItem {
                 if (!this.search.putNode(this.sourceIx, imageSource)) {
                     return false;
                 }
-            } else if (!imageSource.equals(this.sourceFind)) {
+            } else if (imageSource != this.sourceFind) {
                 return false;
             }
             return true;
@@ -455,7 +455,7 @@ class Edge2SearchItem extends AbstractSearchItem {
                     if (!this.search.putNode(this.targetIx, imageTarget)) {
                         return false;
                     }
-                } else if (!imageTarget.equals(this.targetFind)) {
+                } else if (imageTarget != this.targetFind) {
                     return false;
                 }
             }

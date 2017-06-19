@@ -1,8 +1,9 @@
 package test;
 
-import example.AnotherNodeExample;
-import example.EdgeExample;
-import example.NodeExample;
+import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeLabel;
+import groove.grammar.type.TypeNode;
+import groove.graph.EdgeRole;
 import javagraph.TypeGraphLoader;
 import javagraph.graph.Graph;
 import javagraph.graph.Node;
@@ -15,27 +16,30 @@ public class GraphTest {
     @Test
     public void nodeTest() {
         Graph graph = new Graph();
-        assertNotNull(TypeGraphLoader.getInstance());
-        assertTrue(graph.visitNodes().isEmpty());
-        assertTrue(graph.visitNode(NodeExample.class).isEmpty());
+        TypeGraph typeGraph = graph.getTypeGraph();
+        TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
 
-        Node<NodeExample> node1 = graph.createNode(NodeExample.class);
+        assertNotNull(typeGraph);
+        assertTrue(graph.visitNodes().isEmpty());
+        assertTrue(graph.visitNode(nodeExampleType).isEmpty());
+
+        Node node1 = graph.createNode(nodeExampleType);
         assertNotNull(node1);
         assertEquals(graph.visitNodes().size(), 1);
-        assertEquals(graph.visitNode(NodeExample.class).size(), 1);
+        assertEquals(graph.visitNode(nodeExampleType).size(), 1);
 
-        Node<NodeExample> node2 = graph.createNode(NodeExample.class);
+        Node node2 = graph.createNode(nodeExampleType);
         assertNotNull(node2);
         assertEquals(graph.visitNodes().size(), 2);
-        assertEquals(graph.visitNode(NodeExample.class).size(), 2);
+        assertEquals(graph.visitNode(nodeExampleType).size(), 2);
 
         assertTrue(node2.deleteNode());
         assertEquals(graph.visitNodes().size(), 1);
-        assertEquals(graph.visitNode(NodeExample.class).size(), 1);
+        assertEquals(graph.visitNode(nodeExampleType).size(), 1);
 
         assertTrue(node1.deleteNode());
         assertTrue(graph.visitNodes().isEmpty());
-        assertTrue(graph.visitNode(NodeExample.class).isEmpty());
+        assertTrue(graph.visitNode(nodeExampleType).isEmpty());
 
         assertFalse(node1.deleteNode());
     }
@@ -43,56 +47,64 @@ public class GraphTest {
     @Test
     public void edgeTest() {
         Graph graph = new Graph();
+        TypeGraph typeGraph = graph.getTypeGraph();
+        TypeNode edgeExampleType = typeGraph.getNodeByName("EdgeExample");
+        TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
+        TypeNode anotherNodeExampleType = typeGraph.getNodeByName("AnotherNodeExample");
+        TypeLabel labelExample = TypeLabel.createLabel(EdgeRole.BINARY, "LabelExample");
+        TypeLabel anotherLabelExample = TypeLabel.createLabel(EdgeRole.BINARY, "AnotherLabelExample");
+
         assertNotNull(TypeGraphLoader.getInstance());
         assertTrue(graph.visitNodes().isEmpty());
 
-        Node<EdgeExample> sourceNode = graph.createNode(EdgeExample.class);
+        Node sourceNode = graph.createNode(edgeExampleType);
         assertNotNull(sourceNode);
-        Node<NodeExample> targetNode1 = graph.createNode(NodeExample.class);
+        Node targetNode1 = graph.createNode(nodeExampleType);
         assertNotNull(targetNode1);
-        Node<NodeExample> targetNode2 = graph.createNode(NodeExample.class);
+        Node targetNode2 = graph.createNode(nodeExampleType);
         assertNotNull(targetNode2);
-        Node<AnotherNodeExample> targetNode3 = graph.createNode(AnotherNodeExample.class);
+        Node targetNode3 = graph.createNode(anotherNodeExampleType);
         assertNotNull(targetNode3);
         assertEquals(graph.visitNodes().size(), 4);
-        assertEquals(graph.visitNode(EdgeExample.class).size(), 1);
-        assertEquals(graph.visitNode(NodeExample.class).size(), 2);
-        assertEquals(graph.visitNode(AnotherNodeExample.class).size(), 1);
+        assertEquals(graph.visitNode(edgeExampleType).size(), 1);
+        assertEquals(graph.visitNode(nodeExampleType).size(), 2);
+        assertEquals(graph.visitNode(anotherNodeExampleType).size(), 1);
         assertTrue(sourceNode.visitEdges().isEmpty());
-        assertTrue(sourceNode.visitEdge(NodeExample.class).isEmpty());
-        assertTrue(sourceNode.visitEdge(AnotherNodeExample.class).isEmpty());
+        assertTrue(sourceNode.visitEdge(labelExample, nodeExampleType).isEmpty());
+        assertTrue(sourceNode.visitEdge(anotherLabelExample, nodeExampleType).isEmpty());
+        assertTrue(sourceNode.visitEdge(labelExample, anotherNodeExampleType).isEmpty());
 
-        assertNotNull(sourceNode.createEdge(targetNode1));
+        assertNotNull(sourceNode.createEdge(labelExample, targetNode1));
         assertEquals(sourceNode.visitEdges().size(), 1);
-        assertEquals(sourceNode.visitEdge(NodeExample.class).size(), 1);
-        assertTrue(sourceNode.visitEdge(AnotherNodeExample.class).isEmpty());
+        assertEquals(sourceNode.visitEdge(labelExample, nodeExampleType).size(), 1);
+        assertTrue(sourceNode.visitEdge(labelExample, anotherNodeExampleType).isEmpty());
 
-        assertNotNull(sourceNode.createEdge(targetNode2));
+        assertNotNull(sourceNode.createEdge(labelExample, targetNode2));
         assertEquals(sourceNode.visitEdges().size(), 2);
-        assertEquals(sourceNode.visitEdge(NodeExample.class).size(), 2);
-        assertTrue(sourceNode.visitEdge(AnotherNodeExample.class).isEmpty());
+        assertEquals(sourceNode.visitEdge(labelExample, nodeExampleType).size(), 2);
+        assertTrue(sourceNode.visitEdge(labelExample, anotherNodeExampleType).isEmpty());
 
-        assertNotNull(sourceNode.createEdge(targetNode3));
+        assertNotNull(sourceNode.createEdge(labelExample, targetNode3));
         assertEquals(sourceNode.visitEdges().size(), 3);
-        assertEquals(sourceNode.visitEdge(NodeExample.class).size(), 2);
-        assertEquals(sourceNode.visitEdge(AnotherNodeExample.class).size(), 1);
+        assertEquals(sourceNode.visitEdge(labelExample, nodeExampleType).size(), 2);
+        assertEquals(sourceNode.visitEdge(labelExample, anotherNodeExampleType).size(), 1);
 
-        assertTrue(sourceNode.deleteEdge(targetNode1));
+        assertTrue(sourceNode.deleteEdge(labelExample, targetNode1));
         assertEquals(sourceNode.visitEdges().size(), 2);
-        assertEquals(sourceNode.visitEdge(NodeExample.class).size(), 1);
-        assertEquals(sourceNode.visitEdge(AnotherNodeExample.class).size(), 1);
+        assertEquals(sourceNode.visitEdge(labelExample, nodeExampleType).size(), 1);
+        assertEquals(sourceNode.visitEdge(labelExample, anotherNodeExampleType).size(), 1);
 
-        assertTrue(sourceNode.deleteEdge(targetNode3));
+        assertTrue(sourceNode.deleteEdge(labelExample, targetNode3));
         assertEquals(sourceNode.visitEdges().size(), 1);
-        assertEquals(sourceNode.visitEdge(NodeExample.class).size(), 1);
-        assertTrue(sourceNode.visitEdge(AnotherNodeExample.class).isEmpty());
+        assertEquals(sourceNode.visitEdge(labelExample, nodeExampleType).size(), 1);
+        assertTrue(sourceNode.visitEdge(labelExample, anotherNodeExampleType).isEmpty());
 
-        assertTrue(sourceNode.deleteEdge(targetNode2));
+        assertTrue(sourceNode.deleteEdge(labelExample, targetNode2));
         assertTrue(sourceNode.visitEdges().isEmpty());
-        assertTrue(sourceNode.visitEdge(NodeExample.class).isEmpty());
-        assertTrue(sourceNode.visitEdge(AnotherNodeExample.class).isEmpty());
+        assertTrue(sourceNode.visitEdge(labelExample, nodeExampleType).isEmpty());
+        assertTrue(sourceNode.visitEdge(labelExample, anotherNodeExampleType).isEmpty());
 
-        assertFalse(sourceNode.deleteEdge(targetNode1));
+        assertFalse(sourceNode.deleteEdge(labelExample, targetNode1));
 
         assertTrue(sourceNode.deleteNode());
         assertTrue(targetNode1.deleteNode());

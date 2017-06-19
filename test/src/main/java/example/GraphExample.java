@@ -1,5 +1,9 @@
 package example;
 
+import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeLabel;
+import groove.grammar.type.TypeNode;
+import groove.graph.EdgeRole;
 import javagraph.TypeGraphLoader;
 import javagraph.graph.Graph;
 import javagraph.graph.Node;
@@ -12,37 +16,46 @@ public class GraphExample {
     }
 
     public static void nodeExample(Graph graph) {
-        System.out.println("TypeGraph=" + TypeGraphLoader.getInstance());
+        TypeGraph typeGraph = graph.getTypeGraph();
+        TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
+
+        System.out.println("TypeGraph=" + typeGraph);
         System.out.println("Nodes=" + graph.visitNodes());
 
-        Node<NodeExample> node = graph.createNode(NodeExample.class);
-        System.out.println("CreateNode(NodeExample)=" + node);
+        Node nodeExample = graph.createNode(nodeExampleType);
+        System.out.println("CreateNode(NodeExample)=" + nodeExample);
         System.out.println("Nodes=" + graph.visitNodes());
 
-        System.out.println("DeleteNode(NodeExamlpe)=" + node.deleteNode());
+        System.out.println("DeleteNode(NodeExamlpe)=" + nodeExample.deleteNode());
         System.out.println("Nodes=" + graph.visitNodes());
         System.out.println();
     }
 
     public static void edgeExample(Graph graph) {
-        System.out.println("TypeGraph=" + TypeGraphLoader.getInstance());
+        TypeGraph typeGraph = graph.getTypeGraph();
+        TypeNode edgeExampleType = typeGraph.getNodeByName("EdgeExample");
+        TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
+        TypeNode anotherNodeExampleType = typeGraph.getNodeByName("AnotherNodeExample");
+
+        System.out.println("TypeGraph=" + typeGraph);
         System.out.println("Nodes=" + graph.visitNodes());
 
-        Node<EdgeExample> sourceNode = graph.createNode(EdgeExample.class);
-        Node<NodeExample> targetNode1 = graph.createNode(NodeExample.class);
-        Node<AnotherNodeExample> targetNode2 = graph.createNode(AnotherNodeExample.class);
+        Node sourceNode = graph.createNode(edgeExampleType);
+        Node targetNode1 = graph.createNode(nodeExampleType);
+        Node targetNode2 = graph.createNode(anotherNodeExampleType);
         System.out.println("CreateNode(EdgeExample)=" + sourceNode);
         System.out.println("CreateNode(NodeExample)=" + targetNode1);
         System.out.println("CreateNode(AnotherNodeExample)=" + targetNode2);
         System.out.println("Nodes=" + graph.visitNodes());
-        System.out.println("Nodes(EdgeExample)=" + graph.visitNode(EdgeExample.class));
+        System.out.println("Nodes(EdgeExample)=" + graph.visitNode(edgeExampleType));
 
-        System.out.println("CreateEdge(EdgeExample, NodeExample)=" + sourceNode.createEdge(targetNode1));
-        System.out.println("CreateEdge(EdgeExample, AnotherNodeExample)=" + sourceNode.createEdge(targetNode2));
-        System.out.println("VisitEdge(EdgeExample,NodeExample)=" + sourceNode.visitEdge(NodeExample.class));
+        TypeLabel labelExample = TypeLabel.createLabel(EdgeRole.BINARY, "LabelExample");
+        System.out.println("CreateEdge(EdgeExample, NodeExample)=" + sourceNode.createEdge(labelExample, targetNode1));
+        System.out.println("CreateEdge(EdgeExample, AnotherNodeExample)=" + sourceNode.createEdge(labelExample, targetNode2));
+        System.out.println("VisitEdge(EdgeExample,NodeExample)=" + sourceNode.visitEdge(labelExample, nodeExampleType));
         System.out.println("VisitEdges(EdgeExample)=" + sourceNode.visitEdges());
 
-        System.out.println("DeleteEdge(EdgeExample, NodeExample)=" + sourceNode.deleteEdge(targetNode1));
+        System.out.println("DeleteEdge(EdgeExample, NodeExample)=" + sourceNode.deleteEdge(labelExample, targetNode1));
         System.out.println("VisitEdges(EdgeExample)=" + sourceNode.visitEdges());
         System.out.println();
     }
