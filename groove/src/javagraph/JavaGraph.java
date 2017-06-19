@@ -7,6 +7,9 @@ import groove.grammar.host.HostEdge;
 import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
 import groove.grammar.model.GrammarModel;
+import groove.grammar.type.TypeEdge;
+import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeNode;
 import groove.io.store.SystemStore;
 import groove.transform.Proof;
 import groove.transform.Record;
@@ -37,15 +40,23 @@ public class JavaGraph {
     public JavaGraph(Grammar grooveGrammar) throws FormatException {
         grammar = new Grammar();
         grammar.setProperties(grooveGrammar.getProperties());
-        grammar.setTypeGraph(TypeGraphLoader.getInstance());
         grammar.setControl(grooveGrammar.getControl());
         grammar.setPrologEnvironment(grooveGrammar.getPrologEnvironment());
 
-        Graph graph = Graph.getInstance();
+        TypeGraph typeGraph = grooveGrammar.getTypeGraph();
+        initTypeGraph(typeGraph, TypeGraphLoader.getInstance());
+        grammar.setTypeGraph(typeGraph);
+
+        Graph graph = new Graph("javagraph", typeGraph);
         initGraph(graph, grooveGrammar.getStartGraph());
         grammar.setStartGraph(graph);
+
         grooveGrammar.getActions().forEach(grammar::add);
         grammar.setFixed();
+    }
+
+    public Grammar getGrammar() {
+        return grammar;
     }
 
     public Proof findMatch(String ruleName) {
@@ -75,6 +86,24 @@ public class JavaGraph {
 
     public void applyMatches(Collection<Proof> proofs) {
         proofs.forEach(this::applyMatch);
+    }
+
+    private static void initTypeGraph(TypeGraph typeGraph, TypeGraph javaGraph) {
+        for (TypeNode javaNode : javaGraph.nodeSet()) {
+            TypeNode node = typeGraph.getNode(javaNode.label());
+            node.setNodeClassName(javaNode.getNodeClassName());
+            node.setNodeVisit(javaNode.getNodeVisit());
+            node.setNodeCreate(javaNode.getNodeCreate());
+            node.setNodeDelete(javaNode.getNodeDelete());
+        }
+        for (TypeEdge javaEdge : javaGraph.edgeSet()) {
+            TypeNode source = typeGraph.getNode(javaEdge.source().label());
+            TypeNode target = typeGraph.getNode(javaEdge.target().label());
+            TypeEdge edge = typeGraph.getTypeEdge(source, javaEdge.label(), target, true);
+            edge.setEdgeVisit(javaEdge.getEdgeVisit());
+            edge.setEdgeCreate(javaEdge.getEdgeCreate());
+            edge.setEdgeDelete(javaEdge.getEdgeDelete());
+        }
     }
 
     private static void initGraph(Graph graph, HostGraph startGraph) {
