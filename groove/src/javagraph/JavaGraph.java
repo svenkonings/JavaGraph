@@ -17,6 +17,7 @@ import groove.transform.RuleApplication;
 import groove.transform.RuleEvent;
 import groove.util.parse.FormatException;
 import javagraph.graph.Graph;
+import javagraph.graph.GraphException;
 import javagraph.graph.Node;
 
 import java.io.File;
@@ -60,21 +61,27 @@ public class JavaGraph {
     }
 
     public Proof findMatch(String ruleName) {
-        Rule rule = grammar.getRule(QualName.name(ruleName));
-        return rule.getMatch(grammar.getStartGraph(), null);
+        return getRule(ruleName).getMatch(grammar.getStartGraph(), null);
     }
 
     public Collection<Proof> findMatches(String ruleName) {
+        return getRule(ruleName).getAllMatches(grammar.getStartGraph(), null);
+    }
+
+    private Rule getRule(String ruleName) {
         Rule rule = grammar.getRule(QualName.name(ruleName));
-        return rule.getAllMatches(grammar.getStartGraph(), null);
+        if (rule == null) {
+            throw new GraphException("Rule not found");
+        }
+        return rule;
     }
 
     public void applyMatch(String ruleName) {
-        applyMatch(findMatch(ruleName));
-    }
-
-    public void applyMatches(String ruleName) {
-        applyMatches(findMatches(ruleName));
+        Proof proof = findMatch(ruleName);
+        if (proof == null) {
+            throw new GraphException("No match found");
+        }
+        applyMatch(proof);
     }
 
     public void applyMatch(Proof proof) {
@@ -84,13 +91,12 @@ public class JavaGraph {
         application.getTarget();
     }
 
-    public void applyMatches(Collection<Proof> proofs) {
-        proofs.forEach(this::applyMatch);
-    }
-
     private static void initTypeGraph(TypeGraph typeGraph, TypeGraph javaGraph) {
         for (TypeNode javaNode : javaGraph.nodeSet()) {
             TypeNode node = typeGraph.getNode(javaNode.label());
+            if (node == null) {
+                throw new GraphException("Missing node %s in Groove TypeGraph", javaNode);
+            }
             node.setNodeClassName(javaNode.getNodeClassName());
             node.setNodeVisit(javaNode.getNodeVisit());
             node.setNodeCreate(javaNode.getNodeCreate());
@@ -109,11 +115,18 @@ public class JavaGraph {
     private static void initGraph(Graph graph, HostGraph startGraph) {
         Map<HostNode, Node> nodeMapping = new HashMap<>();
         for (HostNode grooveNode : startGraph.nodeSet()) {
-            Node node = graph.createNode(grooveNode.getType());
+            TypeNode type = grooveNode.getType();
+            if (!type.isJavaNode()) {
+                throw new GraphException("Node %s is not a Java node", grooveNode);
+            }
+            Node node = graph.createNode(type);
             nodeMapping.put(grooveNode, node);
         }
-        for (HostEdge edge : startGraph.edgeSet()) {
-            nodeMapping.get(edge.source()).createEdge(edge.label(), nodeMapping.get(edge.target()));
+        for (HostEdge grooveEdge : startGraph.edgeSet()) {
+            if (!grooveEdge.getType().isJavaEdge()) {
+                throw new GraphException("Edge %s is not a Java edge", grooveEdge);
+            }
+            nodeMapping.get(grooveEdge.source()).createEdge(grooveEdge.label(), nodeMapping.get(grooveEdge.target()));
         }
     }
 

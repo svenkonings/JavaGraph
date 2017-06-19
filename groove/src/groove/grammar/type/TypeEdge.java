@@ -16,14 +16,14 @@
  */
 package groove.grammar.type;
 
-import static groove.graph.EdgeRole.BINARY;
-
-import java.util.Set;
-
 import groove.grammar.AnchorKind;
 import groove.graph.AEdge;
 import groove.graph.Label;
 import groove.util.line.Line;
+
+import java.util.Set;
+
+import static groove.graph.EdgeRole.BINARY;
 
 /**
  * Edges used in type graphs.
@@ -177,6 +177,10 @@ public class TypeEdge extends AEdge<TypeNode,TypeLabel>implements TypeElement {
     private String edgeVisit;
     private String edgeCreate;
     private String edgeDelete;
+
+    public boolean isJavaEdge() {
+        return edgeVisit != null && edgeCreate != null && edgeDelete != null;
+    }
 
     public String getEdgeVisit() {
         return edgeVisit;
