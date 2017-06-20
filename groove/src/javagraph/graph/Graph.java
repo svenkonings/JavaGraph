@@ -5,8 +5,8 @@ import groove.grammar.host.HostEdge;
 import groove.grammar.host.HostFactory;
 import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
+import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeGraph;
-import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.AGraph;
 import groove.graph.GraphInfo;
@@ -17,9 +17,11 @@ import javagraph.TypeGraphLoader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SuppressWarnings({"SuspiciousMethodCalls", "MethodDoesntCallSuperMethod"})
 public class Graph implements HostGraph {
@@ -105,22 +107,20 @@ public class Graph implements HostGraph {
         return nodes;
     }
 
-    public Set<Edge> visitEdge(TypeNode sourceType, TypeLabel label, TypeNode targetType) {
-        return visitNode(sourceType).stream()
-                .flatMap(node -> node.visitEdge(label, targetType).stream())
-                .collect(Collectors.toSet());
+    private Stream<Edge> visitEdge(TypeEdge edge) {
+        return visitNode(edge.source()).stream().flatMap(node -> node.visitEdge(edge.label(), edge.target()).stream());
     }
 
-    public Set<Edge> visitEdges(TypeNode typeNode) {
-        return visitNode(typeNode).stream()
-                .flatMap(node -> node.visitEdges().stream())
-                .collect(Collectors.toSet());
+    public Stream<Edge> visitEdges(Collection<? extends TypeEdge> edges) {
+        return edges.stream().flatMap(this::visitEdge);
     }
 
-    public Set<Edge> visitEdges() {
-        return visitNodes().stream()
-                .flatMap(node -> node.visitEdges().stream())
-                .collect(Collectors.toSet());
+    public Stream<Edge> visitEdges(TypeNode typeNode) {
+        return visitNode(typeNode).stream().flatMap(node -> node.visitEdges().stream());
+    }
+
+    public Stream<Edge> visitEdges() {
+        return visitNodes().stream().flatMap(node -> node.visitEdges().stream());
     }
 
     @Override
@@ -135,7 +135,7 @@ public class Graph implements HostGraph {
 
     @Override
     public Set<? extends HostEdge> edgeSet() {
-        return visitEdges();
+        return visitEdges().collect(Collectors.toSet());
     }
 
     @Override
@@ -148,10 +148,13 @@ public class Graph implements HostGraph {
 
     @Override
     public Set<? extends HostEdge> inEdgeSet(groove.graph.Node node) {
-        // TODO: inefficient
-        return edgeSet().stream()
-                .filter(edge -> edge.target().equals(node))
-                .collect(Collectors.toSet());
+        if (node instanceof Node) {
+            return visitEdges(typeGraph.inEdgeSet(((Node) node).getType()))
+                    .filter(edge -> edge.getTarget().equals(node))
+                    .collect(Collectors.toSet());
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
@@ -159,18 +162,13 @@ public class Graph implements HostGraph {
         if (node instanceof Node) {
             return ((Node) node).visitEdges();
         } else {
-            return edgeSet().stream()
-                    .filter(edge -> edge.source().equals(node))
-                    .collect(Collectors.toSet());
+            throw new UnsupportedOperationException();
         }
     }
 
     @Override
     public Set<? extends HostEdge> edgeSet(Label label) {
-        // TODO: inefficient
-        return edgeSet().stream()
-                .filter(edge -> edge.label().equals(label))
-                .collect(Collectors.toSet());
+        return visitEdges(typeGraph.edgeSet(label)).collect(Collectors.toSet());
     }
 
     @Override
