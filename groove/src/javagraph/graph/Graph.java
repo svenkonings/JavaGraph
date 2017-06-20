@@ -56,6 +56,11 @@ public class Graph implements HostGraph {
         graphFactory = new GraphFactory(this);
     }
 
+    @Override
+    public TypeGraph getTypeGraph() {
+        return typeGraph;
+    }
+
     public Node createNode(TypeNode typeNode) {
         Object object;
         try {
@@ -222,8 +227,13 @@ public class Graph implements HostGraph {
     }
 
     @Override
-    public boolean addEdge(HostEdge edge) {
-        return false;
+    public boolean addEdge(HostEdge hostEdge) {
+        if (hostEdge instanceof Edge) {
+            Edge edge = (Edge) hostEdge;
+            return edge.getSource().createEdge(edge.label(), edge.getTarget()) != null;
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override

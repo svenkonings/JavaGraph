@@ -10,14 +10,13 @@ import groove.graph.Element;
 import groove.graph.Label;
 import groove.graph.NodeFactory;
 import groove.util.Dispenser;
-import javagraph.TypeGraphLoader;
 
 public class GraphFactory extends HostFactory {
 
     private final Graph graph;
 
     protected GraphFactory(Graph graph) {
-        super(TypeGraphLoader.getInstance().getFactory(), false);
+        super(graph.getTypeGraph().getFactory(), false);
         this.graph = graph;
     }
 
@@ -66,8 +65,9 @@ public class GraphFactory extends HostFactory {
         if (source instanceof Node && target instanceof Node) {
             Node sourceNode = (Node) source;
             TypeLabel typeLabel = TypeLabel.createLabel(text);
+            TypeEdge typeEdge = getTypeGraph().getTypeEdge(source.getType(), typeLabel, target.getType(), true);
             Node targetNode = (Node) target;
-            return sourceNode.createEdge(typeLabel, targetNode);
+            return new Edge(sourceNode, typeEdge, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -93,8 +93,9 @@ public class GraphFactory extends HostFactory {
         if (source instanceof Node && label instanceof TypeLabel && target instanceof Node) {
             Node sourceNode = (Node) source;
             TypeLabel typeLabel = (TypeLabel) label;
+            TypeEdge typeEdge = getTypeGraph().getTypeEdge(source.getType(), typeLabel, target.getType(), true);
             Node targetNode = (Node) target;
-            return sourceNode.createEdge(typeLabel, targetNode);
+            return new Edge(sourceNode, typeEdge, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -111,12 +112,11 @@ public class GraphFactory extends HostFactory {
     }
 
     @Override
-    public HostEdge createEdge(HostNode source, TypeEdge type, HostNode target) {
+    public HostEdge createEdge(HostNode source, TypeEdge typeEdge, HostNode target) {
         if (source instanceof Node && target instanceof Node) {
             Node sourceNode = (Node) source;
-            TypeLabel typeLabel = type.label();
             Node targetNode = (Node) target;
-            return sourceNode.createEdge(typeLabel, targetNode);
+            return new Edge(sourceNode, typeEdge, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }

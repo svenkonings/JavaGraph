@@ -174,7 +174,7 @@ public class EqualitySearchItem extends AbstractSearchItem {
 
         @Override
         boolean find() {
-            return EqualitySearchItem.this.equals == (this.search.getNode(EqualitySearchItem.this.node1Ix) == this.search.getNode(EqualitySearchItem.this.node2Ix));
+            return EqualitySearchItem.this.equals == (this.search.getNode(EqualitySearchItem.this.node1Ix).equals(this.search.getNode(EqualitySearchItem.this.node2Ix)));
         }
 
         @Override
