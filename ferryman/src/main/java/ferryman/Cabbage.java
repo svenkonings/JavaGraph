@@ -65,4 +65,9 @@ public class Cabbage {
     public Set<Boat> getIn() {
         return Collections.unmodifiableSet(in);
     }
+
+    @Override
+    public String toString() {
+        return "Cabbage";
+    }
 }

@@ -25,10 +25,13 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class JavaGraph {
 
     private final Grammar grammar;
+    private final Graph graph;
 
     public JavaGraph(String grooveFilePath) throws IOException, FormatException {
         this(load(new File(grooveFilePath)));
@@ -48,7 +51,7 @@ public class JavaGraph {
         initTypeGraph(typeGraph, TypeGraphLoader.getInstance());
         grammar.setTypeGraph(typeGraph);
 
-        Graph graph = new Graph(typeGraph);
+        graph = new Graph(typeGraph);
         initGraph(graph, grooveGrammar.getStartGraph());
         grammar.setStartGraph(graph);
 
@@ -60,20 +63,32 @@ public class JavaGraph {
         return grammar;
     }
 
+    public Graph getGraph() {
+        return graph;
+    }
+
     public Proof findMatch(String ruleName) {
-        return getRule(ruleName).getMatch(grammar.getStartGraph(), null);
+        return getRule(ruleName).getMatch(graph, null);
     }
 
     public Collection<Proof> findMatches(String ruleName) {
-        return getRule(ruleName).getAllMatches(grammar.getStartGraph(), null);
+        return getRule(ruleName).getAllMatches(graph, null);
     }
 
-    private Rule getRule(String ruleName) {
+    public Rule getRule(String ruleName) {
         Rule rule = grammar.getRule(QualName.name(ruleName));
         if (rule == null) {
             throw new GraphException("Rule not found");
         }
         return rule;
+    }
+
+    public Set<Rule> getRules() {
+        return grammar.getAllRules();
+    }
+
+    public Set<QualName> getRuleNames() {
+        return getRules().stream().map(Rule::getQualName).collect(Collectors.toSet());
     }
 
     public void applyMatch(String ruleName) {
@@ -85,9 +100,9 @@ public class JavaGraph {
     }
 
     public void applyMatch(Proof proof) {
-        Record record = new Record(grammar, grammar.getStartGraph().getFactory());
+        Record record = new Record(grammar, graph.getFactory());
         RuleEvent event = proof.newEvent(record);
-        RuleApplication application = new RuleApplication(event, grammar.getStartGraph());
+        RuleApplication application = new RuleApplication(event, graph);
         application.getTarget();
     }
 

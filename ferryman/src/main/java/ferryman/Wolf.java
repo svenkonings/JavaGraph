@@ -82,4 +82,9 @@ public class Wolf {
     public Set<Goat> getLikes() {
         return Collections.unmodifiableSet(likes);
     }
+
+    @Override
+    public String toString() {
+        return "Wolf";
+    }
 }

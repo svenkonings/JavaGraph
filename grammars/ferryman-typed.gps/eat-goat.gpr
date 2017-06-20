@@ -6,12 +6,12 @@
         </attr>
         <node id="n35">
             <attr name="layout">
-                <string>42 74 29 18</string>
+                <string>42 74 30 18</string>
             </attr>
         </node>
         <node id="n36">
             <attr name="layout">
-                <string>42 206 36 18</string>
+                <string>34 206 53 18</string>
             </attr>
         </node>
         <node id="n37">
@@ -26,17 +26,17 @@
         </node>
         <edge from="n35" to="n35">
             <attr name="label">
-                <string>type:Goat</string>
-            </attr>
-        </edge>
-        <edge from="n35" to="n36">
-            <attr name="label">
-                <string>likes</string>
+                <string>type:Wolf</string>
             </attr>
         </edge>
         <edge from="n35" to="n37">
             <attr name="label">
                 <string>on</string>
+            </attr>
+        </edge>
+        <edge from="n35" to="n36">
+            <attr name="label">
+                <string>likes</string>
             </attr>
         </edge>
         <edge from="n36" to="n36">
@@ -46,7 +46,7 @@
         </edge>
         <edge from="n36" to="n36">
             <attr name="label">
-                <string>type:Cabbage</string>
+                <string>type:Goat</string>
             </attr>
         </edge>
         <edge from="n36" to="n37">

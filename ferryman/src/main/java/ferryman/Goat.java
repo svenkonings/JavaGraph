@@ -83,4 +83,9 @@ public class Goat {
     public Set<Cabbage> getLikes() {
         return Collections.unmodifiableSet(likes);
     }
+
+    @Override
+    public String toString() {
+        return "Goat";
+    }
 }

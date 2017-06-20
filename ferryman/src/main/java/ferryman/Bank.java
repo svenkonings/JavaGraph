@@ -65,4 +65,15 @@ public class Bank {
     public Set<Bank> getRight() {
         return Collections.unmodifiableSet(right);
     }
+
+    @Override
+    public String toString() {
+        if (!left.isEmpty() && right.isEmpty()) {
+            return "Left bank";
+        } else if (left.isEmpty() && !right.isEmpty()) {
+            return "Right bank";
+        } else {
+            return "Bank";
+        }
+    }
 }

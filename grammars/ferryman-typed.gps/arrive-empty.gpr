@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
-    <graph role="rule" edgeids="false" edgemode="directed" id="arrive-empty-wolf">
+    <graph role="rule" edgeids="false" edgemode="directed" id="arrive-empty">
         <attr name="$version">
             <string>curly</string>
         </attr>
@@ -11,12 +11,22 @@
         </node>
         <node id="n331">
             <attr name="layout">
-                <string>29 86 29 18</string>
+                <string>17 86 53 18</string>
             </attr>
         </node>
         <node id="n330">
             <attr name="layout">
                 <string>125 86 28 18</string>
+            </attr>
+        </node>
+        <node id="n0">
+            <attr name="layout">
+                <string>22 130 29 18</string>
+            </attr>
+        </node>
+        <node id="n1">
+            <attr name="layout">
+                <string>22 177 30 18</string>
             </attr>
         </node>
         <edge from="n329" to="n329">
@@ -31,7 +41,7 @@
         </edge>
         <edge from="n331" to="n331">
             <attr name="label">
-                <string>type:Wolf</string>
+                <string>type:Cabbage</string>
             </attr>
         </edge>
         <edge from="n331" to="n330">
@@ -46,15 +56,45 @@
         </edge>
         <edge from="n330" to="n329">
             <attr name="label">
+                <string>del:go</string>
+            </attr>
+        </edge>
+        <edge from="n330" to="n329">
+            <attr name="label">
                 <string>new:moored</string>
             </attr>
             <attr name="layout">
                 <string>282 -35 147 96 222 127 194 193 12</string>
             </attr>
         </edge>
-        <edge from="n330" to="n329">
+        <edge from="n0" to="n0">
             <attr name="label">
-                <string>del:go</string>
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n0">
+            <attr name="label">
+                <string>type:Goat</string>
+            </attr>
+        </edge>
+        <edge from="n0" to="n330">
+            <attr name="label">
+                <string>in</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>not:</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n1">
+            <attr name="label">
+                <string>type:Wolf</string>
+            </attr>
+        </edge>
+        <edge from="n1" to="n330">
+            <attr name="label">
+                <string>in</string>
             </attr>
         </edge>
     </graph>

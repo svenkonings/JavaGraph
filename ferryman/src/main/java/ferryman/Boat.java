@@ -65,4 +65,9 @@ public class Boat {
     public Set<Bank> getGo() {
         return Collections.unmodifiableSet(go);
     }
+
+    @Override
+    public String toString() {
+        return "Boat";
+    }
 }

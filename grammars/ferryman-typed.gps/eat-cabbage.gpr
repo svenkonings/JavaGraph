@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gxl xmlns="http://www.gupro.de/GXL/gxl-1.0.dtd">
-    <graph role="rule" edgeids="false" edgemode="directed" id="eat-wolf">
+    <graph role="rule" edgeids="false" edgemode="directed" id="eat-cabbage">
         <attr name="$version">
             <string>curly</string>
         </attr>
         <node id="n35">
             <attr name="layout">
-                <string>42 74 30 18</string>
+                <string>42 74 29 18</string>
             </attr>
         </node>
         <node id="n36">
             <attr name="layout">
-                <string>34 206 53 18</string>
+                <string>42 206 36 18</string>
             </attr>
         </node>
         <node id="n37">
@@ -26,7 +26,7 @@
         </node>
         <edge from="n35" to="n35">
             <attr name="label">
-                <string>type:Wolf</string>
+                <string>type:Goat</string>
             </attr>
         </edge>
         <edge from="n35" to="n36">
@@ -46,7 +46,7 @@
         </edge>
         <edge from="n36" to="n36">
             <attr name="label">
-                <string>type:Goat</string>
+                <string>type:Cabbage</string>
             </attr>
         </edge>
         <edge from="n36" to="n37">
@@ -59,14 +59,14 @@
                 <string>type:Bank</string>
             </attr>
         </edge>
-        <edge from="n34" to="n34">
-            <attr name="label">
-                <string>type:Boat</string>
-            </attr>
-        </edge>
         <edge from="n34" to="n37">
             <attr name="label">
                 <string>!moored</string>
+            </attr>
+        </edge>
+        <edge from="n34" to="n34">
+            <attr name="label">
+                <string>type:Boat</string>
             </attr>
         </edge>
     </graph>
