@@ -4,7 +4,6 @@ import groove.grammar.type.TypeGraph;
 import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.EdgeRole;
-import javagraph.TypeGraphLoader;
 import javagraph.graph.Graph;
 import javagraph.graph.Node;
 

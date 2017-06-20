@@ -6,7 +6,6 @@ import groove.grammar.host.HostNode;
 import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeLabel;
 import groove.graph.EdgeRole;
-import javagraph.TypeGraphLoader;
 
 public class Edge implements HostEdge {
 

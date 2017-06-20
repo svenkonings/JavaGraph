@@ -48,7 +48,7 @@ public class JavaGraph {
         initTypeGraph(typeGraph, TypeGraphLoader.getInstance());
         grammar.setTypeGraph(typeGraph);
 
-        Graph graph = new Graph("javagraph", typeGraph);
+        Graph graph = new Graph(typeGraph);
         initGraph(graph, grooveGrammar.getStartGraph());
         grammar.setStartGraph(graph);
 

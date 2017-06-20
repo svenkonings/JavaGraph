@@ -6,7 +6,6 @@ import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeGraph;
 import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
-import javagraph.TypeGraphLoader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

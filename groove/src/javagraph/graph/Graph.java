@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings({"unchecked", "SuspiciousMethodCalls", "MethodDoesntCallSuperMethod"})
+@SuppressWarnings({"SuspiciousMethodCalls", "MethodDoesntCallSuperMethod"})
 public class Graph implements HostGraph {
 
     private static Graph graph = null;
@@ -46,6 +46,10 @@ public class Graph implements HostGraph {
         this(graphName, TypeGraphLoader.getInstance());
     }
 
+    public Graph(TypeGraph type) {
+        this("javagraph", type);
+    }
+
     public Graph(String graphName, TypeGraph type) {
         name = graphName;
         typeGraph = type;
@@ -53,26 +57,26 @@ public class Graph implements HostGraph {
     }
 
     public Node createNode(TypeNode typeNode) {
-        Object node;
+        Object object;
         try {
             Method createNode = typeNode.getNodeClass().getMethod(typeNode.getNodeCreate());
-            node = createNode.invoke(null);
+            object = createNode.invoke(null);
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new GraphException(e);
         }
-        return new Node(typeNode, node);
+        return new Node(typeNode, object);
     }
 
     public Set<Node> visitNode(TypeNode typeNode) {
-        Set<?> nodes;
+        Set<?> objects;
         try {
             Method visitNode = typeNode.getNodeClass().getMethod(typeNode.getNodeVisit());
-            nodes = (Set<?>) visitNode.invoke(null);
+            objects = (Set<?>) visitNode.invoke(null);
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new GraphException(e);
         }
-        return nodes.stream()
-                .map(node -> new Node(typeNode, node))
+        return objects.stream()
+                .map(object -> new Node(typeNode, object))
                 .collect(Collectors.toSet());
     }
 
@@ -82,15 +86,15 @@ public class Graph implements HostGraph {
             if (!typeNode.isJavaNode()) {
                 continue;
             }
-            Set<?> visitNodes;
+            Set<?> objects;
             try {
                 Method visitNode = typeNode.getNodeClass().getMethod(typeNode.getNodeVisit());
-                visitNodes = (Set<?>) visitNode.invoke(null);
+                objects = (Set<?>) visitNode.invoke(null);
             } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new GraphException(e);
             }
-            visitNodes.stream()
-                    .map(node -> new Node(typeNode, node))
+            objects.stream()
+                    .map(object -> new Node(typeNode, object))
                     .forEach(nodes::add);
         }
         return nodes;

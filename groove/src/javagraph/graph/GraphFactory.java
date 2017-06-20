@@ -75,12 +75,7 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public NodeFactory<HostNode> nodes(TypeNode type) {
-        try {
-            return new GraphNodeFactory(type);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new GraphNodeFactory(type);
     }
 
     @Override
@@ -152,7 +147,7 @@ public class GraphFactory extends HostFactory {
         private final TypeNode typeNode;
         private final Dispenser nodeNrDispenser;
 
-        public GraphNodeFactory(TypeNode type) throws ClassNotFoundException {
+        public GraphNodeFactory(TypeNode type) {
             typeNode = type;
             nodeNrDispenser = Dispenser.counter();
         }
