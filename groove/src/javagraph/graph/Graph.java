@@ -107,7 +107,7 @@ public class Graph implements HostGraph {
         return nodes;
     }
 
-    private Stream<Edge> visitEdge(TypeEdge edge) {
+    public Stream<Edge> visitEdge(TypeEdge edge) {
         return visitNode(edge.source()).stream().flatMap(node -> node.visitEdge(edge.label(), edge.target()).stream());
     }
 
