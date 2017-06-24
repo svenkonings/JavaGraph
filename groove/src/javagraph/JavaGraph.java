@@ -34,7 +34,7 @@ public class JavaGraph {
     private final Graph graph;
 
     public JavaGraph(String grooveFilePath) throws IOException, FormatException {
-        this(load(new File(grooveFilePath)));
+        this(new File(grooveFilePath));
     }
 
     public JavaGraph(File grooveFile) throws IOException, FormatException {
@@ -104,6 +104,20 @@ public class JavaGraph {
         RuleEvent event = proof.newEvent(record);
         RuleApplication application = new RuleApplication(event, graph);
         application.getTarget();
+    }
+
+    public void explore() {
+        boolean found = true;
+        while (found) {
+            found = false;
+            for (Rule rule : getRules()) {
+                Proof match = rule.getMatch(graph, null);
+                if (match != null) {
+                    found = true;
+                    applyMatch(match);
+                }
+            }
+        }
     }
 
     private static void initTypeGraph(TypeGraph typeGraph, TypeGraph javaGraph) {

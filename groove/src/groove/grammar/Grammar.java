@@ -217,7 +217,7 @@ public class Grammar {
      * Set of all rules, being the union of the top-level action rules
      * and the subrules used in recipes.
      */
-    private final Set<Rule> allRules = new HashSet<>();
+    private final Set<Rule> allRules = new TreeSet<>(Action.ACTION_COMPARATOR);
 
     /**
      * Returns <tt>true</tt> if the rule system has actions at more than one
