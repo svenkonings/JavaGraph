@@ -1,9 +1,0 @@
-package control;
-
-recipe CaseStmt(node root, node exit, out node entry) {
-	try {
-		entry := rule.CaseStmt-Default(root, exit);
-	} else {
-		entry := rule.CaseStmt-Expr(root, exit);
-	}
-}

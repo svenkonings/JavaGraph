@@ -1,5 +1,0 @@
-#startstate	index	states	transitions	time	time_iso	space	aborted	comment
-append-3-list-7	0	4046	11210	4978	1508	12756	?	?
-append-4-list-8	1	261460	969977	201680	83937	380605	?	?
-append-5-list-8	2	?	?	?	?	?	1	"Out of memory"
-append-6-list-8	3	?	?	?	?	?	1	"Out of memory"

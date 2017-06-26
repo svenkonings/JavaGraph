@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: org.aspectj.tools.ajc.Main
-Class-Path: ../lib/bcel.jar ../lib/jdtcore-for-aspectj.jar ../lib/groove-3_3_1.jar

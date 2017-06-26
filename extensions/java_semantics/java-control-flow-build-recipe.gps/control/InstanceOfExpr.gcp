@@ -1,8 +1,0 @@
-package control;
-
-recipe InstanceOfExpr(node root, node exit, out node entry) {
-	// Match the sub-component of the expression.
-	node croot := rule.InstanceOfExpr(root, exit);
-	// Build the sub-expression.
-	entry := Expr(croot, exit);
-}

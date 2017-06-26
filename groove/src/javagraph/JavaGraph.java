@@ -22,6 +22,7 @@ import javagraph.graph.GraphException;
 import javagraph.graph.Node;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -142,6 +143,9 @@ public class JavaGraph {
             TypeNode source = typeGraph.getNode(javaEdge.source().label());
             TypeNode target = typeGraph.getNode(javaEdge.target().label());
             TypeEdge edge = typeGraph.getTypeEdge(source, javaEdge.label(), target, true);
+            if (edge == null) {
+                throw new GraphException("Missing edge %s in Groove TypeGraph", javaEdge);
+            }
             edge.setEdgeVisit(javaEdge.getEdgeVisit());
             edge.setEdgeCreate(javaEdge.getEdgeCreate());
             edge.setEdgeDelete(javaEdge.getEdgeDelete());
@@ -167,6 +171,9 @@ public class JavaGraph {
     }
 
     private static Grammar load(File file) throws IOException, FormatException {
+        if (!file.isDirectory()) {
+            throw new FileNotFoundException("Grammar directory not found: " + file.getAbsolutePath());
+        }
         SystemStore systemStore = SystemStore.newStore(file, false);
         systemStore.reload();
         GrammarModel grammarModel = systemStore.toGrammarModel();

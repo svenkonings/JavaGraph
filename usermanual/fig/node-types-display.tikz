@@ -1,9 +1,0 @@
-% To use this figure in your LaTeX document
-% import the package groove/resources/groove2tikz.sty
-%
-\begin{tikzpicture}[scale=\tikzscale]
-\node[basic_node] (n38351) at (1.700, -1.695) {\ml{\textbf{Library}}};
-\node[basic_node] (n38352) at (3.060, -1.710) {\ml{\textbf{Book}\\reserved}};
-
-\path[basic_edge](n38351.east |- 3.060, -1.710) -- node[lab] {\ml{has}} (n38352) ;
-\end{tikzpicture}

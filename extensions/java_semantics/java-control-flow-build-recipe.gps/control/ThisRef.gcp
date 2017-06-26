@@ -1,6 +1,0 @@
-package control;
-
-recipe ThisRef(node root, node exit, out node entry) {
-	// A this reference is always a leaf in the AST, so we close the recursion here.
-	entry := rule.ThisRef(root, exit);
-}

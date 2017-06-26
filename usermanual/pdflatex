@@ -1,6 +1,0 @@
-# Get cygwin-compliant path to GROOVE source
-GROOVE_ECLIPSE=`cygpath ${ECLIPSE_WORKSPACE}`/groove
-# Add resources dir to tex inputs
-export TEXINPUTS=${GROOVE_ECLIPSE}/resources/:
-# Go
-pdflatex $@

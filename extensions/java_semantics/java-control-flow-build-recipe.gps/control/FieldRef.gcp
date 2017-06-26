@@ -1,8 +1,0 @@
-package control;
-
-recipe FieldRef(node root, node exit, out node entry) {
-	// Match the receiver of the reference.
-	node rroot := rule.FieldRef(root, exit);
-	// Build the reference.
-	entry := Ref(rroot, exit);
-}

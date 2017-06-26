@@ -1,3 +1,0 @@
-alap place; // Place queens as long as possible
-rename;     // Rename the edges to get a symmetric board
-count;      // Count the number of queens placed
