@@ -12,7 +12,7 @@ import java.util.WeakHashMap;
 @Node("NodeExample")
 public class NodeExample {
 
-    private static final Set<NodeExample> nodes = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap<>()));
+    private static final Set<NodeExample> nodes = Collections.newSetFromMap(new WeakHashMap<>());
 
     public NodeExample() {
         nodes.add(this);

@@ -10,6 +10,7 @@ import groove.grammar.model.GrammarModel;
 import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeGraph;
 import groove.grammar.type.TypeNode;
+import groove.io.graph.GxlIO;
 import groove.io.store.SystemStore;
 import groove.transform.Proof;
 import groove.transform.Record;
@@ -120,8 +121,8 @@ public class JavaGraph {
         }
     }
 
-    private static void initTypeGraph(TypeGraph typeGraph, TypeGraph javaGraph) {
-        for (TypeNode javaNode : javaGraph.nodeSet()) {
+    private static void initTypeGraph(TypeGraph typeGraph, TypeGraph javaTypeGraph) {
+        for (TypeNode javaNode : javaTypeGraph.nodeSet()) {
             if (!javaNode.isJavaNode()) {
                 continue;
             }
@@ -134,7 +135,7 @@ public class JavaGraph {
             node.setNodeCreate(javaNode.getNodeCreate());
             node.setNodeDelete(javaNode.getNodeDelete());
         }
-        for (TypeEdge javaEdge : javaGraph.edgeSet()) {
+        for (TypeEdge javaEdge : javaTypeGraph.edgeSet()) {
             if (!javaEdge.isJavaEdge()) {
                 continue;
             }

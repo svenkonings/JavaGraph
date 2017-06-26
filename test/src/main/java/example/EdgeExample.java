@@ -10,7 +10,7 @@ import java.util.WeakHashMap;
 @Node("EdgeExample")
 public class EdgeExample {
 
-    private static final Set<EdgeExample> nodes = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap<>()));
+    private static final Set<EdgeExample> nodes = Collections.newSetFromMap(new WeakHashMap<>());
 
     private final Set<NodeExample> nodeExampleEdges;
     private final Set<NodeExample> nodeLabelExampleEdges;

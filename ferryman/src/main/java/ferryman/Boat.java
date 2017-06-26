@@ -10,7 +10,7 @@ import java.util.WeakHashMap;
 @Node("Boat")
 public class Boat {
 
-    private static final Set<Boat> nodes = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap<>()));
+    private static final Set<Boat> nodes = Collections.newSetFromMap(new WeakHashMap<>());
 
     private final Set<Bank> moored;
     private final Set<Bank> go;

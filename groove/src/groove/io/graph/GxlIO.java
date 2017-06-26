@@ -147,6 +147,9 @@ public class GxlIO extends GraphIO<AttrGraph> {
         LayoutMap layoutMap = GraphInfo.getLayoutMap(graph);
 
         for (Node node : graph.nodeSet()) {
+            if (node instanceof TypeNode && ((TypeNode) node).isDataType()) {
+                continue;
+            }
             // create an xml element for this node
             NodeType gxlNode = this.factory.createNodeType();
             // give the element an id based on the node number
@@ -166,6 +169,11 @@ public class GxlIO extends GraphIO<AttrGraph> {
             // add attributes of XML nodes
             if (node instanceof AttrNode) {
                 saveAttributes(gxlNode, ((AttrNode) node).getAttributes());
+            }
+            // Added
+            if (node instanceof TypeNode) {
+                EdgeType gxlEdge = createGxlEdge(nodeMap, node, "type:" + ((TypeNode) node).label().text(), node);
+                nodesEdges.add(gxlEdge);
             }
         }
         // add the edges

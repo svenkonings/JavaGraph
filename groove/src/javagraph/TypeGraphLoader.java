@@ -7,8 +7,10 @@ import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.EdgeRole;
 import groove.graph.Label;
+import groove.io.graph.GxlIO;
 import javagraph.classgraph.ClassGraph;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
@@ -21,16 +23,20 @@ public class TypeGraphLoader {
 
     private static TypeGraph graph = null;
 
+    public static void saveGraph(String filename) throws IOException {
+        GxlIO.instance().saveGraph(TypeGraphLoader.getInstance(), new File(filename + ".gty"));
+    }
+
     public static TypeGraph getInstance() {
         if (graph == null) {
-            graph = loadGraph();
+            graph = loadGraph(FOLDER);
         }
         return graph;
     }
 
-    public static TypeGraph loadGraph() {
+    public static TypeGraph loadGraph(String name) {
         ClassGraph classGraph = loadClassGraph();
-        TypeGraph typeGraph = new TypeGraph(QualName.name(FOLDER));
+        TypeGraph typeGraph = new TypeGraph(QualName.name(name));
         classGraph.getNodes().forEach(node -> {
             TypeNode typeNode = typeGraph.addNode(TypeLabel.createLabel(EdgeRole.NODE_TYPE, node.getNodeName()));
             typeNode.setNodeClassName(node.getClassName());
