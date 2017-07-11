@@ -15,18 +15,43 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
 
+/**
+ * Creates a GROOVE {@link TypeGraph} based on the {@link ClassGraph} created by the annotation processor.
+ */
 public class TypeGraphLoader {
 
+    /** The package folder in which the {@link ClassGraph} is stored. **/
     public static final String FOLDER = "javagraph";
-    public static final String PACKAGE = "javagraph.annotations.";
+
+    /** The filename of the {@link ClassGraph} **/
     public static final String TYPEGRAPH_FILE = "TypeGraph.obj";
 
     private static TypeGraph graph = null;
 
+    /**
+     * Save the {@link TypeGraph} instance to the given file.
+     *
+     * @param filename the given file
+     * @throws IOException if the {@link TypeGraph} couldn't be saved
+     */
     public static void saveGraph(String filename) throws IOException {
-        GxlIO.instance().saveGraph(TypeGraphLoader.getInstance(), new File(filename + ".gty"));
+        saveGraph(filename, getInstance());
     }
 
+    /**
+     * Save the given {@link TypeGraph} to the given file.
+     *
+     * @param filename  the given file
+     * @param typeGraph the given typegraph
+     * @throws IOException if the {@link TypeGraph} couldn't be saved
+     */
+    public static void saveGraph(String filename, TypeGraph typeGraph) throws IOException {
+        GxlIO.instance().saveGraph(typeGraph, new File(filename + ".gty"));
+    }
+
+    /**
+     * @return the {@link TypeGraph} instance
+     */
     public static TypeGraph getInstance() {
         if (graph == null) {
             graph = loadGraph(FOLDER);
@@ -34,6 +59,12 @@ public class TypeGraphLoader {
         return graph;
     }
 
+    /**
+     * Create a {@link TypeGraph} with the given name based on the loaded {@link ClassGraph}
+     *
+     * @param name the given name
+     * @return the created {@link TypeGraph}
+     */
     public static TypeGraph loadGraph(String name) {
         ClassGraph classGraph = loadClassGraph();
         TypeGraph typeGraph = new TypeGraph(QualName.name(name));
@@ -57,6 +88,11 @@ public class TypeGraphLoader {
         return typeGraph;
     }
 
+    /**
+     * Load the {@link ClassGraph} on the default location.
+     *
+     * @return the loaded {@link ClassGraph}
+     */
     private static ClassGraph loadClassGraph() {
         URL url = TypeGraphLoader.class.getClassLoader().getResource(FOLDER + "/" + TYPEGRAPH_FILE);
         if (url != null) {
@@ -67,6 +103,12 @@ public class TypeGraphLoader {
         }
     }
 
+    /**
+     * Load the {@link ClassGraph} from the given {@link URL}.
+     *
+     * @param url the given {@link URL}
+     * @return the loaded {@link ClassGraph}
+     */
     private static ClassGraph loadClassGraph(URL url) {
         ObjectInputStream inputStream = null;
         try {

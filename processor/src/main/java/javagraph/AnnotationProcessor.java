@@ -30,10 +30,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static javagraph.TypeGraphLoader.*;
+import static javagraph.TypeGraphLoader.FOLDER;
+import static javagraph.TypeGraphLoader.TYPEGRAPH_FILE;
 import static javax.tools.StandardLocation.CLASS_OUTPUT;
 
+/**
+ * Processes node and edge annotations and creates a {@link ClassGraph} based upon the annotations. The {@link
+ * ClassGraph} contains the class and method names of the corresponding annotations.
+ */
 public class AnnotationProcessor extends AbstractProcessor {
+
+    public static final String PACKAGE = "javagraph.annotations.";
 
     public static final String NODE = PACKAGE + "Node";
 
@@ -85,9 +92,11 @@ public class AnnotationProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         if (roundEnv.processingOver()) {
+            // Write the resulting ClassGraph when done
             writeGraph(graph);
             return false;
         }
+        // Create a collection of all processed annotations except @Node
         Set<Element> unhandledElements = new HashSet<>();
         for (TypeElement annotation : annotations) {
             if (!NODE.equals(annotation.getQualifiedName().toString())) {
@@ -95,20 +104,28 @@ public class AnnotationProcessor extends AbstractProcessor {
                 unhandledElements.addAll(elements);
             }
         }
+        // Process all @Node annotations
         for (TypeElement annotation : annotations) {
             if (NODE.equals(annotation.getQualifiedName().toString())) {
                 Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(annotation);
                 processNode(elements, unhandledElements);
             }
         }
+        // If there are any unprocessed annotations left, return an error
         for (Element element : unhandledElements) {
             error(element, "Annotated elements can only be used in a node class");
         }
         return true;
     }
 
+    /**
+     * Write the given {@link ClassGraph} to the {@link FileObject} associated with this annotations processor.
+     *
+     * @param graph the given {@link ClassGraph}
+     */
     private void writeGraph(ClassGraph graph) {
         if (graphFile == null) {
+            // The error has already been added to the messages, do nothing
             return;
         }
         ObjectOutputStream outputStream = null;
@@ -129,6 +146,7 @@ public class AnnotationProcessor extends AbstractProcessor {
     }
 
     private void processNode(Set<? extends Element> elements, Set<Element> unhandledElements) {
+        // For every @Node annotation
         for (Element element : elements) {
             boolean valid = true;
             TypeElement typeElement;
@@ -148,10 +166,13 @@ public class AnnotationProcessor extends AbstractProcessor {
                 error(NODE, element, "Node name is not a valid identifier");
                 valid = false;
             }
+            // Create the corresponding ClassNode
             ClassNode node = new ClassNode(name, typeElement.getQualifiedName().toString());
+            // For all annotations in the node class
             for (Element enclosedElement : typeElement.getEnclosedElements()) {
                 for (AnnotationMirror annotationMirror : enclosedElement.getAnnotationMirrors()) {
                     boolean remove = true;
+                    // Check if we can process the annotation and do so if possible
                     switch (annotationMirror.getAnnotationType().toString()) {
                         case NODE_VISIT:
                             processNodeVisit(annotationMirror, typeElement.asType(), node, enclosedElement);
@@ -175,11 +196,13 @@ public class AnnotationProcessor extends AbstractProcessor {
                             remove = false;
                             break;
                     }
+                    // Remove all processed annotations from the collection of unprocessed annotations
                     if (remove) {
                         unhandledElements.remove(enclosedElement);
                     }
                 }
             }
+            // Add an error if any of the required methods are missing
             if (!node.hasNodeVisit()) {
                 error(NODE, typeElement, "Missing NodeVisit method");
                 valid = false;
@@ -206,6 +229,7 @@ public class AnnotationProcessor extends AbstractProcessor {
                     valid = false;
                 }
             }
+            // Add the ClassNode to the ClassGraph if it is valid
             if (valid) {
                 graph.addNode(node);
             }
