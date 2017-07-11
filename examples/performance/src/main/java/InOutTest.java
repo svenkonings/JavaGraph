@@ -8,7 +8,7 @@ public class InOutTest {
     public static final int TIMES = 40;
     public static final int AMOUNT = 50;
 
-    public static void main(String[] args) throws Exception {
+    public void main(String[] args) throws Exception {
         List<Long> inTimeSmall = new ArrayList<>();
         List<Long> outTimeSmall = new ArrayList<>();
         List<Long> inTimeLarge = new ArrayList<>();
@@ -43,7 +43,7 @@ public class InOutTest {
                 long outEnd = System.nanoTime();
                 outTimeLarge.add(outEnd - outStart);
             }
-            Test.nodes.clear();
+            SimpleNode.nodes.clear();
         }
         double inSmallAvg = inTimeSmall.stream().mapToLong(Long::longValue).skip(AMOUNT / 2).average().orElse(0);
         double outSmallAvg = outTimeSmall.stream().mapToLong(Long::longValue).skip(AMOUNT / 2).average().orElse(0);

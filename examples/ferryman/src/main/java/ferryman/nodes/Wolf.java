@@ -1,4 +1,4 @@
-package ferryman;
+package ferryman.nodes;
 
 import javagraph.annotations.*;
 
@@ -7,23 +7,25 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-@Node("Cabbage")
-public class Cabbage {
+@Node("Wolf")
+public class Wolf {
 
-    private static final Set<Cabbage> nodes = Collections.newSetFromMap(new WeakHashMap<>());
+    private static final Set<Wolf> nodes = Collections.newSetFromMap(new WeakHashMap<>());
 
     private final Set<Bank> on;
     private final Set<Boat> in;
+    private final Set<Goat> likes;
 
-    public Cabbage() {
+    public Wolf() {
         nodes.add(this);
         on = new HashSet<>();
         in = new HashSet<>();
+        likes = new HashSet<>();
     }
 
     @NodeCreate
-    public static Cabbage getNode() {
-        return new Cabbage();
+    public static Wolf getNode() {
+        return new Wolf();
     }
 
     @NodeDelete
@@ -32,7 +34,7 @@ public class Cabbage {
     }
 
     @NodeVisit
-    public static Set<Cabbage> visitNode() {
+    public static Set<Wolf> visitNode() {
         return Collections.unmodifiableSet(nodes);
     }
 
@@ -66,8 +68,23 @@ public class Cabbage {
         return Collections.unmodifiableSet(in);
     }
 
+    @EdgeCreate("likes")
+    public boolean addLikes(Goat goat) {
+        return likes.add(goat);
+    }
+
+    @EdgeDelete("likes")
+    public boolean removeLikes(Goat goat) {
+        return likes.remove(goat);
+    }
+
+    @EdgeVisit("likes")
+    public Set<Goat> getLikes() {
+        return Collections.unmodifiableSet(likes);
+    }
+
     @Override
     public String toString() {
-        return "Cabbage";
+        return "Wolf";
     }
 }

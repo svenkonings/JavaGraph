@@ -1,4 +1,4 @@
-package ferryman;
+package ferryman.nodes;
 
 import javagraph.annotations.*;
 

@@ -1,4 +1,4 @@
-package main;
+package ferryman;
 
 import groove.transform.Proof;
 import groove.util.parse.FormatException;
@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class Ferryman {
     public static void main(String[] args) throws IOException, FormatException {
         JavaGraph javagraph = new JavaGraph("ferryman.gps");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

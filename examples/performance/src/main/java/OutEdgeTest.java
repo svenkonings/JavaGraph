@@ -19,7 +19,7 @@ public class OutEdgeTest {
             }
             long javaEnd = System.nanoTime();
             javaTime.add(javaEnd - javaStart);
-            Test.nodes.clear();
+            SimpleNode.nodes.clear();
             Generator generator = new Generator("-r=" + AMOUNT, "-s=linear", "-a=any", "performance.gps");
             long grooveStart = System.nanoTime();
             generator.start();

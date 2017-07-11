@@ -6,20 +6,20 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 @Node("node")
-public class Test {
+public class SimpleNode {
 
-    public static final Set<Test> nodes = Collections.newSetFromMap(new WeakHashMap<>());
+    public static final Set<SimpleNode> nodes = Collections.newSetFromMap(new WeakHashMap<>());
 
-    private final Set<Test> edges;
+    private final Set<SimpleNode> edges;
 
-    public Test() {
+    public SimpleNode() {
         nodes.add(this);
         edges = new HashSet<>();
     }
 
     @NodeCreate
-    public static Test getNode() {
-        return new Test();
+    public static SimpleNode getNode() {
+        return new SimpleNode();
     }
 
     @NodeDelete
@@ -28,22 +28,22 @@ public class Test {
     }
 
     @NodeVisit
-    public static Set<Test> visitNode() {
+    public static Set<SimpleNode> visitNode() {
         return Collections.unmodifiableSet(nodes);
     }
 
     @EdgeCreate("edge")
-    public boolean addEdge(Test bank) {
+    public boolean addEdge(SimpleNode bank) {
         return edges.add(bank);
     }
 
     @EdgeDelete("edge")
-    public boolean removeEdge(Test bank) {
+    public boolean removeEdge(SimpleNode bank) {
         return edges.remove(bank);
     }
 
     @EdgeVisit("edge")
-    public Set<Test> getEdges() {
+    public Set<SimpleNode> getEdges() {
         return Collections.unmodifiableSet(edges);
     }
 }

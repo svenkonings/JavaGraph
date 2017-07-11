@@ -1,4 +1,4 @@
-package ferryman;
+package ferryman.nodes;
 
 import javagraph.annotations.*;
 
@@ -10,30 +10,19 @@ import java.util.WeakHashMap;
 @Node("Boat")
 public class Boat {
 
-    private static final Set<Boat> nodes = Collections.newSetFromMap(new WeakHashMap<>());
-
-    private final Set<Bank> moored;
-    private final Set<Bank> go;
-
-    public Boat() {
-        nodes.add(this);
-        moored = new HashSet<>();
-        go = new HashSet<>();
-    }
-
     @NodeCreate
-    public static Boat getNode() {
+    public static Boat getBoat() {
         return new Boat();
     }
 
     @NodeDelete
-    public boolean removeNode() {
-        return nodes.remove(this);
+    public boolean removeBoat() {
+        return boats.remove(this);
     }
 
     @NodeVisit
-    public static Set<Boat> visitNode() {
-        return Collections.unmodifiableSet(nodes);
+    public static Set<Boat> visitBoat() {
+        return Collections.unmodifiableSet(boats);
     }
 
     @EdgeCreate("moored")
@@ -49,6 +38,17 @@ public class Boat {
     @EdgeVisit("moored")
     public Set<Bank> getMoored() {
         return Collections.unmodifiableSet(moored);
+    }
+
+    private static final Set<Boat> boats = Collections.newSetFromMap(new WeakHashMap<>());
+
+    private final Set<Bank> moored;
+    private final Set<Bank> go;
+
+    public Boat() {
+        boats.add(this);
+        moored = new HashSet<>();
+        go = new HashSet<>();
     }
 
     @EdgeCreate("go")
