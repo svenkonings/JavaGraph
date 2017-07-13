@@ -38,7 +38,7 @@ import static javax.tools.StandardLocation.CLASS_OUTPUT;
  * Processes node and edge annotations and creates a {@link ClassGraph} based upon the annotations. The {@link
  * ClassGraph} contains the class and method names of the corresponding annotations.
  */
-public class AnnotationProcessor extends AbstractProcessor {
+public class JavaGraphProcessor extends AbstractProcessor {
 
     public static final String PACKAGE = "javagraph.annotations.";
 

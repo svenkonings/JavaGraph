@@ -19,7 +19,7 @@
                 <version>3.6.1</version>
                 <configuration>
                     <annotationProcessors>
-                        <annotationProcessor>javagraph.AnnotationProcessor</annotationProcessor>
+                        <annotationProcessor>javagraph.JavaGraphProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
             </plugin>
