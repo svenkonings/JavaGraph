@@ -11,6 +11,9 @@ import groove.graph.Label;
 import groove.graph.NodeFactory;
 import groove.util.Dispenser;
 
+/**
+ * A {@link HostFactory} for Java graphs.
+ */
 public class JavaGraphFactory extends HostFactory {
 
     private final JavaGraph graph;

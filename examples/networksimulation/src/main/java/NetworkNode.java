@@ -38,7 +38,7 @@ public class NetworkNode {
                 }));
             }
         }).start();
-        JavaMatcher javagraph = new JavaMatcher("network.gps");
+        JavaMatcher javagraph = new JavaMatcher("examples/networksimulation/network.gps");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
         System.out.println(javagraph.getGraph());

@@ -7,18 +7,43 @@ import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeLabel;
 import groove.graph.EdgeRole;
 
+/**
+ * {@link HostEdge} implementation for Java graphs.
+ */
 public class JavaEdge implements HostEdge {
 
     private final JavaNode source;
     private final TypeEdge typeEdge;
     private final JavaNode target;
 
-    public JavaEdge(JavaNode sourceNode, TypeEdge type, JavaNode targetNode) {
+    /**
+     * Creates a new edge with the given source node, {@link TypeEdge} and target node.
+     *
+     * @param sourceNode the given source node
+     * @param type       the given {@link TypeEdge}
+     * @param targetNode the given target node
+     * @throws JavaGraphException if the type edge is not a Java type edge, or the source or target types don't match
+     */
+    public JavaEdge(JavaNode sourceNode, TypeEdge type, JavaNode targetNode) throws JavaGraphException {
+        if (!type.isJavaEdge()) {
+            throw new JavaGraphException("Type edge %s is not a Java type edge", type);
+        } else if (!type.source().equals(sourceNode.getType())) {
+            throw new JavaGraphException(
+                    "The source type %s of the type edge doesn't match the type %s of the source node",
+                    type.source(), sourceNode.getType());
+        } else if (!type.target().equals(targetNode.getType())) {
+            throw new JavaGraphException(
+                    "The target type %s of the type edge doesn't match the type %s of the target node",
+                    type.target(), targetNode.getType());
+        }
         source = sourceNode;
         typeEdge = type;
         target = targetNode;
     }
 
+    /**
+     * @return the source node of this edge
+     */
     public JavaNode getSource() {
         return source;
     }
@@ -33,11 +58,21 @@ public class JavaEdge implements HostEdge {
         return typeEdge;
     }
 
+    /**
+     * @return the target node of this edge
+     */
     public JavaNode getTarget() {
         return target;
     }
 
-    public boolean deleteEdge() {
+    /**
+     * Delete this edge.
+     *
+     * @return whether the deletion was succesful
+     * @throws JavaGraphException if the method couldn't be called
+     * @see JavaNode#deleteEdge(TypeLabel, JavaNode)
+     */
+    public boolean deleteEdge() throws JavaGraphException {
         return source.deleteEdge(label(), target);
     }
 

@@ -7,6 +7,7 @@ import groove.grammar.host.HostGraph;
 import groove.grammar.host.HostNode;
 import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeGraph;
+import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.AGraph;
 import groove.graph.GraphInfo;
@@ -24,13 +25,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * {@link HostGraph} implementation for java graphs
+ * {@link HostGraph} implementation for Java graphs.
  */
 @SuppressWarnings({"SuspiciousMethodCalls", "MethodDoesntCallSuperMethod"})
 public class JavaGraph implements HostGraph {
 
     private static JavaGraph graph = null;
 
+    /**
+     * @return the instance of this graph
+     */
     public static JavaGraph getInstance() {
         if (graph == null) {
             graph = new JavaGraph();
@@ -43,18 +47,40 @@ public class JavaGraph implements HostGraph {
     private String name;
     private GraphInfo graphInfo;
 
+    /**
+     * Creates a new graph with the default name and type.
+     *
+     * @see TypeGraphLoader#getInstance()
+     */
     public JavaGraph() {
         this("javagraph");
     }
 
+    /**
+     * Creates a new graph with the given name and the default type.
+     *
+     * @param graphName the given name
+     * @see TypeGraphLoader#getInstance()
+     */
     public JavaGraph(String graphName) {
         this(graphName, TypeGraphLoader.getInstance());
     }
 
+    /**
+     * Creates a new graph with the given type and the default name.
+     *
+     * @param type the given type
+     */
     public JavaGraph(TypeGraph type) {
         this("javagraph", type);
     }
 
+    /**
+     * Creates a new graph with the given name and type.
+     *
+     * @param graphName the given name
+     * @param type      the given type
+     */
     public JavaGraph(String graphName, TypeGraph type) {
         name = graphName;
         typeGraph = type;
@@ -66,7 +92,17 @@ public class JavaGraph implements HostGraph {
         return typeGraph;
     }
 
-    public JavaNode createNode(TypeNode typeNode) {
+    /**
+     * Creates a new node instance of the given {@link TypeNode} by calling the associated node create method.
+     *
+     * @param typeNode the given {@link TypeNode}
+     * @return the created node instance
+     * @throws JavaGraphException if the {@link TypeNode} is not a Java type node or the method couldn't be called
+     */
+    public JavaNode createNode(TypeNode typeNode) throws JavaGraphException {
+        if (!typeNode.isJavaNode()) {
+            throw new JavaGraphException("Type node %s is not a Java type node", typeNode);
+        }
         Object object;
         try {
             Method createNode = typeNode.getNodeClass().getMethod(typeNode.getNodeCreate());
@@ -77,7 +113,17 @@ public class JavaGraph implements HostGraph {
         return new JavaNode(typeNode, object);
     }
 
-    public Set<JavaNode> visitNode(TypeNode typeNode) {
+    /**
+     * Visits the node instances of the given {@link TypeNode} by calling the associated node visit method.
+     *
+     * @param typeNode the given {@link TypeNode}
+     * @return the set of node instances
+     * @throws JavaGraphException if the {@link TypeNode} is not a Java type node or the method couldn't be called
+     */
+    public Set<JavaNode> visitNode(TypeNode typeNode) throws JavaGraphException {
+        if (!typeNode.isJavaNode()) {
+            throw new JavaGraphException("Type node %s is not a Java type node", typeNode);
+        }
         Set<?> objects;
         try {
             Method visitNode = typeNode.getNodeClass().getMethod(typeNode.getNodeVisit());
@@ -90,7 +136,13 @@ public class JavaGraph implements HostGraph {
                 .collect(Collectors.toSet());
     }
 
-    public Set<JavaNode> visitNodes() {
+    /**
+     * Visits the node instances of all {@link TypeNode}s in this graph by calling the associated node visit methods.
+     *
+     * @return the set of node instances
+     * @throws JavaGraphException if one of the methods couldn't be called
+     */
+    public Set<JavaNode> visitNodes() throws JavaGraphException {
         Set<JavaNode> nodes = new HashSet<>();
         for (TypeNode typeNode : typeGraph.nodeSet()) {
             if (!typeNode.isJavaNode()) {
@@ -110,19 +162,52 @@ public class JavaGraph implements HostGraph {
         return nodes;
     }
 
-    public Stream<JavaEdge> visitEdge(TypeEdge edge) {
-        return visitNode(edge.source()).stream().flatMap(node -> node.visitEdge(edge.label(), edge.target()).stream());
+    /**
+     * Visits the edge instances of the given {@link TypeEdge} by visiting the source node instances and calling the
+     * edge visit methods of these instances with the label and target node type associated to the {@link TypeEdge}.
+     *
+     * @param typeEdge the given {@link TypeEdge}
+     * @return the stream of edge instances
+     * @throws JavaGraphException if one of the methods couldn't be called
+     * @see JavaNode#visitEdge(TypeLabel, TypeNode)
+     */
+    public Stream<JavaEdge> visitEdge(TypeEdge typeEdge) throws JavaGraphException {
+        return visitNode(typeEdge.source()).stream()
+                .flatMap(node -> node.visitEdge(typeEdge.label(), typeEdge.target()).stream());
     }
 
-    public Stream<JavaEdge> visitEdges(Collection<? extends TypeEdge> edges) {
-        return edges.stream().flatMap(this::visitEdge);
+    /**
+     * Visits the edge instances of the given {@link TypeEdge}s.
+     *
+     * @param typeEdges the given collection of {@link TypeEdge}s
+     * @return the stream of edge instances
+     * @throws JavaGraphException if one of the methods couldn't be called
+     * @see JavaGraph#visitEdge(TypeEdge)
+     */
+    public Stream<JavaEdge> visitEdges(Collection<? extends TypeEdge> typeEdges) throws JavaGraphException {
+        return typeEdges.stream().flatMap(this::visitEdge);
     }
 
-    public Stream<JavaEdge> visitEdges(TypeNode typeNode) {
+    /**
+     * Visits all the outgoing edge instances of the given {@link TypeNode}s.
+     *
+     * @param typeNode the given {@link TypeNode}
+     * @return the stream of edge instances
+     * @throws JavaGraphException if one of the methods couldn't be called
+     * @see JavaNode#visitEdges()
+     */
+    public Stream<JavaEdge> visitEdges(TypeNode typeNode) throws JavaGraphException {
         return visitNode(typeNode).stream().flatMap(node -> node.visitEdges().stream());
     }
 
-    public Stream<JavaEdge> visitEdges() {
+    /**
+     * Visits the edge instances of all {@link TypeNode}s in this graph.
+     *
+     * @return the stream of edge instances
+     * @throws JavaGraphException if one of the methods couldn't be called
+     * @see JavaGraph#visitEdges(TypeNode)
+     */
+    public Stream<JavaEdge> visitEdges() throws JavaGraphException {
         return visitNodes().stream().flatMap(node -> node.visitEdges().stream());
     }
 
@@ -209,7 +294,7 @@ public class JavaGraph implements HostGraph {
 
     @Override
     public HostGraph newGraph(String name) {
-        return new JavaGraph(name);
+        return new JavaGraph(name, typeGraph);
     }
 
     @Override

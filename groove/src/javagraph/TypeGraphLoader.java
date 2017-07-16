@@ -91,7 +91,7 @@ public class TypeGraphLoader {
     /**
      * Load the {@link ClassGraph} on the default location.
      *
-     * @return the loaded {@link ClassGraph}
+     * @return the loaded {@link ClassGraph}, or an empty of if it couldn't be loaded
      */
     private static ClassGraph loadClassGraph() {
         URL url = TypeGraphLoader.class.getClassLoader().getResource(FOLDER + "/" + TYPEGRAPH_FILE);
@@ -107,7 +107,7 @@ public class TypeGraphLoader {
      * Load the {@link ClassGraph} from the given {@link URL}.
      *
      * @param url the given {@link URL}
-     * @return the loaded {@link ClassGraph}
+     * @return the loaded {@link ClassGraph}, or an empty of if it couldn't be loaded
      */
     private static ClassGraph loadClassGraph(URL url) {
         ObjectInputStream inputStream = null;

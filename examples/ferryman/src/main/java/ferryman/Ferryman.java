@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 public class Ferryman {
     public static void main(String[] args) throws IOException, FormatException {
-        JavaMatcher javagraph = new JavaMatcher("ferryman.gps");
+        JavaMatcher javagraph = new JavaMatcher("examples/ferryman/ferryman.gps");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
         System.out.println(javagraph.getGraph());

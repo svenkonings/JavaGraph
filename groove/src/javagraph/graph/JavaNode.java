@@ -13,6 +13,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * {@link HostNode} implementation for Java graphs.
+ */
 public class JavaNode implements HostNode {
 
     private final TypeNode typeNode;
@@ -20,17 +23,37 @@ public class JavaNode implements HostNode {
     private final Object object;
     private final Class<?> objectClass;
 
-    public JavaNode(TypeNode type, Object nodeObject) {
+    /**
+     * Creates a new node with the given {@link TypeNode} and a Java object instance of the class the {@link TypeNode} is
+     * associated with.
+     *
+     * @param type       the given {@link TypeNode}
+     * @param nodeObject the Java object instance
+     * @throws JavaGraphException if the {@link TypeNode} is not a Java type node or the object instance is not an
+     *                            instance of the class associated with the {@link TypeNode}
+     */
+    public JavaNode(TypeNode type, Object nodeObject) throws JavaGraphException {
+        if (!type.isJavaNode()) {
+            throw new JavaGraphException("Type node %s is not a Java type node", type);
+        } else if (!type.getNodeClass().equals(nodeObject.getClass())) {
+            throw new JavaGraphException("Object %s is not an instance of %s", nodeObject.getClass(), type.getNodeClass());
+        }
         typeNode = type;
         typeGraph = typeNode.getGraph();
         object = nodeObject;
         objectClass = typeNode.getNodeClass();
     }
 
+    /**
+     * @return the Java object instance of this node
+     */
     public Object getObject() {
         return object;
     }
 
+    /**
+     * @return the Java class associated with this node
+     */
     public Class<?> getObjectClass() {
         return objectClass;
     }
@@ -40,7 +63,13 @@ public class JavaNode implements HostNode {
         return typeNode;
     }
 
-    public boolean deleteNode() {
+    /**
+     * Delete this node instance by calling the node delete method of the object instance of this node.
+     *
+     * @return whether the deletion was succesful
+     * @throws JavaGraphException if the method couldn't be called
+     */
+    public boolean deleteNode() throws JavaGraphException {
         boolean deleted;
         try {
             Method deleteNode = objectClass.getMethod(typeNode.getNodeDelete());
@@ -51,8 +80,19 @@ public class JavaNode implements HostNode {
         return deleted;
     }
 
-    public JavaEdge createEdge(TypeLabel label, JavaNode targetNode) {
-        TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetNode.getType(), true);
+    /**
+     * Creates a new edge instance with the given {@link TypeLabel} between this node and the given target node. This is
+     * done by finding the type edge associated with the source type, label and target type and then calling the
+     * associated edge create method of the object instance of this node with the given target instance as parameter.
+     *
+     * @param label      the given {@link TypeLabel}
+     * @param targetNode the given target node
+     * @return the created edge, or {@code null} if the creation was unsuccesful
+     * @throws JavaGraphException if the {@link TypeEdge} couldn't be found, the {@link TypeEdge} was not a Java type
+     *                            edge or the method couldn't be called
+     */
+    public JavaEdge createEdge(TypeLabel label, JavaNode targetNode) throws JavaGraphException {
+        TypeEdge typeEdge = getJavaTypeEdge(typeNode, label, targetNode.getType());
         boolean created;
         try {
             Method createEdge = objectClass.getMethod(typeEdge.getEdgeCreate(), targetNode.getObjectClass());
@@ -67,8 +107,19 @@ public class JavaNode implements HostNode {
         }
     }
 
-    public boolean deleteEdge(TypeLabel label, JavaNode targetNode) {
-        TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetNode.getType(), true);
+    /**
+     * Deletes the edge instance with the given {@link TypeLabel} between this node and the given target node. This is
+     * done by finding the type edge associated with the source type, label and target type and then calling the
+     * associated edge delete method of the object instance of this node with the given target instance as parameter.
+     *
+     * @param label      the given {@link TypeLabel}
+     * @param targetNode the given target node
+     * @return whether the deletion was succesful
+     * @throws JavaGraphException if the {@link TypeEdge} couldn't be found, the {@link TypeEdge} was not a Java type
+     *                            edge or the method couldn't be called
+     */
+    public boolean deleteEdge(TypeLabel label, JavaNode targetNode) throws JavaGraphException {
+        TypeEdge typeEdge = getJavaTypeEdge(typeNode, label, targetNode.getType());
         boolean deleted;
         try {
             Method deleteEdge = objectClass.getMethod(typeEdge.getEdgeDelete(), targetNode.getObjectClass());
@@ -79,8 +130,19 @@ public class JavaNode implements HostNode {
         return deleted;
     }
 
-    public Set<JavaEdge> visitEdge(TypeLabel label, TypeNode targetTypeNode) {
-        TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetTypeNode, true);
+    /**
+     * Visits the edge instaces with the given {@link TypeLabel} between this node and the given target type node. This
+     * is done by finding the type edge associated with the source type, label and target type and then calling the
+     * associated edge visit method of the object instance of this node.
+     *
+     * @param label          the given {@link TypeLabel}
+     * @param targetTypeNode the given target {@link TypeNode}
+     * @return the set of edge instances
+     * @throws JavaGraphException if the {@link TypeEdge} couldn't be found, the {@link TypeEdge} was not a Java type
+     *                            edge or the method couldn't be called
+     */
+    public Set<JavaEdge> visitEdge(TypeLabel label, TypeNode targetTypeNode) throws JavaGraphException {
+        TypeEdge typeEdge = getJavaTypeEdge(typeNode, label, targetTypeNode);
         Set<?> targets;
         try {
             Method visitEdge = objectClass.getMethod(typeEdge.getEdgeVisit());
@@ -94,9 +156,19 @@ public class JavaNode implements HostNode {
                 .collect(Collectors.toSet());
     }
 
-    public Set<JavaEdge> visitEdges() {
+    /**
+     * Visits all outging edge instaces of this node. This is calling the edge visit method of the object instance of
+     * this node associated to each {@link TypeEdge} in the outgoing type edge set.
+     *
+     * @return the set of edge instances
+     * @throws JavaGraphException if the method couldn't be called
+     */
+    public Set<JavaEdge> visitEdges() throws JavaGraphException {
         Set<JavaEdge> edges = new HashSet<>();
         for (TypeEdge typeEdge : typeGraph.outEdgeSet(typeNode)) {
+            if (!typeEdge.isJavaEdge()) {
+                continue;
+            }
             Set<?> targets;
             try {
                 Method visitEdge = objectClass.getMethod(typeEdge.getEdgeVisit());
@@ -110,6 +182,26 @@ public class JavaNode implements HostNode {
                     .forEach(edges::add);
         }
         return edges;
+    }
+
+    /**
+     * Get the {@link TypeEdge} associated with the given source type, label and target type.
+     *
+     * @param sourceType the given source type
+     * @param label      the given label
+     * @param targetType the given target type
+     * @return the {@link TypeEdge}
+     * @throws JavaGraphException if the {@link TypeEdge} couldn't be found, the {@link TypeEdge} was not a Java type
+     *                            edge
+     */
+    private TypeEdge getJavaTypeEdge(TypeNode sourceType, TypeLabel label, TypeNode targetType) throws JavaGraphException {
+        TypeEdge typeEdge = typeGraph.getTypeEdge(sourceType, label, targetType, true);
+        if (typeEdge == null) {
+            throw new JavaGraphException("No valid type edge found");
+        } else if (!typeEdge.isJavaEdge()) {
+            throw new JavaGraphException("The type edge is not a Java type edge");
+        }
+        return typeEdge;
     }
 
     @Override
