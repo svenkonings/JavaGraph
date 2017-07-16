@@ -12,9 +12,9 @@ import java.io.InputStreamReader;
 public class Ferryman {
     public static void main(String[] args) throws IOException, FormatException {
         // Load the Java graph
-        JavaMatcher javagraph = new JavaMatcher("examples/ferryman/ferryman.gps");
+        JavaMatcher matcher = new JavaMatcher("examples/ferryman/ferryman.gps");
         // Print the current graph
-        System.out.println(javagraph.getGraph());
+        System.out.println(matcher.getGraph());
         // Read the input
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
@@ -23,20 +23,20 @@ public class Ferryman {
                 // Apply the command
                 switch (line) {
                     case "go":
-                        javagraph.applyMatch("go-empty");
-                        javagraph.applyMatch("arrive-empty");
+                        matcher.applyMatch("go-empty");
+                        matcher.applyMatch("arrive-empty");
                         break;
                     case "cabbage":
-                        javagraph.applyMatch("load-cabbage");
-                        javagraph.applyMatch("unload-cabbage");
+                        matcher.applyMatch("load-cabbage");
+                        matcher.applyMatch("unload-cabbage");
                         break;
                     case "goat":
-                        javagraph.applyMatch("load-goat");
-                        javagraph.applyMatch("unload-goat");
+                        matcher.applyMatch("load-goat");
+                        matcher.applyMatch("unload-goat");
                         break;
                     case "wolf":
-                        javagraph.applyMatch("load-wolf");
-                        javagraph.applyMatch("unload-wolf");
+                        matcher.applyMatch("load-wolf");
+                        matcher.applyMatch("unload-wolf");
                         break;
                 }
             } catch (JavaGraphException e) {
@@ -44,25 +44,25 @@ public class Ferryman {
             }
             // Check whether any of the game ending rules match
             Proof match;
-            match = javagraph.findMatch("eat-cabbage");
+            match = matcher.findMatch("eat-cabbage");
             if (match != null) {
-                javagraph.applyMatch(match);
+                matcher.applyMatch(match);
                 System.out.println("Cabbage eaten");
                 break;
             }
-            match = javagraph.findMatch("eat-goat");
+            match = matcher.findMatch("eat-goat");
             if (match != null) {
-                javagraph.applyMatch(match);
+                matcher.applyMatch(match);
                 System.out.println("Goat eaten");
                 break;
             }
-            match = javagraph.findMatch("final");
+            match = matcher.findMatch("final");
             if (match != null) {
                 System.out.println("Game finished");
                 break;
             }
             // Print the current graph
-            System.out.println(javagraph.getGraph());
+            System.out.println(matcher.getGraph());
         }
     }
 }

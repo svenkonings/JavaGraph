@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class RuleExample {
     public static void main(String[] args) throws IOException, FormatException {
-        JavaMatcher javagraph = new JavaMatcher("examples/simple/simple.gps");
-        System.out.println(javagraph.getGrammar().getStartGraph());
-        javagraph.applyMatch("test");
-        System.out.println(javagraph.getGrammar().getStartGraph());
+        JavaMatcher matcher = new JavaMatcher("examples/simple/simple.gps");
+        System.out.println(matcher.getGrammar().getStartGraph());
+        matcher.applyMatch("test");
+        System.out.println(matcher.getGrammar().getStartGraph());
     }
 }

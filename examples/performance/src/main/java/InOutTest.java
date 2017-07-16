@@ -14,32 +14,32 @@ public class InOutTest {
         List<Long> inTimeLarge = new ArrayList<>();
         List<Long> outTimeLarge = new ArrayList<>();
         for (int i = 0; i < TIMES; i++) {
-            JavaMatcher javagraph = new JavaMatcher("examples/performance/performance.gps");
-            JavaNode node = javagraph.getGraph().visitNodes().iterator().next();
-            javagraph.getGraph().inEdgeSet(node);
-            javagraph.getGraph().outEdgeSet(node);
+            JavaMatcher matcher = new JavaMatcher("examples/performance/performance.gps");
+            JavaNode node = matcher.getGraph().visitNodes().iterator().next();
+            matcher.getGraph().inEdgeSet(node);
+            matcher.getGraph().outEdgeSet(node);
             {
                 long inStart = System.nanoTime();
-                javagraph.getGraph().inEdgeSet(node);
+                matcher.getGraph().inEdgeSet(node);
                 long inEnd = System.nanoTime();
                 inTimeSmall.add(inEnd - inStart);
                 long outStart = System.nanoTime();
-                javagraph.getGraph().outEdgeSet(node);
+                matcher.getGraph().outEdgeSet(node);
                 long outEnd = System.nanoTime();
                 outTimeSmall.add(outEnd - outStart);
             }
             for (int j = 0; j < AMOUNT; j++) {
-                javagraph.applyMatch("rule");
+                matcher.applyMatch("rule");
             }
-            javagraph.getGraph().inEdgeSet(node);
-            javagraph.getGraph().outEdgeSet(node);
+            matcher.getGraph().inEdgeSet(node);
+            matcher.getGraph().outEdgeSet(node);
             {
                 long inStart = System.nanoTime();
-                javagraph.getGraph().inEdgeSet(node);
+                matcher.getGraph().inEdgeSet(node);
                 long inEnd = System.nanoTime();
                 inTimeLarge.add(inEnd - inStart);
                 long outStart = System.nanoTime();
-                javagraph.getGraph().outEdgeSet(node);
+                matcher.getGraph().outEdgeSet(node);
                 long outEnd = System.nanoTime();
                 outTimeLarge.add(outEnd - outStart);
             }

@@ -15,17 +15,25 @@ public class NetworkNode {
     private final Set<NetworkNode> edges;
 
     public static void main(String[] args) throws IOException, FormatException {
+        // Load the Java graph
+        JavaMatcher matcher = new JavaMatcher("examples/networksimulation/network.gps");
+        // Create a new thread:
         new Thread(() -> {
             Random random = new Random();
             while (!Thread.interrupted()) {
+                // Every 10 seconds
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                // For every pair of nodes
                 nodes.forEach(node1 -> nodes.forEach(node2 -> {
+                    // There is a 10% chance
                     int rng = random.nextInt(10);
                     if (rng == 1) {
+                        // The thread will change whether there is an edge between this pair
+                        // It will create a new edge or remove an existing edge
                         Set<NetworkNode> edges = node1.getNetworkNodeEdges();
                         if (edges.contains(node2)) {
                             System.out.printf("Removing edge from %s to %s%n", node1, node2);
@@ -38,17 +46,20 @@ public class NetworkNode {
                 }));
             }
         }).start();
-        JavaMatcher javagraph = new JavaMatcher("examples/networksimulation/network.gps");
+        // Print the current graph
+        System.out.println(matcher.getGraph());
+        // Read the input
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
-        System.out.println(javagraph.getGraph());
         while ((line = in.readLine()) != null) {
+            // Try to apply the rule specified in the input
             try {
-                javagraph.applyMatch(line);
+                matcher.applyMatch(line);
             } catch (JavaGraphException e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println(javagraph.getGraph());
+            // Print the current graph
+            System.out.println(matcher.getGraph());
         }
     }
 
