@@ -5,11 +5,15 @@ import javagraph.JavaMatcher;
 
 import java.io.IOException;
 
-public class RuleExample {
+public class MatchExample {
     public static void main(String[] args) throws IOException, FormatException {
+        // Load the Java graph
         JavaMatcher matcher = new JavaMatcher("examples/simple/simple.gps");
-        System.out.println(matcher.getGrammar().getStartGraph());
+        // Print the current graph
+        System.out.println(matcher.getGraph());
+        // Apply the test rule (see the GROOVE grammar)
         matcher.applyMatch("test");
-        System.out.println(matcher.getGrammar().getStartGraph());
+        // Print the current graph
+        System.out.println(matcher.getGraph());
     }
 }

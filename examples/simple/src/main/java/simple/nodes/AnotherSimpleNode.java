@@ -1,4 +1,4 @@
-package simple;
+package simple.nodes;
 
 
 import javagraph.annotations.Node;
@@ -11,17 +11,17 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 @Node("AnotherNodeExample")
-public class AnotherNodeExample {
+public class AnotherSimpleNode {
 
-    private static final Set<AnotherNodeExample> nodes = Collections.newSetFromMap(new WeakHashMap<>());
+    private static final Set<AnotherSimpleNode> nodes = Collections.newSetFromMap(new WeakHashMap<>());
 
-    public AnotherNodeExample() {
+    public AnotherSimpleNode() {
         nodes.add(this);
     }
 
     @NodeCreate
-    public static AnotherNodeExample getNode() {
-        return new AnotherNodeExample();
+    public static AnotherSimpleNode getNode() {
+        return new AnotherSimpleNode();
     }
 
     @NodeDelete
@@ -30,7 +30,7 @@ public class AnotherNodeExample {
     }
 
     @NodeVisit
-    public static Set<AnotherNodeExample> visitNode() {
+    public static Set<AnotherSimpleNode> visitNode() {
         return Collections.unmodifiableSet(nodes);
     }
 }

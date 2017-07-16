@@ -21,10 +21,12 @@ public class GraphExample {
         System.out.println("TypeGraph=" + typeGraph);
         System.out.println("Nodes=" + graph.visitNodes());
 
+        // Create a node
         JavaNode nodeExample = graph.createNode(nodeExampleType);
         System.out.println("CreateNode(NodeExample)=" + nodeExample);
         System.out.println("Nodes=" + graph.visitNodes());
 
+        // Delete the created node
         System.out.println("DeleteNode(NodeExamlpe)=" + nodeExample.deleteNode());
         System.out.println("Nodes=" + graph.visitNodes());
         System.out.println();
@@ -39,6 +41,7 @@ public class GraphExample {
         System.out.println("TypeGraph=" + typeGraph);
         System.out.println("Nodes=" + graph.visitNodes());
 
+        // Create nodes
         JavaNode sourceNode = graph.createNode(edgeExampleType);
         JavaNode targetNode1 = graph.createNode(nodeExampleType);
         JavaNode targetNode2 = graph.createNode(anotherNodeExampleType);
@@ -48,12 +51,14 @@ public class GraphExample {
         System.out.println("Nodes=" + graph.visitNodes());
         System.out.println("Nodes(EdgeExample)=" + graph.visitNode(edgeExampleType));
 
+        // Create edges
         TypeLabel labelExample = TypeLabel.createLabel(EdgeRole.BINARY, "LabelExample");
         System.out.println("CreateEdge(EdgeExample, NodeExample)=" + sourceNode.createEdge(labelExample, targetNode1));
         System.out.println("CreateEdge(EdgeExample, AnotherNodeExample)=" + sourceNode.createEdge(labelExample, targetNode2));
         System.out.println("VisitEdge(EdgeExample,NodeExample)=" + sourceNode.visitEdge(labelExample, nodeExampleType));
         System.out.println("VisitEdges(EdgeExample)=" + sourceNode.visitEdges());
 
+        // Delete edge
         System.out.println("DeleteEdge(EdgeExample, NodeExample)=" + sourceNode.deleteEdge(labelExample, targetNode1));
         System.out.println("VisitEdges(EdgeExample)=" + sourceNode.visitEdges());
         System.out.println();

@@ -1,4 +1,4 @@
-package simple;
+package simple.nodes;
 
 import javagraph.annotations.*;
 
@@ -8,15 +8,15 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 @Node("EdgeExample")
-public class EdgeExample {
+public class SimpleEdgeNode {
 
-    private static final Set<EdgeExample> nodes = Collections.newSetFromMap(new WeakHashMap<>());
+    private static final Set<SimpleEdgeNode> nodes = Collections.newSetFromMap(new WeakHashMap<>());
 
-    private final Set<NodeExample> nodeExampleEdges;
-    private final Set<NodeExample> nodeLabelExampleEdges;
-    private final Set<AnotherNodeExample> anotherNodeExampleEdges;
+    private final Set<SimpleNode> nodeExampleEdges;
+    private final Set<SimpleNode> nodeLabelExampleEdges;
+    private final Set<AnotherSimpleNode> anotherNodeExampleEdges;
 
-    public EdgeExample() {
+    public SimpleEdgeNode() {
         nodes.add(this);
         nodeExampleEdges = new HashSet<>();
         nodeLabelExampleEdges = new HashSet<>();
@@ -24,53 +24,53 @@ public class EdgeExample {
     }
 
     @EdgeCreate("LabelExample")
-    public boolean addNodeExampleEdge(NodeExample nodeExample) {
+    public boolean addNodeExampleEdge(SimpleNode nodeExample) {
         return nodeExampleEdges.add(nodeExample);
     }
 
     @EdgeDelete("LabelExample")
-    public boolean removeNodeExampleEdge(NodeExample nodeExample) {
+    public boolean removeNodeExampleEdge(SimpleNode nodeExample) {
         return nodeExampleEdges.remove(nodeExample);
     }
 
     @EdgeVisit("LabelExample")
-    public Set<NodeExample> getNodeExampleEdges() {
+    public Set<SimpleNode> getNodeExampleEdges() {
         return Collections.unmodifiableSet(nodeExampleEdges);
     }
 
     @EdgeCreate("AnotherLabelExample")
-    public boolean addNodeLabelExampleEdge(NodeExample nodeExample) {
+    public boolean addNodeLabelExampleEdge(SimpleNode nodeExample) {
         return nodeLabelExampleEdges.add(nodeExample);
     }
 
     @EdgeDelete("AnotherLabelExample")
-    public boolean removeNodeLabelExampleEdge(NodeExample nodeExample) {
+    public boolean removeNodeLabelExampleEdge(SimpleNode nodeExample) {
         return nodeLabelExampleEdges.remove(nodeExample);
     }
 
     @EdgeVisit("AnotherLabelExample")
-    public Set<NodeExample> getNodeLabelExampleEdges() {
+    public Set<SimpleNode> getNodeLabelExampleEdges() {
         return Collections.unmodifiableSet(nodeLabelExampleEdges);
     }
 
     @EdgeCreate("LabelExample")
-    public boolean addAnotherNodeExampleEdge(AnotherNodeExample anotherNodeExample) {
+    public boolean addAnotherNodeExampleEdge(AnotherSimpleNode anotherNodeExample) {
         return anotherNodeExampleEdges.add(anotherNodeExample);
     }
 
     @EdgeDelete("LabelExample")
-    public boolean removeAnotherNodeExampleEdge(AnotherNodeExample anotherNodeExample) {
+    public boolean removeAnotherNodeExampleEdge(AnotherSimpleNode anotherNodeExample) {
         return anotherNodeExampleEdges.remove(anotherNodeExample);
     }
 
     @EdgeVisit("LabelExample")
-    public Set<AnotherNodeExample> getAnotherNodeExampleEdges() {
+    public Set<AnotherSimpleNode> getAnotherNodeExampleEdges() {
         return Collections.unmodifiableSet(anotherNodeExampleEdges);
     }
 
     @NodeCreate
-    public static EdgeExample getNode() {
-        return new EdgeExample();
+    public static SimpleEdgeNode getNode() {
+        return new SimpleEdgeNode();
     }
 
     @NodeDelete
@@ -79,7 +79,7 @@ public class EdgeExample {
     }
 
     @NodeVisit
-    public static Set<EdgeExample> visitNode() {
+    public static Set<SimpleEdgeNode> visitNode() {
         return Collections.unmodifiableSet(nodes);
     }
 }
