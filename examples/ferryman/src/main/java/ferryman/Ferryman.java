@@ -11,12 +11,16 @@ import java.io.InputStreamReader;
 
 public class Ferryman {
     public static void main(String[] args) throws IOException, FormatException {
+        // Load the Java graph
         JavaMatcher javagraph = new JavaMatcher("examples/ferryman/ferryman.gps");
+        // Print the current graph
+        System.out.println(javagraph.getGraph());
+        // Read the input
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
-        System.out.println(javagraph.getGraph());
         while ((line = in.readLine()) != null) {
             try {
+                // Apply the command
                 switch (line) {
                     case "go":
                         javagraph.applyMatch("go-empty");
@@ -38,6 +42,7 @@ public class Ferryman {
             } catch (JavaGraphException e) {
                 System.out.println(e.getMessage());
             }
+            // Check whether any of the game ending rules match
             Proof match;
             match = javagraph.findMatch("eat-cabbage");
             if (match != null) {
@@ -56,6 +61,7 @@ public class Ferryman {
                 System.out.println("Game finished");
                 break;
             }
+            // Print the current graph
             System.out.println(javagraph.getGraph());
         }
     }
