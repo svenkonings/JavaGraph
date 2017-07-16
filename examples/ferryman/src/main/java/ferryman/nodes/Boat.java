@@ -10,6 +10,17 @@ import java.util.WeakHashMap;
 @Node("Boat")
 public class Boat {
 
+    private static final Set<Boat> boats = Collections.newSetFromMap(new WeakHashMap<>());
+
+    private final Set<Bank> moored;
+    private final Set<Bank> go;
+
+    public Boat() {
+        boats.add(this);
+        moored = new HashSet<>();
+        go = new HashSet<>();
+    }
+
     @NodeCreate
     public static Boat getBoat() {
         return new Boat();
@@ -38,17 +49,6 @@ public class Boat {
     @EdgeVisit("moored")
     public Set<Bank> getMoored() {
         return Collections.unmodifiableSet(moored);
-    }
-
-    private static final Set<Boat> boats = Collections.newSetFromMap(new WeakHashMap<>());
-
-    private final Set<Bank> moored;
-    private final Set<Bank> go;
-
-    public Boat() {
-        boats.add(this);
-        moored = new HashSet<>();
-        go = new HashSet<>();
     }
 
     @EdgeCreate("go")
