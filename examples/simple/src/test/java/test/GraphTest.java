@@ -3,10 +3,9 @@ package test;
 import groove.grammar.type.TypeGraph;
 import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
-import groove.graph.EdgeRole;
 import javagraph.TypeGraphLoader;
-import javagraph.graph.Graph;
-import javagraph.graph.Node;
+import javagraph.graph.JavaGraph;
+import javagraph.graph.JavaNode;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,7 +14,7 @@ public class GraphTest {
 
     @Test
     public void nodeTest() {
-        Graph graph = new Graph();
+        JavaGraph graph = new JavaGraph();
         TypeGraph typeGraph = graph.getTypeGraph();
         TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
 
@@ -23,12 +22,12 @@ public class GraphTest {
         assertTrue(graph.visitNodes().isEmpty());
         assertTrue(graph.visitNode(nodeExampleType).isEmpty());
 
-        Node node1 = graph.createNode(nodeExampleType);
+        JavaNode node1 = graph.createNode(nodeExampleType);
         assertNotNull(node1);
         assertEquals(graph.visitNodes().size(), 1);
         assertEquals(graph.visitNode(nodeExampleType).size(), 1);
 
-        Node node2 = graph.createNode(nodeExampleType);
+        JavaNode node2 = graph.createNode(nodeExampleType);
         assertNotNull(node2);
         assertEquals(graph.visitNodes().size(), 2);
         assertEquals(graph.visitNode(nodeExampleType).size(), 2);
@@ -46,7 +45,7 @@ public class GraphTest {
 
     @Test
     public void edgeTest() {
-        Graph graph = new Graph();
+        JavaGraph graph = new JavaGraph();
         TypeGraph typeGraph = graph.getTypeGraph();
         TypeNode edgeExampleType = typeGraph.getNodeByName("EdgeExample");
         TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
@@ -57,13 +56,13 @@ public class GraphTest {
         assertNotNull(TypeGraphLoader.getInstance());
         assertTrue(graph.visitNodes().isEmpty());
 
-        Node sourceNode = graph.createNode(edgeExampleType);
+        JavaNode sourceNode = graph.createNode(edgeExampleType);
         assertNotNull(sourceNode);
-        Node targetNode1 = graph.createNode(nodeExampleType);
+        JavaNode targetNode1 = graph.createNode(nodeExampleType);
         assertNotNull(targetNode1);
-        Node targetNode2 = graph.createNode(nodeExampleType);
+        JavaNode targetNode2 = graph.createNode(nodeExampleType);
         assertNotNull(targetNode2);
-        Node targetNode3 = graph.createNode(anotherNodeExampleType);
+        JavaNode targetNode3 = graph.createNode(anotherNodeExampleType);
         assertNotNull(targetNode3);
         assertEquals(graph.visitNodes().size(), 4);
         assertEquals(graph.visitNode(edgeExampleType).size(), 1);

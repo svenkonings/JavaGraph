@@ -13,14 +13,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Node implements HostNode {
+public class JavaNode implements HostNode {
 
     private final TypeNode typeNode;
     private final TypeGraph typeGraph;
     private final Object object;
     private final Class<?> objectClass;
 
-    public Node(TypeNode type, Object nodeObject) {
+    public JavaNode(TypeNode type, Object nodeObject) {
         typeNode = type;
         typeGraph = typeNode.getGraph();
         object = nodeObject;
@@ -46,67 +46,67 @@ public class Node implements HostNode {
             Method deleteNode = objectClass.getMethod(typeNode.getNodeDelete());
             deleted = (boolean) deleteNode.invoke(object);
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new GraphException(e);
+            throw new JavaGraphException(e);
         }
         return deleted;
     }
 
-    public Edge createEdge(TypeLabel label, Node targetNode) {
+    public JavaEdge createEdge(TypeLabel label, JavaNode targetNode) {
         TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetNode.getType(), true);
         boolean created;
         try {
             Method createEdge = objectClass.getMethod(typeEdge.getEdgeCreate(), targetNode.getObjectClass());
             created = (boolean) createEdge.invoke(object, targetNode.getObject());
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new GraphException(e);
+            throw new JavaGraphException(e);
         }
         if (created) {
-            return new Edge(this, typeEdge, targetNode);
+            return new JavaEdge(this, typeEdge, targetNode);
         } else {
             return null;
         }
     }
 
-    public boolean deleteEdge(TypeLabel label, Node targetNode) {
+    public boolean deleteEdge(TypeLabel label, JavaNode targetNode) {
         TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetNode.getType(), true);
         boolean deleted;
         try {
             Method deleteEdge = objectClass.getMethod(typeEdge.getEdgeDelete(), targetNode.getObjectClass());
             deleted = (boolean) deleteEdge.invoke(object, targetNode.getObject());
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new GraphException(e);
+            throw new JavaGraphException(e);
         }
         return deleted;
     }
 
-    public Set<Edge> visitEdge(TypeLabel label, TypeNode targetTypeNode) {
+    public Set<JavaEdge> visitEdge(TypeLabel label, TypeNode targetTypeNode) {
         TypeEdge typeEdge = typeGraph.getTypeEdge(typeNode, label, targetTypeNode, true);
         Set<?> targets;
         try {
             Method visitEdge = objectClass.getMethod(typeEdge.getEdgeVisit());
             targets = (Set<?>) visitEdge.invoke(object);
         } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new GraphException(e);
+            throw new JavaGraphException(e);
         }
         return targets.stream()
-                .map(target -> new Node(targetTypeNode, target))
-                .map(target -> new Edge(this, typeEdge, target))
+                .map(target -> new JavaNode(targetTypeNode, target))
+                .map(target -> new JavaEdge(this, typeEdge, target))
                 .collect(Collectors.toSet());
     }
 
-    public Set<Edge> visitEdges() {
-        Set<Edge> edges = new HashSet<>();
+    public Set<JavaEdge> visitEdges() {
+        Set<JavaEdge> edges = new HashSet<>();
         for (TypeEdge typeEdge : typeGraph.outEdgeSet(typeNode)) {
             Set<?> targets;
             try {
                 Method visitEdge = objectClass.getMethod(typeEdge.getEdgeVisit());
                 targets = (Set<?>) visitEdge.invoke(object);
             } catch (ClassCastException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new GraphException(e);
+                throw new JavaGraphException(e);
             }
             targets.stream()
-                    .map(target -> new Node(typeEdge.target(), target))
-                    .map(target -> new Edge(this, typeEdge, target))
+                    .map(target -> new JavaNode(typeEdge.target(), target))
+                    .map(target -> new JavaEdge(this, typeEdge, target))
                     .forEach(edges::add);
         }
         return edges;
@@ -123,8 +123,8 @@ public class Node implements HostNode {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof Node) {
-            Node node = (Node) obj;
+        } else if (obj instanceof JavaNode) {
+            JavaNode node = (JavaNode) obj;
             return getType().equals(node.getType()) &&
                     getObject().equals(node.getObject());
         } else {

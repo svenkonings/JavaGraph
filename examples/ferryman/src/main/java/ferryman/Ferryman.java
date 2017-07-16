@@ -2,8 +2,8 @@ package ferryman;
 
 import groove.transform.Proof;
 import groove.util.parse.FormatException;
-import javagraph.JavaGraph;
-import javagraph.graph.GraphException;
+import javagraph.JavaMatcher;
+import javagraph.graph.JavaGraphException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 public class Ferryman {
     public static void main(String[] args) throws IOException, FormatException {
-        JavaGraph javagraph = new JavaGraph("ferryman.gps");
+        JavaMatcher javagraph = new JavaMatcher("ferryman.gps");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
         System.out.println(javagraph.getGraph());
@@ -35,7 +35,7 @@ public class Ferryman {
                         javagraph.applyMatch("unload-wolf");
                         break;
                 }
-            } catch (GraphException e) {
+            } catch (JavaGraphException e) {
                 System.out.println(e.getMessage());
             }
             Proof match;

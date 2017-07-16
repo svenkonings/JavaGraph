@@ -4,24 +4,24 @@ import groove.grammar.type.TypeGraph;
 import groove.grammar.type.TypeLabel;
 import groove.grammar.type.TypeNode;
 import groove.graph.EdgeRole;
-import javagraph.graph.Graph;
-import javagraph.graph.Node;
+import javagraph.graph.JavaGraph;
+import javagraph.graph.JavaNode;
 
 public class GraphExample {
     public static void main(String[] args) {
-        Graph graph = new Graph();
+        JavaGraph graph = new JavaGraph();
         nodeExample(graph);
         edgeExample(graph);
     }
 
-    public static void nodeExample(Graph graph) {
+    public static void nodeExample(JavaGraph graph) {
         TypeGraph typeGraph = graph.getTypeGraph();
         TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
 
         System.out.println("TypeGraph=" + typeGraph);
         System.out.println("Nodes=" + graph.visitNodes());
 
-        Node nodeExample = graph.createNode(nodeExampleType);
+        JavaNode nodeExample = graph.createNode(nodeExampleType);
         System.out.println("CreateNode(NodeExample)=" + nodeExample);
         System.out.println("Nodes=" + graph.visitNodes());
 
@@ -30,7 +30,7 @@ public class GraphExample {
         System.out.println();
     }
 
-    public static void edgeExample(Graph graph) {
+    public static void edgeExample(JavaGraph graph) {
         TypeGraph typeGraph = graph.getTypeGraph();
         TypeNode edgeExampleType = typeGraph.getNodeByName("EdgeExample");
         TypeNode nodeExampleType = typeGraph.getNodeByName("NodeExample");
@@ -39,9 +39,9 @@ public class GraphExample {
         System.out.println("TypeGraph=" + typeGraph);
         System.out.println("Nodes=" + graph.visitNodes());
 
-        Node sourceNode = graph.createNode(edgeExampleType);
-        Node targetNode1 = graph.createNode(nodeExampleType);
-        Node targetNode2 = graph.createNode(anotherNodeExampleType);
+        JavaNode sourceNode = graph.createNode(edgeExampleType);
+        JavaNode targetNode1 = graph.createNode(nodeExampleType);
+        JavaNode targetNode2 = graph.createNode(anotherNodeExampleType);
         System.out.println("CreateNode(EdgeExample)=" + sourceNode);
         System.out.println("CreateNode(NodeExample)=" + targetNode1);
         System.out.println("CreateNode(AnotherNodeExample)=" + targetNode2);

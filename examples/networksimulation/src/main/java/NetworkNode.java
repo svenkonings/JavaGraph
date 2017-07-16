@@ -1,7 +1,7 @@
 import groove.util.parse.FormatException;
-import javagraph.JavaGraph;
+import javagraph.JavaMatcher;
 import javagraph.annotations.*;
-import javagraph.graph.GraphException;
+import javagraph.graph.JavaGraphException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,14 +38,14 @@ public class NetworkNode {
                 }));
             }
         }).start();
-        JavaGraph javagraph = new JavaGraph("network.gps");
+        JavaMatcher javagraph = new JavaMatcher("network.gps");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
         System.out.println(javagraph.getGraph());
         while ((line = in.readLine()) != null) {
             try {
                 javagraph.applyMatch(line);
-            } catch (GraphException e) {
+            } catch (JavaGraphException e) {
                 System.out.println(e.getMessage());
             }
             System.out.println(javagraph.getGraph());

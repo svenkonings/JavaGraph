@@ -21,7 +21,7 @@ import groove.graph.EdgeRole;
 import groove.graph.Label;
 import groove.graph.Node;
 import groove.util.line.Line;
-import javagraph.graph.GraphException;
+import javagraph.graph.JavaGraphException;
 import org.eclipse.jdt.annotation.NonNull;
 
 import java.awt.*;
@@ -262,7 +262,7 @@ public class TypeNode implements Node, TypeElement {
             try {
                 nodeClass = Class.forName(nodeClassName);
             } catch (ClassNotFoundException e) {
-                throw new GraphException(e);
+                throw new JavaGraphException(e);
             }
         }
         return nodeClass;

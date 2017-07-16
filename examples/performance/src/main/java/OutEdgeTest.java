@@ -1,5 +1,5 @@
 import groove.explore.Generator;
-import javagraph.JavaGraph;
+import javagraph.JavaMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class OutEdgeTest {
         List<Long> javaTime = new ArrayList<>();
         List<Long> grooveTime = new ArrayList<>();
         for (int i = 0; i < TIMES; i++) {
-            JavaGraph javagraph = new JavaGraph("performance.gps");
+            JavaMatcher javagraph = new JavaMatcher("performance.gps");
             long javaStart = System.nanoTime();
             for (int j = 0; j < AMOUNT; j++) {
                 javagraph.applyMatch("rule");

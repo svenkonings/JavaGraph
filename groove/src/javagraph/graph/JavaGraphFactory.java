@@ -11,11 +11,11 @@ import groove.graph.Label;
 import groove.graph.NodeFactory;
 import groove.util.Dispenser;
 
-public class GraphFactory extends HostFactory {
+public class JavaGraphFactory extends HostFactory {
 
-    private final Graph graph;
+    private final JavaGraph graph;
 
-    protected GraphFactory(Graph graph) {
+    protected JavaGraphFactory(JavaGraph graph) {
         super(graph.getTypeGraph().getFactory(), false);
         this.graph = graph;
     }
@@ -62,12 +62,12 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, String text, HostNode target) {
-        if (source instanceof Node && target instanceof Node) {
-            Node sourceNode = (Node) source;
+        if (source instanceof JavaNode && target instanceof JavaNode) {
+            JavaNode sourceNode = (JavaNode) source;
             TypeLabel typeLabel = TypeLabel.createLabel(text);
             TypeEdge typeEdge = getTypeGraph().getTypeEdge(source.getType(), typeLabel, target.getType(), true);
-            Node targetNode = (Node) target;
-            return new Edge(sourceNode, typeEdge, targetNode);
+            JavaNode targetNode = (JavaNode) target;
+            return new JavaEdge(sourceNode, typeEdge, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -90,12 +90,12 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, Label label, HostNode target) {
-        if (source instanceof Node && label instanceof TypeLabel && target instanceof Node) {
-            Node sourceNode = (Node) source;
+        if (source instanceof JavaNode && label instanceof TypeLabel && target instanceof JavaNode) {
+            JavaNode sourceNode = (JavaNode) source;
             TypeLabel typeLabel = (TypeLabel) label;
             TypeEdge typeEdge = getTypeGraph().getTypeEdge(source.getType(), typeLabel, target.getType(), true);
-            Node targetNode = (Node) target;
-            return new Edge(sourceNode, typeEdge, targetNode);
+            JavaNode targetNode = (JavaNode) target;
+            return new JavaEdge(sourceNode, typeEdge, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -113,10 +113,10 @@ public class GraphFactory extends HostFactory {
 
     @Override
     public HostEdge createEdge(HostNode source, TypeEdge typeEdge, HostNode target) {
-        if (source instanceof Node && target instanceof Node) {
-            Node sourceNode = (Node) source;
-            Node targetNode = (Node) target;
-            return new Edge(sourceNode, typeEdge, targetNode);
+        if (source instanceof JavaNode && target instanceof JavaNode) {
+            JavaNode sourceNode = (JavaNode) source;
+            JavaNode targetNode = (JavaNode) target;
+            return new JavaEdge(sourceNode, typeEdge, targetNode);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -169,7 +169,7 @@ public class GraphFactory extends HostFactory {
 
         @Override
         protected HostNode getNode(int nr) {
-            return GraphFactory.this.getNode(nr);
+            return JavaGraphFactory.this.getNode(nr);
         }
 
         @Override

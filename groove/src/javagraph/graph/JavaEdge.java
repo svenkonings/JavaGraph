@@ -7,19 +7,19 @@ import groove.grammar.type.TypeEdge;
 import groove.grammar.type.TypeLabel;
 import groove.graph.EdgeRole;
 
-public class Edge implements HostEdge {
+public class JavaEdge implements HostEdge {
 
-    private final Node source;
+    private final JavaNode source;
     private final TypeEdge typeEdge;
-    private final Node target;
+    private final JavaNode target;
 
-    public Edge(Node sourceNode, TypeEdge type, Node targetNode) {
+    public JavaEdge(JavaNode sourceNode, TypeEdge type, JavaNode targetNode) {
         source = sourceNode;
         typeEdge = type;
         target = targetNode;
     }
 
-    public Node getSource() {
+    public JavaNode getSource() {
         return source;
     }
 
@@ -33,7 +33,7 @@ public class Edge implements HostEdge {
         return typeEdge;
     }
 
-    public Node getTarget() {
+    public JavaNode getTarget() {
         return target;
     }
 
@@ -53,8 +53,8 @@ public class Edge implements HostEdge {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof Edge) {
-            Edge edge = (Edge) obj;
+        } else if (obj instanceof JavaEdge) {
+            JavaEdge edge = (JavaEdge) obj;
             return getType().equals(edge.getType()) &&
                     getSource().equals(edge.getSource()) &&
                     getTarget().equals(edge.getTarget());

@@ -1,5 +1,5 @@
-import javagraph.JavaGraph;
-import javagraph.graph.Node;
+import javagraph.JavaMatcher;
+import javagraph.graph.JavaNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ public class InOutTest {
         List<Long> inTimeLarge = new ArrayList<>();
         List<Long> outTimeLarge = new ArrayList<>();
         for (int i = 0; i < TIMES; i++) {
-            JavaGraph javagraph = new JavaGraph("performance.gps");
-            Node node = javagraph.getGraph().visitNodes().iterator().next();
+            JavaMatcher javagraph = new JavaMatcher("performance.gps");
+            JavaNode node = javagraph.getGraph().visitNodes().iterator().next();
             javagraph.getGraph().inEdgeSet(node);
             javagraph.getGraph().outEdgeSet(node);
             {
